@@ -8,3 +8,9 @@ abstract class DriverInfoState extends Equatable {
 }
 
 class DriverInfoInitial extends DriverInfoState {}
+
+class DriverInfoSuccess extends DriverInfoState {}
+
+class DriverInfoFailed extends DriverInfoState {}
+
+class DriverInfoLoading extends DriverInfoState {}

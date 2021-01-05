@@ -5,11 +5,22 @@ import 'package:gm_driver_lite/core/repository/driver_info_repository.dart';
 part 'driver_info_state.dart';
 
 class DriverInfoCubit extends Cubit<DriverInfoState> {
-  DriverInfoCubit({
-    this.username,
+  DriverInfoCubit(
     this.repository,
-  }) : super(DriverInfoInitial());
+  ) : super(DriverInfoInitial());
 
-  final String username;
   final DriverInfoRepository repository;
+
+  Future<void> getDriverInfo(String username) async {
+    emit(DriverInfoLoading());
+    try {
+      final driverInfo = await repository.getDriverInfo(
+        username: username,
+      );
+      print(driverInfo);
+      emit(DriverInfoSuccess());
+    } on Exception {
+      emit(DriverInfoFailed());
+    }
+  }
 }

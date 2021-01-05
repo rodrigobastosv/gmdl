@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gm_driver_lite/core/cubit/sign_in/sign_in_cubit.dart';
+import 'package:gm_driver_lite/core/provider/global_info_provider.dart';
+import 'package:gm_driver_lite/page/driver_info_loading/driver_info_loading_page.dart';
 import 'package:gm_driver_lite/page/sign_in/widget/sign_in_form.dart';
 
 class SignInView extends StatefulWidget {
@@ -18,7 +20,17 @@ class _SignInViewState extends State<SignInView> {
         child: BlocConsumer<SignInCubit, SignInState>(
           listener: (_, state) {
             if (state is UserSignedSuccess) {
-              
+              final loginResult = state.loginResult;
+              final username = loginResult.username;
+              print(loginResult.jSessionId);
+              context
+                  .read<GlobalInfoProvider>()
+                  .storeSignedUserInfo(username, state.loginResult.jSessionId);
+              /*Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => DriverInfoLoadingPage(),
+                ),
+              );*/
             }
           },
           builder: (_, state) {
