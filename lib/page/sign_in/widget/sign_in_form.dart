@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gm_driver_lite/core/cubit/sign_in/sign_in_cubit.dart';
+import '../../../core/cubit/sign_in/sign_in_cubit.dart';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
@@ -41,7 +41,7 @@ class _SignInFormState extends State<SignInForm> {
                 );
               }
             },
-            child: Text('Sign In'),
+            child: const Text('Sign In'),
           ),
         ],
       ),

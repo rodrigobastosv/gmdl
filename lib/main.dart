@@ -6,5 +6,7 @@ import 'core/hive/hive.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initHiveBoxes();
-  runApp(App());
+  runApp(
+    const App(),
+  );
 }

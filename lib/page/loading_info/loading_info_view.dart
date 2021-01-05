@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gm_driver_lite/core/cubit/loading_info/loading_info_cubit.dart';
+import '../../core/cubit/loading_info/loading_info_cubit.dart';
 
 class LoadingInfoView extends StatelessWidget {
   const LoadingInfoView({Key key}) : super(key: key);
@@ -16,7 +16,7 @@ class LoadingInfoView extends StatelessWidget {
         builder: (_, state) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
+            const Center(
               child: CircularProgressIndicator(),
             ),
             if (state is InfoLoading) Text(state.step)

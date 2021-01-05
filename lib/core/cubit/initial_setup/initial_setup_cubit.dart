@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gm_driver_lite/core/hive/boxes.dart';
-import 'package:gm_driver_lite/core/repository/initial_setup_repository.dart';
+import '../../hive/boxes.dart';
+import '../../repository/initial_setup_repository.dart';
 import 'package:hive/hive.dart';
 
 part 'initial_setup_state.dart';

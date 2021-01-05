@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:gm_driver_lite/core/exception/exceptions.dart';
+import '../exception/exceptions.dart';
 
 import 'client/endpoints.dart';
 

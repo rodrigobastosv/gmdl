@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gm_driver_lite/core/repository/loading_info_repository.dart';
-import 'package:gm_driver_lite/core/repository/client/utils.dart';
+import 'loading_info_repository.dart';
+import 'client/utils.dart';
 
 import 'sign_in_repository.dart';
 

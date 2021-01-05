@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gm_driver_lite/core/cubit/initial_setup/initial_setup_cubit.dart';
+import '../../../core/cubit/initial_setup/initial_setup_cubit.dart';
 
 class InitialSetupForm extends StatefulWidget {
   InitialSetupForm({Key key}) : super(key: key);
@@ -36,7 +36,7 @@ class _InitialSetupFormState extends State<InitialSetupForm> {
                       .validateServerName(_serverName);
                 }
               },
-              child: Text('Confirm'),
+              child: const Text('Confirm'),
             ),
           ],
         ),

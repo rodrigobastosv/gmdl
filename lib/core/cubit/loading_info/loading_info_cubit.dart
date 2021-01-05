@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gm_driver_lite/core/hive/boxes.dart';
-import 'package:gm_driver_lite/core/repository/repositories.dart';
+import '../../hive/boxes.dart';
+import '../../repository/repositories.dart';
 import 'package:hive/hive.dart';
 
 part 'loading_info_state.dart';

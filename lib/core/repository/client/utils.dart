@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:gm_driver_lite/core/hive/boxes.dart';
+import '../../hive/boxes.dart';
 import 'package:hive/hive.dart';
 
 Dio getBasicClient() {
