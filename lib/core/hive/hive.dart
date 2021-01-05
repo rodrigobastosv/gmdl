@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
+// Project imports:
 import 'boxes.dart';
 
 Future<void> initHiveBoxes() async {

@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../loading_info/loading_info_page.dart';
 import 'widget/sign_in_form.dart';

@@ -1,10 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+
+// Project imports:
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../../core/hive/boxes.dart';
 import '../../core/repository/sign_in_repository.dart';
-import 'package:hive/hive.dart';
-
 import 'sign_in_view.dart';
 
 class SignInPage extends StatelessWidget {

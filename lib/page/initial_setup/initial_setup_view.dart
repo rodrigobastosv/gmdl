@@ -1,8 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import '../../core/cubit/initial_setup/initial_setup_cubit.dart';
-import 'widget/initial_setup_form.dart';
 import '../sign_in/sign_in_page.dart';
+import 'widget/initial_setup_form.dart';
 
 class InitialSetupView extends StatelessWidget {
   @override

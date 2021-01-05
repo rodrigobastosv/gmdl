@@ -1,6 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Project imports:
 import 'core/repository/repositories_provider.dart';
 import 'page/initial_setup/initial_setup_page.dart';
 

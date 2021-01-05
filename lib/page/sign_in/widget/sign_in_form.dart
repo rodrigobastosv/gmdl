@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import '../../../core/cubit/sign_in/sign_in_cubit.dart';
 
 class SignInForm extends StatefulWidget {
@@ -36,9 +41,9 @@ class _SignInFormState extends State<SignInForm> {
               if (_form.validate()) {
                 _form.save();
                 context.read<SignInCubit>().signInUser(
-                  username: _username,
-                  password: _password,
-                );
+                      username: _username,
+                      password: _password,
+                    );
               }
             },
             child: const Text('Sign In'),

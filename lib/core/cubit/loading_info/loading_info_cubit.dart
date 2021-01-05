@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+// Project imports:
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
-import 'package:hive/hive.dart';
 
 part 'loading_info_state.dart';
 
@@ -31,7 +36,6 @@ class LoadingInfoCubit extends Cubit<LoadingInfoState> {
       final configurations = await repository.getGlobalConfigurations();
       configurationsBox.put(CONFIGURATIONS_BOX, configurations);
       emit(FetchGlobalConfigSuccess());
-
     } on Exception {
       emit(DriverInfoFailed());
     }

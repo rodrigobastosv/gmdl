@@ -1,11 +1,16 @@
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+// Project imports:
 import '../../entity/dto/login_result_dto.dart';
 import '../../exception/exceptions.dart';
 import '../../hive/boxes.dart';
 import '../../repository/sign_in_repository.dart';
-import 'package:hive/hive.dart';
 
 part 'sign_in_state.dart';
 

@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:dio/dio.dart';
-import '../../hive/boxes.dart';
 import 'package:hive/hive.dart';
+
+// Project imports:
+import '../../hive/boxes.dart';
 
 Dio getBasicClient() {
   return Dio(

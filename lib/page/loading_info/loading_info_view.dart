@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import '../../core/cubit/loading_info/loading_info_cubit.dart';
 
 class LoadingInfoView extends StatelessWidget {
@@ -10,8 +15,7 @@ class LoadingInfoView extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<LoadingInfoCubit, LoadingInfoState>(
         listener: (_, state) {
-          if (state is AllInfoLoadedSuccess) {
-          }
+          if (state is AllInfoLoadedSuccess) {}
         },
         builder: (_, state) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
