@@ -1,12 +1,9 @@
-// Flutter imports:
 import 'package:flutter/foundation.dart';
 
-// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
-// Project imports:
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
 

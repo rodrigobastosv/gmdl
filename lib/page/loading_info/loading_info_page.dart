@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
-// Project imports:
 import '../../core/cubit/loading_info/loading_info_cubit.dart';
 import '../../core/hive/boxes.dart';
 import '../../core/repository/repositories.dart';

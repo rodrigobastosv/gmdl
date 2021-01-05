@@ -1,4 +1,3 @@
-// Package imports:
 import 'package:equatable/equatable.dart';
 
 class LoginResultDTO extends Equatable {
