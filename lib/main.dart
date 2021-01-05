@@ -1,10 +1,10 @@
-import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 
-import 'global_app.dart';
+import 'app.dart';
+import 'core/hive/hive.dart';
 
-Alice alice = Alice();
-
-void main() {
-  runApp(GlobalApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHiveBoxes();
+  runApp(App());
 }

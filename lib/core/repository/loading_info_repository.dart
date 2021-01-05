@@ -1,19 +1,17 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:http/http.dart';
 
-import 'api.dart';
+import 'client/endpoints.dart';
 
-class DriverInfoRepository {
-  DriverInfoRepository(this._client);
+class LoadingInfoRepository {
+  LoadingInfoRepository(this._client);
 
   final Dio _client;
 
-  Future<Map<String, dynamic>> getDriverInfo({
+  Future<Map<String, dynamic>> getBasicDriverInfo({
     String username,
   }) async {
-    print('a');
     try {
       final response = await _client.post(
         '/$DRIVER/restrictions',
@@ -53,17 +51,47 @@ class DriverInfoRepository {
           }),
         },
       );
-      print('b');
       if (response.statusCode != 200) {
-        print('c');
         throw Exception(response.statusMessage);
       } else {
         final responseData = response.data[0] as Map<String, dynamic>;
         return responseData;
       }
-    } on Exception catch (e) {
-      print(e);
-      print(e.toString());
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> getGlobalConfigurations() async {
+    try {
+      final response = await _client.post(
+        '/$GLOBAL_CONFIGURATION/restrictions',
+        queryParameters: {
+          'criteria': jsonEncode({
+            'filters': jsonEncode(
+              [
+                [
+                  'size1AliasConfig.id',
+                  'size1AliasConfig.key',
+                  'size2AliasConfig.id',
+                  'size2AliasConfig.key',
+                  'size3AliasConfig.id',
+                  'size3AliasConfig.key',
+                  'authConfigId',
+                  'allowChatBetweenDrivers'
+                ]
+              ],
+            ),
+          }),
+        },
+      );
+      if (response.statusCode != 200) {
+        throw Exception(response.statusMessage);
+      } else {
+        final responseData = response.data[0] as Map<String, dynamic>;
+        return responseData;
+      }
+    } on Exception {
       rethrow;
     }
   }

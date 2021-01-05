@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gm_driver_lite/core/exception/exceptions.dart';
 
-import 'api.dart';
+import 'client/endpoints.dart';
 
 class SignInRepository {
   SignInRepository(this.client);

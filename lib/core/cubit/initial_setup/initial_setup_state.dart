@@ -9,14 +9,7 @@ abstract class InitialSetupState extends Equatable {
 
 class InitialSetupInitial extends InitialSetupState {}
 
-class ServerValidationSuccess extends InitialSetupState {
-  ServerValidationSuccess(this.serverName);
-
-  final String serverName;
-
-  @override
-  List<Object> get props => [serverName];
-}
+class ServerValidationSuccess extends InitialSetupState {}
 
 class ServerValidationFailed extends InitialSetupState {}
 

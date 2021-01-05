@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gm_driver_lite/core/cubit/initial_setup/initial_setup_cubit.dart';
-import 'package:gm_driver_lite/core/provider/global_info_provider.dart';
 import 'package:gm_driver_lite/page/initial_setup/widget/initial_setup_form.dart';
+import 'package:gm_driver_lite/page/sign_in/sign_in_page.dart';
 
 class InitialSetupView extends StatelessWidget {
   @override
@@ -11,9 +11,11 @@ class InitialSetupView extends StatelessWidget {
       body: BlocConsumer<InitialSetupCubit, InitialSetupState>(
         listener: (_, state) {
           if (state is ServerValidationSuccess) {
-            context
-                .read<GlobalInfoProvider>()
-                .changeServerName(state.serverName);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => SignInPage(),
+              ),
+            );
           }
         },
         builder: (_, state) => InitialSetupForm(),
