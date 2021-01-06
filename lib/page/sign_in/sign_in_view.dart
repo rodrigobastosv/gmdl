@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gm_driver_lite/widget/gm_loading.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../loading_info/loading_info_page.dart';
@@ -16,9 +17,27 @@ class SignInView extends StatefulWidget {
 class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: BlocConsumer<SignInCubit, SignInState>(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFF24242A),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'LOGIN',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: BlocConsumer<SignInCubit, SignInState>(
           listener: (_, state) {
             if (state is UserSignedSuccess) {
               Navigator.of(context).pushReplacement(
@@ -31,7 +50,7 @@ class _SignInViewState extends State<SignInView> {
           builder: (_, state) {
             if (state is UserSigningLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: GMLoading(),
               );
             } else {
               return SignInForm();

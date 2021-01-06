@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../../core/cubit/sign_in/sign_in_cubit.dart';
 
@@ -20,33 +21,97 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextFormField(
-            onSaved: (username) => _username = username,
-            validator: (username) => username.isEmpty ? 'Required Field' : null,
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Image.asset('assets/images/banner_gm.png'),
+              const SizedBox(height: 140),
+              Padding(
+                padding: const EdgeInsets.all(18),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Username',
+                              fillColor: Colors.white,
+                              filled: true,
+                              prefixIcon: Icon(Icons.person_pin),
+                            ),
+                            onSaved: (username) => _username = username,
+                            validator: (username) =>
+                                username.isEmpty ? 'Required Field' : null,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Icon(
+                          AntDesign.qrcode,
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Password',
+                              fillColor: Colors.white,
+                              filled: true,
+                              prefixIcon: Icon(Icons.lock),
+                            ),
+                            onSaved: (password) => _password = password,
+                            validator: (password) =>
+                                password.isEmpty ? 'Required Field' : null,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Icon(
+                          AntDesign.eye,
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: RaisedButton(
+                              color: Theme.of(context).primaryColor,
+                              child: const Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () {
+                                final _form = _formKey.currentState;
+                                if (_form.validate()) {
+                                  _form.save();
+                                  context.read<SignInCubit>().signInUser(
+                                        username: _username,
+                                        password: _password,
+                                      );
+                                }
+                              }),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-          TextFormField(
-            onSaved: (password) => _password = password,
-            validator: (password) => password.isEmpty ? 'Required Field' : null,
-          ),
-          RaisedButton(
-            onPressed: () async {
-              final _form = _formKey.currentState;
-              if (_form.validate()) {
-                _form.save();
-                context.read<SignInCubit>().signInUser(
-                      username: _username,
-                      password: _password,
-                    );
-              }
-            },
-            child: const Text('Sign In'),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

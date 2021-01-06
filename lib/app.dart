@@ -13,9 +13,10 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: getProviders(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: const Color(0xFFB0D25A),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: const InitialSetupPage(),

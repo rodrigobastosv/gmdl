@@ -10,6 +10,16 @@ class InitialSetupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF24242A),
+      appBar: AppBar(
+        title: const Text(
+          'SETTINGS',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: BlocConsumer<InitialSetupCubit, InitialSetupState>(
         listener: (_, state) {
           if (state is ServerValidationSuccess) {
