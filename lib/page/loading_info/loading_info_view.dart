@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/loading_info/loading_info_cubit.dart';
@@ -11,6 +10,7 @@ class LoadingInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF24242A),
       body: BlocConsumer<LoadingInfoCubit, LoadingInfoState>(
         listener: (_, state) {
           if (state is AllInfoLoadedSuccess) {}
@@ -21,7 +21,13 @@ class LoadingInfoView extends StatelessWidget {
             const Center(
               child: GMLoading(),
             ),
-            if (state is InfoLoading) Text(state.step)
+            if (state is InfoLoading)
+              Text(
+                state.step,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
           ],
         ),
       ),
