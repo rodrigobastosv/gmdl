@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import '../../../core/cubit/cubits.dart';
 
-import '../../../core/cubit/initial_setup/initial_setup_cubit.dart';
-
-class InitialSetupForm extends StatefulWidget {
-  InitialSetupForm({Key key}) : super(key: key);
+class InitialSettingsForm extends StatefulWidget {
+  InitialSettingsForm({Key key}) : super(key: key);
 
   @override
-  _InitialSetupFormState createState() => _InitialSetupFormState();
+  _InitialSettingsFormState createState() => _InitialSettingsFormState();
 }
 
-class _InitialSetupFormState extends State<InitialSetupForm> {
+class _InitialSettingsFormState extends State<InitialSettingsForm> {
   final _formKey = GlobalKey<FormState>();
   String _serverName;
 
@@ -77,7 +76,9 @@ class _InitialSetupFormState extends State<InitialSetupForm> {
           final _form = _formKey.currentState;
           if (_form.validate()) {
             _form.save();
-            context.read<InitialSetupCubit>().validateServerName(_serverName);
+            context
+                .read<InitialSettingsCubit>()
+                .validateServerName(_serverName);
           }
         },
         child: const Icon(Icons.check_outlined),

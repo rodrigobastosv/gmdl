@@ -5,19 +5,18 @@ import 'package:hive/hive.dart';
 import '../../hive/boxes.dart';
 import '../../repository/initial_setup_repository.dart';
 
-part 'initial_setup_state.dart';
+part 'initial_settings_state.dart';
 
-class InitialSetupCubit extends Cubit<InitialSetupState> {
-  InitialSetupCubit({
+class InitialSettingsCubit extends Cubit<InitialSettingsState> {
+  InitialSettingsCubit({
     this.repository,
     this.securityBox,
-  }) : super(InitialSetupInitial());
+  }) : super(ServerValidationInitial());
 
   final InitialSetupRepository repository;
   final Box securityBox;
 
   Future<void> validateServerName(String serverName) async {
-    emit(InitialSetupInitial());
     try {
       final serverValidated = await repository.validateServerName(serverName);
       if (serverValidated) {

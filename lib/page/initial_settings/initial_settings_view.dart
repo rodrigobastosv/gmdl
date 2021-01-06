@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/cubit/cubits.dart';
 
-import '../../core/cubit/initial_setup/initial_setup_cubit.dart';
 import '../sign_in/sign_in_page.dart';
-import 'widget/initial_setup_form.dart';
+import 'widget/initial_settings_form.dart';
 
-class InitialSetupView extends StatelessWidget {
+class InitialSettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class InitialSetupView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: BlocConsumer<InitialSetupCubit, InitialSetupState>(
+      body: BlocConsumer<InitialSettingsCubit, InitialSettingsState>(
         listener: (_, state) {
           if (state is ServerValidationSuccess) {
             Navigator.of(context).push(
@@ -30,7 +30,7 @@ class InitialSetupView extends StatelessWidget {
             );
           }
         },
-        builder: (_, state) => InitialSetupForm(),
+        builder: (_, state) => InitialSettingsForm(),
       ),
     );
   }
