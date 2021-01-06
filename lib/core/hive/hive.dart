@@ -8,5 +8,6 @@ Future<void> initHiveBoxes() async {
   Hive.init(dir.path);
   await Hive.openBox(SECURITY_BOX);
   await Hive.openBox(DRIVER_BOX);
-  await Hive.openBox(CONFIGURATIONS_BOX);
+  await Hive.openBox(GLOBAL_CONFIGURATIONS_BOX);
+  await Hive.openBox(USER_CONFIGURATIONS_BOX);
 }

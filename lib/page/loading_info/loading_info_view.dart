@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../choose_equipment/choose_equipment_page.dart';
 
 import '../../core/cubit/loading_info/loading_info_cubit.dart';
 import '../../widget/gm_loading.dart';
@@ -14,7 +14,13 @@ class LoadingInfoView extends StatelessWidget {
       backgroundColor: const Color(0xFF24242A),
       body: BlocConsumer<LoadingInfoCubit, LoadingInfoState>(
         listener: (_, state) {
-          if (state is AllInfoLoadedSuccess) {}
+          if (state is AllInfoLoadedSuccess) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const ChooseEquipmentPage(),
+              ),
+            );
+          }
         },
         builder: (_, state) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,6 +28,7 @@ class LoadingInfoView extends StatelessWidget {
             const Center(
               child: GMLoading(),
             ),
+            const SizedBox(height: 12),
             if (state is InfoLoading)
               Text(
                 state.step,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
@@ -22,7 +21,8 @@ class LoadingInfoPage extends StatelessWidget {
       create: (_) => LoadingInfoCubit(
         repository: context.read<LoadingInfoRepository>(),
         driverBox: Hive.box(DRIVER_BOX),
-        configurationsBox: Hive.box(CONFIGURATIONS_BOX),
+        globalConfigurationsBox: Hive.box(GLOBAL_CONFIGURATIONS_BOX),
+        userConfigurationsBox: Hive.box(USER_CONFIGURATIONS_BOX),
       )..getDriverInfo(username),
       child: const LoadingInfoView(),
     );

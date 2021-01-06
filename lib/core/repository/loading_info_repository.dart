@@ -54,8 +54,11 @@ class LoadingInfoRepository {
       if (response.statusCode != 200) {
         throw Exception(response.statusMessage);
       } else {
-        final responseData = response.data[0] as Map<String, dynamic>;
-        return responseData;
+        final driverInfoList = response.data as List;
+        if (driverInfoList.isNotEmpty) {
+          return driverInfoList[0] as Map<String, dynamic>;
+        }
+        return {};
       }
     } on Exception {
       rethrow;
@@ -89,6 +92,22 @@ class LoadingInfoRepository {
         throw Exception(response.statusMessage);
       } else {
         final responseData = response.data[0] as Map<String, dynamic>;
+        return responseData;
+      }
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserConfigurations() async {
+    try {
+      final response = await _client.get(
+        '/$CONFIGURATION/loggedUser',
+      );
+      if (response.statusCode != 200) {
+        throw Exception(response.statusMessage);
+      } else {
+        final responseData = response.data as Map<String, dynamic>;
         return responseData;
       }
     } on Exception {

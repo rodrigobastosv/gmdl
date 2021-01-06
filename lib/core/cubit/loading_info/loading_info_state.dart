@@ -15,6 +15,8 @@ class AllInfoLoadedSuccess extends LoadingInfoState {}
 
 class FetchGlobalConfigSuccess extends LoadingInfoState {}
 
+class FetchUserConfigSuccess extends LoadingInfoState {}
+
 class DriverInfoFailed extends LoadingInfoState {}
 
 class InfoLoading extends LoadingInfoState {
