@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/cubit/cubits.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../sign_in/sign_in_page.dart';
 import 'widget/initial_settings_form.dart';
 
