@@ -8,3 +8,11 @@ abstract class ChooseEquipmentState extends Equatable {
 }
 
 class ChooseEquipmentInitial extends ChooseEquipmentState {}
+
+class EquipmentFound extends ChooseEquipmentState {}
+
+class EquipmentNotFound extends ChooseEquipmentState {}
+
+class EquipmentFailed extends ChooseEquipmentState {}
+
+class LoadingEquipment extends ChooseEquipmentState {}

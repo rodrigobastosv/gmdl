@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/choose_equipment/choose_equipment_cubit.dart';
+import '../../core/repository/repositories.dart';
 import 'choose_equipment_view.dart';
 
 class ChooseEquipmentPage extends StatelessWidget {
@@ -11,7 +12,9 @@ class ChooseEquipmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ChooseEquipmentCubit>(
-      create: (_) => ChooseEquipmentCubit(),
+      create: (_) => ChooseEquipmentCubit(
+        context.read<EquipmentRepository>(),
+      ),
       child: ChooseEquipmentView(),
     );
   }

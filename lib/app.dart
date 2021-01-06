@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/repository/repositories_provider.dart';
-import 'page/initial_settings/initial_settings_page.dart';
+import 'page/pages.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
