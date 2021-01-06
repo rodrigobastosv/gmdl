@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../choose_equipment/choose_equipment_page.dart';
 
 import '../../core/cubit/loading_info/loading_info_cubit.dart';
 import '../../widget/gm_loading.dart';
+import '../choose_equipment/choose_equipment_page.dart';
 
 class LoadingInfoView extends StatelessWidget {
   const LoadingInfoView({Key key}) : super(key: key);

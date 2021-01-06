@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../core/cubit/choose_equipment/choose_equipment_cubit.dart';
 import 'choose_equipment_view.dart';
 
