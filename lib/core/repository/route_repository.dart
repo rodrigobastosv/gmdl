@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import '../entity/dto/route_view_info_dto.dart';
 import '../entity/model/models.dart';
 import 'client/client.dart';
-import 'filters/route_view_filters.dart';
 import 'filters/filters.dart';
+import 'filters/route_view_filters.dart';
 
 class RouteRepository {
   RouteRepository(this._client);
