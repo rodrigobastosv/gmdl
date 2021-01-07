@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/cubit/cubits.dart';
 import 'package:hive/hive.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/hive/boxes.dart';
 import '../../core/repository/repositories.dart';
 import 'load_info_view.dart';

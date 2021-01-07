@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'route_at_glance_view.dart';
-import '../../core/repository/repositories.dart';
+
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/model/models.dart';
+import '../../core/repository/repositories.dart';
+import 'route_at_glance_view.dart';
 
 class RouteAtGlancePage extends StatelessWidget {
-  const RouteAtGlancePage({Key key, this.route,}) : super(key: key);
+  const RouteAtGlancePage({
+    Key key,
+    this.route,
+  }) : super(key: key);
 
   final RouteModel route;
 
