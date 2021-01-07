@@ -13,26 +13,28 @@ part 'load_route_state.dart';
 
 class LoadRouteCubit extends Cubit<LoadRouteState> {
   LoadRouteCubit({
-    @required this.repository,
-    @required this.driverBox,
-  }) : super(RouteAtGlanceInitial());
+    @required RouteRepository repository,
+    @required Box driverBox,
+  })  : _repository = repository,
+        _driverBox = driverBox,
+        super(RouteAtGlanceInitial());
 
-  final RouteRepository repository;
-  final Box driverBox;
+  final RouteRepository _repository;
+  final Box _driverBox;
 
   RouteViewInfoDTO routeViewInfo;
   RouteModel route;
 
   Future<void> fetchRouteView() async {
     emit(const LoadingInfo('Loading Basic Route Informations'));
-    final driverInfo = driverBox.get(DRIVER_INFO);
+    final driverInfo = _driverBox.get(DRIVER_INFO);
     final username = driverInfo['login'];
     try {
-      routeViewInfo = await repository.fetchRouteView(username);
+      routeViewInfo = await _repository.fetchRouteView(username);
       emit(const LoadingInfo('Loading Route'));
 
       try {
-        route = await repository.fetchRoute(routeViewInfo.id);
+        route = await _repository.fetchRoute(routeViewInfo.id);
         emit(RouteLoadedSuccess(route));
       } on Exception {
         emit(RouteLoadFailed());

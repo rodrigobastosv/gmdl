@@ -8,3 +8,9 @@ abstract class RouteState extends Equatable {
 }
 
 class RouteInitial extends RouteState {}
+
+class RouteStartedSuccess extends RouteState {}
+
+class RouteStartFailed extends RouteState {}
+
+class StartingRoute extends RouteState {}

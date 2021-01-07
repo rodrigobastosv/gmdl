@@ -6,14 +6,16 @@ import '../../repository/repositories.dart';
 part 'choose_equipment_state.dart';
 
 class ChooseEquipmentCubit extends Cubit<ChooseEquipmentState> {
-  ChooseEquipmentCubit(this.repository) : super(ChooseEquipmentInitial());
+  ChooseEquipmentCubit(this._repository)
+      : assert(_repository != null),
+        super(ChooseEquipmentInitial());
 
-  final EquipmentRepository repository;
+  final EquipmentRepository _repository;
 
   Future<void> getEquipmentInfo(String equipmentKey) async {
     try {
       emit(LoadingEquipment());
-      final equipmentWasFound = await repository.getEquipment(equipmentKey);
+      final equipmentWasFound = await _repository.getEquipment(equipmentKey);
       if (equipmentWasFound) {
         emit(EquipmentFound());
       } else {

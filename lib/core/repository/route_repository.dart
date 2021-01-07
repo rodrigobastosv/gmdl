@@ -74,4 +74,21 @@ class RouteRepository {
       rethrow;
     }
   }
+
+  Future<bool> startRoute(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$START',
+        data: {
+          'actualStart': DateTime.now().toUtc().toIso8601String(),
+        },
+      );
+      if (response.statusCode != 200) {
+        throw Exception();
+      }
+      return response.data as bool;
+    } on Exception {
+      rethrow;
+    }
+  }
 }

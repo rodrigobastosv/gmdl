@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/model/models.dart';
+import '../../core/hive/boxes.dart';
 import '../../core/repository/repositories.dart';
 import 'route_at_glance_view.dart';
 
@@ -21,6 +23,7 @@ class RouteAtGlancePage extends StatelessWidget {
       create: (_) => RouteCubit(
         route: route,
         repository: context.read<RouteRepository>(),
+        driverBox: Hive.box(DRIVER_BOX),
       ),
       child: const RouteAtGlanceView(),
     );

@@ -13,13 +13,16 @@ part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit({
-    @required this.repository,
-    @required this.securityBox,
+    @required SignInRepository repository,
+    @required Box securityBox,
   })  : assert(repository != null),
+        assert(securityBox != null),
+        _repository = repository,
+        _securityBox = securityBox,
         super(SignInInitial());
 
-  final SignInRepository repository;
-  final Box securityBox;
+  final SignInRepository _repository;
+  final Box _securityBox;
 
   Future<void> signInUser({
     String serverName,
@@ -28,12 +31,12 @@ class SignInCubit extends Cubit<SignInState> {
   }) async {
     emit(UserSigningLoading());
     try {
-      final signInResponse = await repository.signInUser(
+      final signInResponse = await _repository.signInUser(
         username: username,
         password: password,
       );
       final loginResult = LoginResultDTO.fromJson(username, signInResponse);
-      securityBox.put(SESSION_ID, loginResult.jSessionId);
+      _securityBox.put(SESSION_ID, loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
     } on SignInException {
       emit(UserSigningFailed());

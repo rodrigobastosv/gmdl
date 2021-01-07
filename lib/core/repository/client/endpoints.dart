@@ -3,5 +3,7 @@ const DRIVER = 'Driver';
 const EQUIPMENT = 'Equipment';
 const ROUTE_VIEW = 'RouteView';
 const APLICATION_LOAD_DRIVER = 'ApplicationLoadDriver';
+const ROUTE = 'Route';
+const START = 'Start';
 const GLOBAL_CONFIGURATION = 'GlobalConfiguration';
 const CONFIGURATION = 'Configuration';
