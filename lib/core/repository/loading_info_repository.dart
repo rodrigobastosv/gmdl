@@ -15,7 +15,11 @@ class LoadingInfoRepository {
       final response = await _client.post(
         '/$DRIVER/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {FILTERS: driverFilters, FIRST_RESULT: 0, MAX_RESULTS: 51},
+          CRITERIA: {
+            FILTERS: driverFilters,
+            FIRST_RESULT: 0,
+            MAX_RESULTS: 51,
+          },
         },
         data: {
           CRITERIA_CHAIN: [

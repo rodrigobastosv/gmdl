@@ -23,8 +23,8 @@ class RouteRepository {
         },
         data: {
           SORT: [
-            {ATTR: 'route.date', TYPE: 'DESC'},
-            {ATTR: 'route.key', TYPE: 'ASC'}
+            {ATTR: 'route.date', TYPE: SortMode.DESC.value},
+            {ATTR: 'route.key', TYPE: SortMode.ASC.value}
           ],
           CRITERIA_CHAIN: [
             {

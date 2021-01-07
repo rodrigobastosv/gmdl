@@ -22,13 +22,17 @@ class EquipmentRepository {
           CRITERIA_CHAIN: [
             {
               AND: [
-                {ATTR: 'key', EQUAL: equipmentKey, MATCH_MODE: 'EXACT'},
+                {
+                  ATTR: 'key',
+                  EQUAL: equipmentKey,
+                  MATCH_MODE: MatchMode.EXACT.value
+                },
                 {ATTR: 'enabled', EQUAL: true}
               ]
             }
           ],
           SORT: [
-            {ATTR: 'key', TYPE: 'ASC'},
+            {ATTR: 'key', TYPE: SortMode.ASC.value},
           ],
         },
       );
