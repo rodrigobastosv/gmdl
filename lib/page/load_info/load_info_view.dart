@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/cubit/cubits.dart';
 
-import '../../core/cubit/loading_info/loading_info_cubit.dart';
 import '../../widget/gm_loading.dart';
 import '../pages.dart';
 
-class LoadingInfoView extends StatelessWidget {
-  const LoadingInfoView({Key key}) : super(key: key);
+class LoadInfoView extends StatelessWidget {
+  const LoadInfoView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF24242A),
-      body: BlocConsumer<LoadingInfoCubit, LoadingInfoState>(
+      body: BlocConsumer<LoadInfoCubit, LoadInfoState>(
         listener: (_, state) {
           if (state is AllInfoLoadedSuccess) {
             Navigator.of(context).push(

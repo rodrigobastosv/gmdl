@@ -7,10 +7,10 @@ import 'package:hive/hive.dart';
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
 
-part 'loading_info_state.dart';
+part 'load_info_state.dart';
 
-class LoadingInfoCubit extends Cubit<LoadingInfoState> {
-  LoadingInfoCubit({
+class LoadInfoCubit extends Cubit<LoadInfoState> {
+  LoadInfoCubit({
     @required this.repository,
     @required this.driverBox,
     @required this.globalConfigurationsBox,

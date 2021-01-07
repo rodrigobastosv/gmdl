@@ -27,7 +27,7 @@ class ChooseEquipmentView extends StatelessWidget {
           if (state is EquipmentFound) {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => const LoadingRoutePage(),
+                builder: (_) => const LoadRoutePage(),
               ),
             );
           }

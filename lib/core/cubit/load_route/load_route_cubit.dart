@@ -9,10 +9,10 @@ import '../../entity/model/models.dart';
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
 
-part 'route_at_glance_state.dart';
+part 'load_route_state.dart';
 
-class RouteAtGlanceCubit extends Cubit<RouteAtGlanceState> {
-  RouteAtGlanceCubit({
+class LoadRouteCubit extends Cubit<LoadRouteState> {
+  LoadRouteCubit({
     @required this.repository,
     @required this.driverBox,
   }) : super(RouteAtGlanceInitial());
@@ -38,7 +38,7 @@ class RouteAtGlanceCubit extends Cubit<RouteAtGlanceState> {
         emit(RouteLoadFailed());
       }
     } on Exception {
-      emit(RouteAtGlanceLoadingFailed());
+      emit(RouteLoadFailed());
     }
   }
 }
