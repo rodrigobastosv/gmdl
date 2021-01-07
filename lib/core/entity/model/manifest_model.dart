@@ -1,10 +1,11 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class ManifestModel {
   int id;
   SkuModel sku;
   TransportModel transport;
-  int size1;
+  double size1;
   BaseUnitModel size1Alias;
   List<UdfModel> udfs;
 
@@ -23,7 +24,7 @@ class ManifestModel {
     transport = json['transport'] != null
         ? TransportModel.fromJson(json['transport'])
         : null;
-    size1 = json['size1'];
+    size1 = convertToDouble(json['size1']);
     size1Alias = json['size1Alias'] != null
         ? BaseUnitModel.fromJson(json['size1Alias'])
         : null;

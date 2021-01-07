@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class SkuModel {
@@ -8,10 +9,10 @@ class SkuModel {
   SkuTypeModel skuType;
   BaseUnitModel baseUnit;
   BaseUnitModel secondaryUnit;
-  int secondaryQty;
+  double secondaryQty;
   String alternativeKey;
   SecondaryCompoundModel secondaryCompound;
-  int secondaryCompoundQty;
+  double secondaryCompoundQty;
 
   SkuModel({
     this.id,
@@ -47,7 +48,7 @@ class SkuModel {
     secondaryCompound = json['secondaryCompound'] != null
         ? SecondaryCompoundModel.fromJson(json['secondaryCompound'])
         : null;
-    secondaryCompoundQty = json['secondaryCompoundQty'];
+    secondaryCompoundQty = convertToDouble(json['secondaryCompoundQty']);
   }
 
   Map<String, dynamic> toJson() {

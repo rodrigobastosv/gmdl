@@ -4,12 +4,12 @@ class OrderModel {
   int id;
   String number;
   List<LineItemModel> lineItems;
-  int plannedSize1;
-  int plannedSize2;
+  double plannedSize1;
+  double plannedSize2;
   double plannedSize3;
-  int plannedPickupSize1;
-  int plannedPickupSize2;
-  int plannedPickupSize3;
+  double plannedPickupSize1;
+  double plannedPickupSize2;
+  double plannedPickupSize3;
   List<UdfModel> udfs;
   bool hasPicture;
   PaymentMethodModel paymentMethod;
@@ -19,9 +19,9 @@ class OrderModel {
   bool allowShort;
   bool newOrder;
   OrderClassModel orderClass;
-  int damagedSize1;
-  int damagedSize2;
-  int damagedSize3;
+  double damagedSize1;
+  double damagedSize2;
+  double damagedSize3;
 
   OrderModel({
     this.id,

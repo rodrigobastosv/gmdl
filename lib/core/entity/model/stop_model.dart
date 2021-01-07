@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class StopModel {
@@ -14,12 +15,12 @@ class StopModel {
   String projectedArrival;
   String plannedDeparture;
   String projectedDeparture;
-  int plannedSize1;
-  int plannedSize2;
-  int plannedSize3;
-  int plannedPickupSize1;
-  int plannedPickupSize2;
-  int plannedPickupSize3;
+  double plannedSize1;
+  double plannedSize2;
+  double plannedSize3;
+  double plannedPickupSize1;
+  double plannedPickupSize2;
+  double plannedPickupSize3;
   bool hasPicture;
   bool hasSignature;
   double longitude;
@@ -31,9 +32,9 @@ class StopModel {
   bool returned;
   bool redelivered;
   bool canceled;
-  int damagedSize1;
-  int damagedSize2;
-  int damagedSize3;
+  double damagedSize1;
+  double damagedSize2;
+  double damagedSize3;
 
   StopModel({
     this.id,
@@ -100,12 +101,12 @@ class StopModel {
     projectedArrival = json['projectedArrival'];
     plannedDeparture = json['plannedDeparture'];
     projectedDeparture = json['projectedDeparture'];
-    plannedSize1 = json['plannedSize1'];
-    plannedSize2 = json['plannedSize2'];
-    plannedSize3 = json['plannedSize3'];
-    plannedPickupSize1 = json['plannedPickupSize1'];
-    plannedPickupSize2 = json['plannedPickupSize2'];
-    plannedPickupSize3 = json['plannedPickupSize3'];
+    plannedSize1 = convertToDouble(json['plannedSize1']);
+    plannedSize2 = convertToDouble(json['plannedSize2']);
+    plannedSize3 = convertToDouble(json['plannedSize3']);
+    plannedPickupSize1 = convertToDouble(json['plannedPickupSize1']);
+    plannedPickupSize2 = convertToDouble(json['plannedPickupSize2']);
+    plannedPickupSize3 = convertToDouble(json['plannedPickupSize3']);
     hasPicture = json['hasPicture'];
     hasSignature = json['hasSignature'];
     longitude = json['longitude'];
@@ -123,9 +124,9 @@ class StopModel {
     returned = json['returned'];
     redelivered = json['redelivered'];
     canceled = json['canceled'];
-    damagedSize1 = json['damagedSize1'];
-    damagedSize2 = json['damagedSize2'];
-    damagedSize3 = json['damagedSize3'];
+    damagedSize1 = convertToDouble(json['damagedSize1']);
+    damagedSize2 = convertToDouble(json['damagedSize2']);
+    damagedSize3 = convertToDouble(json['damagedSize3']);
   }
 
   Map<String, dynamic> toJson() {

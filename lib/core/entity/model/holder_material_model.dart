@@ -1,15 +1,16 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class HolderMaterialModel {
   int id;
   SkuModel sku;
   TransportModel transport;
+  double size1Quantity;
+  double size2Quantity;
+  double size3Quantity;
   BaseUnitModel size1Alias;
-  int size1Quantity;
   BaseUnitModel size2Alias;
-  int size2Quantity;
   BaseUnitModel size3Alias;
-  int size3Quantity;
 
   HolderMaterialModel({
     this.id,
@@ -29,18 +30,19 @@ class HolderMaterialModel {
     transport = json['transport'] != null
         ? TransportModel.fromJson(json['transport'])
         : null;
+    size1Quantity = convertToDouble(json['size1Quantity']);
+    size2Quantity = convertToDouble(json['size2Quantity']);
+    size3Quantity = convertToDouble(json['size3Quantity']);
     size1Alias = json['size1Alias'] != null
         ? BaseUnitModel.fromJson(json['size1Alias'])
         : null;
-    size1Quantity = json['size1Quantity'];
     size2Alias = json['size2Alias'] != null
         ? BaseUnitModel.fromJson(json['size2Alias'])
         : null;
-    size2Quantity = json['size2Quantity'];
+
     size3Alias = json['size3Alias'] != null
         ? BaseUnitModel.fromJson(json['size3Alias'])
         : null;
-    size3Quantity = json['size3Quantity'];
   }
 
   Map<String, dynamic> toJson() {

@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class RouteModel {
@@ -27,12 +28,12 @@ class RouteModel {
   String status;
   int plannedServiceTime;
   bool hasPicture;
-  int plannedSize1;
-  int plannedSize2;
-  int plannedSize3;
-  int plannedPickupSize1;
-  int plannedPickupSize2;
-  int plannedPickupSize3;
+  double plannedSize1;
+  double plannedSize2;
+  double plannedSize3;
+  double plannedPickupSize1;
+  double plannedPickupSize2;
+  double plannedPickupSize3;
   BaseUnitModel size1AliasConfig;
   BaseUnitModel size3AliasConfig;
   bool onRoute;
@@ -135,12 +136,12 @@ class RouteModel {
     status = json['status'];
     plannedServiceTime = json['plannedServiceTime'];
     hasPicture = json['hasPicture'];
-    plannedSize1 = json['plannedSize1'];
-    plannedSize2 = json['plannedSize2'];
-    plannedSize3 = json['plannedSize3'];
-    plannedPickupSize1 = json['plannedPickupSize1'];
-    plannedPickupSize2 = json['plannedPickupSize2'];
-    plannedPickupSize3 = json['plannedPickupSize3'];
+    plannedSize1 = convertToDouble(json['plannedSize1']);
+    plannedSize2 = convertToDouble(json['plannedSize2']);
+    plannedSize3 = convertToDouble(json['plannedSize3']);
+    plannedPickupSize1 = convertToDouble(json['plannedPickupSize1']);
+    plannedPickupSize2 = convertToDouble(json['plannedPickupSize2']);
+    plannedPickupSize3 = convertToDouble(json['plannedPickupSize3']);
     size1AliasConfig = json['size1AliasConfig'] != null
         ? BaseUnitModel.fromJson(json['size1AliasConfig'])
         : null;

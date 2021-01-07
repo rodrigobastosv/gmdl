@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/dto/route_view_info_dto.dart';
+import '../../entity/model/models.dart';
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
 
@@ -20,6 +21,7 @@ class RouteAtGlanceCubit extends Cubit<RouteAtGlanceState> {
   final Box driverBox;
 
   RouteViewInfoDTO routeViewInfo;
+  RouteModel route;
 
   Future<void> fetchRouteView() async {
     emit(const LoadingInfo('Loading Basic Route Informations'));
@@ -27,6 +29,14 @@ class RouteAtGlanceCubit extends Cubit<RouteAtGlanceState> {
     final username = driverInfo['login'];
     try {
       routeViewInfo = await repository.fetchRouteView(username);
+      emit(const LoadingInfo('Loading Route'));
+
+      try {
+        route = await repository.fetchRoute(routeViewInfo.id);
+        emit(RouteLoadedSuccess(route));
+      } on Exception {
+        emit(RouteLoadFailed());
+      }
     } on Exception {
       emit(RouteAtGlanceLoadingFailed());
     }

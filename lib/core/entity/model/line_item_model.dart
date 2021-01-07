@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class LineItemModel {
@@ -5,8 +6,6 @@ class LineItemModel {
   String key;
   String lineItemID;
   SkuModel sku;
-  int plannedSize1;
-  int plannedSize2;
   bool hasPicture;
   BaseUnitModel size1AliasConfig;
   BaseUnitModel size2AliasConfig;
@@ -16,17 +15,19 @@ class LineItemModel {
   String bonusKey;
   bool allowShort;
   List<UdfModel> udfs;
-  double unitTaxSize1;
   double unitDiscountSize1;
-  bool disregardInStock;
-  int plannedPickupSize1;
-  int plannedPickupSize2;
-  int damagedSize1;
-  int damagedSize2;
-  double unitTaxSize2;
+  double plannedSize1;
+  double plannedSize2;
   double plannedSize3;
+  double plannedPickupSize1;
+  double plannedPickupSize2;
+  double unitTaxSize1;
+  double unitTaxSize2;
   double unitTaxSize3;
-  int damagedSize3;
+  double damagedSize1;
+  double damagedSize2;
+  double damagedSize3;
+  bool disregardInStock;
 
   LineItemModel({
     this.id,
@@ -74,8 +75,8 @@ class LineItemModel {
     size3AliasConfig = json['size3AliasConfig'] != null
         ? BaseUnitModel.fromJson(json['size3AliasConfig'])
         : null;
-    unitPrice = json['unitPrice'];
-    totalPrice = json['totalPrice'];
+    unitPrice = convertToDouble(json['unitPrice']);
+    totalPrice = convertToDouble(json['totalPrice']);
     bonusKey = json['bonusKey'];
     allowShort = json['allowShort'];
     if (json['udfs'] != null) {
@@ -87,14 +88,14 @@ class LineItemModel {
     unitTaxSize1 = json['unitTaxSize1'];
     unitDiscountSize1 = json['unitDiscountSize1'];
     disregardInStock = json['disregardInStock'];
-    plannedPickupSize1 = json['plannedPickupSize1'];
-    plannedPickupSize2 = json['plannedPickupSize2'];
-    damagedSize1 = json['damagedSize1'];
-    damagedSize2 = json['damagedSize2'];
-    unitTaxSize2 = json['unitTaxSize2'];
-    plannedSize3 = json['plannedSize3'];
-    unitTaxSize3 = json['unitTaxSize3'];
-    damagedSize3 = json['damagedSize3'];
+    plannedPickupSize1 = convertToDouble(json['plannedPickupSize1']);
+    plannedPickupSize2 = convertToDouble(json['plannedPickupSize2']);
+    damagedSize1 = convertToDouble(json['damagedSize1']);
+    damagedSize2 = convertToDouble(json['damagedSize2']);
+    unitTaxSize2 = convertToDouble(json['unitTaxSize2']);
+    plannedSize3 = convertToDouble(json['plannedSize3']);
+    unitTaxSize3 = convertToDouble(json['unitTaxSize3']);
+    damagedSize3 = convertToDouble(json['damagedSize3']);
   }
 
   Map<String, dynamic> toJson() {

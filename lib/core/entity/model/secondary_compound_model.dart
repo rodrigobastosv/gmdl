@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class SecondaryCompoundModel {
@@ -10,7 +11,7 @@ class SecondaryCompoundModel {
   bool enabled;
   OrganizationModel skuType;
   BaseUnitModel baseUnit;
-  int secondaryQty;
+  double secondaryQty;
   String alternativeKey;
   bool hasSecondaryBundle;
   bool hasTertiaryBundle;
@@ -47,7 +48,7 @@ class SecondaryCompoundModel {
     baseUnit = json['baseUnit'] != null
         ? BaseUnitModel.fromJson(json['baseUnit'])
         : null;
-    secondaryQty = json['secondaryQty'];
+    secondaryQty = convertToDouble(json['secondaryQty']);
     alternativeKey = json['alternativeKey'];
     hasSecondaryBundle = json['hasSecondaryBundle'];
     hasTertiaryBundle = json['hasTertiaryBundle'];

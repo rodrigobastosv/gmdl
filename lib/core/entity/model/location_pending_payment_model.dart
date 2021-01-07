@@ -1,3 +1,4 @@
+import '../serializing_utils.dart';
 import 'models.dart';
 
 class LocationPendingPaymentModel {
@@ -26,7 +27,7 @@ class LocationPendingPaymentModel {
     location = json['location'] != null
         ? LocationModel.fromJson(json['location'])
         : null;
-    amount = json['amount'];
+    amount = convertToDouble(json['amount']);
     saleDate = json['saleDate'];
     dueDate = json['dueDate'];
     remark = json['remark'];
