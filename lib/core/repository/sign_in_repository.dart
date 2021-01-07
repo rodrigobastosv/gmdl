@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../exception/exceptions.dart';
 import 'client/endpoints.dart';
+import 'client/query_params.dart';
 
 class SignInRepository {
   SignInRepository(this.client);
@@ -17,8 +18,8 @@ class SignInRepository {
       final response = await client.post(
         '/$SIGN_IN',
         queryParameters: {
-          'j_username': username,
-          'j_password': password,
+          J_USERNAME: username,
+          J_PASSWORD: password,
         },
       );
       if (response.statusCode != 200) {

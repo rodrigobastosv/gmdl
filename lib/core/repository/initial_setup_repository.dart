@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 
+import '../constants.dart';
+import 'client/client.dart';
+
 class InitialSetupRepository {
   InitialSetupRepository(this.client);
 
@@ -10,8 +13,8 @@ class InitialSetupRepository {
       final response = await client.get(
         'https://$serverName.greenmile.com/auth/idp/discovery',
         queryParameters: {
-          'consumer': 'DRIVER',
-          'scope': 'driver7:default',
+          CONSUMER: moduleName,
+          SCOPE: moduleScope,
         },
       );
       return response.statusCode == 200;

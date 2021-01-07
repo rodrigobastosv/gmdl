@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
-import 'client/endpoints.dart';
+import 'client/client.dart';
+import 'filters/filters.dart';
 
 class EquipmentRepository {
   EquipmentRepository(this._client);
@@ -12,36 +11,24 @@ class EquipmentRepository {
   Future<bool> getEquipment(String equipmentKey) async {
     try {
       final response = await _client.post(
-        '/$EQUIPMENT/restrictions',
+        '/$EQUIPMENT/$RESTRICTIONS',
         queryParameters: {
-          'criteria': jsonEncode({
-            'filters': jsonEncode(
-              [
-                'id',
-                'key',
-                'description',
-                'organization.id',
-                'organization.key',
-                'organization.description',
-                'gpsProvider.id',
-                'gpsUnitId',
-                'equipmentType.*'
-              ],
-            ),
-            'maxResults': 51
-          }),
+          CRITERIA: {
+            FILTERS: equipmentFilters,
+            MAX_RESULTS: 51,
+          },
         },
         data: {
-          'criteriaChain': [
+          CRITERIA_CHAIN: [
             {
-              'and': [
-                {'matchMode': 'EXACT', 'attr': 'key', 'eq': equipmentKey},
-                {'attr': 'enabled', 'eq': true}
+              AND: [
+                {ATTR: 'key', EQUAL: equipmentKey, MATCH_MODE: 'EXACT'},
+                {ATTR: 'enabled', EQUAL: true}
               ]
             }
           ],
-          'sort': [
-            {'attr': 'key', 'type': 'ASC'},
+          SORT: [
+            {ATTR: 'key', TYPE: 'ASC'},
           ],
         },
       );

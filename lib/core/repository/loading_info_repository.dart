@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
-import 'client/endpoints.dart';
+import 'client/client.dart';
+import 'filters/filters.dart';
 
 class LoadingInfoRepository {
   LoadingInfoRepository(this._client);
@@ -14,41 +13,18 @@ class LoadingInfoRepository {
   }) async {
     try {
       final response = await _client.post(
-        '/$DRIVER/restrictions',
+        '/$DRIVER/$RESTRICTIONS',
+        queryParameters: {
+          CRITERIA: {FILTERS: driverFilters, FIRST_RESULT: 0, MAX_RESULTS: 51},
+        },
         data: {
-          'criteriaChain': [
+          CRITERIA_CHAIN: [
             {
-              'and': [
-                {
-                  'attr': 'login',
-                  'eq': 'rodriver',
-                }
+              AND: [
+                {ATTR: 'login', EQUAL: username}
               ]
             },
           ],
-        },
-        queryParameters: {
-          'criteria': jsonEncode({
-            'filters': jsonEncode(
-              [
-                'id',
-                'login',
-                'name',
-                'key',
-                'organization.id',
-                'organization.key',
-                'driverType',
-                'smartTrack',
-                'unitSystem',
-                'udfs.key',
-                'udfs.id',
-                'udfs.value',
-                'groups.id',
-              ],
-            ),
-            'firstResult': 0,
-            'maxResults': 51
-          }),
         },
       );
       if (response.statusCode != 200) {
@@ -68,24 +44,11 @@ class LoadingInfoRepository {
   Future<Map<String, dynamic>> getGlobalConfigurations() async {
     try {
       final response = await _client.post(
-        '/$GLOBAL_CONFIGURATION/restrictions',
+        '/$GLOBAL_CONFIGURATION/$RESTRICTIONS',
         queryParameters: {
-          'criteria': jsonEncode({
-            'filters': jsonEncode(
-              [
-                [
-                  'size1AliasConfig.id',
-                  'size1AliasConfig.key',
-                  'size2AliasConfig.id',
-                  'size2AliasConfig.key',
-                  'size3AliasConfig.id',
-                  'size3AliasConfig.key',
-                  'authConfigId',
-                  'allowChatBetweenDrivers'
-                ]
-              ],
-            ),
-          }),
+          CRITERIA: {
+            FILTERS: globalConfigurationFilters,
+          },
         },
       );
       if (response.statusCode != 200) {
