@@ -1,4 +1,4 @@
-import 'payment_method_model.dart';
+import 'models.dart';
 
 class LocationPaymentMethodModel {
   int id;

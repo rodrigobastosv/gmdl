@@ -1,5 +1,4 @@
-import 'base_unit_model.dart';
-import 'organization_model.dart';
+import 'models.dart';
 
 class SecondaryCompoundModel {
   int id;

@@ -1,6 +1,4 @@
-import 'size_alias_model.dart';
-import 'sku_model.dart';
-import 'transport_model.dart';
+import 'models.dart';
 
 class AdditionalMaterialModel {
   int id;

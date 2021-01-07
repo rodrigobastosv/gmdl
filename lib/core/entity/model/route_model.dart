@@ -1,7 +1,4 @@
-import 'base_unit_model.dart';
-import 'location_model.dart';
-import 'organization_model.dart';
-import 'stop_model.dart';
+import 'models.dart';
 
 class RouteModel {
   int id;
@@ -22,10 +19,10 @@ class RouteModel {
   double plannedDistance;
   String plannedComplete;
   String plannedStart;
-  List<LocationPendingPayments> locationPendingPayments;
-  List<AdditionalMaterials> additionalMaterials;
-  List<HolderMaterials> holderMaterials;
-  List<Manifests> manifests;
+  List<LocationPendingPaymentModel> locationPendingPayments;
+  List<AdditionalMaterialModel> additionalMaterials;
+  List<HolderMaterialModel> holderMaterials;
+  List<ManifestModel> manifests;
   int totalStops;
   String status;
   int plannedServiceTime;
@@ -111,27 +108,27 @@ class RouteModel {
     plannedComplete = json['plannedComplete'];
     plannedStart = json['plannedStart'];
     if (json['locationPendingPayments'] != null) {
-      locationPendingPayments = <LocationPendingPayments>[];
+      locationPendingPayments = <LocationPendingPaymentModel>[];
       json['locationPendingPayments'].forEach((v) {
-        locationPendingPayments.add(LocationPendingPayments.fromJson(v));
+        locationPendingPayments.add(LocationPendingPaymentModel.fromJson(v));
       });
     }
     if (json['additionalMaterials'] != null) {
-      additionalMaterials = <AdditionalMaterials>[];
+      additionalMaterials = <AdditionalMaterialModel>[];
       json['additionalMaterials'].forEach((v) {
-        additionalMaterials.add(AdditionalMaterials.fromJson(v));
+        additionalMaterials.add(AdditionalMaterialModel.fromJson(v));
       });
     }
     if (json['holderMaterials'] != null) {
-      holderMaterials = <HolderMaterials>[];
+      holderMaterials = <HolderMaterialModel>[];
       json['holderMaterials'].forEach((v) {
-        holderMaterials.add(HolderMaterials.fromJson(v));
+        holderMaterials.add(HolderMaterialModel.fromJson(v));
       });
     }
     if (json['manifests'] != null) {
-      manifests = <Manifests>[];
+      manifests = <ManifestModel>[];
       json['manifests'].forEach((v) {
-        manifests.add(Manifests.fromJson(v));
+        manifests.add(ManifestModel.fromJson(v));
       });
     }
     totalStops = json['totalStops'];
@@ -212,234 +209,6 @@ class RouteModel {
       data['size3AliasConfig'] = size3AliasConfig.toJson();
     }
     data['onRoute'] = onRoute;
-    return data;
-  }
-}
-
-class HolderMaterials {
-  int id;
-  Sku sku;
-  Transport transport;
-  BaseUnit size1Alias;
-  int size1Quantity;
-  BaseUnit size2Alias;
-  int size2Quantity;
-  BaseUnit size3Alias;
-  int size3Quantity;
-
-  HolderMaterials(
-      {this.id,
-      this.sku,
-      this.transport,
-      this.size1Alias,
-      this.size1Quantity,
-      this.size2Alias,
-      this.size2Quantity,
-      this.size3Alias,
-      this.size3Quantity});
-
-  HolderMaterials.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sku = json['sku'] != null ? new Sku.fromJson(json['sku']) : null;
-    transport = json['transport'] != null
-        ? new Transport.fromJson(json['transport'])
-        : null;
-    size1Alias = json['size1Alias'] != null
-        ? new BaseUnit.fromJson(json['size1Alias'])
-        : null;
-    size1Quantity = json['size1Quantity'];
-    size2Alias = json['size2Alias'] != null
-        ? new BaseUnit.fromJson(json['size2Alias'])
-        : null;
-    size2Quantity = json['size2Quantity'];
-    size3Alias = json['size3Alias'] != null
-        ? new BaseUnit.fromJson(json['size3Alias'])
-        : null;
-    size3Quantity = json['size3Quantity'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.sku != null) {
-      data['sku'] = this.sku.toJson();
-    }
-    if (this.transport != null) {
-      data['transport'] = this.transport.toJson();
-    }
-    if (this.size1Alias != null) {
-      data['size1Alias'] = this.size1Alias.toJson();
-    }
-    data['size1Quantity'] = this.size1Quantity;
-    if (this.size2Alias != null) {
-      data['size2Alias'] = this.size2Alias.toJson();
-    }
-    data['size2Quantity'] = this.size2Quantity;
-    if (this.size3Alias != null) {
-      data['size3Alias'] = this.size3Alias.toJson();
-    }
-    data['size3Quantity'] = this.size3Quantity;
-    return data;
-  }
-}
-
-class Manifests {
-  int id;
-  Sku sku;
-  Transport transport;
-  int size1;
-  BaseUnit size1Alias;
-  List<Udfs> udfs;
-
-  Manifests(
-      {this.id,
-      this.sku,
-      this.transport,
-      this.size1,
-      this.size1Alias,
-      this.udfs});
-
-  Manifests.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sku = json['sku'] != null ? new Sku.fromJson(json['sku']) : null;
-    transport = json['transport'] != null
-        ? new Transport.fromJson(json['transport'])
-        : null;
-    size1 = json['size1'];
-    size1Alias = json['size1Alias'] != null
-        ? new BaseUnit.fromJson(json['size1Alias'])
-        : null;
-    if (json['udfs'] != null) {
-      udfs = new List<Udfs>();
-      json['udfs'].forEach((v) {
-        udfs.add(new Udfs.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.sku != null) {
-      data['sku'] = this.sku.toJson();
-    }
-    if (this.transport != null) {
-      data['transport'] = this.transport.toJson();
-    }
-    data['size1'] = this.size1;
-    if (this.size1Alias != null) {
-      data['size1Alias'] = this.size1Alias.toJson();
-    }
-    if (this.udfs != null) {
-      data['udfs'] = this.udfs.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Sku {
-  int id;
-  Organization organization;
-  String key;
-  String description;
-  Organization skuType;
-  BaseUnit baseUnit;
-  BaseUnit secondaryUnit;
-  int secondaryQty;
-  String alternativeKey;
-
-  Sku(
-      {this.id,
-      this.organization,
-      this.key,
-      this.description,
-      this.skuType,
-      this.baseUnit,
-      this.secondaryUnit,
-      this.secondaryQty,
-      this.alternativeKey});
-
-  Sku.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    organization = json['organization'] != null
-        ? new Organization.fromJson(json['organization'])
-        : null;
-    key = json['key'];
-    description = json['description'];
-    skuType = json['skuType'] != null
-        ? new Organization.fromJson(json['skuType'])
-        : null;
-    baseUnit = json['baseUnit'] != null
-        ? new BaseUnit.fromJson(json['baseUnit'])
-        : null;
-    secondaryUnit = json['secondaryUnit'] != null
-        ? new BaseUnit.fromJson(json['secondaryUnit'])
-        : null;
-    secondaryQty = json['secondaryQty'];
-    alternativeKey = json['alternativeKey'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.organization != null) {
-      data['organization'] = this.organization.toJson();
-    }
-    data['key'] = this.key;
-    data['description'] = this.description;
-    if (this.skuType != null) {
-      data['skuType'] = this.skuType.toJson();
-    }
-    if (this.baseUnit != null) {
-      data['baseUnit'] = this.baseUnit.toJson();
-    }
-    if (this.secondaryUnit != null) {
-      data['secondaryUnit'] = this.secondaryUnit.toJson();
-    }
-    data['secondaryQty'] = this.secondaryQty;
-    data['alternativeKey'] = this.alternativeKey;
-    return data;
-  }
-}
-
-class FeatureStates {
-  String name;
-  bool enabled;
-  Parameters parameters;
-
-  FeatureStates({this.name, this.enabled, this.parameters});
-
-  FeatureStates.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    enabled = json['enabled'];
-    parameters = json['parameters'] != null
-        ? new Parameters.fromJson(json['parameters'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['enabled'] = this.enabled;
-    if (this.parameters != null) {
-      data['parameters'] = this.parameters.toJson();
-    }
-    return data;
-  }
-}
-
-class Parameters {
-  String url;
-
-  Parameters({this.url});
-
-  Parameters.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
     return data;
   }
 }

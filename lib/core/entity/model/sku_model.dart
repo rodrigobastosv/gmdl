@@ -1,13 +1,11 @@
-import 'base_unit_model.dart';
-import 'organization_model.dart';
-import 'secondary_compound_model.dart';
+import 'models.dart';
 
 class SkuModel {
   int id;
   OrganizationModel organization;
   String key;
   String description;
-  OrganizationModel skuType;
+  SkuTypeModel skuType;
   BaseUnitModel baseUnit;
   BaseUnitModel secondaryUnit;
   int secondaryQty;
@@ -36,9 +34,8 @@ class SkuModel {
         : null;
     key = json['key'];
     description = json['description'];
-    skuType = json['skuType'] != null
-        ? OrganizationModel.fromJson(json['skuType'])
-        : null;
+    skuType =
+        json['skuType'] != null ? SkuTypeModel.fromJson(json['skuType']) : null;
     baseUnit = json['baseUnit'] != null
         ? BaseUnitModel.fromJson(json['baseUnit'])
         : null;

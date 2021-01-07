@@ -1,4 +1,4 @@
-import 'organization_model.dart';
+import 'models.dart';
 
 class SkuTypeModel {
   int id;

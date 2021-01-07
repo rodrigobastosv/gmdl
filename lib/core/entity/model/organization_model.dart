@@ -1,5 +1,4 @@
-import 'prefered_locale_model.dart';
-import 'time_zone_model.dart';
+import 'models.dart';
 
 class OrganizationModel {
   int id;

@@ -1,4 +1,4 @@
-import 'location_model.dart';
+import 'models.dart';
 
 class LocationPendingPaymentModel {
   int id;

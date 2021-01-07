@@ -1,10 +1,4 @@
-import 'base_unit_model.dart';
-import 'location_model.dart';
-import 'order_model.dart';
-import 'route_model.dart';
-import 'stop_document_model.dart';
-import 'stop_type_model.dart';
-import 'transport_model.dart';
+import 'models.dart';
 
 class StopModel {
   int id;

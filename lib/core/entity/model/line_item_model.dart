@@ -1,6 +1,4 @@
-import 'base_unit_model.dart';
-import 'sku_model.dart';
-import 'udf_model.dart';
+import 'models.dart';
 
 class LineItemModel {
   int id;

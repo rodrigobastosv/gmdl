@@ -1,8 +1,4 @@
-import 'base_unit_model.dart';
-import 'line_item_model.dart';
-import 'order_class_model.dart';
-import 'payment_method_model.dart';
-import 'udf_model.dart';
+import 'models.dart';
 
 class OrderModel {
   int id;

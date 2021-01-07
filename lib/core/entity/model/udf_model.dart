@@ -1,4 +1,4 @@
-import 'entity_model.dart';
+import 'models.dart';
 
 class UdfModel {
   int id;
