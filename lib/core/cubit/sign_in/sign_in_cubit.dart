@@ -32,7 +32,7 @@ class SignInCubit extends Cubit<SignInState> {
         username: username,
         password: password,
       );
-      final loginResult = LoginResultDTO.fromJson(signInResponse);
+      final loginResult = LoginResultDTO.fromJson(username, signInResponse);
       securityBox.put(SESSION_ID, loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
     } on SignInException {

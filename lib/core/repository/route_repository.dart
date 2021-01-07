@@ -1,9 +1,10 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 import '../entity/dto/route_view_info_dto.dart';
-import 'client/endpoints.dart';
+import '../entity/model/models.dart';
+import 'client/client.dart';
+import 'filters/filters.dart';
+import 'filters/route_view_filters.dart';
 
 class RouteRepository {
   RouteRepository(this._client);
@@ -13,59 +14,23 @@ class RouteRepository {
   Future<RouteViewInfoDTO> fetchRouteView(String username) async {
     try {
       final response = await _client.post(
-        '/$ROUTE_VIEW/restrictions',
+        '/$ROUTE_VIEW/$RESTRICTIONS',
         queryParameters: {
-          'criteria': jsonEncode({
-            'filters': jsonEncode(
-              [
-                'primaryEquipment.gpsProvider.id',
-                'primaryEquipment.gpsUnitId',
-                'primaryEquipment.id',
-                'primaryEquipment.key',
-                'primaryEquipment.description',
-                'primaryEquipment.equipmentType.key',
-                'primaryEquipment.equipmentType.description',
-                'primaryEquipment.equipmentType.weight',
-                'primaryEquipment.equipmentType.height',
-                'primaryEquipment.equipmentType.size1',
-                'primaryEquipment.equipmentType.size2',
-                'primaryEquipment.equipmentType.size3',
-                'route.date',
-                'route.description',
-                'route.origin.description',
-                'route.driverAssignments.driver.id',
-                'route.driverAssignments.driver.login',
-                'route.driverAssignments.id',
-                'route.helperAssignments.helper.id',
-                'route.helperAssignments.helper.login',
-                'route.helperAssignments.id',
-                'route.id',
-                'route.key',
-                'route.organization.description',
-                'route.organization.id',
-                'route.organization.key',
-                'route.organization.parentOrganization.id',
-                'route.plannedStart',
-                'route.status',
-                'route.totalStops'
-              ],
-            ),
-            'maxResults': 51
-          }),
+          CRITERIA: {
+            FILTERS: routeViewFilters,
+            MAX_RESULTS: 51,
+          },
         },
         data: {
-          'sort': [
-            {'attr': 'route.date', 'type': 'DESC'},
-            {'attr': 'route.key', 'type': 'ASC'}
+          SORT: [
+            {ATTR: 'route.date', TYPE: SortMode.DESC.value},
+            {ATTR: 'route.key', TYPE: SortMode.ASC.value}
           ],
-          'criteriaChain': [
+          CRITERIA_CHAIN: [
             {
-              'and': [
-                {'eq': 'NOT_STARTED', 'attr': 'route.status'},
-                {
-                  'attr': 'route.driverAssignments.driver.login',
-                  'eq': username,
-                }
+              AND: [
+                {ATTR: 'route.status', EQUAL: 'NOT_STARTED'},
+                {ATTR: 'route.driverAssignments.driver.login', EQUAL: username}
               ]
             }
           ]
@@ -80,6 +45,31 @@ class RouteRepository {
       } else {
         return null;
       }
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<RouteModel> fetchRoute(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$APLICATION_LOAD_DRIVER',
+        data: {
+          'routeId': routeId,
+          'routeFilters': routeFilters,
+          'stopFilters': stopFilters,
+          'locationPendingPaymentFilters': locationPendingPaymentFilters,
+          'consignedSkuFilters': consignedSkuFilters,
+          'locationsFilters': locationFilters,
+          'ordersFilters': ordersFilters,
+          'lineItemsFilters': lineItemsFilters,
+          'holderMaterialsFilters': holderMaterialsFilters,
+        },
+      );
+      if (response.statusCode != 200) {
+        throw Exception();
+      }
+      return RouteModel.fromJson(response.data['route']);
     } on Exception {
       rethrow;
     }

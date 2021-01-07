@@ -1,0 +1,15 @@
+final driverFilters = [
+  'id',
+  'login',
+  'name',
+  'key',
+  'organization.id',
+  'organization.key',
+  'driverType',
+  'smartTrack',
+  'unitSystem',
+  'udfs.key',
+  'udfs.id',
+  'udfs.value',
+  'groups.id',
+];
