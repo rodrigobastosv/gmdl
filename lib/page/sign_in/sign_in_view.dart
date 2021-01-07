@@ -42,7 +42,7 @@ class _SignInViewState extends State<SignInView> {
             if (state is UserSignedSuccess) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (_) => LoadingInfoPage(
+                  builder: (_) => LoadInfoPage(
                     username: state.loginResult.username,
                   ),
                 ),
