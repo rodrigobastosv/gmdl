@@ -10,7 +10,6 @@ import 'core/hive/hive.dart';
 
 final alice = Alice(
   showInspectorOnShake: kDebugMode,
-  
 );
 
 void main() async {
