@@ -5,5 +5,6 @@ const ROUTE_VIEW = 'RouteView';
 const APLICATION_LOAD_DRIVER = 'ApplicationLoadDriver';
 const ROUTE = 'Route';
 const START = 'Start';
+const DEPART_ORIGIN = 'DepartOrigin';
 const GLOBAL_CONFIGURATION = 'GlobalConfiguration';
 const CONFIGURATION = 'Configuration';

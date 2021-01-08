@@ -14,3 +14,9 @@ class RouteStartedSuccess extends RouteState {}
 class RouteStartFailed extends RouteState {}
 
 class StartingRoute extends RouteState {}
+
+class DepartingOrigin extends RouteState {}
+
+class DepartOriginSuccess extends RouteState {}
+
+class DepartOriginFailed extends RouteState {}

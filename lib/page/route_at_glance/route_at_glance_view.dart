@@ -81,11 +81,11 @@ class RouteAtGlanceView extends StatelessWidget {
     );
   }
 
-  void _onPressedButton(RouteCubit cubit) async {
+  Future<void> _onPressedButton(RouteCubit cubit) async {
     if (cubit.state is RouteInitial || cubit.state is RouteStartFailed) {
       await cubit.startRoute();
     } else if (cubit.state is RouteStartedSuccess) {
-      return;
+      await cubit.departOrigin();
     } else {
       return;
     }

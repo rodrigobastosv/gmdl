@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../entity/dto/route_view_info_dto.dart';
 import '../entity/model/models.dart';
 import '../exception/exceptions.dart';
+import '../extension/extensions.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 import 'filters/route_view_filters.dart';
@@ -79,12 +80,26 @@ class RouteRepository {
       final response = await _client.post(
         '/$ROUTE/$routeId/$START',
         data: {
-          'actualStart': DateTime.now().toUtc().toIso8601String(),
+          'actualStart': DateTime.now().toUtcAsString,
         },
       );
       return response.isOk;
     } on Exception {
-      rethrow;
+      throw StartRouteException();
+    }
+  }
+
+  Future<bool> departOrigin(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$DEPART_ORIGIN',
+        data: {
+          'actualDeparture': DateTime.now().toUtcAsString,
+        },
+      );
+      return response.isOk;
+    } on Exception {
+      throw DepartOriginException();
     }
   }
 }

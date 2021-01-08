@@ -19,7 +19,6 @@ class RouteCubit extends Cubit<RouteState> {
         super(RouteInitial());
 
   final RouteModel route;
-  // ignore: unused_field
   final RouteRepository _repository;
   final Box driverBox;
 
@@ -34,9 +33,22 @@ class RouteCubit extends Cubit<RouteState> {
       } else {
         emit(RouteStartFailed());
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       emit(RouteStartFailed());
+    }
+  }
+
+  Future<void> departOrigin() async {
+    try {
+      emit(DepartingOrigin());
+      final departedOrigin = await _repository.departOrigin(route.id);
+      if (departedOrigin) {
+        emit(DepartOriginSuccess());
+      } else {
+        emit(DepartOriginFailed());
+      }
+    } on Exception {
+      emit(DepartOriginFailed());
     }
   }
 }
