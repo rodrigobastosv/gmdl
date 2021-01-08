@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../core/cubit/route/route_cubit.dart';
 import '../../widget/gm_button_loading.dart';
 import '../../widget/gm_menu_drawer.dart';
+import '../stop_list/stop_list_page.dart';
 import 'widget/basic_route_info.dart';
 
 class RouteAtGlanceView extends StatelessWidget {
@@ -17,7 +18,19 @@ class RouteAtGlanceView extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<RouteCubit>();
     return SafeArea(
-      child: BlocBuilder<RouteCubit, RouteState>(
+      child: BlocConsumer<RouteCubit, RouteState>(
+        listener: (_, state) {
+          if (state is DepartOriginSuccess) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: cubit,
+                  child: const StopListPage(),
+                ),
+              ),
+            );
+          }
+        },
         builder: (_, state) => Scaffold(
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),

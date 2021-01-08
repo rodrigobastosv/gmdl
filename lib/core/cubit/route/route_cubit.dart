@@ -42,12 +42,14 @@ class RouteCubit extends Cubit<RouteState> {
     try {
       emit(DepartingOrigin());
       final departedOrigin = await _repository.departOrigin(route.id);
+      print(departedOrigin);
       if (departedOrigin) {
         emit(DepartOriginSuccess());
       } else {
         emit(DepartOriginFailed());
       }
-    } on Exception {
+    } on Exception catch (e) {
+      print(e);
       emit(DepartOriginFailed());
     }
   }
