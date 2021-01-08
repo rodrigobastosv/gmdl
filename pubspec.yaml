@@ -33,6 +33,9 @@ dependencies:
   # Bloc
   flutter_bloc: ^6.1.1
   equatable: ^1.2.5
+
+  # Util
+  alice: ^0.1.9
   
   # UI
   material_design_icons_flutter: ^4.0.5755

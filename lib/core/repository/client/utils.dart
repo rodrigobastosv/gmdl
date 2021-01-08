@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
+import '../../../main.dart';
 import '../../exception/exceptions.dart';
 import '../../hive/boxes.dart';
 import 'client.dart';
@@ -15,7 +18,7 @@ Dio getBasicClient() {
         'consumer': 'DRIVER',
       },
     ),
-  );
+  )..interceptors.addAll(_getBasicInterceptors());
 }
 
 Dio getDefaultClient() {
@@ -30,7 +33,14 @@ Dio getDefaultClient() {
         'consumer': 'DRIVER',
       },
     ),
-  );
+  )..interceptors.addAll(_getBasicInterceptors());
+}
+
+List<Interceptor> _getBasicInterceptors() {
+  if (kDebugMode) {
+    return []..add(alice.getDioInterceptor());
+  }
+  return [];
 }
 
 dynamic handleResponse(Response response) {
