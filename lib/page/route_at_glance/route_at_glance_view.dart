@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -23,17 +22,16 @@ class RouteAtGlanceView extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             automaticallyImplyLeading: false,
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: const Icon(
+                MdiIcons.accountCircle,
+                size: 36,
+              ),
+            ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(18),
-                  child: const Icon(
-                    Ionicons.md_person,
-                    size: 36,
-                  ),
-                ),
-                const SizedBox(width: 60),
                 Text(
                   'WELCOME ${cubit.driverName.toUpperCase()}',
                   style: const TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/entity/model/models.dart';
 
@@ -52,7 +52,7 @@ class BasicRouteInfo extends StatelessWidget {
             Row(
               children: <Widget>[
                 Icon(
-                  Ionicons.ios_pin,
+                  MdiIcons.pin,
                   color: Theme.of(context).primaryColor,
                 ),
                 Text(

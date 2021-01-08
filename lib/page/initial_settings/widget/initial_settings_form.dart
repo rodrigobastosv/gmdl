@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/cubit/cubits.dart';
 
@@ -35,7 +35,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     hintText: 'Server',
                     fillColor: Colors.white,
                     filled: true,
-                    prefixIcon: Icon(FontAwesome.server),
+                    prefixIcon: Icon(MdiIcons.server),
                   ),
                   onSaved: (serverName) => _serverName = serverName,
                   validator: (serverName) =>
@@ -50,7 +50,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     hintText: 'Language',
                     fillColor: Colors.white,
                     filled: true,
-                    prefixIcon: Icon(MaterialCommunityIcons.earth),
+                    prefixIcon: Icon(MdiIcons.earth),
                   ),
                   initialValue: 'English',
                 ),
@@ -63,7 +63,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     hintText: 'Phone',
                     fillColor: Colors.white,
                     filled: true,
-                    prefixIcon: Icon(FontAwesome.mobile_phone),
+                    prefixIcon: Icon(MdiIcons.phone),
                   ),
                 ),
               ),

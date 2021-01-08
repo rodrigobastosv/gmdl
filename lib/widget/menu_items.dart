@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 final menuItems = [
   /*MenuItem(
@@ -25,7 +25,7 @@ final menuItems = [
   ),*/
   MenuItem(
     'Sign Out',
-    Octicons.sign_out,
+    MdiIcons.logout,
   ),
 ];
 

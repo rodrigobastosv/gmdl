@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../pages.dart';
@@ -46,7 +46,7 @@ class ChooseEquipmentView extends StatelessWidget {
                         hintText: 'Equipment',
                         fillColor: Colors.white,
                         filled: true,
-                        prefixIcon: Icon(MaterialCommunityIcons.truck),
+                        prefixIcon: Icon(MdiIcons.truckCheck),
                       ),
                       onSaved: (equipmentKey) => context
                           .read<ChooseEquipmentCubit>()
@@ -57,7 +57,7 @@ class ChooseEquipmentView extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   const Icon(
-                    AntDesign.qrcode,
+                    MdiIcons.qrcodeScan,
                     color: Colors.white,
                     size: 26,
                   ),
@@ -75,7 +75,7 @@ class ChooseEquipmentView extends StatelessWidget {
           }
         },
         child: const Icon(
-          MaterialCommunityIcons.map_search,
+          MdiIcons.mapCheck,
         ),
         backgroundColor: const Color(0xFFB0D25A),
       ),

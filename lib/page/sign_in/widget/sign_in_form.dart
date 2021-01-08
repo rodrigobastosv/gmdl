@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/cubit/sign_in/sign_in_cubit.dart';
 
@@ -50,7 +50,7 @@ class _SignInFormState extends State<SignInForm> {
                         ),
                         const SizedBox(width: 6),
                         const Icon(
-                          AntDesign.qrcode,
+                          MdiIcons.qrcodeScan,
                           color: Colors.white,
                           size: 26,
                         ),
@@ -76,7 +76,7 @@ class _SignInFormState extends State<SignInForm> {
                         ),
                         const SizedBox(width: 6),
                         const Icon(
-                          AntDesign.eye,
+                          MdiIcons.eye,
                           color: Colors.white,
                           size: 26,
                         ),
