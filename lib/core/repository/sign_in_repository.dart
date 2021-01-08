@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../exception/exceptions.dart';
 import 'client/endpoints.dart';
 import 'client/query_params.dart';
+import 'client/utils.dart';
 
 class SignInRepository {
   SignInRepository(this.client);
@@ -22,11 +23,7 @@ class SignInRepository {
           J_PASSWORD: password,
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception(response.statusMessage);
-      } else {
-        return response.data as Map<String, dynamic>;
-      }
+      return handleResponse(response) as Map<String, dynamic>;
     } on Exception {
       throw SignInException();
     }

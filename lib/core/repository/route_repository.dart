@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../entity/dto/route_view_info_dto.dart';
 import '../entity/model/models.dart';
+import '../exception/exceptions.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 import 'filters/route_view_filters.dart';
@@ -36,15 +37,11 @@ class RouteRepository {
           ]
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception();
+      final routesList = handleResponse(response) as List;
+      if (routesList.isEmpty) {
+        throw ResourceNotFoundException(resource: 'ROUTE_VIEW');
       }
-      final routesList = response.data as List;
-      if (routesList.isNotEmpty) {
-        return RouteViewInfoDTO.fromJson(routesList[0]);
-      } else {
-        return null;
-      }
+      return RouteViewInfoDTO.fromJson(routesList[0]);
     } on Exception {
       rethrow;
     }
@@ -66,10 +63,12 @@ class RouteRepository {
           'holderMaterialsFilters': holderMaterialsFilters,
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception();
+      final routeData = handleResponse(response);
+      if (routeData != null) {
+        return RouteModel.fromJson(response.data['route']);
+      } else {
+        throw RouteNotFoundException(routeId);
       }
-      return RouteModel.fromJson(response.data['route']);
     } on Exception {
       rethrow;
     }
@@ -83,10 +82,7 @@ class RouteRepository {
           'actualStart': DateTime.now().toUtc().toIso8601String(),
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception();
-      }
-      return response.data as bool;
+      return response.isOk;
     } on Exception {
       rethrow;
     }

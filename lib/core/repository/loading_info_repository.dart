@@ -31,15 +31,11 @@ class LoadingInfoRepository {
           ],
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception(response.statusMessage);
-      } else {
-        final driverInfoList = response.data as List;
-        if (driverInfoList.isNotEmpty) {
-          return driverInfoList[0] as Map<String, dynamic>;
-        }
-        return {};
+      final driverInfoList = handleResponse(response) as List;
+      if (driverInfoList.isNotEmpty) {
+        return driverInfoList[0] as Map<String, dynamic>;
       }
+      return {};
     } on Exception {
       rethrow;
     }
@@ -55,12 +51,8 @@ class LoadingInfoRepository {
           },
         },
       );
-      if (response.statusCode != 200) {
-        throw Exception(response.statusMessage);
-      } else {
-        final responseData = response.data[0] as Map<String, dynamic>;
-        return responseData;
-      }
+      final globalConfigs = handleResponse(response) as List;
+      return globalConfigs[0] as Map<String, dynamic>;
     } on Exception {
       rethrow;
     }
@@ -71,12 +63,7 @@ class LoadingInfoRepository {
       final response = await _client.get(
         '/$CONFIGURATION/loggedUser',
       );
-      if (response.statusCode != 200) {
-        throw Exception(response.statusMessage);
-      } else {
-        final responseData = response.data as Map<String, dynamic>;
-        return responseData;
-      }
+      return handleResponse(response);
     } on Exception {
       rethrow;
     }

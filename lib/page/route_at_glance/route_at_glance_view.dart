@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/route/route_cubit.dart';
 import '../../widget/gm_button_loading.dart';
@@ -97,12 +98,12 @@ class RouteAtGlanceView extends StatelessWidget {
       return const GMButtonLoading();
     } else if (state is RouteStartedSuccess) {
       return const Icon(
-        MaterialCommunityIcons.ab_testing,
+        MdiIcons.truckFastOutline,
         size: 32,
       );
     } else {
       return const Icon(
-        MaterialCommunityIcons.truck,
+        MdiIcons.truckCheckOutline,
         size: 32,
       );
     }

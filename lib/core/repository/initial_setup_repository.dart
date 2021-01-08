@@ -17,7 +17,7 @@ class InitialSetupRepository {
           SCOPE: moduleScope,
         },
       );
-      return response.statusCode == 200;
+      return response.isOk;
     } on Exception {
       return false;
     }

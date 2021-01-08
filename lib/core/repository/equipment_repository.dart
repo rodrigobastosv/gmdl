@@ -36,7 +36,7 @@ class EquipmentRepository {
           ],
         },
       );
-      return response.statusCode == 200;
+      return response.isOk;
     } on Exception {
       rethrow;
     }

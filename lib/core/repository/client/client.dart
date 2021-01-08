@@ -1,3 +1,4 @@
+export 'client_extensions.dart';
 export 'endpoints.dart';
 export 'query_params.dart';
 export 'seimos_constants.dart';

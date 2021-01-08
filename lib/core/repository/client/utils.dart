@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
+import '../../exception/exceptions.dart';
 import '../../hive/boxes.dart';
+import 'client.dart';
 
 Dio getBasicClient() {
   return Dio(
@@ -29,4 +31,11 @@ Dio getDefaultClient() {
       },
     ),
   );
+}
+
+dynamic handleResponse(Response response) {
+  if (response.isNotOk) {
+    throw GMServerException(response.statusCode, response.statusMessage);
+  }
+  return response.data;
 }
