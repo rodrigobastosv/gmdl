@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../selector/route_selectors.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/model/models.dart';
@@ -73,6 +74,38 @@ class RouteCubit extends Cubit<RouteState> {
     route = route.copyWith(
       stops: stops,
     );
-    emit(RouteUpdatedDueDepartStop(stop));
+    if (hasPendingStops(route)) {
+      emit(RouteUpdatedDueDepartStop(stop));
+    } else {
+      emit(RouteHasNoPendingStops());
+    }
+  }
+
+  Future<void> arriveWarehouse() async {
+    try {
+      emit(ArrivingWarehouse());
+      final arrivedWarehouse = await _repository.arriveWarehouse(route.id);
+      if (arrivedWarehouse) {
+        emit(ArrivedWarehouseSuccess());
+      } else {
+        emit(ArrivedWarehouseFailed());
+      }
+    } on Exception {
+      emit(ArrivedWarehouseFailed());
+    }
+  }
+
+  Future<void> completeRoute() async {
+    try {
+      emit(CompletingRoute());
+      final routeCompleted = await _repository.completeRoute(route.id);
+      if (routeCompleted) {
+        emit(RouteCompletedSuccess());
+      } else {
+        emit(RouteCompletedFailed());
+      }
+    } on Exception {
+      emit(RouteCompletedFailed());
+    }
   }
 }

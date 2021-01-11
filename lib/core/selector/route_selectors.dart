@@ -11,3 +11,8 @@ List<StopModel> getDoneStops(RouteModel route) {
   final routeStops = route.stops;
   return routeStops.where(isDoneStop).toList();
 }
+
+bool hasPendingStops(RouteModel route) {
+  final routeStops = route.stops;
+  return routeStops.any(isPendingStop);
+}

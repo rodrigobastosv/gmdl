@@ -46,3 +46,17 @@ class RouteUpdatedDueDepartStop extends RouteState {
         departedStop.id,
       ];
 }
+
+class RouteHasNoPendingStops extends RouteState {}
+
+class ArrivingWarehouse extends RouteState {}
+
+class ArrivedWarehouseSuccess extends RouteState {}
+
+class ArrivedWarehouseFailed extends RouteState {}
+
+class CompletingRoute extends RouteState {}
+
+class RouteCompletedSuccess extends RouteState {}
+
+class RouteCompletedFailed extends RouteState {}

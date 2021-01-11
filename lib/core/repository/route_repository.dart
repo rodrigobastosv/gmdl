@@ -116,4 +116,33 @@ class RouteRepository {
       throw ArriveStopException();
     }
   }
+
+  Future<bool> arriveWarehouse(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$ARRIVE_DESTINATION',
+        data: {
+          'actualArrival': DateTime.now().toUtcAsString,
+        },
+      );
+      return response.isOk;
+    } on Exception {
+      throw ArriveStopException();
+    }
+  }
+
+  Future<bool> completeRoute(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$COMPLETE',
+        data: {
+          'actualComplete': DateTime.now().toUtcAsString,
+          'amountReceived': 0,
+        },
+      );
+      return response.isOk;
+    } on Exception {
+      throw ArriveStopException();
+    }
+  }
 }
