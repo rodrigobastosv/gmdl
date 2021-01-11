@@ -20,3 +20,29 @@ class DepartingOrigin extends RouteState {}
 class DepartOriginSuccess extends RouteState {}
 
 class DepartOriginFailed extends RouteState {}
+
+class ArrivingStop extends RouteState {}
+
+class ArrivedStopSuccess extends RouteState {
+  ArrivedStopSuccess(this.stop);
+
+  final StopModel stop;
+
+  @override
+  List<Object> get props => [
+        stop.id,
+      ];
+}
+
+class ArrivedStopFailed extends RouteState {}
+
+class RouteUpdatedDueDepartStop extends RouteState {
+  RouteUpdatedDueDepartStop(this.departedStop);
+
+  final StopModel departedStop;
+
+  @override
+  List<Object> get props => [
+        departedStop.id,
+      ];
+}

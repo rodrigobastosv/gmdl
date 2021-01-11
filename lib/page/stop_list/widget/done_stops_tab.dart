@@ -9,10 +9,10 @@ class DoneStopsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Tab(
+    return Tab(
       child: Text(
-        'DONE (0)',
-        style: TextStyle(
+        'DONE (${stops.length})',
+        style: const TextStyle(
           fontSize: 12,
         ),
       ),

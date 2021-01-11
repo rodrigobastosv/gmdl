@@ -17,6 +17,7 @@ class SignInView extends StatefulWidget {
 class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xFF24242A),

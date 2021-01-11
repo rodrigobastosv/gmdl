@@ -1,7 +1,12 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+
 import '../serializing_utils.dart';
 import 'models.dart';
 
-class RouteModel {
+@immutable
+// ignore: must_be_immutable
+class RouteModel extends Equatable {
   int id;
   OrganizationModel organization;
   String key;
@@ -212,4 +217,121 @@ class RouteModel {
     data['onRoute'] = onRoute;
     return data;
   }
+
+  RouteModel copyWith({
+    int id,
+    OrganizationModel organization,
+    String key,
+    String date,
+    String description,
+    LocationModel origin,
+    double origLatitude,
+    double origLongitude,
+    LocationModel destination,
+    double destLatitude,
+    double destLongitude,
+    bool lastStopIsDestination,
+    List<StopModel> stops,
+    String plannedArrival,
+    String plannedDeparture,
+    double plannedDistance,
+    String plannedComplete,
+    String plannedStart,
+    List<LocationPendingPaymentModel> locationPendingPayments,
+    List<AdditionalMaterialModel> additionalMaterials,
+    List<HolderMaterialModel> holderMaterials,
+    List<ManifestModel> manifests,
+    int totalStops,
+    String status,
+    int plannedServiceTime,
+    bool hasPicture,
+    double plannedSize1,
+    double plannedSize2,
+    double plannedSize3,
+    double plannedPickupSize1,
+    double plannedPickupSize2,
+    double plannedPickupSize3,
+    BaseUnitModel size1AliasConfig,
+    BaseUnitModel size3AliasConfig,
+    bool onRoute,
+  }) {
+    return RouteModel(
+      id: id ?? this.id,
+      organization: organization ?? this.organization,
+      key: key ?? this.key,
+      date: date ?? this.date,
+      description: description ?? this.description,
+      origin: origin ?? this.origin,
+      origLatitude: origLatitude ?? this.origLatitude,
+      origLongitude: origLongitude ?? this.origLongitude,
+      destination: destination ?? this.destination,
+      destLatitude: destLatitude ?? this.destLatitude,
+      destLongitude: destLongitude ?? this.destLongitude,
+      lastStopIsDestination:
+          lastStopIsDestination ?? this.lastStopIsDestination,
+      stops: stops ?? this.stops,
+      plannedArrival: plannedArrival ?? this.plannedArrival,
+      plannedDeparture: plannedDeparture ?? this.plannedDeparture,
+      plannedDistance: plannedDistance ?? this.plannedDistance,
+      plannedComplete: plannedComplete ?? this.plannedComplete,
+      plannedStart: plannedStart ?? this.plannedStart,
+      locationPendingPayments:
+          locationPendingPayments ?? this.locationPendingPayments,
+      additionalMaterials: additionalMaterials ?? this.additionalMaterials,
+      holderMaterials: holderMaterials ?? this.holderMaterials,
+      manifests: manifests ?? this.manifests,
+      totalStops: totalStops ?? this.totalStops,
+      status: status ?? this.status,
+      plannedServiceTime: plannedServiceTime ?? this.plannedServiceTime,
+      hasPicture: hasPicture ?? this.hasPicture,
+      plannedSize1: plannedSize1 ?? this.plannedSize1,
+      plannedSize2: plannedSize2 ?? this.plannedSize2,
+      plannedSize3: plannedSize3 ?? this.plannedSize3,
+      plannedPickupSize1: plannedPickupSize1 ?? this.plannedPickupSize1,
+      plannedPickupSize2: plannedPickupSize2 ?? this.plannedPickupSize2,
+      plannedPickupSize3: plannedPickupSize3 ?? this.plannedPickupSize3,
+      size1AliasConfig: size1AliasConfig ?? this.size1AliasConfig,
+      size3AliasConfig: size3AliasConfig ?? this.size3AliasConfig,
+      onRoute: onRoute ?? this.onRoute,
+    );
+  }
+
+  @override
+  List<Object> get props => [
+        id.hashCode,
+        organization.hashCode,
+        key.hashCode,
+        date.hashCode,
+        description.hashCode,
+        origin.hashCode,
+        origLatitude.hashCode,
+        origLongitude.hashCode,
+        destination.hashCode,
+        destLatitude.hashCode,
+        destLongitude.hashCode,
+        lastStopIsDestination.hashCode,
+        stops.hashCode,
+        plannedArrival.hashCode,
+        plannedDeparture.hashCode,
+        plannedDistance.hashCode,
+        plannedComplete.hashCode,
+        plannedStart.hashCode,
+        locationPendingPayments.hashCode,
+        additionalMaterials.hashCode,
+        holderMaterials.hashCode,
+        manifests.hashCode,
+        totalStops.hashCode,
+        status.hashCode,
+        plannedServiceTime.hashCode,
+        hasPicture.hashCode,
+        plannedSize1.hashCode,
+        plannedSize2.hashCode,
+        plannedSize3.hashCode,
+        plannedPickupSize1.hashCode,
+        plannedPickupSize2.hashCode,
+        plannedPickupSize3.hashCode,
+        size1AliasConfig.hashCode,
+        size3AliasConfig.hashCode,
+        onRoute.hashCode,
+      ];
 }

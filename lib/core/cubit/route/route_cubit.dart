@@ -18,7 +18,7 @@ class RouteCubit extends Cubit<RouteState> {
   })  : _repository = repository,
         super(RouteInitial());
 
-  final RouteModel route;
+  RouteModel route;
   final RouteRepository _repository;
   final Box driverBox;
 
@@ -42,7 +42,6 @@ class RouteCubit extends Cubit<RouteState> {
     try {
       emit(DepartingOrigin());
       final departedOrigin = await _repository.departOrigin(route.id);
-      print(departedOrigin);
       if (departedOrigin) {
         emit(DepartOriginSuccess());
       } else {
@@ -52,5 +51,30 @@ class RouteCubit extends Cubit<RouteState> {
       print(e);
       emit(DepartOriginFailed());
     }
+  }
+
+  Future<void> arriveStop(StopModel stop) async {
+    try {
+      emit(ArrivingStop());
+      final arrivedStop = await _repository.arriveStop(route.id, stop);
+      if (arrivedStop) {
+        emit(ArrivedStopSuccess(stop));
+      } else {
+        emit(ArrivedStopFailed());
+      }
+    } on Exception catch (e) {
+      print(e);
+      emit(ArrivedStopFailed());
+    }
+  }
+
+  void updateRouteDueToDepartStop(StopModel stop) {
+    final stops = route.stops;
+    final stopIndex = stops.indexWhere((it) => stop.id == it.id);
+    stops[stopIndex] = stop;
+    route = route.copyWith(
+      stops: stops,
+    );
+    emit(RouteUpdatedDueDepartStop(stop));
   }
 }
