@@ -29,9 +29,7 @@ dependencies:
   hive: ^1.4.4+1
   path_provider: ^1.6.24
   flutter_map: ^0.10.1+1
-  json_serializable: ^3.5.1
   json_annotation: ^3.1.1
-  freezed: ^0.12.6
   freezed_annotation: ^0.12.0
 
   # Bloc
@@ -58,6 +56,8 @@ dev_dependencies:
   import_sorter: ^4.4.1
 
   # Code Generation
+  freezed: ^0.12.6
+  json_serializable: ^3.5.1
   build_runner: ^1.10.12
 
 # For information on the generic Dart part of this file, see the
