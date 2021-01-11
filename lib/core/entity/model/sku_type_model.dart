@@ -1,38 +1,20 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'models.dart';
 
-class SkuTypeModel {
-  int id;
-  String creationDate;
-  OrganizationModel organization;
-  String key;
-  String description;
+part 'sku_type_model.freezed.dart';
+part 'sku_type_model.g.dart';
 
-  SkuTypeModel(
-      {this.id,
-      this.creationDate,
-      this.organization,
-      this.key,
-      this.description});
+@freezed
+abstract class SkuTypeModel with _$SkuTypeModel {
+  factory SkuTypeModel({
+    int id,
+    String creationDate,
+    OrganizationModel organization,
+    String key,
+    String description,
+  }) = _SkuTypeModel;
 
-  SkuTypeModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    creationDate = json['creationDate'];
-    organization = json['organization'] != null
-        ? OrganizationModel.fromJson(json['organization'])
-        : null;
-    key = json['key'];
-    description = json['description'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['creationDate'] = creationDate;
-    if (organization != null) {
-      data['organization'] = organization.toJson();
-    }
-    data['key'] = key;
-    data['description'] = description;
-    return data;
-  }
+  factory SkuTypeModel.fromJson(Map<String, dynamic> json) =>
+      _$SkuTypeModelFromJson(json);
 }

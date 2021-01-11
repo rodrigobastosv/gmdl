@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import '../../../core/entity/model/models.dart';
 
-class StopListTile extends StatelessWidget {
-  StopListTile(this.stop);
+class FinishedStopListTile extends StatelessWidget {
+  FinishedStopListTile(this.stop);
 
   final StopModel stop;
 
@@ -57,32 +55,6 @@ class StopListTile extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          ),
-          const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const Icon(
-                    MdiIcons.directionsFork,
-                    color: Color(0xFF464646),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text('Directions'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  const Icon(
-                    MdiIcons.truckDelivery,
-                    color: Color(0xFF464646),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text('Arrival'),
-                ],
-              )
             ],
           ),
         ],

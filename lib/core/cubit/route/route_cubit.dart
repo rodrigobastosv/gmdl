@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../selector/route_selectors.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/model/models.dart';
@@ -18,7 +19,7 @@ class RouteCubit extends Cubit<RouteState> {
   })  : _repository = repository,
         super(RouteInitial());
 
-  final RouteModel route;
+  RouteModel route;
   final RouteRepository _repository;
   final Box driverBox;
 
@@ -42,15 +43,69 @@ class RouteCubit extends Cubit<RouteState> {
     try {
       emit(DepartingOrigin());
       final departedOrigin = await _repository.departOrigin(route.id);
-      print(departedOrigin);
       if (departedOrigin) {
         emit(DepartOriginSuccess());
       } else {
         emit(DepartOriginFailed());
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       emit(DepartOriginFailed());
+    }
+  }
+
+  Future<void> arriveStop(StopModel stop) async {
+    try {
+      emit(ArrivingStop());
+      final arrivedStop = await _repository.arriveStop(route.id, stop);
+      if (arrivedStop) {
+        emit(ArrivedStopSuccess(stop));
+      } else {
+        emit(ArrivedStopFailed());
+      }
+    } on Exception {
+      emit(ArrivedStopFailed());
+    }
+  }
+
+  void updateRouteDueToDepartStop(StopModel stop) {
+    final stops = route.stops;
+    final stopIndex = stops.indexWhere((it) => stop.id == it.id);
+    stops[stopIndex] = stop;
+    route = route.copyWith(
+      stops: stops,
+    );
+    if (hasPendingStops(route)) {
+      emit(RouteUpdatedDueDepartStop(stop));
+    } else {
+      emit(RouteHasNoPendingStops());
+    }
+  }
+
+  Future<void> arriveWarehouse() async {
+    try {
+      emit(ArrivingWarehouse());
+      final arrivedWarehouse = await _repository.arriveWarehouse(route.id);
+      if (arrivedWarehouse) {
+        emit(ArrivedWarehouseSuccess());
+      } else {
+        emit(ArrivedWarehouseFailed());
+      }
+    } on Exception {
+      emit(ArrivedWarehouseFailed());
+    }
+  }
+
+  Future<void> completeRoute() async {
+    try {
+      emit(CompletingRoute());
+      final routeCompleted = await _repository.completeRoute(route.id);
+      if (routeCompleted) {
+        emit(RouteCompletedSuccess());
+      } else {
+        emit(RouteCompletedFailed());
+      }
+    } on Exception {
+      emit(RouteCompletedFailed());
     }
   }
 }

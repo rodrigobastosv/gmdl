@@ -1,31 +1,18 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'models.dart';
 
-class FeatureStateModel {
-  String name;
-  bool enabled;
-  ParameterModel parameters;
+part 'feature_state_model.freezed.dart';
+part 'feature_state_model.g.dart';
 
-  FeatureStateModel({
-    this.name,
-    this.enabled,
-    this.parameters,
-  });
+@freezed
+abstract class FeatureStateModel with _$FeatureStateModel {
+  factory FeatureStateModel({
+    String name,
+    bool enabled,
+    List<ParameterModel> parameters,
+  }) = _FeatureStateModel;
 
-  FeatureStateModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    enabled = json['enabled'];
-    parameters = json['parameters'] != null
-        ? ParameterModel.fromJson(json['parameters'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = name;
-    data['enabled'] = enabled;
-    if (parameters != null) {
-      data['parameters'] = parameters.toJson();
-    }
-    return data;
-  }
+  factory FeatureStateModel.fromJson(Map<String, dynamic> json) =>
+      _$FeatureStateModelFromJson(json);
 }

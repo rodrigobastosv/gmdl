@@ -27,5 +27,10 @@ List<RepositoryProvider> getProviders() {
         getDefaultClient(),
       ),
     ),
+    RepositoryProvider<StopRepository>(
+      create: (_) => StopRepository(
+        getDefaultClient(),
+      ),
+    ),
   ];
 }

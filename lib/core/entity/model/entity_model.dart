@@ -1,21 +1,15 @@
-class EntityModel {
-  int id;
-  bool hasPicture;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  EntityModel({
-    this.id,
-    this.hasPicture,
-  });
+part 'entity_model.freezed.dart';
+part 'entity_model.g.dart';
 
-  EntityModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    hasPicture = json['hasPicture'];
-  }
+@freezed
+abstract class EntityModel with _$EntityModel {
+  factory EntityModel({
+    int id,
+    bool hasPicture,
+  }) = _EntityModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['hasPicture'] = hasPicture;
-    return data;
-  }
+  factory EntityModel.fromJson(Map<String, dynamic> json) =>
+      _$EntityModelFromJson(json);
 }

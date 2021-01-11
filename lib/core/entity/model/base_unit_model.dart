@@ -1,33 +1,18 @@
-class BaseUnitModel {
-  int id;
-  String key;
-  String description;
-  String icon;
-  String preferredSize;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  BaseUnitModel({
-    this.id,
-    this.key,
-    this.description,
-    this.icon,
-    this.preferredSize,
-  });
+part 'base_unit_model.freezed.dart';
+part 'base_unit_model.g.dart';
 
-  BaseUnitModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    description = json['description'];
-    icon = json['icon'];
-    preferredSize = json['preferredSize'];
-  }
+@freezed
+abstract class BaseUnitModel with _$BaseUnitModel {
+  factory BaseUnitModel({
+    int id,
+    String key,
+    String description,
+    String icon,
+    String preferredSize,
+  }) = _BaseUnitModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['description'] = description;
-    data['icon'] = icon;
-    data['preferredSize'] = preferredSize;
-    return data;
-  }
+  factory BaseUnitModel.fromJson(Map<String, dynamic> json) =>
+      _$BaseUnitModelFromJson(json);
 }

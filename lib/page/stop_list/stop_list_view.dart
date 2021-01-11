@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../finished_stops/finished_stops_page.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/selector/route_selectors.dart';
+import '../pages.dart';
+import '../stop/stop_page.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
 import 'widget/pending_stops_tab.dart';
@@ -14,7 +18,8 @@ class StopListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<RouteCubit>();
-    final stops = cubit.route.stops;
+    final pendingStops = getPendingStops(cubit.route);
+    final doneStops = getDoneStops(cubit.route);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -26,8 +31,40 @@ class StopListView extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: BlocBuilder<RouteCubit, RouteState>(
-          builder: (_, state) => Column(
+        body: BlocListener<RouteCubit, RouteState>(
+          listener: (_, state) {
+            if (state is ArrivedStopSuccess) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<RouteCubit>(),
+                    child: StopPage(
+                      stop: state.stop,
+                    ),
+                  ),
+                ),
+              );
+            } else if (state is RouteHasNoPendingStops) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<RouteCubit>(),
+                    child: const FinishedStopsPage(),
+                  ),
+                ),
+              );
+            } else if (state is ArrivedWarehouseSuccess) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<RouteCubit>(),
+                    child: const RouteSummaryPage(),
+                  ),
+                ),
+              );
+            } else if (state is RouteCompletedSuccess) {}
+          },
+          child: Column(
             children: [
               Container(
                 height: 38,
@@ -38,16 +75,16 @@ class StopListView extends StatelessWidget {
                   unselectedLabelColor: const Color(0xFFE0E0E0),
                   indicatorColor: const Color(0xFFB0D25A),
                   tabs: [
-                    PendingStopsTab(stops: stops),
-                    DoneStopsTab(stops: stops),
+                    PendingStopsTab(stops: pendingStops),
+                    DoneStopsTab(stops: doneStops),
                   ],
                 ),
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    PendingStopsTabView(stops: stops),
-                    DoneStopsTabView(stops: stops),
+                    PendingStopsTabView(stops: pendingStops),
+                    DoneStopsTabView(stops: doneStops),
                   ],
                 ),
               ),

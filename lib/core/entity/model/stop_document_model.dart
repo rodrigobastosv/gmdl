@@ -1,25 +1,16 @@
-class StopDocumentModel {
-  int id;
-  String documentDescription;
-  String documentNumber;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  StopDocumentModel({
-    this.id,
-    this.documentDescription,
-    this.documentNumber,
-  });
+part 'stop_document_model.freezed.dart';
+part 'stop_document_model.g.dart';
 
-  StopDocumentModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    documentDescription = json['documentDescription'];
-    documentNumber = json['documentNumber'];
-  }
+@freezed
+abstract class StopDocumentModel with _$StopDocumentModel {
+  factory StopDocumentModel({
+    int id,
+    String documentDescription,
+    String documentNumber,
+  }) = _StopDocumentModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['documentDescription'] = documentDescription;
-    data['documentNumber'] = documentNumber;
-    return data;
-  }
+  factory StopDocumentModel.fromJson(Map<String, dynamic> json) =>
+      _$StopDocumentModelFromJson(json);
 }
