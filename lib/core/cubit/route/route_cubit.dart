@@ -47,8 +47,7 @@ class RouteCubit extends Cubit<RouteState> {
       } else {
         emit(DepartOriginFailed());
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       emit(DepartOriginFailed());
     }
   }
@@ -62,8 +61,7 @@ class RouteCubit extends Cubit<RouteState> {
       } else {
         emit(ArrivedStopFailed());
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       emit(ArrivedStopFailed());
     }
   }

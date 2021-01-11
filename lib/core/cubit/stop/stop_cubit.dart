@@ -41,8 +41,7 @@ class StopCubit extends Cubit<StopState> {
       } else {
         emit(DepartedStopFailed());
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       emit(DepartedStopFailed());
     }
   }

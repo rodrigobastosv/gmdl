@@ -18,7 +18,6 @@ class StopListView extends StatelessWidget {
     final cubit = context.watch<RouteCubit>();
     final pendingStops = getPendingStops(cubit.route);
     final doneStops = getDoneStops(cubit.route);
-    pendingStops.forEach((stop) => print(stop.actualDeparture));
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -30,7 +29,7 @@ class StopListView extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: BlocConsumer<RouteCubit, RouteState>(
+        body: BlocListener<RouteCubit, RouteState>(
           listener: (_, state) {
             if (state is ArrivedStopSuccess) {
               Navigator.of(context).push(
@@ -45,7 +44,7 @@ class StopListView extends StatelessWidget {
               );
             }
           },
-          builder: (_, state) => Column(
+          child: Column(
             children: [
               Container(
                 height: 38,
