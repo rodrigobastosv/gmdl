@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import '../route/route_cubit.dart';
+
 import '../../entity/model/models.dart';
-import '../../repository/stop_repository.dart';
 import '../../extension/datetime_extensions.dart';
+import '../../repository/stop_repository.dart';
+import '../route/route_cubit.dart';
+
 part 'stop_state.dart';
 
 class StopCubit extends Cubit<StopState> {

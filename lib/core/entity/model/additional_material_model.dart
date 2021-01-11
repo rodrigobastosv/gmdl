@@ -1,45 +1,20 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'models.dart';
 
-class AdditionalMaterialModel {
-  int id;
-  SkuModel sku;
-  TransportModel transport;
-  int quantity;
-  SizeAliasModel sizeAlias;
+part 'additional_material_model.freezed.dart';
+part 'additional_material_model.g.dart';
 
-  AdditionalMaterialModel({
-    this.id,
-    this.sku,
-    this.transport,
-    this.quantity,
-    this.sizeAlias,
-  });
+@freezed
+abstract class AdditionalMaterialModel with _$AdditionalMaterialModel {
+  factory AdditionalMaterialModel({
+    int id,
+    SkuModel sku,
+    TransportModel transport,
+    int quantity,
+    SizeAliasModel sizeAlias,
+  }) = _AdditionalMaterialModel;
 
-  AdditionalMaterialModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sku = json['sku'] != null ? SkuModel.fromJson(json['sku']) : null;
-    transport = json['transport'] != null
-        ? TransportModel.fromJson(json['transport'])
-        : null;
-    quantity = json['quantity'];
-    sizeAlias = json['sizeAlias'] != null
-        ? SizeAliasModel.fromJson(json['sizeAlias'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    if (sku != null) {
-      data['sku'] = sku.toJson();
-    }
-    if (transport != null) {
-      data['transport'] = transport.toJson();
-    }
-    data['quantity'] = quantity;
-    if (sizeAlias != null) {
-      data['sizeAlias'] = sizeAlias.toJson();
-    }
-    return data;
-  }
+  factory AdditionalMaterialModel.fromJson(Map<String, dynamic> json) =>
+      _$AdditionalMaterialModelFromJson(json);
 }

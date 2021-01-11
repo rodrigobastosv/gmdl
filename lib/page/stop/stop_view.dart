@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../core/cubit/stop/stop_cubit.dart';
 
+import '../../core/cubit/stop/stop_cubit.dart';
 import 'widget/instructions_card.dart';
 
 class StopView extends StatelessWidget {

@@ -18,8 +18,8 @@ class DepartedStopSuccess extends StopState {
 
   @override
   List<Object> get props => [
-    stop.id,
-  ];
+        stop.id,
+      ];
 }
 
 class DepartedStopFailed extends StopState {}

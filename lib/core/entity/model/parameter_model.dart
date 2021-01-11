@@ -1,17 +1,14 @@
-class ParameterModel {
-  String url;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ParameterModel({
-    this.url,
-  });
+part 'parameter_model.freezed.dart';
+part 'parameter_model.g.dart';
 
-  ParameterModel.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-  }
+@freezed
+abstract class ParameterModel with _$ParameterModel {
+  factory ParameterModel({
+    String url,
+  }) = _ParameterModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['url'] = url;
-    return data;
-  }
+  factory ParameterModel.fromJson(Map<String, dynamic> json) =>
+      _$ParameterModelFromJson(json);
 }

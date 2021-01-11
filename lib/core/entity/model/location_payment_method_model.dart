@@ -1,27 +1,17 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'models.dart';
 
-class LocationPaymentMethodModel {
-  int id;
-  PaymentMethodModel paymentMethod;
+part 'location_payment_method_model.freezed.dart';
+part 'location_payment_method_model.g.dart';
 
-  LocationPaymentMethodModel({
-    this.id,
-    this.paymentMethod,
-  });
+@freezed
+abstract class LocationPaymentMethodModel with _$LocationPaymentMethodModel {
+  factory LocationPaymentMethodModel({
+    int id,
+    PaymentMethodModel paymentMethod,
+  }) = _LocationPaymentMethodModel;
 
-  LocationPaymentMethodModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    paymentMethod = json['paymentMethod'] != null
-        ? PaymentMethodModel.fromJson(json['paymentMethod'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    if (paymentMethod != null) {
-      data['paymentMethod'] = paymentMethod.toJson();
-    }
-    return data;
-  }
+  factory LocationPaymentMethodModel.fromJson(Map<String, dynamic> json) =>
+      _$LocationPaymentMethodModelFromJson(json);
 }

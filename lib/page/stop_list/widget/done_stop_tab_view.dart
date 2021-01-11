@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/cubit/route/route_cubit.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/cubit/route/route_cubit.dart';
 import '../../../core/entity/model/models.dart';
 import 'done_stop_list_tile.dart';
 

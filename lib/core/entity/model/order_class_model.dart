@@ -1,29 +1,17 @@
-class OrderClassModel {
-  int id;
-  String key;
-  String description;
-  bool allDamaged;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  OrderClassModel({
-    this.id,
-    this.key,
-    this.description,
-    this.allDamaged,
-  });
+part 'order_class_model.g.dart';
+part 'order_class_model.freezed.dart';
 
-  OrderClassModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    description = json['description'];
-    allDamaged = json['allDamaged'];
-  }
+@freezed
+abstract class OrderClassModel with _$OrderClassModel {
+  factory OrderClassModel({
+    int id,
+    String key,
+    String description,
+    bool allDamaged,
+  }) = _OrderClassModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['description'] = description;
-    data['allDamaged'] = allDamaged;
-    return data;
-  }
+  factory OrderClassModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderClassModelFromJson(json);
 }

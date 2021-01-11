@@ -1,29 +1,17 @@
-class TransportModel {
-  int id;
-  String key;
-  String date;
-  String alternativeKey;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  TransportModel({
-    this.id,
-    this.key,
-    this.date,
-    this.alternativeKey,
-  });
+part 'transport_model.freezed.dart';
+part 'transport_model.g.dart';
 
-  TransportModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    date = json['date'];
-    alternativeKey = json['alternativeKey'];
-  }
+@freezed
+abstract class TransportModel with _$TransportModel {
+  factory TransportModel({
+    int id,
+    String key,
+    String date,
+    String alternativeKey,
+  }) = _TransportModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['date'] = date;
-    data['alternativeKey'] = alternativeKey;
-    return data;
-  }
+  factory TransportModel.fromJson(Map<String, dynamic> json) =>
+      _$TransportModelFromJson(json);
 }

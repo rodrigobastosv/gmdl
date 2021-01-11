@@ -1,25 +1,16 @@
-class SizeAliasModel {
-  int id;
-  String key;
-  String preferredSize;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  SizeAliasModel({
-    this.id,
-    this.key,
-    this.preferredSize,
-  });
+part 'size_alias_model.freezed.dart';
+part 'size_alias_model.g.dart';
 
-  SizeAliasModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    preferredSize = json['preferredSize'];
-  }
+@freezed
+abstract class SizeAliasModel with _$SizeAliasModel {
+  factory SizeAliasModel({
+    int id,
+    String key,
+    String preferredSize,
+  }) = _SizeAliasModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['preferredSize'] = preferredSize;
-    return data;
-  }
+  factory SizeAliasModel.fromJson(Map<String, dynamic> json) =>
+      _$SizeAliasModelFromJson(json);
 }

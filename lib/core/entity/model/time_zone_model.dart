@@ -1,29 +1,17 @@
-class TimeZoneModel {
-  int id;
-  String description;
-  int rawOffsetMinutes;
-  String timezoneName;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  TimeZoneModel({
-    this.id,
-    this.description,
-    this.rawOffsetMinutes,
-    this.timezoneName,
-  });
+part 'time_zone_model.freezed.dart';
+part 'time_zone_model.g.dart';
 
-  TimeZoneModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    description = json['description'];
-    rawOffsetMinutes = json['rawOffsetMinutes'];
-    timezoneName = json['timezoneName'];
-  }
+@freezed
+abstract class TimeZoneModel with _$TimeZoneModel {
+  factory TimeZoneModel({
+    int id,
+    String description,
+    int rawOffsetMinutes,
+    String timezoneName,
+  }) = _TimeZoneModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['description'] = description;
-    data['rawOffsetMinutes'] = rawOffsetMinutes;
-    data['timezoneName'] = timezoneName;
-    return data;
-  }
+  factory TimeZoneModel.fromJson(Map<String, dynamic> json) =>
+      _$TimeZoneModelFromJson(json);
 }

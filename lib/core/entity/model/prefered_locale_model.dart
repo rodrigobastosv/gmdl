@@ -1,48 +1,22 @@
-class PreferedLocaleModel {
-  int id;
-  String key;
-  String language;
-  String description;
-  String dateFormat;
-  String timeFormat;
-  String currency;
-  String decimalSymbol;
-  String digitalGrouping;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  PreferedLocaleModel(
-      {this.id,
-      this.key,
-      this.language,
-      this.description,
-      this.dateFormat,
-      this.timeFormat,
-      this.currency,
-      this.decimalSymbol,
-      this.digitalGrouping});
+part 'prefered_locale_model.freezed.dart';
+part 'prefered_locale_model.g.dart';
 
-  PreferedLocaleModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    language = json['language'];
-    description = json['description'];
-    dateFormat = json['dateFormat'];
-    timeFormat = json['timeFormat'];
-    currency = json['currency'];
-    decimalSymbol = json['decimalSymbol'];
-    digitalGrouping = json['digitalGrouping'];
-  }
+@freezed
+abstract class PreferedLocaleModel with _$PreferedLocaleModel {
+  factory PreferedLocaleModel({
+    int id,
+    String key,
+    String language,
+    String description,
+    String dateFormat,
+    String timeFormat,
+    String currency,
+    String decimalSymbol,
+    String digitalGrouping,
+  }) = _PreferedLocaleModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['language'] = language;
-    data['description'] = description;
-    data['dateFormat'] = dateFormat;
-    data['timeFormat'] = timeFormat;
-    data['currency'] = currency;
-    data['decimalSymbol'] = decimalSymbol;
-    data['digitalGrouping'] = digitalGrouping;
-    return data;
-  }
+  factory PreferedLocaleModel.fromJson(Map<String, dynamic> json) =>
+      _$PreferedLocaleModelFromJson(json);
 }

@@ -1,15 +1,14 @@
-class PaymentMethodModel {
-  int id;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  PaymentMethodModel({this.id});
+part 'payment_method_model.freezed.dart';
+part 'payment_method_model.g.dart';
 
-  PaymentMethodModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-  }
+@freezed
+abstract class PaymentMethodModel with _$PaymentMethodModel {
+  factory PaymentMethodModel({
+    int id,
+  }) = _PaymentMethodModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    return data;
-  }
+  factory PaymentMethodModel.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodModelFromJson(json);
 }

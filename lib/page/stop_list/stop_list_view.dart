@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../stop/stop_page.dart';
-import '../../core/selector/route_selectors.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/selector/route_selectors.dart';
+import '../stop/stop_page.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
 import 'widget/pending_stops_tab.dart';

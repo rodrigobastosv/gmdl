@@ -1,33 +1,18 @@
-class LocationTypeModel {
-  int id;
-  String key;
-  String description;
-  bool showOnMobileCreate;
-  String alternativeKey;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  LocationTypeModel({
-    this.id,
-    this.key,
-    this.description,
-    this.showOnMobileCreate,
-    this.alternativeKey,
-  });
+part 'location_type_model.freezed.dart';
+part 'location_type_model.g.dart';
 
-  LocationTypeModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    description = json['description'];
-    showOnMobileCreate = json['showOnMobileCreate'];
-    alternativeKey = json['alternativeKey'];
-  }
+@freezed
+abstract class LocationTypeModel with _$LocationTypeModel {
+  factory LocationTypeModel({
+    int id,
+    String key,
+    String description,
+    bool showOnMobileCreate,
+    String alternativeKey,
+  }) = _LocationTypeModel;
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['description'] = description;
-    data['showOnMobileCreate'] = showOnMobileCreate;
-    data['alternativeKey'] = alternativeKey;
-    return data;
-  }
+  factory LocationTypeModel.fromJson(Map<String, dynamic> json) =>
+      _$LocationTypeModelFromJson(json);
 }
