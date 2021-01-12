@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/cubit/cubits.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../core/cubit/cubits.dart';
 
 class RouteSummaryView extends StatelessWidget {
   const RouteSummaryView({Key key}) : super(key: key);

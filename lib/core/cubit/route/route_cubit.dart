@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../selector/route_selectors.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/model/models.dart';
 import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
+import '../../selector/route_selectors.dart';
 
 part 'route_state.dart';
 

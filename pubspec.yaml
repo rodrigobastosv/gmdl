@@ -31,6 +31,7 @@ dependencies:
   flutter_map: ^0.10.1+1
   json_annotation: ^3.1.1
   freezed_annotation: ^0.12.0
+  intl: ^0.16.1
 
   # Bloc
   flutter_bloc: ^6.1.1

@@ -5,3 +5,10 @@ extension DateTimeExt on DateTime {
     return '$firstPart+0000';
   }
 }
+
+extension StringDateTimeExt on String {
+  DateTime get local {
+    final datetime = DateTime.parse(this);
+    return datetime.toLocal();
+  }
+}

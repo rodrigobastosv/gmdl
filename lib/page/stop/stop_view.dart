@@ -12,7 +12,7 @@ class StopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(

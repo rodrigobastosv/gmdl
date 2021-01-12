@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../finished_stops/finished_stops_page.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/selector/route_selectors.dart';
+import '../finished_stops/finished_stops_page.dart';
 import '../pages.dart';
 import '../stop/stop_page.dart';
 import 'widget/done_stop_tab_view.dart';
@@ -21,7 +21,7 @@ class StopListView extends StatelessWidget {
     final pendingStops = getPendingStops(cubit.route);
     final doneStops = getDoneStops(cubit.route);
     return DefaultTabController(
-      length: 2,
+      length: doneStops.isNotEmpty ? 2 : 1,
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
@@ -76,7 +76,7 @@ class StopListView extends StatelessWidget {
                   indicatorColor: const Color(0xFFB0D25A),
                   tabs: [
                     PendingStopsTab(stops: pendingStops),
-                    DoneStopsTab(stops: doneStops),
+                    if (doneStops.isNotEmpty) DoneStopsTab(stops: doneStops),
                   ],
                 ),
               ),
@@ -84,7 +84,8 @@ class StopListView extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     PendingStopsTabView(stops: pendingStops),
-                    DoneStopsTabView(stops: doneStops),
+                    if (doneStops.isNotEmpty)
+                      DoneStopsTabView(stops: doneStops),
                   ],
                 ),
               ),

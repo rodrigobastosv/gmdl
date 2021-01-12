@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/selector/route_selectors.dart';
 
 class BasicRouteInfo extends StatelessWidget {
   const BasicRouteInfo({Key key, this.route}) : super(key: key);
@@ -49,21 +50,63 @@ class BasicRouteInfo extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: <Widget>[
-                Icon(
-                  MdiIcons.pin,
-                  color: Theme.of(context).primaryColor,
-                ),
-                Text(
-                  '${route.stops.length} Stops',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+            Container(
+              height: 30,
+              child: Row(
+                children: [
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        MdiIcons.pin,
+                        color: Theme.of(context).primaryColor,
+                        size: 14,
+                      ),
+                      Text(
+                        '${route.stops.length} Stops',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            )
+                  const SizedBox(width: 8),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        MdiIcons.road,
+                        color: Theme.of(context).primaryColor,
+                        size: 14,
+                      ),
+                      Text(
+                        '''${getPlannedDistanceInKm(route).toStringAsFixed(1)} km''',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 8),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        MdiIcons.clockEnd,
+                        color: Theme.of(context).primaryColor,
+                        size: 14,
+                      ),
+                      Text(
+                        '${getPlannedServiceInHoursAndMinutes(route)}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

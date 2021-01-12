@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/cubit/cubits.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../core/cubit/cubits.dart';
 import 'route_summary_view.dart';
 
 class RouteSummaryPage extends StatelessWidget {

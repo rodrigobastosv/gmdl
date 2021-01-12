@@ -5,6 +5,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
+import '../../../core/utils/date_utils.dart';
+import '../../../widget/stop/stop_sizes.dart';
 
 class PendingStopListTile extends StatelessWidget {
   PendingStopListTile(this.stop);
@@ -34,10 +36,9 @@ class PendingStopListTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
-                    //stop.plannedArrival.substring(0, 6),
-                    '01: 04 PM',
-                    style: TextStyle(
+                  Text(
+                    getBasicDateHourMinute(stop.plannedArrival),
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF464646),
                     ),
@@ -56,41 +57,53 @@ class PendingStopListTile extends StatelessWidget {
                       ),
                     ),
                     Text(stop.location.addressLine1),
+                    const SizedBox(height: 8),
+                    StopSizes(stop: stop),
                   ],
                 ),
               ),
             ],
           ),
           const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const Icon(
+          Container(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextButton.icon(
+                  label: const Text('Directions'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  icon: const Icon(
                     MdiIcons.directionsFork,
                     color: Color(0xFF464646),
+                    size: 16,
                   ),
-                  const SizedBox(width: 8),
-                  const Text('Directions'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      MdiIcons.truckDelivery,
-                      color: Color(0xFF464646),
+                  onPressed: () {},
+                ),
+                TextButton.icon(
+                  label: const Text('Arrival'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                    textStyle: const TextStyle(
+                      fontSize: 14,
                     ),
-                    onPressed: () =>
-                        context.read<RouteCubit>().arriveStop(stop),
                   ),
-                  const SizedBox(width: 8),
-                  const Text('Arrival'),
-                ],
-              )
-            ],
+                  icon: const Icon(
+                    MdiIcons.truckDelivery,
+                    color: Color(0xFF464646),
+                    size: 16,
+                  ),
+                  onPressed: () => context.read<RouteCubit>().arriveStop(stop),
+                ),
+              ],
+            ),
           ),
+          const Divider(thickness: 2),
         ],
       ),
     );
