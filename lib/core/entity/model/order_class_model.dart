@@ -12,6 +12,13 @@ abstract class OrderClassModel with _$OrderClassModel {
     bool allDamaged,
   }) = _OrderClassModel;
 
+  static List<OrderClassModel> fromJsonList(List list) {
+    return List.generate(
+      list.length,
+      (i) => OrderClassModel.fromJson(list[i]),
+    );
+  }
+
   factory OrderClassModel.fromJson(Map<String, dynamic> json) =>
       _$OrderClassModelFromJson(json);
 }

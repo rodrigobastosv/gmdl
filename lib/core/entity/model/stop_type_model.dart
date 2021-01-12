@@ -13,6 +13,13 @@ abstract class StopTypeModel with _$StopTypeModel {
     bool locationRequired,
   }) = _StopTypeModel;
 
+  static List<StopTypeModel> fromJsonList(List list) {
+    return List.generate(
+      list.length,
+      (i) => StopTypeModel.fromJson(list[i]),
+    );
+  }
+
   factory StopTypeModel.fromJson(Map<String, dynamic> json) =>
       _$StopTypeModelFromJson(json);
 }

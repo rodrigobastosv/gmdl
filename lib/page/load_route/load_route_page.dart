@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 import '../../core/cubit/cubits.dart';
-import '../../core/hive/boxes.dart';
 import '../../core/repository/repositories.dart';
+import '../../core/store/store_provider.dart';
 import 'load_route_view.dart';
 
 class LoadRoutePage extends StatelessWidget {
@@ -16,8 +15,8 @@ class LoadRoutePage extends StatelessWidget {
     return BlocProvider<LoadRouteCubit>(
       create: (_) => LoadRouteCubit(
         repository: context.read<RouteRepository>(),
-        driverBox: Hive.box(DRIVER_BOX),
-      )..fetchRouteView(),
+        storeProvider: context.read<StoreProvider>(),
+      )..fetchRouteInformation(),
       child: const LoadRouteView(),
     );
   }

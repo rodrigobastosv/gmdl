@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 import '../../core/cubit/cubits.dart';
-import '../../core/hive/boxes.dart';
 import '../../core/repository/repositories.dart';
+import '../../core/store/store_provider.dart';
 import 'load_info_view.dart';
 
 class LoadInfoPage extends StatelessWidget {
@@ -21,9 +20,7 @@ class LoadInfoPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => LoadInfoCubit(
         repository: context.read<LoadingInfoRepository>(),
-        driverBox: Hive.box(DRIVER_BOX),
-        globalConfigurationsBox: Hive.box(GLOBAL_CONFIGURATIONS_BOX),
-        userConfigurationsBox: Hive.box(USER_CONFIGURATIONS_BOX),
+        storeProvider: context.read<StoreProvider>(),
       )..getDriverInfo(username),
       child: const LoadInfoView(),
     );

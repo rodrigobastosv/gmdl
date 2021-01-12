@@ -1,3 +1,4 @@
+export 'entity_repository.dart';
 export 'loading_info_repository.dart';
 export 'route_repository.dart';
 export 'initial_setup_repository.dart';

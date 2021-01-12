@@ -9,4 +9,5 @@ export 'location_filters.dart';
 export 'orders_filters.dart';
 export 'route_filters.dart';
 export 'stop_filters.dart';
+export 'stop_type_filters.dart';
 export 'location_pending_payment_filters.dart';

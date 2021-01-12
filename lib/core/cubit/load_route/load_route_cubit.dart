@@ -2,43 +2,43 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hive/hive.dart';
 
 import '../../entity/dto/route_view_info_dto.dart';
 import '../../entity/model/models.dart';
-import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
+import '../../store/store_provider.dart';
 
 part 'load_route_state.dart';
 
 class LoadRouteCubit extends Cubit<LoadRouteState> {
   LoadRouteCubit({
     @required RouteRepository repository,
-    @required Box driverBox,
-  })  : _repository = repository,
-        _driverBox = driverBox,
+    @required this.storeProvider,
+  })  : assert(repository != null),
+        assert(storeProvider != null),
+        _repository = repository,
         super(RouteAtGlanceInitial());
 
   final RouteRepository _repository;
-  final Box _driverBox;
+  final StoreProvider storeProvider;
 
   RouteViewInfoDTO routeViewInfo;
   RouteModel route;
 
-  Future<void> fetchRouteView() async {
+  Future<void> fetchRouteInformation() async {
     emit(const LoadingInfo('Loading Basic Route Informations'));
-    final driverInfo = _driverBox.get(DRIVER_INFO);
-    final username = driverInfo['login'];
+    final driverInfo = storeProvider.driverInfo;
+    final username = driverInfo.login;
     try {
       routeViewInfo = await _repository.fetchRouteView(username);
       emit(const LoadingInfo('Loading Route'));
 
-      try {
-        route = await _repository.fetchRoute(routeViewInfo.id);
-        emit(RouteLoadedSuccess(route));
-      } on Exception {
-        emit(RouteLoadFailed());
-      }
+      final dataLoad = await _repository.fetchRoute(routeViewInfo.id);
+      final featureStates =
+          FeatureStateModel.fromJsonList(dataLoad['featureStates']);
+      storeProvider.featureStates = featureStates;
+      route = RouteModel.fromJson(dataLoad['route']);
+      emit(RouteLoadedSuccess(route));
     } on Exception {
       emit(RouteLoadFailed());
     }

@@ -48,7 +48,7 @@ class RouteRepository {
     }
   }
 
-  Future<RouteModel> fetchRoute(int routeId) async {
+  Future<Map<String, dynamic>> fetchRoute(int routeId) async {
     try {
       final response = await _client.post(
         '/$APLICATION_LOAD_DRIVER',
@@ -64,12 +64,7 @@ class RouteRepository {
           'holderMaterialsFilters': holderMaterialsFilters,
         },
       );
-      final routeData = handleResponse(response);
-      if (routeData != null) {
-        return RouteModel.fromJson(response.data['route']);
-      } else {
-        throw RouteNotFoundException(routeId);
-      }
+      return handleResponse(response);
     } on Exception {
       rethrow;
     }

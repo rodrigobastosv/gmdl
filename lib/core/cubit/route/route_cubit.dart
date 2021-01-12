@@ -2,12 +2,11 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hive/hive.dart';
 
 import '../../entity/model/models.dart';
-import '../../hive/boxes.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
+import '../../store/store_provider.dart';
 
 part 'route_state.dart';
 
@@ -15,15 +14,17 @@ class RouteCubit extends Cubit<RouteState> {
   RouteCubit({
     @required this.route,
     @required RouteRepository repository,
-    @required this.driverBox,
-  })  : _repository = repository,
+    @required this.storeProvider,
+  })  : assert(repository != null),
+        assert(storeProvider != null),
+        _repository = repository,
         super(RouteInitial());
 
   RouteModel route;
   final RouteRepository _repository;
-  final Box driverBox;
+  final StoreProvider storeProvider;
 
-  String get driverName => driverBox.get(DRIVER_INFO)['name'];
+  String get driverName => storeProvider.driverInfo.name;
 
   Future<void> startRoute() async {
     try {

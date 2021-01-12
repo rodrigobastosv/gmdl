@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
 
 import '../../../main.dart';
 import '../../exception/exceptions.dart';
-import '../../hive/boxes.dart';
 import 'client.dart';
 
 Dio getBasicClient() {
@@ -21,10 +19,7 @@ Dio getBasicClient() {
   )..interceptors.addAll(_getBasicInterceptors());
 }
 
-Dio getDefaultClient() {
-  var securityBox = Hive.box(SECURITY_BOX);
-  final serverName = securityBox.get(SERVER_NAME);
-  final sessionId = securityBox.get(SESSION_ID);
+Dio getDefaultClient(String serverName, String sessionId) {
   return Dio(
     BaseOptions(
       headers: {'Accept': 'application/json', 'Cookie': 'SESSION=$sessionId'},

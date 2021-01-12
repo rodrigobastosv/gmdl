@@ -1,4 +1,5 @@
 const RESTRICTIONS = 'restrictions';
+const FILTER = 'filter';
 const FILTERS = 'filters';
 const FIRST_RESULT = 'firstResult';
 const MAX_RESULTS = 'maxResults';

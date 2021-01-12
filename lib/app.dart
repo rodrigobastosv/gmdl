@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/repository/repositories_provider.dart';
+import 'core/store/store_provider.dart';
 import 'main.dart';
 import 'page/pages.dart';
 
@@ -13,7 +14,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: getProviders(),
+      providers: getRepositoryProviders(
+        context.watch<StoreProvider>(),
+      ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: alice.getNavigatorKey(),

@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../entity/dto/driver_info_dto.dart';
+import '../entity/dto/global_configurations_dto.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 
@@ -8,7 +10,7 @@ class LoadingInfoRepository {
 
   final Dio _client;
 
-  Future<Map<String, dynamic>> getBasicDriverInfo({
+  Future<DriverInfoDto> getDriverInfo({
     String username,
   }) async {
     try {
@@ -33,15 +35,15 @@ class LoadingInfoRepository {
       );
       final driverInfoList = handleResponse(response) as List;
       if (driverInfoList.isNotEmpty) {
-        return driverInfoList[0] as Map<String, dynamic>;
+        return DriverInfoDto.fromJson(driverInfoList[0]);
       }
-      return {};
+      return null;
     } on Exception {
       rethrow;
     }
   }
 
-  Future<Map<String, dynamic>> getGlobalConfigurations() async {
+  Future<GlobalConfigurationsDto> getGlobalConfigurations() async {
     try {
       final response = await _client.post(
         '/$GLOBAL_CONFIGURATION/$RESTRICTIONS',
@@ -52,7 +54,7 @@ class LoadingInfoRepository {
         },
       );
       final globalConfigs = handleResponse(response) as List;
-      return globalConfigs[0] as Map<String, dynamic>;
+      return GlobalConfigurationsDto.fromJson(globalConfigs[0]);
     } on Exception {
       rethrow;
     }
