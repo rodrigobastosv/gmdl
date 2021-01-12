@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/model/models.dart';
+import '../../widget/general/gm_scaffold.dart';
 import 'widget/finished_stop_list_tile.dart';
 
 class FinishedStopsView extends StatelessWidget {
@@ -17,15 +18,8 @@ class FinishedStopsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          'STOP LIST',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
+    return GMScaffold(
+      title: 'STOP LIST',
       body: ListView.builder(
         itemBuilder: (_, i) => FinishedStopListTile(stops[i]),
         itemCount: stops.length,

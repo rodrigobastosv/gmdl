@@ -3,23 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
 import 'widget/initial_settings_form.dart';
 
 class InitialSettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GMScaffold(
       backgroundColor: const Color(0xFF24242A),
-      appBar: AppBar(
-        title: const Text(
-          'SETTINGS',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      title: 'SETTINGS',
+      withDrawer: false,
+      withBackButton: false,
       body: BlocConsumer<InitialSettingsCubit, InitialSettingsState>(
         listener: (_, state) {
           if (state is ServerValidationSuccess) {

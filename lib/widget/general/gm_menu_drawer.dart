@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'menu_items.dart';
+import '../menu_items.dart';
 
 class GMMenuDrawer extends StatelessWidget {
   const GMMenuDrawer({Key key}) : super(key: key);
@@ -22,6 +22,7 @@ class GMMenuDrawer extends StatelessWidget {
             Image.asset('assets/images/top_menu.png'),
             Expanded(
               child: ListView.separated(
+                padding: const EdgeInsets.all(0),
                 itemBuilder: (_, i) {
                   return ListTile(
                     leading: Icon(

@@ -4,29 +4,67 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../widget/general/gm_scaffold.dart';
+import '../initial_settings/initial_settings_page.dart';
+import 'widget/basic_route_summary_info.dart';
+import 'widget/route_summary_header_info.dart';
 
 class RouteSummaryView extends StatelessWidget {
   const RouteSummaryView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          'ROUTE SUMMARY',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
+    final cubit = context.watch<RouteCubit>();
+    final route = cubit.route;
+    return GMScaffold(
+      title: 'GOOD JOB!',
       body: BlocConsumer<RouteCubit, RouteState>(
         listener: (_, state) {
           if (state is RouteCompletedSuccess) {
-            print('logout!!!');
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (_) => const InitialSettingsPage(),
+                ),
+                (_) => false);
           }
         },
         builder: (_, state) => Column(
-          children: [],
+          children: [
+            Container(
+              height: 100,
+              color: const Color(0xFF181818),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Column(
+                  children: [
+                    RouteSummaryHeaderInfo(route: route),
+                    const SizedBox(height: 8),
+                    BasicRouteSummaryInfo(route: route),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      MdiIcons.notebookCheckOutline,
+                      size: 38,
+                      color: Color(0xFF9b9b9b),
+                    ),
+                    const Text(
+                      'NOTHING FOUND',
+                      style: TextStyle(
+                        color: Color(0xFF9b9b9b),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(

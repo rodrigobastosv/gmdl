@@ -6,8 +6,8 @@ import 'package:latlong/latlong.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/route/route_cubit.dart';
-import '../../widget/gm_button_loading.dart';
-import '../../widget/gm_menu_drawer.dart';
+import '../../widget/general/gm_button_loading.dart';
+import '../../widget/general/gm_scaffold.dart';
 import '../stop_list/stop_list_page.dart';
 import 'widget/basic_route_info.dart';
 
@@ -17,78 +17,59 @@ class RouteAtGlanceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<RouteCubit>();
-    return SafeArea(
-      child: BlocConsumer<RouteCubit, RouteState>(
-        listener: (_, state) {
-          if (state is DepartOriginSuccess) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: cubit,
-                  child: const StopListPage(),
-                ),
-              ),
-            );
-          }
-        },
-        builder: (_, state) => Scaffold(
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            automaticallyImplyLeading: false,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: const Icon(
-                MdiIcons.accountCircle,
-                size: 36,
+    return BlocConsumer<RouteCubit, RouteState>(
+      listener: (_, state) {
+        if (state is DepartOriginSuccess) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: cubit,
+                child: const StopListPage(),
               ),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'WELCOME ${cubit.driverName.toUpperCase()}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+          );
+        }
+      },
+      builder: (_, state) => GMScaffold(
+        title: 'WELCOME ${cubit.driverName.toUpperCase()}',
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(18),
+          child: const Icon(
+            MdiIcons.accountCircle,
+            size: 36,
+          ),
+        ),
+        body: Column(
+          children: <Widget>[
+            BasicRouteInfo(
+              route: context.read<RouteCubit>().route,
             ),
-            centerTitle: true,
-          ),
-          endDrawer: const GMMenuDrawer(),
-          body: Column(
-            children: <Widget>[
-              BasicRouteInfo(
-                route: context.read<RouteCubit>().route,
-              ),
-              Expanded(
-                child: FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(
-                      cubit.route.origLatitude,
-                      cubit.route.origLongitude,
-                    ),
-                    zoom: 13,
+            Expanded(
+              child: FlutterMap(
+                options: MapOptions(
+                  center: LatLng(
+                    cubit.route.origLatitude,
+                    cubit.route.origLongitude,
                   ),
-                  layers: [
-                    TileLayerOptions(
-                      urlTemplate:
-                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      subdomains: ['a', 'b', 'c'],
-                    ),
-                  ],
+                  zoom: 13,
                 ),
+                layers: [
+                  TileLayerOptions(
+                    urlTemplate:
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    subdomains: ['a', 'b', 'c'],
+                  ),
+                ],
               ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _onPressedButton(cubit),
-            tooltip: state is RouteStartedSuccess
-                ? 'LEAVE WAREHOUSE'
-                : 'START ROUTE',
-            child: _getMainIcon(state),
-            backgroundColor: const Color(0xFF3AA348),
-          ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _onPressedButton(cubit),
+          tooltip:
+              state is RouteStartedSuccess ? 'LEAVE WAREHOUSE' : 'START ROUTE',
+          child: _getMainIcon(state),
+          backgroundColor: const Color(0xFF3AA348),
         ),
       ),
     );

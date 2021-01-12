@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
-import '../../widget/gm_loading.dart';
+import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
 import 'widget/sign_in_form.dart';
 

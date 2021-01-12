@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/stop/stop_cubit.dart';
+import '../../widget/general/gm_scaffold.dart';
 import 'widget/instructions_card.dart';
 
 class StopView extends StatelessWidget {
@@ -11,16 +12,9 @@ class StopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GMScaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          'DEPARTURE',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
+      title: 'DEPARTURE',
       body: BlocConsumer<StopCubit, StopState>(
         listener: (_, state) {
           if (state is DepartedStopSuccess) {

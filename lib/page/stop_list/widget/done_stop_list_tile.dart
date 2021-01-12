@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/utils/date_utils.dart';
+import '../../../widget/stop/stop_sizes.dart';
 
 class DoneStopListTile extends StatelessWidget {
   DoneStopListTile(this.stop);
@@ -30,10 +32,9 @@ class DoneStopListTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
-                    //stop.plannedArrival.substring(0, 6),
-                    '01: 04 PM',
-                    style: TextStyle(
+                  Text(
+                    getBasicDateHourMinute(stop.plannedArrival),
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF464646),
                     ),
@@ -52,6 +53,7 @@ class DoneStopListTile extends StatelessWidget {
                       ),
                     ),
                     Text(stop.location.addressLine1),
+                    StopSizes(stop: stop),
                   ],
                 ),
               ),

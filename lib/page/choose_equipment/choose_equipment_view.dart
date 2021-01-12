@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
 
 class ChooseEquipmentView extends StatelessWidget {
@@ -11,17 +12,9 @@ class ChooseEquipmentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GMScaffold(
       backgroundColor: const Color(0xFF24242A),
-      appBar: AppBar(
-        title: const Text(
-          'LOAD ROUTE',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      title: 'LOAD ROUTE',
       body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
         listener: (_, state) {
           if (state is EquipmentFound) {
