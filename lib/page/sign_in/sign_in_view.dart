@@ -38,28 +38,32 @@ class _SignInViewState extends State<SignInView> {
           centerTitle: true,
         ),
         body: BlocConsumer<SignInCubit, SignInState>(
-          listener: (_, state) {
-            if (state is UserSignedSuccess) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (_) => LoadInfoPage(
-                    username: state.loginResult.username,
-                  ),
-                ),
-              );
-            }
-          },
-          builder: (_, state) {
-            if (state is UserSigningLoading) {
-              return const Center(
-                child: GMLoading(),
-              );
-            } else {
-              return SignInForm();
-            }
-          },
+          listener: _listener,
+          builder: _builder,
         ),
       ),
     );
+  }
+
+  void _listener(BuildContext context, SignInState state) {
+    if (state is UserSignedSuccess) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => LoadInfoPage(
+            username: state.loginResult.username,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, SignInState state) {
+    if (state is UserSigningLoading) {
+      return const Center(
+        child: GMLoading(),
+      );
+    } else {
+      return SignInForm();
+    }
   }
 }

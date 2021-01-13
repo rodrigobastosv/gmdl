@@ -9,6 +9,24 @@ class StopRepository {
 
   final Dio _client;
 
+  Future<bool> arriveStop({
+    int routeId,
+    StopModel stop,
+    String actualArrival,
+  }) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$STOP/${stop.key}/$ARRIVE',
+        data: {
+          'actualArrival': actualArrival,
+        },
+      );
+      return response.isOk;
+    } on Exception {
+      throw ArriveStopException();
+    }
+  }
+
   Future<bool> departStop({
     int routeId,
     StopModel stop,

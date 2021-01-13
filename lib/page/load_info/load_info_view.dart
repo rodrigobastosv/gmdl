@@ -14,32 +14,38 @@ class LoadInfoView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF24242A),
       body: BlocConsumer<LoadInfoCubit, LoadInfoState>(
-        listener: (_, state) {
-          if (state is AllInfoLoadedSuccess) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const ChooseEquipmentPage(),
-              ),
-            );
-          }
-        },
-        builder: (_, state) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Center(
-              child: GMLoading(),
-            ),
-            const SizedBox(height: 12),
-            if (state is InfoLoading)
-              Text(
-                state.step,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-          ],
-        ),
+        listener: _listener,
+        builder: _builder,
       ),
+    );
+  }
+
+  void _listener(BuildContext context, LoadInfoState state) {
+    if (state is AllInfoLoadedSuccess) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => const ChooseEquipmentPage(),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, LoadInfoState state) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Center(
+          child: GMLoading(),
+        ),
+        const SizedBox(height: 12),
+        if (state is InfoLoading)
+          Text(
+            state.step,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+      ],
     );
   }
 }

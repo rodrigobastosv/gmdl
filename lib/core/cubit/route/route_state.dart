@@ -36,14 +36,16 @@ class ArrivedStopSuccess extends RouteState {
 
 class ArrivedStopFailed extends RouteState {}
 
-class RouteUpdatedDueDepartStop extends RouteState {
-  RouteUpdatedDueDepartStop(this.departedStop);
+class RouteUpdatedDueStopChange extends RouteState {
+  RouteUpdatedDueStopChange(this.stop);
 
-  final StopModel departedStop;
+  final StopModel stop;
 
   @override
   List<Object> get props => [
-        departedStop.id,
+        stop.id,
+        stop.actualArrival,
+        stop.actualDeparture,
       ];
 }
 

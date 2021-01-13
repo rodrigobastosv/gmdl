@@ -9,6 +9,10 @@ abstract class StopState extends Equatable {
 
 class StopInitial extends StopState {}
 
+class ArrivedStopSuccess extends StopState {}
+
+class ArrivedStopFailed extends StopState {}
+
 class DepartingStop extends StopState {}
 
 class DepartedStopSuccess extends StopState {

@@ -18,49 +18,8 @@ class ChooseEquipmentView extends StatelessWidget {
       withNavigationBar: true,
       title: 'EQUIPMENT SELECTION',
       body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
-        listener: (_, state) {
-          if (state is EquipmentFound) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const LoadRoutePage(),
-              ),
-            );
-          }
-        },
-        builder: (_, state) => Container(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
-            child: Form(
-              key: _formKey,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Equipment',
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: Icon(MdiIcons.truckCheck),
-                      ),
-                      onSaved: (equipmentKey) => context
-                          .read<ChooseEquipmentCubit>()
-                          .getEquipmentInfo(equipmentKey),
-                      validator: (equipmentKey) =>
-                          equipmentKey.isEmpty ? 'Required Field' : null,
-                    ),
-                  ),
-                  const SizedBox(width: 6),
-                  SvgPicture.asset(
-                    'assets/icons/qrcode.svg',
-                    height: 26,
-                    width: 26,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        listener: _listener,
+        builder: _builder,
       ),
       mainActionButton: FloatingActionButton(
         onPressed: () {
@@ -73,6 +32,53 @@ class ChooseEquipmentView extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       mainActionButtonLabel: 'LOAD ROUTE',
+    );
+  }
+
+  void _listener(BuildContext context, ChooseEquipmentState state) {
+    if (state is EquipmentFound) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => const LoadRoutePage(),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, ChooseEquipmentState state) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
+        child: Form(
+          key: _formKey,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Equipment',
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: Icon(MdiIcons.truckCheck),
+                  ),
+                  onSaved: (equipmentKey) => context
+                      .read<ChooseEquipmentCubit>()
+                      .getEquipmentInfo(equipmentKey),
+                  validator: (equipmentKey) =>
+                      equipmentKey.isEmpty ? 'Required Field' : null,
+                ),
+              ),
+              const SizedBox(width: 6),
+              SvgPicture.asset(
+                'assets/icons/qrcode.svg',
+                height: 26,
+                width: 26,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

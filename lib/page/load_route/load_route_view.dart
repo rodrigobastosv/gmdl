@@ -17,37 +17,41 @@ class LoadRouteView extends StatelessWidget {
       withAppBar: false,
       withNavigationBar: false,
       body: BlocConsumer<LoadRouteCubit, LoadRouteState>(
-        listener: (_, state) {
-          if (state is RouteLoadedSuccess) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => RouteAtGlancePage(
-                  route: state.route,
-                ),
+        listener: _listener,
+        builder: _builder,
+      ),
+    );
+  }
+
+  void _listener(BuildContext context, LoadRouteState state) {
+    if (state is RouteLoadedSuccess) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => RouteAtGlancePage(
+            route: state.route,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, LoadRouteState state) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Center(
+            child: GMLoading(),
+          ),
+          const SizedBox(height: 12),
+          if (state is LoadingInfo)
+            Text(
+              state.info,
+              style: const TextStyle(
+                color: Colors.white,
               ),
-            );
-          }
-        },
-        builder: (_, state) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Center(
-                  child: GMLoading(),
-                ),
-                const SizedBox(height: 12),
-                if (state is LoadingInfo)
-                  Text(
-                    state.info,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-              ],
             ),
-          );
-        },
+        ],
       ),
     );
   }
