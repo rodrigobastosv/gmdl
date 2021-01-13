@@ -101,8 +101,11 @@ class _GMScaffoldState extends State<GMScaffold> {
       return widget.leading;
     }
     return widget.withBackButton
-        ? const Icon(
-            Icons.arrow_back_ios,
+        ? GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
           )
         : null;
   }

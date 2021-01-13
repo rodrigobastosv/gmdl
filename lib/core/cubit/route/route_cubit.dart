@@ -31,6 +31,9 @@ class RouteCubit extends Cubit<RouteState> {
       emit(StartingRoute());
       final routeStarted = await _repository.startRoute(route.id);
       if (routeStarted) {
+        route = route.copyWith(
+          status: 'STARTED',
+        );
         emit(RouteStartedSuccess());
       } else {
         emit(RouteStartFailed());
@@ -45,6 +48,9 @@ class RouteCubit extends Cubit<RouteState> {
       emit(DepartingOrigin());
       final departedOrigin = await _repository.departOrigin(route.id);
       if (departedOrigin) {
+        route = route.copyWith(
+          status: 'DEPARTED_ORIGIN',
+        );
         emit(DepartOriginSuccess());
       } else {
         emit(DepartOriginFailed());

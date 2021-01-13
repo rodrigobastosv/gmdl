@@ -66,33 +66,59 @@ class RouteAtGlanceView extends StatelessWidget {
           ],
         ),
         mainActionButton: FloatingActionButton(
-          onPressed: () => _onPressedButton(cubit),
-          child: _getMainIcon(state),
+          onPressed: () => _onPressedButton(cubit, context),
+          child: _getMainButtonIcon(cubit),
           backgroundColor: const Color(0xFF3AA348),
         ),
-        mainActionButtonLabel:
-            state is RouteStartedSuccess ? 'LEAVE WAREHOUSE' : 'START ROUTE',
+        mainActionButtonLabel: _getMainButtonLabel(cubit),
       ),
     );
   }
 
-  Future<void> _onPressedButton(RouteCubit cubit) async {
-    if (cubit.state is RouteInitial || cubit.state is RouteStartFailed) {
-      await cubit.startRoute();
-    } else if (cubit.state is RouteStartedSuccess) {
+  Future<void> _onPressedButton(RouteCubit cubit, BuildContext context) async {
+    final state = cubit.state;
+    final route = cubit.route;
+    if (state is StartingRoute) {
+      return null;
+    } else if (state is RouteStartedSuccess) {
       await cubit.departOrigin();
+    } else if (route.status == 'NOT_STARTED') {
+      await cubit.startRoute();
     } else {
-      return;
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: cubit,
+            child: const StopListPage(),
+          ),
+        ),
+      );
     }
   }
 
-  Widget _getMainIcon(RouteState state) {
+  Widget _getMainButtonIcon(RouteCubit cubit) {
+    final state = cubit.state;
+    final route = cubit.route;
     if (state is StartingRoute) {
       return const GMButtonLoading();
     } else if (state is RouteStartedSuccess) {
       return SvgPicture.asset('assets/icons/driving.svg');
-    } else {
+    } else if (route.status == 'NOT_STARTED') {
       return SvgPicture.asset('assets/icons/truck-front.svg');
+    } else {
+      return SvgPicture.asset('assets/icons/location.svg');
+    }
+  }
+
+  String _getMainButtonLabel(RouteCubit cubit) {
+    final state = cubit.state;
+    final route = cubit.route;
+    if (state is RouteStartedSuccess) {
+      return 'LEAVE WAREHOUSE';
+    } else if (route.status == 'NOT_STARTED') {
+      return 'START ROUTE';
+    } else {
+      return 'STOP LIST';
     }
   }
 }

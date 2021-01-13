@@ -38,6 +38,7 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
           FeatureStateModel.fromJsonList(dataLoad['featureStates']);
       storeProvider.featureStates = featureStates;
       route = RouteModel.fromJson(dataLoad['route']);
+
       emit(RouteLoadedSuccess(route));
     } on Exception {
       emit(RouteLoadFailed());

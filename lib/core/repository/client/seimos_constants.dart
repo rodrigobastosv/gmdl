@@ -8,5 +8,6 @@ const AND = 'and';
 const MATCH_MODE = 'matchMode';
 const ATTR = 'attr';
 const EQUAL = 'eq';
+const NOT_EQUAL = 'neq';
 const SORT = 'sort';
 const TYPE = 'type';

@@ -31,7 +31,7 @@ class RouteRepository {
           CRITERIA_CHAIN: [
             {
               AND: [
-                {ATTR: 'route.status', EQUAL: 'NOT_STARTED'},
+                {ATTR: 'route.status', NOT_EQUAL: 'COMPLETED'},
                 {ATTR: 'route.driverAssignments.driver.login', EQUAL: username}
               ]
             }
