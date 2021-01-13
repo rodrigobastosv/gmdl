@@ -29,15 +29,15 @@ class StopView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      mainActionButton: FloatingActionButton(
         onPressed: () => context.read<StopCubit>().departStop(),
-        tooltip: 'LEAVE',
         child: const Icon(
           MdiIcons.truckFastOutline,
           size: 32,
         ),
         backgroundColor: const Color(0xFF3AA348),
       ),
+      mainActionButtonLabel: 'LEAVE',
     );
   }
 }

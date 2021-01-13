@@ -15,6 +15,7 @@ class InitialSettingsView extends StatelessWidget {
       title: 'SETTINGS',
       withDrawer: false,
       withBackButton: false,
+      withNavigationBar: false,
       body: BlocConsumer<InitialSettingsCubit, InitialSettingsState>(
         listener: (_, state) {
           if (state is ServerValidationSuccess) {

@@ -24,12 +24,12 @@ class FinishedStopsView extends StatelessWidget {
         itemBuilder: (_, i) => FinishedStopListTile(stops[i]),
         itemCount: stops.length,
       ),
-      floatingActionButton: FloatingActionButton(
+      mainActionButton: FloatingActionButton(
         onPressed: () => context.read<RouteCubit>().arriveWarehouse(),
-        tooltip: 'ARRIVE AT THE WAREHOUSE',
         child: SvgPicture.asset('assets/icons/sidetruck.svg'),
         backgroundColor: const Color(0xFF3AA348),
       ),
+      mainActionButtonLabel: 'ARRIVE AT THE WAREHOUSE',
     );
   }
 }

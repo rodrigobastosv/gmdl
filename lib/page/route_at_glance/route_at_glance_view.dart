@@ -65,13 +65,13 @@ class RouteAtGlanceView extends StatelessWidget {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
+        mainActionButton: FloatingActionButton(
           onPressed: () => _onPressedButton(cubit),
-          tooltip:
-              state is RouteStartedSuccess ? 'LEAVE WAREHOUSE' : 'START ROUTE',
           child: _getMainIcon(state),
           backgroundColor: const Color(0xFF3AA348),
         ),
+        mainActionButtonLabel:
+            state is RouteStartedSuccess ? 'LEAVE WAREHOUSE' : 'START ROUTE',
       ),
     );
   }

@@ -15,7 +15,8 @@ class ChooseEquipmentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GMScaffold(
       backgroundColor: const Color(0xFF24242A),
-      title: 'LOAD ROUTE',
+      withNavigationBar: true,
+      title: 'EQUIPMENT SELECTION',
       body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
         listener: (_, state) {
           if (state is EquipmentFound) {
@@ -61,7 +62,7 @@ class ChooseEquipmentView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      mainActionButton: FloatingActionButton(
         onPressed: () {
           final _form = _formKey.currentState;
           if (_form.validate()) {
@@ -71,6 +72,7 @@ class ChooseEquipmentView extends StatelessWidget {
         child: SvgPicture.asset('assets/icons/route.svg'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
+      mainActionButtonLabel: 'LOAD ROUTE',
     );
   }
 }

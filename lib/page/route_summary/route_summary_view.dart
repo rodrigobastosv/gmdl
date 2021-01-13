@@ -68,12 +68,12 @@ class RouteSummaryView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      mainActionButton: FloatingActionButton(
         onPressed: () => context.read<RouteCubit>().completeRoute(),
-        tooltip: 'COMPLETE ROUTE',
         child: SvgPicture.asset('assets/icons/end-route.svg'),
         backgroundColor: const Color(0xFF3AA348),
       ),
+      mainActionButtonLabel: 'COMPLETE ROUTE',
     );
   }
 }

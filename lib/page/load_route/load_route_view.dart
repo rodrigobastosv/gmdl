@@ -14,6 +14,8 @@ class LoadRouteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GMScaffold(
       backgroundColor: const Color(0xFF24242A),
+      withAppBar: false,
+      withNavigationBar: false,
       body: BlocConsumer<LoadRouteCubit, LoadRouteState>(
         listener: (_, state) {
           if (state is RouteLoadedSuccess) {
