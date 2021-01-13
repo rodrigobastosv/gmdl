@@ -12,6 +12,7 @@ class StopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<StopCubit>();
     return GMScaffold(
       backgroundColor: Colors.grey[200],
       title: 'DEPARTURE',
@@ -20,14 +21,14 @@ class StopView extends StatelessWidget {
         builder: _builder,
       ),
       mainActionButton: FloatingActionButton(
-        onPressed: () => context.read<StopCubit>().departStop(),
+        onPressed: () => _onPressedButton(cubit),
         child: const Icon(
           MdiIcons.truckFastOutline,
           size: 32,
         ),
         backgroundColor: const Color(0xFF3AA348),
       ),
-      mainActionButtonLabel: 'LEAVE',
+      mainActionButtonLabel: _getMainButtonLabel(cubit),
     );
   }
 
@@ -45,5 +46,25 @@ class StopView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _onPressedButton(StopCubit cubit) async {
+    final stop = cubit.stop;
+    if (stop.hasBeenArrived) {
+      await cubit.departStop();
+    } else {
+      await cubit.arriveStop();
+    }
+  }
+
+  String _getMainButtonLabel(StopCubit cubit) {
+    final stop = cubit.stop;
+    if (stop.isFinished) {
+      return 'CLONE';
+    } else if (stop.hasBeenArrived) {
+      return 'LEAVE';
+    } else {
+      return 'ARRIVE';
+    }
   }
 }

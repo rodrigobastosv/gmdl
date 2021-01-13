@@ -7,7 +7,10 @@ part 'stop_model.freezed.dart';
 part 'stop_model.g.dart';
 
 @freezed
-abstract class StopModel with _$StopModel {
+abstract class StopModel implements _$StopModel {
+  // ignore: unused_element
+  const StopModel._();
+
   factory StopModel({
     int id,
     String key,
@@ -18,6 +21,7 @@ abstract class StopModel with _$StopModel {
     int plannedSequenceNum,
     StopTypeModel stopType,
     TransportModel transport,
+    String actualArrival,
     String plannedArrival,
     String projectedArrival,
     String actualDeparture,
@@ -47,4 +51,10 @@ abstract class StopModel with _$StopModel {
 
   factory StopModel.fromJson(Map<String, dynamic> json) =>
       _$StopModelFromJson(json);
+
+  bool get isFinished => actualDeparture != null;
+
+  bool get hasBeenArrived => actualArrival != null;
+
+  bool get hasNotBeenArrived => actualArrival == null;
 }

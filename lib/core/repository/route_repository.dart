@@ -98,12 +98,16 @@ class RouteRepository {
     }
   }
 
-  Future<bool> arriveStop(int routeId, StopModel stop) async {
+  Future<bool> arriveStop({
+    int routeId,
+    StopModel stop,
+    String actualArrival,
+  }) async {
     try {
       final response = await _client.post(
         '/$ROUTE/$routeId/$STOP/${stop.key}/$ARRIVE',
         data: {
-          'actualArrival': DateTime.now().toUtcAsString,
+          'actualArrival': actualArrival,
         },
       );
       return response.isOk;
