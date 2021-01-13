@@ -55,9 +55,7 @@ class StopCubit extends Cubit<StopState> {
       );
       if (departedStop) {
         stop = stop.copyWith(actualDeparture: actualDeparture);
-        print('a');
         _routeCubit.updateRouteDueStopChange(stop);
-        print('c');
         emit(DepartedStopSuccess(stop));
       } else {
         emit(DepartedStopFailed());

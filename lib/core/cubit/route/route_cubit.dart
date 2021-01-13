@@ -2,14 +2,15 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../utils/route_utils.dart';
 
 import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
+import '../../extension/datetime_extensions.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
 import '../../store/store_provider.dart';
-import '../../extension/datetime_extensions.dart';
+import '../../utils/route_utils.dart';
+
 part 'route_state.dart';
 
 class RouteCubit extends Cubit<RouteState> {
@@ -79,8 +80,6 @@ class RouteCubit extends Cubit<RouteState> {
   }
 
   void updateRouteDueStopChange(StopModel stop) {
-    print('b');
-    print(stop.id);
     route = updateRouteByStopChange(route, stop);
     emit(RouteUpdatedDueStopChange(stop));
     if (!hasPendingStops(route)) {
