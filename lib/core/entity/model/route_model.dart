@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../enum/enums.dart';
 import '../serializing_utils.dart';
 import 'models.dart';
 
@@ -32,7 +33,7 @@ abstract class RouteModel with _$RouteModel {
     List<HolderMaterialModel> holderMaterials,
     List<ManifestModel> manifests,
     int totalStops,
-    String status,
+    @JsonKey(fromJson: statusFromJson, toJson: statusToJson) RouteStatus status,
     int plannedServiceTime,
     bool hasPicture,
     @JsonKey(fromJson: convertToDouble) double plannedSize1,

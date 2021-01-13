@@ -26,38 +26,7 @@ class StopListView extends StatelessWidget {
       child: GMScaffold(
         title: 'STOP LIST',
         body: BlocListener<RouteCubit, RouteState>(
-          listener: (_, state) {
-            if (state is ArrivedStopSuccess) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    value: context.read<RouteCubit>(),
-                    child: StopPage(
-                      stop: state.stop,
-                    ),
-                  ),
-                ),
-              );
-            } else if (state is RouteHasNoPendingStops) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    value: context.read<RouteCubit>(),
-                    child: const FinishedStopsPage(),
-                  ),
-                ),
-              );
-            } else if (state is ArrivedWarehouseSuccess) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    value: context.read<RouteCubit>(),
-                    child: const RouteSummaryPage(),
-                  ),
-                ),
-              );
-            } else if (state is RouteCompletedSuccess) {}
-          },
+          listener: _listener,
           child: Column(
             children: [
               Container(
@@ -88,5 +57,38 @@ class StopListView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _listener(BuildContext context, RouteState state) {
+    if (state is ArrivedStopSuccess) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: context.read<RouteCubit>(),
+            child: StopPage(
+              stop: state.stop,
+            ),
+          ),
+        ),
+      );
+    } else if (state is RouteHasNoPendingStops) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: context.read<RouteCubit>(),
+            child: const FinishedStopsPage(),
+          ),
+        ),
+      );
+    } else if (state is ArrivedWarehouseSuccess) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: context.read<RouteCubit>(),
+            child: const RouteSummaryPage(),
+          ),
+        ),
+      );
+    }
   }
 }

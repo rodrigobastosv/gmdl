@@ -15,58 +15,11 @@ class RouteSummaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<RouteCubit>();
-    final route = cubit.route;
     return GMScaffold(
       title: 'GOOD JOB!',
       body: BlocConsumer<RouteCubit, RouteState>(
-        listener: (_, state) {
-          if (state is RouteCompletedSuccess) {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (_) => const InitialSettingsPage(),
-                ),
-                (_) => false);
-          }
-        },
-        builder: (_, state) => Column(
-          children: [
-            Container(
-              height: 100,
-              color: const Color(0xFF181818),
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: Column(
-                  children: [
-                    RouteSummaryHeaderInfo(route: route),
-                    const SizedBox(height: 8),
-                    BasicRouteSummaryInfo(route: route),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      MdiIcons.notebookCheckOutline,
-                      size: 38,
-                      color: Color(0xFF9b9b9b),
-                    ),
-                    const Text(
-                      'NOTHING FOUND',
-                      style: TextStyle(
-                        color: Color(0xFF9b9b9b),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+        listener: _listener,
+        builder: _builder,
       ),
       mainActionButton: FloatingActionButton(
         onPressed: () => context.read<RouteCubit>().completeRoute(),
@@ -74,6 +27,59 @@ class RouteSummaryView extends StatelessWidget {
         backgroundColor: const Color(0xFF3AA348),
       ),
       mainActionButtonLabel: 'COMPLETE ROUTE',
+    );
+  }
+
+  void _listener(BuildContext context, RouteState state) {
+    if (state is RouteCompletedSuccess) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (_) => const InitialSettingsPage(),
+          ),
+          (_) => false);
+    }
+  }
+
+  Widget _builder(BuildContext context, RouteState state) {
+    final cubit = context.watch<RouteCubit>();
+    final route = cubit.route;
+    return Column(
+      children: [
+        Container(
+          height: 100,
+          color: const Color(0xFF181818),
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Column(
+              children: [
+                RouteSummaryHeaderInfo(route: route),
+                const SizedBox(height: 8),
+                BasicRouteSummaryInfo(route: route),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  MdiIcons.notebookCheckOutline,
+                  size: 38,
+                  color: Color(0xFF9b9b9b),
+                ),
+                const Text(
+                  'NOTHING FOUND',
+                  style: TextStyle(
+                    color: Color(0xFF9b9b9b),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

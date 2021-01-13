@@ -16,18 +16,8 @@ class StopView extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       title: 'DEPARTURE',
       body: BlocConsumer<StopCubit, StopState>(
-        listener: (_, state) {
-          if (state is DepartedStopSuccess) {
-            Navigator.of(context).pop();
-          }
-        },
-        builder: (_, state) => SingleChildScrollView(
-          child: Column(
-            children: [
-              const InstructionsCard(),
-            ],
-          ),
-        ),
+        listener: _listener,
+        builder: _builder,
       ),
       mainActionButton: FloatingActionButton(
         onPressed: () => context.read<StopCubit>().departStop(),
@@ -38,6 +28,22 @@ class StopView extends StatelessWidget {
         backgroundColor: const Color(0xFF3AA348),
       ),
       mainActionButtonLabel: 'LEAVE',
+    );
+  }
+
+  void _listener(BuildContext context, StopState state) {
+    if (state is DepartedStopSuccess) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  Widget _builder(BuildContext context, StopState state) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const InstructionsCard(),
+        ],
+      ),
     );
   }
 }

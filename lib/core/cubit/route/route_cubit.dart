@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
@@ -31,9 +32,7 @@ class RouteCubit extends Cubit<RouteState> {
       emit(StartingRoute());
       final routeStarted = await _repository.startRoute(route.id);
       if (routeStarted) {
-        route = route.copyWith(
-          status: 'STARTED',
-        );
+        route = route.copyWith(status: RouteStatus.STARTED);
         emit(RouteStartedSuccess());
       } else {
         emit(RouteStartFailed());
@@ -48,9 +47,7 @@ class RouteCubit extends Cubit<RouteState> {
       emit(DepartingOrigin());
       final departedOrigin = await _repository.departOrigin(route.id);
       if (departedOrigin) {
-        route = route.copyWith(
-          status: 'DEPARTED_ORIGIN',
-        );
+        route = route.copyWith(status: RouteStatus.DEPARTED_ORIGIN);
         emit(DepartOriginSuccess());
       } else {
         emit(DepartOriginFailed());

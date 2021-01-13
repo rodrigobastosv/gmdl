@@ -17,17 +17,22 @@ class InitialSettingsView extends StatelessWidget {
       withBackButton: false,
       withNavigationBar: false,
       body: BlocConsumer<InitialSettingsCubit, InitialSettingsState>(
-        listener: (_, state) {
-          if (state is ServerValidationSuccess) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => SignInPage(),
-              ),
-            );
-          }
-        },
-        builder: (_, state) => InitialSettingsForm(),
+        listener: _listener,
+        builder: _builder,
       ),
     );
   }
+
+  void _listener(BuildContext context, InitialSettingsState state) {
+    if (state is ServerValidationSuccess) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => SignInPage(),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, InitialSettingsState state) =>
+      InitialSettingsForm();
 }
