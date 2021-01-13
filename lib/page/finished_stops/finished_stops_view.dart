@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/model/models.dart';
@@ -27,10 +27,7 @@ class FinishedStopsView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<RouteCubit>().arriveWarehouse(),
         tooltip: 'ARRIVE AT THE WAREHOUSE',
-        child: const Icon(
-          MdiIcons.truck,
-          size: 32,
-        ),
+        child: SvgPicture.asset('assets/icons/sidetruck.svg'),
         backgroundColor: const Color(0xFF3AA348),
       ),
     );

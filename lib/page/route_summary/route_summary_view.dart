@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
@@ -70,10 +71,7 @@ class RouteSummaryView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<RouteCubit>().completeRoute(),
         tooltip: 'COMPLETE ROUTE',
-        child: const Icon(
-          MdiIcons.drone,
-          size: 32,
-        ),
+        child: SvgPicture.asset('assets/icons/end-route.svg'),
         backgroundColor: const Color(0xFF3AA348),
       ),
     );

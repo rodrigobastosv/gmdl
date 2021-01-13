@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong/latlong.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -89,15 +90,9 @@ class RouteAtGlanceView extends StatelessWidget {
     if (state is StartingRoute) {
       return const GMButtonLoading();
     } else if (state is RouteStartedSuccess) {
-      return const Icon(
-        MdiIcons.truckFastOutline,
-        size: 32,
-      );
+      return SvgPicture.asset('assets/icons/driving.svg');
     } else {
-      return const Icon(
-        MdiIcons.truckCheckOutline,
-        size: 32,
-      );
+      return SvgPicture.asset('assets/icons/truck-front.svg');
     }
   }
 }

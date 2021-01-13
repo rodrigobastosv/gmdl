@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
@@ -49,10 +50,10 @@ class ChooseEquipmentView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  const Icon(
-                    MdiIcons.qrcodeScan,
-                    color: Colors.white,
-                    size: 26,
+                  SvgPicture.asset(
+                    'assets/icons/qrcode.svg',
+                    height: 26,
+                    width: 26,
                   ),
                 ],
               ),
@@ -67,10 +68,8 @@ class ChooseEquipmentView extends StatelessWidget {
             _form.save();
           }
         },
-        child: const Icon(
-          MdiIcons.mapCheck,
-        ),
-        backgroundColor: const Color(0xFFB0D25A),
+        child: SvgPicture.asset('assets/icons/route.svg'),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }

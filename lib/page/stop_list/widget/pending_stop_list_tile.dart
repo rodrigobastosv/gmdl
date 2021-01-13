@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
@@ -78,11 +78,8 @@ class PendingStopListTile extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  icon: const Icon(
-                    MdiIcons.directionsFork,
-                    color: Color(0xFF464646),
-                    size: 16,
-                  ),
+                  icon: SvgPicture.asset('assets/icons/directions.svg',
+                      color: Colors.black),
                   onPressed: () {},
                 ),
                 TextButton.icon(
@@ -93,11 +90,8 @@ class PendingStopListTile extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  icon: const Icon(
-                    MdiIcons.truckDelivery,
-                    color: Color(0xFF464646),
-                    size: 16,
-                  ),
+                  icon: SvgPicture.asset('assets/icons/arrival.svg',
+                      color: Colors.black),
                   onPressed: () => context.read<RouteCubit>().arriveStop(stop),
                 ),
               ],

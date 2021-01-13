@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         navigatorKey: alice.getNavigatorKey(),
         title: 'Flutter Demo',
         theme: ThemeData(
-          primaryColor: const Color(0xFFB0D25A),
+          primaryColor: const Color(0xFF3AA348),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: const InitialSettingsPage(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/sign_in/sign_in_cubit.dart';
 
@@ -49,10 +49,10 @@ class _SignInFormState extends State<SignInForm> {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Icon(
-                          MdiIcons.qrcodeScan,
-                          color: Colors.white,
-                          size: 26,
+                        SvgPicture.asset(
+                          'assets/icons/qrcode.svg',
+                          height: 26,
+                          width: 26,
                         ),
                       ],
                     ),
@@ -75,10 +75,11 @@ class _SignInFormState extends State<SignInForm> {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Icon(
-                          MdiIcons.eye,
+                        SvgPicture.asset(
+                          'assets/icons/view.svg',
                           color: Colors.white,
-                          size: 26,
+                          height: 18,
+                          width: 18,
                         ),
                       ],
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/cubit/cubits.dart';
@@ -82,7 +83,11 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                 .validateServerName(_serverName);
           }
         },
-        child: const Icon(Icons.check_outlined),
+        child: SvgPicture.asset(
+          'assets/icons/checkmark.svg',
+          height: 22,
+          width: 22,
+        ),
       ),
     );
   }
