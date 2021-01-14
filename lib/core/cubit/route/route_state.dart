@@ -49,6 +49,17 @@ class RouteUpdatedDueStopChange extends RouteState {
       ];
 }
 
+class RouteUpdatedDueStopClone extends RouteState {
+  RouteUpdatedDueStopClone(this.stop);
+
+  final StopModel stop;
+
+  @override
+  List<Object> get props => [
+        stop.id,
+      ];
+}
+
 class RouteHasNoPendingStops extends RouteState {}
 
 class ArrivingWarehouse extends RouteState {}

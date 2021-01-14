@@ -1,3 +1,4 @@
+export 'clone_stop_exception.dart';
 export 'depart_stop_exception.dart';
 export 'gm_base_exception.dart';
 export 'gm_server_exception.dart';

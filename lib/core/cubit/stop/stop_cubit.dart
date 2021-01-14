@@ -7,6 +7,7 @@ import '../../entity/model/models.dart';
 import '../../extension/datetime_extensions.dart';
 import '../../repository/stop_repository.dart';
 import '../route/route_cubit.dart';
+import '../../utils/utils.dart';
 
 part 'stop_state.dart';
 
@@ -60,6 +61,27 @@ class StopCubit extends Cubit<StopState> {
       } else {
         emit(DepartedStopFailed());
       }
+    } on Exception {
+      emit(DepartedStopFailed());
+    }
+  }
+
+  Future<void> cloneStop() async {
+    final route = _routeCubit.route;
+    try {
+      emit(CloningStop());
+      final clonedStop = await _repository.cloneStop(
+        routeId: route.id,
+        stop: stop,
+      );
+      stop = cloneStopWithoutActuals(
+        stopId: clonedStop.id,
+        stopKey: clonedStop.key,
+        plannedSequenceNum: clonedStop.plannedSequenceNum,
+        stop: stop,
+      );
+      emit(ClonedStopSuccess(stop));
+      _routeCubit.updateRouteDueClonedStop(stop);
     } on Exception {
       emit(DepartedStopFailed());
     }

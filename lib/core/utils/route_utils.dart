@@ -13,3 +13,11 @@ RouteModel updateRouteByStopChange(RouteModel route, StopModel stop) {
     stops: stops,
   );
 }
+
+RouteModel updateRouteByAddStop(RouteModel route, StopModel stop) {
+  final stops = route.stops;
+  stops.add(stop);
+  return route.copyWith(
+    stops: [...stops],
+  );
+}

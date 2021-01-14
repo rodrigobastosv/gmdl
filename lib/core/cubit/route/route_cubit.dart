@@ -87,6 +87,11 @@ class RouteCubit extends Cubit<RouteState> {
     }
   }
 
+  void updateRouteDueClonedStop(StopModel clonedStop) {
+    route = updateRouteByAddStop(route, clonedStop);
+    emit(RouteUpdatedDueStopClone(clonedStop));
+  }
+
   Future<void> arriveWarehouse() async {
     try {
       emit(ArrivingWarehouse());
