@@ -4,6 +4,7 @@ final stopFilters = [
   'actualArrival',
   'actualDeparture',
   'actualSequenceNum',
+  'cloneDate',
   'actualService',
   'cancelCode.id',
   'instructions',

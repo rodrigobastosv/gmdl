@@ -78,6 +78,7 @@ class StopCubit extends Cubit<StopState> {
         stopId: clonedStop.id,
         stopKey: clonedStop.key,
         plannedSequenceNum: clonedStop.plannedSequenceNum,
+        cloneDate: clonedStop.cloneDate,
         stop: stop,
       );
       emit(ClonedStopSuccess(stop));

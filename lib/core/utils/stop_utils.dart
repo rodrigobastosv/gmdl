@@ -10,6 +10,7 @@ String generateCloneStopKey() {
 StopModel cloneStopWithoutActuals({
   @required int stopId,
   @required String stopKey,
+  @required String cloneDate,
   @required StopModel stop,
   @required int plannedSequenceNum,
 }) {
@@ -17,6 +18,7 @@ StopModel cloneStopWithoutActuals({
     id: stopId,
     key: stopKey,
     plannedSequenceNum: plannedSequenceNum,
+    cloneDate: cloneDate,
     actualArrival: null,
     actualDeparture: null,
   );
