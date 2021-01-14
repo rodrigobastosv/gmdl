@@ -36,8 +36,8 @@ class SignInCubit extends Cubit<SignInState> {
       final loginResult = LoginResultDTO.fromJson(username, signInResponse);
       storeProvider.storeSessionId(loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
-    } on SignInException {
-      emit(UserSigningFailed());
+    } on SignInException catch (e) {
+      emit(UserSigningFailed(e.errorMessage));
     }
   }
 }

@@ -1,3 +1,5 @@
 import 'exceptions.dart';
 
-class DepartStopException implements GMBaseException {}
+class DepartStopException extends GMBaseException {
+  DepartStopException(String errorMessage) : super(errorMessage);
+}

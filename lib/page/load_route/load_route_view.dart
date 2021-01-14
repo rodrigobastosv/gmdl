@@ -25,7 +25,7 @@ class LoadRouteView extends StatelessWidget {
 
   void _listener(BuildContext context, LoadRouteState state) {
     if (state is RouteLoadedSuccess) {
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => RouteAtGlancePage(
             route: state.route,

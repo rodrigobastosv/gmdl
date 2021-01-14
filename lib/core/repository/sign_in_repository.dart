@@ -24,8 +24,10 @@ class SignInRepository {
         },
       );
       return handleResponse(response) as Map<String, dynamic>;
-    } on Exception {
-      throw SignInException();
+    } on DioError catch (e) {
+      throw SignInException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw SignInException(e.errorMessage);
     }
   }
 }

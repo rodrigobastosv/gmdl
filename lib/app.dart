@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: alice.getNavigatorKey(),
         title: 'Flutter Demo',
+        builder: BotToastInit(),
         theme: ThemeData(
           primaryColor: const Color(0xFF3AA348),
           visualDensity: VisualDensity.adaptivePlatformDensity,

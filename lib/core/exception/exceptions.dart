@@ -1,10 +1,14 @@
 export 'clone_stop_exception.dart';
+export 'complete_route_exception.dart';
 export 'depart_stop_exception.dart';
+export 'equipment_not_found_exception.dart';
+export 'fetch_route_exception.dart';
 export 'gm_base_exception.dart';
 export 'gm_server_exception.dart';
+export 'none_route_found_exception.dart';
 export 'sign_in_exception.dart';
 export 'route_not_found_exception.dart';
-export 'resource_not_found_exception.dart';
 export 'start_route_exception.dart';
 export 'depart_origin_exception.dart';
 export 'arrive_stop_exception.dart';
+export 'arrive_warehouse_exception.dart';

@@ -27,10 +27,18 @@ class InitialSettingsCubit extends Cubit<InitialSettingsState> {
         storeProvider.changeServerName(serverName);
         emit(ServerValidationSuccess());
       } else {
-        emit(ServerValidationFailed());
+        emit(
+          ServerValidationFailed(
+            'The $serverName server is unavailable or does not exist!',
+          ),
+        );
       }
     } on Exception {
-      emit(ServerValidationFailed());
+      emit(
+        ServerValidationFailed(
+          'The $serverName server is unavailable or does not exist!',
+        ),
+      );
     }
   }
 }

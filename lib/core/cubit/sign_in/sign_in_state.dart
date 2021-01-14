@@ -16,6 +16,15 @@ class UserSignedSuccess extends SignInState {
   List<Object> get props => [loginResult];
 }
 
-class UserSigningFailed extends SignInState {}
+class UserSigningFailed extends SignInState {
+  UserSigningFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+    errorMessage,
+  ];
+}
 
 class UserSigningLoading extends SignInState {}

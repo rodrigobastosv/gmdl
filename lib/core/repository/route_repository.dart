@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import '../exception/none_route_found_exception.dart';
 
 import '../entity/dto/route_view_info_dto.dart';
 import '../entity/model/models.dart';
@@ -40,7 +41,7 @@ class RouteRepository {
       );
       final routesList = handleResponse(response) as List;
       if (routesList.isEmpty) {
-        throw ResourceNotFoundException(resource: 'ROUTE_VIEW');
+        throw NoneRouteFoundException();
       }
       return RouteViewInfoDTO.fromJson(routesList[0]);
     } on Exception {
@@ -65,8 +66,10 @@ class RouteRepository {
         },
       );
       return handleResponse(response);
-    } on Exception {
-      rethrow;
+    } on DioError catch (e) {
+      throw FetchRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw FetchRouteException(e.errorMessage);
     }
   }
 
@@ -79,8 +82,10 @@ class RouteRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw StartRouteException();
+    } on DioError catch (e) {
+      throw StartRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw StartRouteException(e.errorMessage);
     }
   }
 
@@ -93,8 +98,10 @@ class RouteRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw DepartOriginException();
+    } on DioError catch (e) {
+      throw DepartOriginException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw DepartOriginException(e.errorMessage);
     }
   }
 
@@ -111,8 +118,10 @@ class RouteRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw ArriveStopException();
+    } on DioError catch (e) {
+      throw ArriveStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw ArriveStopException(e.errorMessage);
     }
   }
 
@@ -125,8 +134,10 @@ class RouteRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw ArriveStopException();
+    } on DioError catch (e) {
+      throw ArriveWarehouseException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw ArriveWarehouseException(e.errorMessage);
     }
   }
 
@@ -140,8 +151,10 @@ class RouteRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw ArriveStopException();
+    } on DioError catch (e) {
+      throw CompleteRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw CompleteRouteException(e.errorMessage);
     }
   }
 }

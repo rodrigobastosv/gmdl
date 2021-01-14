@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../widget/alert/notification.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../widget/general/gm_scaffold.dart';
@@ -30,6 +31,8 @@ class InitialSettingsView extends StatelessWidget {
           builder: (_) => SignInPage(),
         ),
       );
+    } else if (state is ServerValidationFailed) {
+      showErrorNotification(state.errorMessage);
     }
   }
 

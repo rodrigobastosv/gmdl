@@ -11,8 +11,26 @@ class ChooseEquipmentInitial extends ChooseEquipmentState {}
 
 class EquipmentFound extends ChooseEquipmentState {}
 
-class EquipmentNotFound extends ChooseEquipmentState {}
+class EquipmentNotFound extends ChooseEquipmentState {
+  EquipmentNotFound(this.errorMessage);
 
-class EquipmentFailed extends ChooseEquipmentState {}
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+    errorMessage,
+  ];
+}
+
+class EquipmentFailed extends ChooseEquipmentState {
+  EquipmentFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+    errorMessage,
+  ];
+}
 
 class LoadingEquipment extends ChooseEquipmentState {}

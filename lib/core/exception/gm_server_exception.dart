@@ -1,8 +1,5 @@
-import 'exceptions.dart';
+import 'gm_base_exception.dart';
 
-class GMServerException implements GMBaseException {
-  GMServerException(this.statusCode, this.message);
-
-  final int statusCode;
-  final String message;
+class GMServerException extends GMBaseException {
+  GMServerException(String errorMessage) : super(errorMessage);
 }
