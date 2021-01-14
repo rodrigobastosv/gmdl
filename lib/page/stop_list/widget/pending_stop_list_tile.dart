@@ -37,15 +37,29 @@ class PendingStopListTile extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    CircleAvatar(
-                      backgroundColor: const Color(0xFF464646),
-                      child: Text(
-                        stop.plannedSequenceNum.toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xFF464646),
+                          child: Text(
+                            stop.plannedSequenceNum.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        if (stop.isCloned)
+                          Positioned(
+                            bottom: -2,
+                            left: -2,
+                            child: SvgPicture.asset(
+                              'assets/icons/stop-cloned.svg',
+                              height: 18,
+                              width: 18,
+                            ),
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 6),
                     Text(

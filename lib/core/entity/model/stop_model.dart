@@ -54,6 +54,8 @@ abstract class StopModel implements _$StopModel {
 
   bool get isFinished => actualDeparture != null;
 
+  bool get isCloned => key.contains('clone-');
+
   bool get hasBeenArrived => actualArrival != null;
 
   bool get hasNotBeenArrived => actualArrival == null;
