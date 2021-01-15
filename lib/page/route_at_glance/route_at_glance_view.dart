@@ -71,7 +71,7 @@ class RouteAtGlanceView extends StatelessWidget {
     final route = cubit.route;
     if (state is StartingRoute) {
       return null;
-    } else if (state is RouteStartedSuccess) {
+    } else if (route.status == RouteStatus.STARTED) {
       await cubit.departOrigin();
     } else if (route.status == RouteStatus.NOT_STARTED) {
       await cubit.startRoute();
@@ -92,7 +92,7 @@ class RouteAtGlanceView extends StatelessWidget {
     final route = cubit.route;
     if (state is StartingRoute) {
       return const GMButtonLoading();
-    } else if (state is RouteStartedSuccess) {
+    } else if (route.status == RouteStatus.STARTED) {
       return SvgPicture.asset('assets/icons/driving.svg');
     } else if (route.status == RouteStatus.NOT_STARTED) {
       return SvgPicture.asset('assets/icons/truck-front.svg');
@@ -102,9 +102,8 @@ class RouteAtGlanceView extends StatelessWidget {
   }
 
   String _getMainButtonLabel(RouteCubit cubit) {
-    final state = cubit.state;
     final route = cubit.route;
-    if (state is RouteStartedSuccess) {
+    if (route.status == RouteStatus.STARTED) {
       return 'LEAVE WAREHOUSE';
     } else if (route.status == RouteStatus.NOT_STARTED) {
       return 'START ROUTE';
