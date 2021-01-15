@@ -1,3 +1,5 @@
 import 'exceptions.dart';
 
-class DepartOriginException implements GMBaseException {}
+class DepartOriginException extends GMBaseException {
+  DepartOriginException(String errorMessage) : super(errorMessage);
+}

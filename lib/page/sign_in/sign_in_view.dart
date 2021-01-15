@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../widget/alert/notification.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../../widget/general/gm_loading.dart';
@@ -54,6 +55,8 @@ class _SignInViewState extends State<SignInView> {
           ),
         ),
       );
+    } else if (state is UserSigningFailed) {
+      showErrorNotification(state.errorMessage);
     }
   }
 

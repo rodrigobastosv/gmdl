@@ -1,3 +1,5 @@
 import 'exceptions.dart';
 
-class CloneStopException implements GMBaseException {}
+class CloneStopException extends GMBaseException {
+  CloneStopException(String errorMessage) : super(errorMessage);
+}

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
+import '../../exception/exceptions.dart';
 
 import '../../../main.dart';
-import '../../exception/exceptions.dart';
 import 'client.dart';
 
 Dio getBasicClient() {
@@ -40,7 +40,11 @@ List<Interceptor> _getBasicInterceptors() {
 
 dynamic handleResponse(Response response) {
   if (response.isNotOk) {
-    throw GMServerException(response.statusCode, response.statusMessage);
+    throw GMServerException(response.statusMessage);
   }
   return response.data;
+}
+
+String getErrorMessage(DioError dioError) {
+  return dioError.response.data['message'];
 }

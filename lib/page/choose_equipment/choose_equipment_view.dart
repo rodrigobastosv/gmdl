@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gm_driver_lite/widget/alert/notification.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
@@ -42,6 +43,10 @@ class ChooseEquipmentView extends StatelessWidget {
           builder: (_) => const LoadRoutePage(),
         ),
       );
+    } else if (state is EquipmentNotFound) {
+      showErrorNotification(state.errorMessage);
+    } else if (state is EquipmentFailed) {
+      showErrorNotification(state.errorMessage);
     }
   }
 

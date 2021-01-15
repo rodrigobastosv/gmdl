@@ -1,3 +1,5 @@
 import 'exceptions.dart';
 
-class StartRouteException implements GMBaseException {}
+class StartRouteException extends GMBaseException {
+  StartRouteException(String errorMessage) : super(errorMessage);
+}

@@ -25,8 +25,10 @@ class StopRepository {
         },
       );
       return response.isOk;
-    } on Exception {
-      throw ArriveStopException();
+    } on DioError catch (e) {
+      throw ArriveStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw ArriveStopException(e.errorMessage);
     }
   }
 
@@ -43,11 +45,10 @@ class StopRepository {
         },
       );
       return response.isOk;
-    } on Exception catch (e) {
-      if (e is DioError) {
-        return e.response.isPrecondictionFailed;
-      }
-      throw DepartStopException();
+    } on DioError catch (e) {
+      throw DepartStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw DepartStopException(e.errorMessage);
     }
   }
 
@@ -69,8 +70,10 @@ class StopRepository {
       );
       final responseData = handleResponse(response);
       return StopModel.fromJson(responseData);
-    } on Exception {
-      throw CloneStopException();
+    } on DioError catch (e) {
+      throw CloneStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw CloneStopException(e.errorMessage);
     }
   }
 }
