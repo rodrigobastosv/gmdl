@@ -77,7 +77,7 @@ class StopView extends StatelessWidget {
 
   Future<void> _onPressedButton(StopCubit cubit) async {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       await cubit.cloneStop();
     } else if (stop.hasBeenArrived) {
       await cubit.departStop();
@@ -88,7 +88,7 @@ class StopView extends StatelessWidget {
 
   Widget _getMainButtonIcon(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       return SvgPicture.asset('assets/icons/clone-stop.svg');
     } else {
       return SvgPicture.asset('assets/icons/driving.svg');
@@ -97,7 +97,7 @@ class StopView extends StatelessWidget {
 
   String _getMainButtonLabel(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       return 'CLONE';
     } else if (stop.hasBeenArrived) {
       return 'LEAVE';

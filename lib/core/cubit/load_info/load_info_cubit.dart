@@ -44,7 +44,7 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
         userConfigurations: userConfigurations,
         cancelCodes: cancelCodes,
       );
-      print(cancelCodes);
+
       emit(AllInfoLoadedSuccess());
     } on Exception {
       emit(DriverInfoFailed());

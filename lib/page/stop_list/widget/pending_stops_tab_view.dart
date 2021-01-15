@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
-import 'pending_stop_list_tile.dart';
+import 'stop_list_tile.dart';
 
 class PendingStopsTabView extends StatelessWidget {
   const PendingStopsTabView({
@@ -18,7 +18,7 @@ class PendingStopsTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RouteCubit, RouteState>(
       builder: (_, state) => ListView.builder(
-        itemBuilder: (_, i) => PendingStopListTile(stops[i]),
+        itemBuilder: (_, i) => StopListTile(stops[i]),
         itemCount: stops.length,
       ),
     );

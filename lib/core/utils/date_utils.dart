@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 import '../extension/datetime_extensions.dart';
 
 // 10:51 AM
-// 01:33 PM
+//  1:33 PM
 String getBasicDateHourMinute(String dateString) {
   final date = dateString.local;
-  return DateFormat('hh:mm').add_j().format(date);
+  return DateFormat().add_jm().format(date);
 }
 
 // Jan 12

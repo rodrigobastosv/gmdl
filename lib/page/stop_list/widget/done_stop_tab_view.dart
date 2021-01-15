@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/cubit/route/route_cubit.dart';
 import '../../../core/entity/model/models.dart';
-import 'done_stop_list_tile.dart';
+import 'stop_list_tile.dart';
 
 class DoneStopsTabView extends StatelessWidget {
   const DoneStopsTabView({
@@ -21,7 +21,7 @@ class DoneStopsTabView extends StatelessWidget {
           state is RouteUpdatedDueStopChange ||
           state is RouteUpdatedDueStopClone,
       builder: (_, state) => ListView.builder(
-        itemBuilder: (_, i) => DoneStopListTile(stops[i]),
+        itemBuilder: (_, i) => StopListTile(stops[i]),
         itemCount: stops.length,
       ),
     );

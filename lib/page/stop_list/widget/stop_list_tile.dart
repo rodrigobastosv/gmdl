@@ -6,11 +6,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
 import '../../../core/utils/date_utils.dart';
+import '../../../core/utils/utils.dart';
 import '../../../widget/stop/stop_sizes.dart';
 import '../../pages.dart';
+import 'stop_list_tile_bottom.dart';
 
-class DoneStopListTile extends StatelessWidget {
-  DoneStopListTile(this.stop);
+class StopListTile extends StatelessWidget {
+  StopListTile(this.stop);
 
   final StopModel stop;
 
@@ -74,6 +76,7 @@ class DoneStopListTile extends StatelessWidget {
                         ),
                       ),
                       Text(stop.location.addressLine1),
+                      const SizedBox(height: 8),
                       StopSizes(stop: stop),
                     ],
                   ),
@@ -81,6 +84,7 @@ class DoneStopListTile extends StatelessWidget {
               ],
             ),
           ),
+          if (isPendingStop(stop)) StopListTileBottom(stop: stop),
         ],
       ),
     );
