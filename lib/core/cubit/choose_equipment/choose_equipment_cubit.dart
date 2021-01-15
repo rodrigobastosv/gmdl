@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../exception/exceptions.dart';
 
+import '../../exception/exceptions.dart';
 import '../../repository/repositories.dart';
 
 part 'choose_equipment_state.dart';

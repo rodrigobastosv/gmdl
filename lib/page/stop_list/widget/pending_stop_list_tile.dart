@@ -49,16 +49,7 @@ class PendingStopListTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        if (stop.isCloned)
-                          Positioned(
-                            bottom: -2,
-                            left: -2,
-                            child: SvgPicture.asset(
-                              'assets/icons/stop-cloned.svg',
-                              height: 18,
-                              width: 18,
-                            ),
-                          ),
+                        _getStopStatusIcon(stop),
                       ],
                     ),
                     const SizedBox(height: 6),
@@ -130,5 +121,30 @@ class PendingStopListTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _getStopStatusIcon(StopModel stop) {
+    if (stop.isCloned) {
+      return Positioned(
+        bottom: -2,
+        left: -2,
+        child: SvgPicture.asset(
+          'assets/icons/stop-cloned.svg',
+          height: 18,
+          width: 18,
+        ),
+      );
+    } else if (stop.isCanceled) {
+      return Positioned(
+        bottom: -2,
+        left: -2,
+        child: SvgPicture.asset(
+          'assets/icons/canceled.svg',
+          height: 18,
+          width: 18,
+        ),
+      );
+    }
+    return const SizedBox();
   }
 }

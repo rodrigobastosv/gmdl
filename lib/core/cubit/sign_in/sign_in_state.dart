@@ -23,8 +23,8 @@ class UserSigningFailed extends SignInState {
 
   @override
   List<Object> get props => [
-    errorMessage,
-  ];
+        errorMessage,
+      ];
 }
 
 class UserSigningLoading extends SignInState {}

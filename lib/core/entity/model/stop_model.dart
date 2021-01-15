@@ -57,6 +57,8 @@ abstract class StopModel implements _$StopModel {
 
   bool get isCloned => cloneDate != null;
 
+  bool get isCanceled => canceled;
+
   bool get hasBeenArrived => actualArrival != null;
 
   bool get hasNotBeenArrived => actualArrival == null;

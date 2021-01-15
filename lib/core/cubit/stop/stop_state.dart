@@ -42,3 +42,27 @@ class ClonedStopSuccess extends StopState {
 }
 
 class ClonedStopFailed extends StopState {}
+
+class CancellingStop extends StopState {}
+
+class CanceledStopSuccess extends StopState {
+  CanceledStopSuccess(this.stop);
+
+  final StopModel stop;
+
+  @override
+  List<Object> get props => [
+        stop.id,
+      ];
+}
+
+class CanceledStopFailed extends StopState {
+  CanceledStopFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}

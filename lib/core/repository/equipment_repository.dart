@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+
 import '../exception/equipment_not_found_exception.dart';
 import '../exception/exceptions.dart';
-
 import 'client/client.dart';
 import 'filters/filters.dart';
 
@@ -40,10 +40,10 @@ class EquipmentRepository {
       );
       final responseData = handleResponse(response) as List;
       if (responseData.isEmpty) {
-          throw EquipmentNotFoundException();
-        } else {
-          return true;
-        }
+        throw EquipmentNotFoundException();
+      } else {
+        return true;
+      }
     } on Exception {
       rethrow;
     }

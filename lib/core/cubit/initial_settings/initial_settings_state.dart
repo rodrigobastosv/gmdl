@@ -18,8 +18,8 @@ class ServerValidationFailed extends InitialSettingsState {
 
   @override
   List<Object> get props => [
-    errorMessage,
-  ];
+        errorMessage,
+      ];
 }
 
 class ServerValidationLoading extends InitialSettingsState {}

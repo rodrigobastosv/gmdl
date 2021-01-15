@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
@@ -36,15 +37,20 @@ class DoneStopListTile extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    CircleAvatar(
-                      backgroundColor: const Color(0xFF464646),
-                      child: Text(
-                        stop.plannedSequenceNum.toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xFF464646),
+                          child: Text(
+                            stop.plannedSequenceNum.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        _getStopStatusIcon(stop),
+                      ],
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -78,5 +84,30 @@ class DoneStopListTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _getStopStatusIcon(StopModel stop) {
+    if (stop.isCloned) {
+      return Positioned(
+        bottom: -2,
+        left: -2,
+        child: SvgPicture.asset(
+          'assets/icons/stop-cloned.svg',
+          height: 18,
+          width: 18,
+        ),
+      );
+    } else if (stop.isCanceled) {
+      return Positioned(
+        bottom: -2,
+        left: -2,
+        child: SvgPicture.asset(
+          'assets/icons/canceled.svg',
+          height: 18,
+          width: 18,
+        ),
+      );
+    }
+    return const SizedBox();
   }
 }

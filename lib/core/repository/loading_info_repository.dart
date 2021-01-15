@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../entity/dto/driver_info_dto.dart';
 import '../entity/dto/global_configurations_dto.dart';
+import '../entity/model/cancel_code_model.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 
@@ -66,6 +67,19 @@ class LoadingInfoRepository {
         '/$CONFIGURATION/loggedUser',
       );
       return handleResponse(response);
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<List<CancelCodeModel>> fetchCancelCodes() async {
+    try {
+      final response = await _client.post('/$CANCEL_CODE/$FILTER', data: {
+        'enabled': true,
+      });
+      final responseData = handleResponse(response) as List;
+      return List.generate(responseData.length,
+          (i) => CancelCodeModel.fromJson(responseData[i]));
     } on Exception {
       rethrow;
     }

@@ -1,7 +1,12 @@
 import 'package:flutter/foundation.dart';
-import '../entity/model/models.dart';
 
+import '../entity/model/models.dart';
 import 'utils.dart';
+
+bool isPendingStop(StopModel stop) =>
+    stop.actualDeparture == null && !stop.canceled;
+
+bool isDoneStop(StopModel stop) => !isPendingStop(stop);
 
 String generateCloneStopKey() {
   return 'clone-${generateRandomString(30)}';
