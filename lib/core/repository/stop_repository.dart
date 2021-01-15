@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../entity/model/models.dart';
 import '../exception/exceptions.dart';
 import 'client/client.dart';
+import '../utils/utils.dart';
+import 'filters/filters.dart';
 
 class StopRepository {
   StopRepository(this._client);
@@ -45,6 +48,29 @@ class StopRepository {
         return e.response.isPrecondictionFailed;
       }
       throw DepartStopException();
+    }
+  }
+
+  Future<StopModel> cloneStop({
+    @required int routeId,
+    @required StopModel stop,
+  }) async {
+    try {
+      final response = await _client.post(
+        '/$STOP/${stop.key}/$ROUTE/$routeId/$CLONE',
+        queryParameters: {
+          CRITERIA: {
+            FILTERS: cloneStopFilters,
+          },
+        },
+        data: {
+          'key': generateCloneStopKey(),
+        },
+      );
+      final responseData = handleResponse(response);
+      return StopModel.fromJson(responseData);
+    } on Exception {
+      throw CloneStopException();
     }
   }
 }

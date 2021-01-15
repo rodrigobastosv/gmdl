@@ -27,3 +27,18 @@ class DepartedStopSuccess extends StopState {
 }
 
 class DepartedStopFailed extends StopState {}
+
+class CloningStop extends StopState {}
+
+class ClonedStopSuccess extends StopState {
+  ClonedStopSuccess(this.stop);
+
+  final StopModel stop;
+
+  @override
+  List<Object> get props => [
+        stop.id,
+      ];
+}
+
+class ClonedStopFailed extends StopState {}

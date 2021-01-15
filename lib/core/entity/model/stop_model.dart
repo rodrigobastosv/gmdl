@@ -38,6 +38,7 @@ abstract class StopModel implements _$StopModel {
     @JsonKey(fromJson: convertToDouble) double longitude,
     @JsonKey(fromJson: convertToDouble) double latitude,
     String ordersInfo,
+    String cloneDate,
     BaseUnitModel size1AliasConfig,
     BaseUnitModel size2AliasConfig,
     BaseUnitModel size3AliasConfig,
@@ -53,6 +54,8 @@ abstract class StopModel implements _$StopModel {
       _$StopModelFromJson(json);
 
   bool get isFinished => actualDeparture != null;
+
+  bool get isCloned => cloneDate != null;
 
   bool get hasBeenArrived => actualArrival != null;
 

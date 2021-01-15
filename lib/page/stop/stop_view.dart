@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cubit/stop/stop_cubit.dart';
 import '../../widget/general/gm_scaffold.dart';
@@ -22,10 +22,7 @@ class StopView extends StatelessWidget {
       ),
       mainActionButton: FloatingActionButton(
         onPressed: () => _onPressedButton(cubit),
-        child: const Icon(
-          MdiIcons.truckFastOutline,
-          size: 32,
-        ),
+        child: _getMainButtonIcon(cubit),
         backgroundColor: const Color(0xFF3AA348),
       ),
       mainActionButtonLabel: _getMainButtonLabel(cubit),
@@ -50,10 +47,21 @@ class StopView extends StatelessWidget {
 
   Future<void> _onPressedButton(StopCubit cubit) async {
     final stop = cubit.stop;
-    if (stop.hasBeenArrived) {
+    if (stop.isFinished) {
+      await cubit.cloneStop();
+    } else if (stop.hasBeenArrived) {
       await cubit.departStop();
     } else {
       await cubit.arriveStop();
+    }
+  }
+
+  Widget _getMainButtonIcon(StopCubit cubit) {
+    final stop = cubit.stop;
+    if (stop.isFinished) {
+      return SvgPicture.asset('assets/icons/clone-stop.svg');
+    } else {
+      return SvgPicture.asset('assets/icons/driving.svg');
     }
   }
 

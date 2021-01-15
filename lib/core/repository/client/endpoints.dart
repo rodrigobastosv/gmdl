@@ -12,6 +12,7 @@ const ARRIVE = 'Arrive';
 const ARRIVE_DESTINATION = 'ArriveDestination';
 const COMPLETE = 'Complete';
 const DEPART = 'Depart';
+const CLONE = 'Clone';
 const DEPART_ORIGIN = 'DepartOrigin';
 const GLOBAL_CONFIGURATION = 'GlobalConfiguration';
 const CONFIGURATION = 'Configuration';
