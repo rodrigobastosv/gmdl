@@ -1,10 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:dio/dio.dart';
 
 import '../entity/model/models.dart';
 import '../exception/exceptions.dart';
-import 'client/client.dart';
 import '../utils/utils.dart';
+import 'client/client.dart';
 import 'filters/filters.dart';
 
 class StopRepository {
@@ -74,6 +75,31 @@ class StopRepository {
       throw CloneStopException(getErrorMessage(e));
     } on GMServerException catch (e) {
       throw CloneStopException(e.errorMessage);
+    }
+  }
+
+  Future<bool> cancelStop({
+    @required int routeId,
+    @required int cancelCode,
+    @required String stopKey,
+    @required String actualCancel,
+  }) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$STOP/$CANCEL',
+        data: {
+          'actualCancel': actualCancel,
+          'cancelCode': {'id': cancelCode},
+          'stops': [
+            {'key': stopKey}
+          ]
+        },
+      );
+      return response.isOk;
+    } on DioError catch (e) {
+      throw CancelStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw CancelStopException(e.errorMessage);
     }
   }
 }

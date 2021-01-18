@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
+import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../stop_list/stop_list_page.dart';
+import 'choose_cancel_code/choose_cancel_code_page.dart';
 import 'widget/instructions_card.dart';
 
 class StopView extends StatelessWidget {
@@ -26,12 +30,38 @@ class StopView extends StatelessWidget {
         backgroundColor: const Color(0xFF3AA348),
       ),
       mainActionButtonLabel: _getMainButtonLabel(cubit),
+      menuOptions: [
+        GMMenuOption(
+          text: 'Cancel',
+          icon: 'cancel-stop',
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: cubit,
+                  child: const ChooseCancelCodePage(),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
   void _listener(BuildContext context, StopState state) {
     if (state is DepartedStopSuccess) {
       Navigator.of(context).pop();
+    }
+    if (state is CanceledStopSuccess) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: context.read<RouteCubit>(),
+            child: const StopListPage(),
+          ),
+        ),
+      );
     }
   }
 
@@ -47,7 +77,7 @@ class StopView extends StatelessWidget {
 
   Future<void> _onPressedButton(StopCubit cubit) async {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       await cubit.cloneStop();
     } else if (stop.hasBeenArrived) {
       await cubit.departStop();
@@ -58,7 +88,7 @@ class StopView extends StatelessWidget {
 
   Widget _getMainButtonIcon(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       return SvgPicture.asset('assets/icons/clone-stop.svg');
     } else {
       return SvgPicture.asset('assets/icons/driving.svg');
@@ -67,7 +97,7 @@ class StopView extends StatelessWidget {
 
   String _getMainButtonLabel(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished) {
+    if (stop.isFinished || stop.isCanceled) {
       return 'CLONE';
     } else if (stop.hasBeenArrived) {
       return 'LEAVE';

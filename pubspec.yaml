@@ -40,6 +40,7 @@ dependencies:
   # UI
   flutter_svg: ^0.19.1
   bot_toast: ^3.0.5
+  roundcheckbox: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

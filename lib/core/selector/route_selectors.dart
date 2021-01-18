@@ -1,6 +1,6 @@
 import '../entity/model/models.dart';
 import '../entity/model/route_model.dart';
-import '../utils/route_utils.dart';
+import '../utils/utils.dart';
 
 List<StopModel> getPendingStops(RouteModel route) {
   final routeStops = route.stops;

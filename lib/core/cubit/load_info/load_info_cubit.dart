@@ -21,7 +21,7 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
   final StoreProvider storeProvider;
 
   Future<void> getDriverInfo(String username) async {
-    emit(InfoLoading('Loading Basic User Infos'));
+    emit(InfoLoading('Loading Basic User Information'));
     try {
       final driverInfo = await _repository.getDriverInfo(username: username);
       emit(BasicDriverInfoSuccess());
@@ -34,11 +34,17 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
       final userConfigurations = await _repository.getUserConfigurations();
       emit(FetchUserConfigSuccess());
 
+      emit(InfoLoading('Fetching Cancel Codes'));
+      final cancelCodes = await _repository.fetchCancelCodes();
+      emit(FetchCancelCodesSuccess());
+
       storeProvider.storeGeneralInfo(
         driverInfo: driverInfo,
         globalConfigurations: globalConfigurations,
         userConfigurations: userConfigurations,
+        cancelCodes: cancelCodes,
       );
+
       emit(AllInfoLoadedSuccess());
     } on Exception {
       emit(DriverInfoFailed());

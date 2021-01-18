@@ -18,8 +18,8 @@ class EquipmentNotFound extends ChooseEquipmentState {
 
   @override
   List<Object> get props => [
-    errorMessage,
-  ];
+        errorMessage,
+      ];
 }
 
 class EquipmentFailed extends ChooseEquipmentState {
@@ -29,8 +29,8 @@ class EquipmentFailed extends ChooseEquipmentState {
 
   @override
   List<Object> get props => [
-    errorMessage,
-  ];
+        errorMessage,
+      ];
 }
 
 class LoadingEquipment extends ChooseEquipmentState {}

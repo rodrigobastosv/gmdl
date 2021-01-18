@@ -1,3 +1,4 @@
+export 'cancel_stop_exception.dart';
 export 'clone_stop_exception.dart';
 export 'complete_route_exception.dart';
 export 'depart_stop_exception.dart';
