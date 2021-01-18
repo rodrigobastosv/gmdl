@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../entity/dto/driver_info_dto.dart';
-import '../entity/dto/global_configurations_dto.dart';
-import '../entity/model/cancel_code_model.dart';
-import '../entity/model/feature_state_model.dart';
+import '../entity/dto/dtos.dart';
+import '../entity/model/models.dart';
 
 class StoreProvider extends ChangeNotifier {
   String serverName;
@@ -13,6 +11,7 @@ class StoreProvider extends ChangeNotifier {
   Map<String, dynamic> userConfigurations;
   List<FeatureStateModel> featureStates;
   List<CancelCodeModel> cancelCodes;
+  List<UndeliverableCodeModel> undeliverableCodes;
 
   void changeServerName(String serverName) {
     this.serverName = serverName;
@@ -29,11 +28,13 @@ class StoreProvider extends ChangeNotifier {
     @required GlobalConfigurationsDto globalConfigurations,
     @required Map<String, dynamic> userConfigurations,
     @required List<CancelCodeModel> cancelCodes,
+    @required List<UndeliverableCodeModel> undeliverableCodes,
   }) {
     this.driverInfo = driverInfo;
     this.globalConfigurations = globalConfigurations;
     this.userConfigurations = userConfigurations;
     this.cancelCodes = cancelCodes;
+    this.undeliverableCodes = undeliverableCodes;
     notifyListeners();
   }
 }

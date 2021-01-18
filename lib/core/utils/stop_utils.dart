@@ -4,7 +4,7 @@ import '../entity/model/models.dart';
 import 'utils.dart';
 
 bool isPendingStop(StopModel stop) =>
-    stop.actualDeparture == null && !stop.canceled;
+    stop.actualDeparture == null && !stop.canceled && !stop.isUndeliverable;
 
 bool isDoneStop(StopModel stop) => !isPendingStop(stop);
 

@@ -26,3 +26,5 @@ export 'stop_type_model.dart';
 export 'time_zone_model.dart';
 export 'transport_model.dart';
 export 'udf_model.dart';
+export 'cancel_code_model.dart';
+export 'undeliverable_code_model.dart';

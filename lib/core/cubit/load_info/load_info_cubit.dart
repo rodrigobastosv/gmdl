@@ -38,11 +38,16 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
       final cancelCodes = await _repository.fetchCancelCodes();
       emit(FetchCancelCodesSuccess());
 
+      emit(InfoLoading('Fetching Undeliverable Codes'));
+      final undeliverableCodes = await _repository.fetchUndeliverableCodes();
+      emit(FetchUndeliverableCodesSuccess());
+
       storeProvider.storeGeneralInfo(
         driverInfo: driverInfo,
         globalConfigurations: globalConfigurations,
         userConfigurations: userConfigurations,
         cancelCodes: cancelCodes,
+        undeliverableCodes: undeliverableCodes,
       );
 
       emit(AllInfoLoadedSuccess());

@@ -35,6 +35,8 @@ class StopCubit extends Cubit<StopState> {
   final StoreProvider _storeProvider;
 
   List<CancelCodeModel> get allCancelCodes => _storeProvider.cancelCodes;
+  List<UndeliverableCodeModel> get allUndeliveableCodes =>
+      _storeProvider.undeliverableCodes;
 
   Future<void> arriveStop() async {
     final route = _routeCubit.route;
@@ -113,6 +115,25 @@ class StopCubit extends Cubit<StopState> {
       _routeCubit.updateRouteDueStopChange(stop);
     } on CancelStopException catch (e) {
       emit(CanceledStopFailed(e.errorMessage));
+    }
+  }
+
+  Future<void> undeliverStop(UndeliverableCodeModel undeliverableCode) async {
+    final route = _routeCubit.route;
+    try {
+      emit(UndeliveringStop());
+      final actualDeparture = DateTime.now().toUtcAsString;
+      await _repository.undeliverStop(
+        routeId: route.id,
+        undeliverableCode: undeliverableCode.id,
+        actualDeparture: actualDeparture,
+        stopKey: stop.key,
+      );
+      stop = stop.copyWith(undeliverableCode: undeliverableCode);
+      emit(UndeliveredStopSuccess(stop));
+      _routeCubit.updateRouteDueStopChange(stop);
+    } on CancelStopException catch (e) {
+      emit(UndeliveredStopFailed(e.errorMessage));
     }
   }
 }

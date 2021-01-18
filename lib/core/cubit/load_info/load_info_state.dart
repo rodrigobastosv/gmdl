@@ -19,6 +19,8 @@ class FetchUserConfigSuccess extends LoadInfoState {}
 
 class FetchCancelCodesSuccess extends LoadInfoState {}
 
+class FetchUndeliverableCodesSuccess extends LoadInfoState {}
+
 class DriverInfoFailed extends LoadInfoState {}
 
 class InfoLoading extends LoadInfoState {
