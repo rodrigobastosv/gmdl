@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../entity/model/models.dart';
 
 part 'choose_undeliverable_code_state.dart';

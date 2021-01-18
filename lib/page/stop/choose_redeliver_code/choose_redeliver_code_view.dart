@@ -6,43 +6,45 @@ import 'package:roundcheckbox/roundcheckbox.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/cubit/stop/stop_cubit.dart';
+import '../../../core/selector/store_selectors.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
-class ChooseCancelCodeView extends StatelessWidget {
-  const ChooseCancelCodeView({Key key}) : super(key: key);
+class ChooseRedeliverCodeView extends StatelessWidget {
+  const ChooseRedeliverCodeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final stopCubit = context.watch<StopCubit>();
-    final cubit = context.watch<ChooseCancelCodeCubit>();
-    final allCancelCodes = stopCubit.allCancelCodes;
+    final cubit = context.watch<ChooseRedeliverCodeCubit>();
+    final allRedeliverCodes =
+        getRedeliveryReasons(stopCubit.allUndeliveableCodes);
     return GMScaffold(
-      title: 'REASON CODES',
+      title: 'REDELIVERY CODES',
       body: BlocBuilder<StopCubit, StopState>(
         builder: (_, state) => ListView.builder(
           itemBuilder: (_, i) => ListTile(
             key: UniqueKey(),
-            title: Text(allCancelCodes[i].description),
+            title: Text(allRedeliverCodes[i].description),
             trailing: RoundCheckBox(
-              isChecked: cubit.pickedCancelCode == allCancelCodes[i],
+              isChecked: cubit.pickedRedeliverableCode == allRedeliverCodes[i],
               onTap: (selected) {
                 if (selected) {
-                  cubit.pickCancelCode(allCancelCodes[i]);
+                  cubit.pickRedeliverCode(allRedeliverCodes[i]);
                 } else {
-                  cubit.unpickCancelCode(allCancelCodes[i]);
+                  cubit.unpickRedeliverCode(allRedeliverCodes[i]);
                 }
               },
             ),
           ),
-          itemCount: allCancelCodes.length,
+          itemCount: allRedeliverCodes.length,
         ),
       ),
       mainActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: cubit.hasCancelCodePicked
+        onPressed: cubit.hasRedeliverableCodePicked
             ? () {
-                final pickedCancelCode = cubit.pickedCancelCode;
-                stopCubit.cancelStop(pickedCancelCode);
+                final pickedRedeliverableCode = cubit.pickedRedeliverableCode;
+                stopCubit.redeliverStop(pickedRedeliverableCode);
               }
             : null,
         child: SvgPicture.asset(

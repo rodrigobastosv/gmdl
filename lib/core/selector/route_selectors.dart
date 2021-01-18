@@ -31,3 +31,16 @@ String getPlannedServiceInHoursAndMinutes(RouteModel route) {
   final plannedMinutes = (plannedDifferenceInMinutes % 60).round();
   return '${plannedHours}h ${plannedMinutes}m';
 }
+
+StopModel getLastStopOrderedById(RouteModel route) {
+  final stops = [...route.stops];
+  stops.sort((s1, s2) => s1.id.compareTo(s2.id));
+  return stops.last;
+}
+
+StopModel getLastPlannedStop(RouteModel route) {
+  final stops = [...route.stops];
+  stops
+      .sort((s1, s2) => s1.plannedSequenceNum.compareTo(s2.plannedSequenceNum));
+  return stops.last;
+}

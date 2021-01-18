@@ -89,9 +89,7 @@ class StopRepository {
         '/$ROUTE/$routeId/$STOP/$CANCEL',
         data: {
           'actualCancel': actualCancel,
-          'cancelCode': {
-            'id': cancelCode
-          },
+          'cancelCode': {'id': cancelCode},
           'stops': [
             {'key': stopKey}
           ]
@@ -116,12 +114,35 @@ class StopRepository {
         '/$ROUTE/$routeId/$STOP/$stopKey/$RETURN',
         data: {
           'actualDeparture': actualDeparture,
-          'undeliverableCode': {
-            'id': undeliverableCode
-          },
+          'undeliverableCode': {'id': undeliverableCode},
         },
       );
       return response.isOk;
+    } on DioError catch (e) {
+      throw CancelStopException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw CancelStopException(e.errorMessage);
+    }
+  }
+
+  Future<StopModel> redeliverStop({
+    @required int routeId,
+    @required int undeliverableCode,
+    @required String actualDeparture,
+    @required String undeliveredStopKey,
+    @required String newStopKey,
+  }) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE/$routeId/$STOP/$undeliveredStopKey/$REDELIVERY',
+        data: {
+          'actualDeparture': actualDeparture,
+          'undeliverableCode': {'id': undeliverableCode},
+          'key': newStopKey,
+        },
+      );
+      final responseData = handleResponse(response);
+      return StopModel.fromJson(responseData);
     } on DioError catch (e) {
       throw CancelStopException(getErrorMessage(e));
     } on GMServerException catch (e) {

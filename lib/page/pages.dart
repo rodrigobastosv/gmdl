@@ -9,5 +9,6 @@ export 'sign_in/sign_in_page.dart';
 export 'stop/stop_page.dart';
 export 'stop/choose_undeliverable_code/choose_undeliverable_code_page.dart';
 export 'stop/choose_cancel_code/choose_cancel_code_page.dart';
+export 'stop/choose_redeliver_code/choose_redeliver_code_page.dart';
 export 'stop_list/stop_list_page.dart';
 export 'stop_list/stop_list_page.dart';
