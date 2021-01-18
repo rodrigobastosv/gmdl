@@ -45,6 +45,7 @@ abstract class StopModel implements _$StopModel {
     bool returned,
     bool redelivered,
     bool canceled,
+    UndeliverableCodeModel undeliverableCode,
     @JsonKey(fromJson: convertToDouble) double damagedSize1,
     @JsonKey(fromJson: convertToDouble) double damagedSize2,
     @JsonKey(fromJson: convertToDouble) double damagedSize3,
@@ -58,6 +59,8 @@ abstract class StopModel implements _$StopModel {
   bool get isCloned => cloneDate != null;
 
   bool get isCanceled => canceled;
+
+  bool get isUndeliverable => undeliverableCode != null;
 
   bool get hasBeenArrived => actualArrival != null;
 

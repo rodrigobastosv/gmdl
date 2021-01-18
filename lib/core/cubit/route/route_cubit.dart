@@ -32,13 +32,9 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> startRoute() async {
     try {
       emit(StartingRoute());
-      final routeStarted = await _repository.startRoute(route.id);
-      if (routeStarted) {
-        route = route.copyWith(status: RouteStatus.STARTED);
-        emit(RouteStartedSuccess());
-      } else {
-        emit(RouteStartFailed());
-      }
+      await _repository.startRoute(route.id);
+      route = route.copyWith(status: RouteStatus.STARTED);
+      emit(RouteStartedSuccess());
     } on Exception {
       emit(RouteStartFailed());
     }
@@ -47,13 +43,9 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> departOrigin() async {
     try {
       emit(DepartingOrigin());
-      final departedOrigin = await _repository.departOrigin(route.id);
-      if (departedOrigin) {
-        route = route.copyWith(status: RouteStatus.DEPARTED_ORIGIN);
-        emit(DepartOriginSuccess());
-      } else {
-        emit(DepartOriginFailed());
-      }
+      await _repository.departOrigin(route.id);
+      route = route.copyWith(status: RouteStatus.DEPARTED_ORIGIN);
+      emit(DepartOriginSuccess());
     } on Exception {
       emit(DepartOriginFailed());
     }
@@ -70,6 +62,7 @@ class RouteCubit extends Cubit<RouteState> {
       );
       if (arrivedStop) {
         final _updatedStop = stop.copyWith(actualArrival: actualArrival);
+        route = updateRouteByStopChange(route, _updatedStop);
         emit(ArrivedStopSuccess(_updatedStop));
       } else {
         emit(ArrivedStopFailed());
@@ -109,12 +102,9 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> completeRoute() async {
     try {
       emit(CompletingRoute());
-      final routeCompleted = await _repository.completeRoute(route.id);
-      if (routeCompleted) {
-        emit(RouteCompletedSuccess());
-      } else {
-        emit(RouteCompletedFailed());
-      }
+      await _repository.completeRoute(route.id);
+      route = route.copyWith(status: RouteStatus.COMPLETED);
+      emit(RouteCompletedSuccess());
     } on Exception {
       emit(RouteCompletedFailed());
     }

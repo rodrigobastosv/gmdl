@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../entity/dto/driver_info_dto.dart';
-import '../entity/dto/global_configurations_dto.dart';
-import '../entity/model/cancel_code_model.dart';
+import '../entity/dto/dtos.dart';
+import '../entity/model/models.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 
@@ -80,6 +79,19 @@ class LoadingInfoRepository {
       final responseData = handleResponse(response) as List;
       return List.generate(responseData.length,
           (i) => CancelCodeModel.fromJson(responseData[i]));
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<List<UndeliverableCodeModel>> fetchUndeliverableCodes() async {
+    try {
+      final response = await _client.post('/$UNDELIVERABLE_CODE/$FILTER', data: {
+        'enabled': true,
+      });
+      final responseData = handleResponse(response) as List;
+      return List.generate(responseData.length,
+          (i) => UndeliverableCodeModel.fromJson(responseData[i]));
     } on Exception {
       rethrow;
     }

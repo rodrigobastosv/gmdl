@@ -111,6 +111,16 @@ class StopListTile extends StatelessWidget {
           width: 18,
         ),
       );
+    } else if (stop.isUndeliverable) {
+      return Positioned(
+        bottom: -2,
+        left: -2,
+        child: SvgPicture.asset(
+          'assets/icons/stop-undelivered.svg',
+          height: 18,
+          width: 18,
+        ),
+      );
     }
     return const SizedBox();
   }
