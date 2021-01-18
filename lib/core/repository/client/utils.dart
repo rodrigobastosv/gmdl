@@ -37,6 +37,9 @@ List<Interceptor> _getBasicInterceptors() {
       ..add(alice.getDioInterceptor())
       ..add(
         LogInterceptor(
+          requestHeader: false,
+          requestBody: false,
+          responseHeader: false,
           responseBody: true,
           error: true,
         ),

@@ -62,6 +62,7 @@ class RouteCubit extends Cubit<RouteState> {
       );
       if (arrivedStop) {
         final _updatedStop = stop.copyWith(actualArrival: actualArrival);
+        route = updateRouteByStopChange(route, _updatedStop);
         emit(ArrivedStopSuccess(_updatedStop));
       } else {
         emit(ArrivedStopFailed());
