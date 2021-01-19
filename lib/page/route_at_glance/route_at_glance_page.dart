@@ -24,7 +24,7 @@ class RouteAtGlancePage extends StatelessWidget {
         repository: context.read<RouteRepository>(),
         store: context.read<Store>(),
         notificationCubit: context.read<NotificationCubit>(),
-      )..initNotifications(),
+      )..listenNotifications(),
       child: const RouteAtGlanceView(),
     );
   }

@@ -8,9 +8,6 @@ part 'stop_model.g.dart';
 
 @freezed
 abstract class StopModel implements _$StopModel {
-  // ignore: unused_element
-  const StopModel._();
-
   factory StopModel({
     int id,
     String key,
@@ -53,23 +50,37 @@ abstract class StopModel implements _$StopModel {
     @JsonKey(fromJson: convertToDouble) double damagedSize3,
   }) = _StopModel;
 
-  factory StopModel.fromJson(Map<String, dynamic> json) =>
-      _$StopModelFromJson(json);
-
+  @late
   bool get canClone =>
       !isCloned && (isFinished || isCanceled || isUndeliverable);
 
+  @late
+  bool get isPending => hasNotBeenArrived && !isCanceled;
+
+  @late
+  bool get isDone => !isPending;
+
+  @late
   bool get isFinished => actualDeparture != null;
 
+  @late
   bool get isCloned => cloneDate != null;
 
+  @late
   bool get isCanceled => cancelCode != null;
 
+  @late
   bool get isUndeliverable => undeliverableCode != null;
 
+  @late
   bool get isRedelivered => isUndeliverable && redeliveryStop != null;
 
+  @late
   bool get hasBeenArrived => actualArrival != null;
 
+  @late
   bool get hasNotBeenArrived => actualArrival == null;
+
+  factory StopModel.fromJson(Map<String, dynamic> json) =>
+      _$StopModelFromJson(json);
 }

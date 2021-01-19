@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 
 import '../entity/dto/dtos.dart';
+import '../entity/dto/mobile_device_dto.dart';
 import '../entity/model/models.dart';
+import '../exception/exceptions.dart';
 import 'client/client.dart';
 import 'filters/filters.dart';
 
@@ -40,6 +42,97 @@ class LoadingInfoRepository {
       return null;
     } on Exception {
       rethrow;
+    }
+  }
+
+  Future<MobileDeviceDto> registerDevice({
+    String deviceModel,
+    String platform,
+    String platformVersion,
+    int registrationAccuracy,
+    String registrationGPSProvider,
+    String registrationIp,
+    double registrationLatitude,
+    double registrationLongitude,
+    String uniqueDeviceId,
+  }) async {
+    try {
+      final response = await _client.post(
+        '/$MOBILE_DEVICE/$REGISTER',
+        data: {
+          'deviceModel': deviceModel,
+          'platform': platform,
+          'platformVersion': platformVersion,
+          'registrationAccuracy': registrationAccuracy,
+          'registrationGPSProvider': registrationGPSProvider,
+          'registrationIp': registrationIp,
+          'registrationLatitude': registrationLatitude,
+          'registrationLongitude': registrationLongitude,
+          'uniqueDeviceId': uniqueDeviceId,
+        },
+      );
+      final responseData = handleResponse(response) as Map<String, dynamic>;
+      return MobileDeviceDto.fromJson(responseData['mobileDevice']);
+    } on DioError catch (e) {
+      throw SignInException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw SignInException(e.errorMessage);
+    }
+  }
+
+  Future<void> bindModule({
+    int deviceId,
+    String appVersion,
+    String moduleKey,
+  }) async {
+    try {
+      _client.post('/$MOBILE_DEVICE/$deviceId/$BIND_MODULE', queryParameters: {
+        'returnEntity': true,
+      }, data: {
+        'appVersion': appVersion,
+        'module': {
+          'key': moduleKey,
+        }
+      });
+    } on DioError {} on GMServerException {}
+  }
+
+  Future<void> fetchAppVersion({
+    int deviceId,
+  }) async {
+    try {
+      _client.get('/$MOBILE_VERSION/$DEVICE/$deviceId');
+    } on DioError {} on GMServerException {}
+  }
+
+  Future<void> logDevice({
+    int deviceId,
+    int userId,
+  }) async {
+    try {
+      _client.post(
+        '/$MOBILE_DEVICE/$deviceId/$LOG',
+        data: {
+          'accuracy': 2765,
+          'batteryLevel': null,
+          'device': {
+            'id': deviceId,
+          },
+          'fromIP': "10.1.1.1",
+          'gpsProvider': "PASSIVE",
+          'latitude': -3.7617664,
+          'longitude': -38.479462399999996,
+          'phoneNumber': null,
+          'simSerialNumber': null,
+          'user': {
+            'id': userId,
+          },
+        },
+      );
+    } on DioError catch (e) {
+      throw SignInException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw SignInException(e.errorMessage);
     }
   }
 

@@ -32,6 +32,7 @@ class RouteCubit extends Cubit<RouteState> {
   final RouteRepository _repository;
   final Store store;
   final NotificationCubit _notificationCubit;
+
   RouteModel route;
   StreamSubscription<NotificationState> _notificationSubscription;
 
@@ -39,7 +40,7 @@ class RouteCubit extends Cubit<RouteState> {
 
   String get token => _notificationCubit.fcmToken;
 
-  void initNotifications() {
+  void listenNotifications() {
     _notificationSubscription = _notificationCubit.listen((state) {
       if (state is NotificationReceived) {
         print('Process notification!');
@@ -59,6 +60,14 @@ class RouteCubit extends Cubit<RouteState> {
       emit(StartingRoute());
       await _repository.startRoute(route.id);
       route = route.copyWith(status: RouteStatus.STARTED);
+
+      final proConfig = await _repository.fetchProConfig(route.id);
+      if (proConfig != null) {
+        route = route.copyWith(proactiveRouteOptConfig: proConfig);
+        emit(ProConfigAppliedToRoute(proConfig));
+      }
+      print(proConfig);
+
       emit(RouteStartedSuccess());
     } on Exception {
       emit(RouteStartFailed());

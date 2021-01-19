@@ -40,5 +40,10 @@ List<RepositoryProvider> getRepositoryProviders(Store store) {
         getDefaultClient(serverName, sessionId),
       ),
     ),
+    RepositoryProvider<NotificationRepository>(
+      create: (_) => NotificationRepository(
+        getDefaultClient(serverName, sessionId),
+      ),
+    ),
   ];
 }

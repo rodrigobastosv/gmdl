@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
@@ -21,6 +22,7 @@ class LoadInfoPage extends StatelessWidget {
       create: (_) => LoadInfoCubit(
         repository: context.read<LoadingInfoRepository>(),
         store: context.read<Store>(),
+        deviceInfo: DeviceInfoPlugin(),
       )..getDriverInfo(username),
       child: const LoadInfoView(),
     );

@@ -3,11 +3,6 @@ import 'package:flutter/foundation.dart';
 import '../entity/model/models.dart';
 import 'utils.dart';
 
-bool isPendingStop(StopModel stop) =>
-    stop.hasNotBeenArrived && !stop.isCanceled;
-
-bool isDoneStop(StopModel stop) => !isPendingStop(stop);
-
 String generateNewStopKey() => generateRandomString(30);
 
 String generateCloneStopKey() => 'clone-${generateRandomString(30)}';

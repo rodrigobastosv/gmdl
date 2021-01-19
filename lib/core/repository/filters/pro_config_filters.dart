@@ -1,0 +1,4 @@
+final proConfigFilters = [
+  'id',
+  'proactiveRouteOptConfig.*',
+];

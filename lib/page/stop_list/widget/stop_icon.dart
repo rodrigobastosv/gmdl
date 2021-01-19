@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
-import '../../../core/utils/utils.dart';
 import 'done_stop_status_icon.dart';
 import 'pending_stop_status_icon.dart';
 
@@ -15,7 +14,7 @@ class StopIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isPendingStop(stop)
+    return stop.isPending
         ? Stack(
             children: [
               CircleAvatar(

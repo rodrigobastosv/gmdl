@@ -44,8 +44,12 @@ abstract class RouteModel with _$RouteModel {
     @JsonKey(fromJson: convertToDouble) double plannedPickupSize3,
     BaseUnitModel size1AliasConfig,
     BaseUnitModel size3AliasConfig,
+    ProactiveRouteOptConfigModel proactiveRouteOptConfig,
     bool onRoute,
   }) = _RouteModel;
+
+  @late
+  bool get isUsingPro => proactiveRouteOptConfig != null;
 
   factory RouteModel.fromJson(Map<String, dynamic> json) =>
       _$RouteModelFromJson(json);

@@ -70,7 +70,7 @@ class StopListTile extends StatelessWidget {
               ],
             ),
           ),
-          if (isPendingStop(stop)) StopListTileBottom(stop: stop),
+          if (stop.isPending) StopListTileBottom(stop: stop),
         ],
       ),
     );
