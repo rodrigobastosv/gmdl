@@ -16,7 +16,8 @@ class NotificationCubit extends Cubit<NotificationState> {
 
       _firebaseMessaging.configure(
         onMessage: (message) {
-          emit(NotificationReceived(message));
+          var data = message['data'] ?? message;
+          emit(NotificationReceived(data));
           return;
         },
       );
