@@ -72,4 +72,6 @@ abstract class StopModel implements _$StopModel {
   bool get hasBeenArrived => actualArrival != null;
 
   bool get hasNotBeenArrived => actualArrival == null;
+
+  bool get hasNotBeenDeparted => actualDeparture == null;
 }
