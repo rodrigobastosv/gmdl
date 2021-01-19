@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../../core/repository/sign_in_repository.dart';
-import '../../core/store/store_provider.dart';
+import '../../core/store/store.dart';
 import 'sign_in_view.dart';
 
 class SignInPage extends StatelessWidget {
@@ -13,7 +13,7 @@ class SignInPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => SignInCubit(
         repository: context.read<SignInRepository>(),
-        storeProvider: context.read<StoreProvider>(),
+        store: context.read<Store>(),
       ),
       child: SignInView(),
     );

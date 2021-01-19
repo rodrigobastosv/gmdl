@@ -4,27 +4,27 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../repository/initial_setup_repository.dart';
-import '../../store/store_provider.dart';
+import '../../store/store.dart';
 
 part 'initial_settings_state.dart';
 
 class InitialSettingsCubit extends Cubit<InitialSettingsState> {
   InitialSettingsCubit({
     @required InitialSetupRepository repository,
-    @required this.storeProvider,
+    @required this.store,
   })  : assert(repository != null),
-        assert(storeProvider != null),
+        assert(store != null),
         _repository = repository,
         super(ServerValidationInitial());
 
   final InitialSetupRepository _repository;
-  final StoreProvider storeProvider;
+  final Store store;
 
   Future<void> validateServerName(String serverName) async {
     try {
       final serverValidated = await _repository.validateServerName(serverName);
       if (serverValidated) {
-        storeProvider.changeServerName(serverName);
+        store.changeServerName(serverName);
         emit(ServerValidationSuccess());
       } else {
         emit(

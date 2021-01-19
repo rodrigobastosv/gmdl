@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/repository/repositories.dart';
-import '../../core/store/store_provider.dart';
+import '../../core/store/store.dart';
 import 'load_route_view.dart';
 
 class LoadRoutePage extends StatelessWidget {
@@ -15,7 +15,7 @@ class LoadRoutePage extends StatelessWidget {
     return BlocProvider<LoadRouteCubit>(
       create: (_) => LoadRouteCubit(
         repository: context.read<RouteRepository>(),
-        storeProvider: context.read<StoreProvider>(),
+        store: context.read<Store>(),
       )..fetchRouteInformation(),
       child: const LoadRouteView(),
     );

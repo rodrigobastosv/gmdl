@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/repository/repositories.dart';
-import '../../core/store/store_provider.dart';
+import '../../core/store/store.dart';
 import 'load_info_view.dart';
 
 class LoadInfoPage extends StatelessWidget {
@@ -20,7 +20,7 @@ class LoadInfoPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => LoadInfoCubit(
         repository: context.read<LoadingInfoRepository>(),
-        storeProvider: context.read<StoreProvider>(),
+        store: context.read<Store>(),
       )..getDriverInfo(username),
       child: const LoadInfoView(),
     );

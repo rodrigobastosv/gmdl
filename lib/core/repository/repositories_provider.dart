@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../store/store_provider.dart';
+import '../store/store.dart';
 import 'client/utils.dart';
 import 'loading_info_repository.dart';
 import 'repositories.dart';
 import 'sign_in_repository.dart';
 
-List<RepositoryProvider> getRepositoryProviders(StoreProvider store) {
+List<RepositoryProvider> getRepositoryProviders(Store store) {
   final serverName = store.serverName;
   final sessionId = store.sessionId;
   return [

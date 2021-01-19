@@ -9,35 +9,35 @@ import '../../exception/exceptions.dart';
 import '../../extension/datetime_extensions.dart';
 import '../../repository/stop_repository.dart';
 import '../../selector/route_selectors.dart';
-import '../../store/store_provider.dart';
+import '../../store/store.dart';
 import '../../utils/utils.dart';
 import '../route/route_cubit.dart';
 
 part 'stop_state.dart';
 
 class StopCubit extends Cubit<StopState> {
-  StopCubit(
-      {@required this.stop,
-      @required StopRepository repository,
-      @required RouteCubit routeCubit,
-      @required StoreProvider storeProvider})
-      : assert(stop != null),
+  StopCubit({
+    @required this.stop,
+    @required StopRepository repository,
+    @required RouteCubit routeCubit,
+    @required Store store,
+  })  : assert(stop != null),
         assert(repository != null),
         assert(routeCubit != null),
-        assert(storeProvider != null),
+        assert(store != null),
         _repository = repository,
         _routeCubit = routeCubit,
-        _storeProvider = storeProvider,
+        _store = store,
         super(StopInitial());
 
   StopModel stop;
   final StopRepository _repository;
   final RouteCubit _routeCubit;
-  final StoreProvider _storeProvider;
+  final Store _store;
 
-  List<CancelCodeModel> get allCancelCodes => _storeProvider.cancelCodes;
+  List<CancelCodeModel> get allCancelCodes => _store.cancelCodes;
   List<UndeliverableCodeModel> get allUndeliveableCodes =>
-      _storeProvider.undeliverableCodes;
+      _store.undeliverableCodes;
 
   Future<void> arriveStop() async {
     final route = _routeCubit.route;

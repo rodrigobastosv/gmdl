@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
@@ -8,8 +10,9 @@ import '../../entity/model/models.dart';
 import '../../extension/datetime_extensions.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
-import '../../store/store_provider.dart';
+import '../../store/store.dart';
 import '../../utils/route_utils.dart';
+import '../cubits.dart';
 
 part 'route_state.dart';
 
@@ -17,17 +20,37 @@ class RouteCubit extends Cubit<RouteState> {
   RouteCubit({
     @required this.route,
     @required RouteRepository repository,
-    @required this.storeProvider,
+    @required this.store,
+    @required NotificationCubit notificationCubit,
   })  : assert(repository != null),
-        assert(storeProvider != null),
+        assert(store != null),
+        assert(notificationCubit != null),
         _repository = repository,
+        _notificationCubit = notificationCubit,
         super(RouteInitial());
 
-  RouteModel route;
   final RouteRepository _repository;
-  final StoreProvider storeProvider;
+  final Store store;
+  final NotificationCubit _notificationCubit;
+  RouteModel route;
+  StreamSubscription<NotificationState> _notificationSubscription;
 
-  String get driverName => storeProvider.driverInfo.name;
+  String get driverName => store.driverInfo.name;
+
+  void initNotifications() {
+    _notificationSubscription = _notificationCubit.listen((state) {
+      if (state is NotificationReceived) {
+        print('Process notification!');
+      }
+    });
+    emit(RouteBeginListenNotifications());
+  }
+
+  @override
+  Future<void> close() {
+    _notificationSubscription.cancel();
+    return super.close();
+  }
 
   Future<void> startRoute() async {
     try {
