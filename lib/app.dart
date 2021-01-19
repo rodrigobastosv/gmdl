@@ -21,7 +21,8 @@ class App extends StatelessWidget {
         context.watch<Store>(),
       ),
       child: BlocProvider<NotificationCubit>(
-        create: (_) => NotificationCubit(FirebaseMessaging()),
+        create: (_) =>
+            NotificationCubit(FirebaseMessaging.instance)..initNotifications(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: alice.getNavigatorKey(),

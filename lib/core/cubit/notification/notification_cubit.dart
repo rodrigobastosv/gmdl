@@ -14,13 +14,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     try {
       fcmToken = await _firebaseMessaging.getToken();
 
-      _firebaseMessaging.configure(
-        onMessage: (message) {
-          final data = message['data'] ?? message;
-          emit(NotificationReceived(data));
-          return;
-        },
-      );
+      FirebaseMessaging.onMessage.listen((message) {
+        emit(
+          NotificationReceived(
+            id: message.messageId,
+            data: message.data,
+          ),
+        );
+      });
 
       _firebaseMessaging.onTokenRefresh.listen((token) async {
         fcmToken = token;

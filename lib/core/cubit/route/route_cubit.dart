@@ -37,6 +37,8 @@ class RouteCubit extends Cubit<RouteState> {
 
   String get driverName => store.driverInfo.name;
 
+  String get token => _notificationCubit.fcmToken;
+
   void initNotifications() {
     _notificationSubscription = _notificationCubit.listen((state) {
       if (state is NotificationReceived) {
