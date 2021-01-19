@@ -38,7 +38,9 @@ class StopView extends StatelessWidget {
     if (state is DepartedStopSuccess) {
       Navigator.of(context).pop();
     }
-    if (state is CanceledStopSuccess || state is UndeliveredStopSuccess) {
+    if (state is CanceledStopSuccess ||
+        state is UndeliveredStopSuccess ||
+        state is RedeliveredStopSuccess) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => BlocProvider.value(
@@ -62,7 +64,7 @@ class StopView extends StatelessWidget {
 
   Future<void> _onPressedButton(StopCubit cubit) async {
     final stop = cubit.stop;
-    if (stop.isFinished || stop.isCanceled || stop.isUndeliverable) {
+    if (stop.canClone) {
       await cubit.cloneStop();
     } else if (stop.hasBeenArrived) {
       await cubit.departStop();
@@ -73,7 +75,7 @@ class StopView extends StatelessWidget {
 
   Widget _getMainButtonIcon(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished || stop.isCanceled || stop.isUndeliverable) {
+    if (stop.canClone) {
       return SvgPicture.asset('assets/icons/clone-stop.svg');
     } else {
       return SvgPicture.asset('assets/icons/driving.svg');
@@ -82,7 +84,7 @@ class StopView extends StatelessWidget {
 
   String _getMainButtonLabel(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.isFinished || stop.isCanceled || stop.isUndeliverable) {
+    if (stop.canClone) {
       return 'CLONE';
     } else if (stop.hasBeenArrived) {
       return 'LEAVE';
@@ -110,7 +112,7 @@ class StopView extends StatelessWidget {
             );
           },
         ),
-      if (!stop.isUndeliverable && stop.hasBeenArrived)
+      if (!stop.isUndeliverable && stop.hasBeenArrived) ...[
         GMMenuOption(
           text: 'Uncompleted',
           icon: 'undeliverable',
@@ -125,6 +127,21 @@ class StopView extends StatelessWidget {
             );
           },
         ),
+        GMMenuOption(
+          text: 'Redeliver',
+          icon: 'redeliver',
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: cubit,
+                  child: const ChooseRedeliverCodePage(),
+                ),
+              ),
+            );
+          },
+        ),
+      ]
     ];
   }
 }

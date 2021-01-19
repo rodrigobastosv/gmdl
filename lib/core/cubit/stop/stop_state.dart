@@ -90,3 +90,27 @@ class UndeliveredStopFailed extends StopState {
         errorMessage,
       ];
 }
+
+class RedeliveringStop extends StopState {}
+
+class RedeliveredStopSuccess extends StopState {
+  RedeliveredStopSuccess(this.newStop);
+
+  final StopModel newStop;
+
+  @override
+  List<Object> get props => [
+        newStop.id,
+      ];
+}
+
+class RedeliveredStopFailed extends StopState {
+  RedeliveredStopFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}

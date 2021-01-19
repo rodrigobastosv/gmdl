@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
@@ -9,6 +8,7 @@ import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/utils.dart';
 import '../../../widget/stop/stop_sizes.dart';
 import '../../pages.dart';
+import 'stop_icon.dart';
 import 'stop_list_tile_bottom.dart';
 
 class StopListTile extends StatelessWidget {
@@ -39,21 +39,7 @@ class StopListTile extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Stack(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: const Color(0xFF464646),
-                          child: Text(
-                            stop.plannedSequenceNum.toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        _getStopStatusIcon(stop),
-                      ],
-                    ),
+                    StopIcon(stop: stop),
                     const SizedBox(height: 6),
                     Text(
                       getBasicDateHourMinute(stop.plannedArrival),
@@ -88,40 +74,5 @@ class StopListTile extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _getStopStatusIcon(StopModel stop) {
-    if (stop.isCloned) {
-      return Positioned(
-        bottom: -2,
-        left: -2,
-        child: SvgPicture.asset(
-          'assets/icons/stop-cloned.svg',
-          height: 18,
-          width: 18,
-        ),
-      );
-    } else if (stop.isCanceled) {
-      return Positioned(
-        bottom: -2,
-        left: -2,
-        child: SvgPicture.asset(
-          'assets/icons/canceled.svg',
-          height: 18,
-          width: 18,
-        ),
-      );
-    } else if (stop.isUndeliverable) {
-      return Positioned(
-        bottom: -2,
-        left: -2,
-        child: SvgPicture.asset(
-          'assets/icons/stop-undelivered.svg',
-          height: 18,
-          width: 18,
-        ),
-      );
-    }
-    return const SizedBox();
   }
 }

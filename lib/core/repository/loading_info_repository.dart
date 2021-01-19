@@ -86,7 +86,8 @@ class LoadingInfoRepository {
 
   Future<List<UndeliverableCodeModel>> fetchUndeliverableCodes() async {
     try {
-      final response = await _client.post('/$UNDELIVERABLE_CODE/$FILTER', data: {
+      final response =
+          await _client.post('/$UNDELIVERABLE_CODE/$FILTER', data: {
         'enabled': true,
       });
       final responseData = handleResponse(response) as List;

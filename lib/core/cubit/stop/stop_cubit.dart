@@ -8,6 +8,7 @@ import '../../entity/model/models.dart';
 import '../../exception/exceptions.dart';
 import '../../extension/datetime_extensions.dart';
 import '../../repository/stop_repository.dart';
+import '../../selector/route_selectors.dart';
 import '../../store/store_provider.dart';
 import '../../utils/utils.dart';
 import '../route/route_cubit.dart';
@@ -99,7 +100,7 @@ class StopCubit extends Cubit<StopState> {
     }
   }
 
-  Future<void> cancelStop(int cancelCode) async {
+  Future<void> cancelStop(CancelCodeModel cancelCode) async {
     final route = _routeCubit.route;
     try {
       emit(CancellingStop());
@@ -107,10 +108,13 @@ class StopCubit extends Cubit<StopState> {
       await _repository.cancelStop(
         routeId: route.id,
         actualCancel: actualCancel,
-        cancelCode: cancelCode,
+        cancelCode: cancelCode.id,
         stopKey: stop.key,
       );
-      stop = stop.copyWith(canceled: true);
+      stop = stop.copyWith(
+        canceled: true,
+        cancelCode: cancelCode,
+      );
       emit(CanceledStopSuccess(stop));
       _routeCubit.updateRouteDueStopChange(stop);
     } on CancelStopException catch (e) {
@@ -129,11 +133,48 @@ class StopCubit extends Cubit<StopState> {
         actualDeparture: actualDeparture,
         stopKey: stop.key,
       );
-      stop = stop.copyWith(undeliverableCode: undeliverableCode);
+      stop = stop.copyWith(
+        actualDeparture: actualDeparture,
+        undeliverableCode: undeliverableCode,
+      );
       emit(UndeliveredStopSuccess(stop));
       _routeCubit.updateRouteDueStopChange(stop);
     } on CancelStopException catch (e) {
       emit(UndeliveredStopFailed(e.errorMessage));
+    }
+  }
+
+  Future<void> redeliverStop(UndeliverableCodeModel undeliverableCode) async {
+    final route = _routeCubit.route;
+    try {
+      emit(RedeliveringStop());
+      final newStopKey = generateNewStopKey();
+      final actualDeparture = DateTime.now().toUtcAsString;
+      _repository.redeliverStop(
+        routeId: route.id,
+        undeliverableCode: undeliverableCode.id,
+        actualDeparture: actualDeparture,
+        undeliveredStopKey: stop.key,
+        newStopKey: newStopKey,
+      );
+      final lastStopById = getLastStopOrderedById(route);
+      final lastPlannedStop = getLastPlannedStop(route);
+      final stopToRedeliver = stop.copyWith(
+        id: lastStopById.id + 1,
+        key: newStopKey,
+        plannedSequenceNum: lastPlannedStop.plannedSequenceNum + 1,
+        actualArrival: null,
+      );
+      _routeCubit.updateRouteDueRedeliverStop(stopToRedeliver);
+      stop = stop.copyWith(
+        actualDeparture: actualDeparture,
+        undeliverableCode: undeliverableCode,
+        redeliveryStop: stopToRedeliver,
+      );
+      _routeCubit.updateRouteDueStopChange(stop);
+      emit(RedeliveredStopSuccess(stop));
+    } on CancelStopException catch (e) {
+      emit(RedeliveredStopFailed(e.errorMessage));
     }
   }
 }

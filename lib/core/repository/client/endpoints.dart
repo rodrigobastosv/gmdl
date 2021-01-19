@@ -17,6 +17,7 @@ const DEPART = 'Depart';
 const CLONE = 'Clone';
 const CANCEL = 'Cancel';
 const RETURN = 'Return';
+const REDELIVERY = 'Redelivery';
 const DEPART_ORIGIN = 'DepartOrigin';
 const GLOBAL_CONFIGURATION = 'GlobalConfiguration';
 const CONFIGURATION = 'Configuration';
