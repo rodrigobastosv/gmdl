@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../entity/dto/dtos.dart';
 import '../entity/model/models.dart';
 
-class StoreProvider extends ChangeNotifier {
+class Store extends ChangeNotifier {
   String serverName;
   String sessionId;
   DriverInfoDto driverInfo;

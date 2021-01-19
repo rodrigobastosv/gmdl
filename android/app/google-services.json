@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "347426474331",
+    "project_id": "gm-driver-lite",
+    "storage_bucket": "gm-driver-lite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347426474331:android:d1919f570e1c032e72727e",
+        "android_client_info": {
+          "package_name": "com.greenmile.gm_driver_lite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347426474331-2488rnprk4jf5v6gs3sqrrdchsph5jfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaD5uxDagZWFbxT8JSPV7eevUSngbMGXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347426474331-2488rnprk4jf5v6gs3sqrrdchsph5jfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/cubit/cubits.dart';
 import '../../core/repository/client/utils.dart';
 import '../../core/repository/initial_setup_repository.dart';
-import '../../core/store/store_provider.dart';
+import '../../core/store/store.dart';
 import 'initial_settings_view.dart';
 
 class InitialSettingsPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class InitialSettingsPage extends StatelessWidget {
         repository: InitialSetupRepository(
           getBasicClient(),
         ),
-        storeProvider: context.read<StoreProvider>(),
+        store: context.read<Store>(),
       ),
       child: InitialSettingsView(),
     );

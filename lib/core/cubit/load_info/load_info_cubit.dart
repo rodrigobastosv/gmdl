@@ -4,21 +4,21 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../repository/repositories.dart';
-import '../../store/store_provider.dart';
+import '../../store/store.dart';
 
 part 'load_info_state.dart';
 
 class LoadInfoCubit extends Cubit<LoadInfoState> {
   LoadInfoCubit({
     @required LoadingInfoRepository repository,
-    @required this.storeProvider,
+    @required this.store,
   })  : assert(repository != null),
-        assert(storeProvider != null),
+        assert(store != null),
         _repository = repository,
         super(LoadingInitial());
 
   final LoadingInfoRepository _repository;
-  final StoreProvider storeProvider;
+  final Store store;
 
   Future<void> getDriverInfo(String username) async {
     emit(InfoLoading('Loading Basic User Information'));
@@ -42,7 +42,7 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
       final undeliverableCodes = await _repository.fetchUndeliverableCodes();
       emit(FetchUndeliverableCodesSuccess());
 
-      storeProvider.storeGeneralInfo(
+      store.storeGeneralInfo(
         driverInfo: driverInfo,
         globalConfigurations: globalConfigurations,
         userConfigurations: userConfigurations,

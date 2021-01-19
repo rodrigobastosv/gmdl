@@ -84,3 +84,5 @@ class CompletingRoute extends RouteState {}
 class RouteCompletedSuccess extends RouteState {}
 
 class RouteCompletedFailed extends RouteState {}
+
+class RouteBeginListenNotifications extends RouteState {}

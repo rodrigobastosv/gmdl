@@ -6,7 +6,7 @@ import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
 import '../../core/entity/model/models.dart';
 import '../../core/repository/repositories.dart';
-import '../../core/store/store_provider.dart';
+import '../../core/store/store.dart';
 import 'stop_view.dart';
 
 class StopPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class StopPage extends StatelessWidget {
         stop: stop,
         repository: context.read<StopRepository>(),
         routeCubit: context.read<RouteCubit>(),
-        storeProvider: context.read<StoreProvider>(),
+        store: context.read<Store>(),
       ),
       child: const StopView(),
     );

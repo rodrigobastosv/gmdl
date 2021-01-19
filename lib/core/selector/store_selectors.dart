@@ -1,9 +1,9 @@
 import '../entity/enum/enums.dart';
 import '../entity/model/undeliverable_code_model.dart';
-import '../store/store_provider.dart';
+import '../store/store.dart';
 
 List<UndeliverableCodeModel> getUndeliverableAndRedeliveryReasons(
-        StoreProvider store) =>
+        Store store) =>
     store.undeliverableCodes;
 
 List<UndeliverableCodeModel> getRedeliveryReasons(

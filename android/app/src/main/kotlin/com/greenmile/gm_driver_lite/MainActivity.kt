@@ -1,4 +1,4 @@
-package com.example.gm_driver_lite
+package com.greenmile.gm_driver_lite
 
 import io.flutter.embedding.android.FlutterActivity
 

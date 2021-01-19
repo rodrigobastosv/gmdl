@@ -6,21 +6,21 @@ import 'package:equatable/equatable.dart';
 import '../../entity/dto/login_result_dto.dart';
 import '../../exception/exceptions.dart';
 import '../../repository/sign_in_repository.dart';
-import '../../store/store_provider.dart';
+import '../../store/store.dart';
 
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit({
     @required SignInRepository repository,
-    @required this.storeProvider,
+    @required this.store,
   })  : assert(repository != null),
-        assert(storeProvider != null),
+        assert(store != null),
         _repository = repository,
         super(SignInInitial());
 
   final SignInRepository _repository;
-  final StoreProvider storeProvider;
+  final Store store;
 
   Future<void> signInUser({
     String serverName,
@@ -34,7 +34,7 @@ class SignInCubit extends Cubit<SignInState> {
         password: password,
       );
       final loginResult = LoginResultDTO.fromJson(username, signInResponse);
-      storeProvider.storeSessionId(loginResult.jSessionId);
+      store.storeSessionId(loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
     } on SignInException catch (e) {
       emit(UserSigningFailed(e.errorMessage));
