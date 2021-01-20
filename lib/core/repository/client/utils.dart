@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
@@ -56,4 +58,8 @@ dynamic handleResponse(Response response) {
 
 String getErrorMessage(DioError dioError) {
   return dioError.response.data['message'];
+}
+
+String getCriteria(dynamic criteria) {
+  return jsonEncode(criteria);
 }

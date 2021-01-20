@@ -14,9 +14,9 @@ class EntityRepository {
       final response = await _client.post(
         '/$STOP_TYPE/$FILTER',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: stopTypeFilters,
-          },
+          }),
         },
         data: {},
       );

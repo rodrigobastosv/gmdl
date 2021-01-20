@@ -15,10 +15,10 @@ class EquipmentRepository {
       final response = await _client.post(
         '/$EQUIPMENT/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: equipmentFilters,
             MAX_RESULTS: 51,
-          },
+          }),
         },
         data: {
           CRITERIA_CHAIN: [

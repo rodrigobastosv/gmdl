@@ -19,11 +19,11 @@ class LoadingInfoRepository {
       final response = await _client.post(
         '/$DRIVER/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: driverFilters,
             FIRST_RESULT: 0,
             MAX_RESULTS: 51,
-          },
+          }),
         },
         data: {
           CRITERIA_CHAIN: [
@@ -147,9 +147,9 @@ class LoadingInfoRepository {
       final response = await _client.post(
         '/$GLOBAL_CONFIGURATION/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: globalConfigurationFilters,
-          },
+          }),
         },
       );
       final globalConfigs = handleResponse(response) as List;

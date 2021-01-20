@@ -61,11 +61,11 @@ class RouteCubit extends Cubit<RouteState> {
       await _repository.startRoute(route.id);
       route = route.copyWith(status: RouteStatus.STARTED);
 
-      /*final proConfig = await _repository.fetchProConfig(route.id);
+      final proConfig = await _repository.fetchProConfig(route.id);
       if (proConfig != null) {
         route = route.copyWith(proactiveRouteOptConfig: proConfig);
         emit(ProConfigAppliedToRoute(proConfig));
-      }*/
+      }
 
       emit(RouteStartedSuccess());
     } on Exception {

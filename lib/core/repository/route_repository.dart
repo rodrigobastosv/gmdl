@@ -19,10 +19,10 @@ class RouteRepository {
       final response = await _client.post(
         '/$ROUTE_VIEW/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: routeViewFilters,
             MAX_RESULTS: 51,
-          },
+          }),
         },
         data: {
           SORT: [
@@ -92,11 +92,11 @@ class RouteRepository {
   Future<ProactiveRouteOptConfigModel> fetchProConfig(int routeId) async {
     try {
       final response = await _client.post(
-        '/$ROUTE',
+        '/$ROUTE/$RESTRICTIONS',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: proConfigFilters,
-          },
+          }),
         },
         data: {
           CRITERIA_CHAIN: [
@@ -110,8 +110,11 @@ class RouteRepository {
       );
       final responseDataList = handleResponse(response) as List;
       final responseData = responseDataList[0];
-      return ProactiveRouteOptConfigModel.fromJson(
-          responseData['proactiveRouteOptConfig']);
+      final proactiveRouteOptConfigData =
+          responseData['proactiveRouteOptConfig'];
+      return proactiveRouteOptConfigData != null
+          ? ProactiveRouteOptConfigModel.fromJson(proactiveRouteOptConfigData)
+          : null;
     } on DioError catch (e) {
       throw StartRouteException(getErrorMessage(e));
     } on GMServerException catch (e) {

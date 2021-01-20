@@ -61,9 +61,9 @@ class StopRepository {
       final response = await _client.post(
         '/$STOP/${stop.key}/$ROUTE/$routeId/$CLONE',
         queryParameters: {
-          CRITERIA: {
+          CRITERIA: getCriteria({
             FILTERS: cloneStopFilters,
-          },
+          }),
         },
         data: {
           'key': generateCloneStopKey(),

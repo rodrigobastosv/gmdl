@@ -1,21 +1,25 @@
-class RouteDTO {
-  String key;
-  String date;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  RouteDTO({
-    this.key,
-    this.date,
-  });
+part 'route_dto.freezed.dart';
+part 'route_dto.g.dart';
 
-  RouteDTO.fromJson(Map<String, dynamic> json) {
-    key = json['key'];
-    date = json['date'];
-  }
+@freezed
+abstract class RouteDTO with _$RouteDTO {
+  factory RouteDTO({
+    int id,
+    String key,
+    String description,
+    String date,
+    Map<String, dynamic> organization,
+    Map<String, dynamic> origin,
+    String plannedStart,
+    bool hasSurveyApplied,
+    int totalStops,
+    String status,
+    bool hasPicture,
+    bool onRoute,
+  }) = _RouteDTO;
 
-  Map<String, dynamic> toJson() {
-    final data = {};
-    data['key'] = key;
-    data['date'] = date;
-    return data;
-  }
+  factory RouteDTO.fromJson(Map<String, dynamic> json) =>
+      _$RouteDTOFromJson(json);
 }

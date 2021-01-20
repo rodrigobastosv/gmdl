@@ -33,7 +33,7 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
       routeViewInfo = await _repository.fetchRouteView(username);
       emit(const LoadingInfo('Loading Route'));
 
-      final dataLoad = await _repository.fetchRoute(routeViewInfo.id);
+      final dataLoad = await _repository.fetchRoute(routeViewInfo.route.id);
       final featureStates =
           FeatureStateModel.fromJsonList(dataLoad['featureStates']);
       store.featureStates = featureStates;
