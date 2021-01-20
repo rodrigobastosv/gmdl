@@ -22,7 +22,7 @@ class LoadInfoView extends StatelessWidget {
 
   void _listener(BuildContext context, LoadInfoState state) {
     if (state is AllInfoLoadedSuccess) {
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const ChooseEquipmentPage(),
         ),

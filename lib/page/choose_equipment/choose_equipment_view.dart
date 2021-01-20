@@ -14,25 +14,32 @@ class ChooseEquipmentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GMScaffold(
-      backgroundColor: const Color(0xFF24242A),
-      withNavigationBar: true,
-      title: 'EQUIPMENT SELECTION',
-      body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
-        listener: _listener,
-        builder: _builder,
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).pop();
+        return true;
+      },
+      child: GMScaffold(
+        backgroundColor: const Color(0xFF24242A),
+        withNavigationBar: true,
+        withBackButton: false,
+        title: 'EQUIPMENT SELECTION',
+        body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
+          listener: _listener,
+          builder: _builder,
+        ),
+        mainActionButton: FloatingActionButton(
+          onPressed: () {
+            final _form = _formKey.currentState;
+            if (_form.validate()) {
+              _form.save();
+            }
+          },
+          child: SvgPicture.asset('assets/icons/route.svg'),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        mainActionButtonLabel: 'LOAD ROUTE',
       ),
-      mainActionButton: FloatingActionButton(
-        onPressed: () {
-          final _form = _formKey.currentState;
-          if (_form.validate()) {
-            _form.save();
-          }
-        },
-        child: SvgPicture.asset('assets/icons/route.svg'),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      mainActionButtonLabel: 'LOAD ROUTE',
     );
   }
 

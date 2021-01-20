@@ -51,11 +51,15 @@ abstract class StopModel implements _$StopModel {
   }) = _StopModel;
 
   @late
+  bool get stopHadActionPerformed =>
+      isCloned || isCanceled || isRedelivered || isUndeliverable;
+
+  @late
   bool get canClone =>
       !isCloned && (isFinished || isCanceled || isUndeliverable);
 
   @late
-  bool get isPending => hasNotBeenArrived && !isCanceled;
+  bool get isPending => hasNotBeenDeparted && !isCanceled;
 
   @late
   bool get isDone => !isPending;
@@ -80,6 +84,9 @@ abstract class StopModel implements _$StopModel {
 
   @late
   bool get hasNotBeenArrived => actualArrival == null;
+
+  @late
+  bool get hasNotBeenDeparted => actualDeparture == null;
 
   factory StopModel.fromJson(Map<String, dynamic> json) =>
       _$StopModelFromJson(json);

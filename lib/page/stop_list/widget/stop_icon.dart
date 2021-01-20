@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
-import 'done_stop_status_icon.dart';
+import '../../../core/utils/utils.dart';
 import 'pending_stop_status_icon.dart';
 
 class StopIcon extends StatelessWidget {
@@ -27,9 +27,13 @@ class StopIcon extends StatelessWidget {
                   ),
                 ),
               ),
-              PendingStopStatusIcon(stop: stop),
+              if (stop.stopHadActionPerformed)
+                PendingStopStatusIcon(stop: stop),
             ],
           )
-        : DoneStopStatusIcon(stop: stop);
+        : getStopWidget(
+            isRouteFinished: false,
+            stop: stop,
+          );
   }
 }

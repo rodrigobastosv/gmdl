@@ -1,4 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../entity/model/models.dart';
 import 'utils.dart';
@@ -35,6 +38,37 @@ String getPendingStopStatusIconAsset(StopModel stop) {
     return 'assets/icons/stop-undelivered.svg';
   }
   return '';
+}
+
+Widget getStopWidget({
+  bool isRouteFinished,
+  StopModel stop,
+}) {
+  if (stop.stopHadActionPerformed) {
+    return SvgPicture.asset(
+      getDoneStopStatusIconAsset(stop),
+      height: 32,
+      width: 32,
+    );
+  } else {
+    if (isRouteFinished) {
+      return SvgPicture.asset(
+        'assets/icons/circled-checkmark.svg',
+        height: 32,
+        width: 32,
+      );
+    }
+    return CircleAvatar(
+      backgroundColor: const Color(0xFF464646),
+      child: Text(
+        stop.plannedSequenceNum.toString(),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
 }
 
 String getDoneStopStatusIconAsset(StopModel stop) {

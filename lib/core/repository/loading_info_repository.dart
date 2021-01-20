@@ -86,15 +86,21 @@ class LoadingInfoRepository {
     String moduleKey,
   }) async {
     try {
-      _client.post('/$MOBILE_DEVICE/$deviceId/$BIND_MODULE', queryParameters: {
-        'returnEntity': true,
-      }, data: {
-        'appVersion': appVersion,
-        'module': {
-          'key': moduleKey,
-        }
-      });
-    } on DioError {} on GMServerException {}
+      _client.post(
+        '/$MOBILE_DEVICE/$deviceId/$BIND_MODULE',
+        queryParameters: {
+          'returnEntity': true,
+        },
+        data: {
+          'appVersion': appVersion,
+          'module': {
+            'key': moduleKey,
+          }
+        },
+      );
+    } on Exception {
+      rethrow;
+    }
   }
 
   Future<void> fetchAppVersion({
@@ -102,7 +108,9 @@ class LoadingInfoRepository {
   }) async {
     try {
       _client.get('/$MOBILE_VERSION/$DEVICE/$deviceId');
-    } on DioError {} on GMServerException {}
+    } on Exception {
+      rethrow;
+    }
   }
 
   Future<void> logDevice({
@@ -129,10 +137,8 @@ class LoadingInfoRepository {
           },
         },
       );
-    } on DioError catch (e) {
-      throw SignInException(getErrorMessage(e));
-    } on GMServerException catch (e) {
-      throw SignInException(e.errorMessage);
+    } on Exception {
+      rethrow;
     }
   }
 
@@ -166,9 +172,12 @@ class LoadingInfoRepository {
 
   Future<List<CancelCodeModel>> fetchCancelCodes() async {
     try {
-      final response = await _client.post('/$CANCEL_CODE/$FILTER', data: {
-        'enabled': true,
-      });
+      final response = await _client.post(
+        '/$CANCEL_CODE/$FILTER',
+        data: {
+          'enabled': true,
+        },
+      );
       final responseData = handleResponse(response) as List;
       return List.generate(responseData.length,
           (i) => CancelCodeModel.fromJson(responseData[i]));
@@ -179,10 +188,12 @@ class LoadingInfoRepository {
 
   Future<List<UndeliverableCodeModel>> fetchUndeliverableCodes() async {
     try {
-      final response =
-          await _client.post('/$UNDELIVERABLE_CODE/$FILTER', data: {
-        'enabled': true,
-      });
+      final response = await _client.post(
+        '/$UNDELIVERABLE_CODE/$FILTER',
+        data: {
+          'enabled': true,
+        },
+      );
       final responseData = handleResponse(response) as List;
       return List.generate(responseData.length,
           (i) => UndeliverableCodeModel.fromJson(responseData[i]));

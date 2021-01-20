@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:device_info/device_info.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../constants.dart';
 import '../../repository/repositories.dart';
 import '../../store/store.dart';
 
@@ -45,7 +46,7 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
       await _repository.bindModule(
         deviceId: mobileDevice.id,
         appVersion: '1.0.0',
-        moduleKey: 'GreenMileDriver7',
+        moduleKey: moduleKey,
       );
 
       emit(InfoLoading('Logging Device'));

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/utils/utils.dart';
 
 class FinishedStopListTile extends StatelessWidget {
   FinishedStopListTile(this.stop);
@@ -17,28 +18,9 @@ class FinishedStopListTile extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: const Color(0xFF464646),
-                    child: Text(
-                      stop.plannedSequenceNum.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Text(
-                    //stop.plannedArrival.substring(0, 6),
-                    '01: 04 PM',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF464646),
-                    ),
-                  ),
-                ],
+              getStopWidget(
+                isRouteFinished: true,
+                stop: stop,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 14),
