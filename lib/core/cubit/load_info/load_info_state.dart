@@ -11,6 +11,17 @@ class LoadingInitial extends LoadInfoState {}
 
 class BasicDriverInfoSuccess extends LoadInfoState {}
 
+class RegisterDeviceSuccess extends LoadInfoState {
+  RegisterDeviceSuccess(this.deviceId);
+
+  final int deviceId;
+
+  @override
+  List<Object> get props => [
+        deviceId,
+      ];
+}
+
 class AllInfoLoadedSuccess extends LoadInfoState {}
 
 class FetchGlobalConfigSuccess extends LoadInfoState {}

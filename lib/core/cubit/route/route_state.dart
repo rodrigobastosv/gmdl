@@ -86,3 +86,14 @@ class RouteCompletedSuccess extends RouteState {}
 class RouteCompletedFailed extends RouteState {}
 
 class RouteBeginListenNotifications extends RouteState {}
+
+class ProConfigAppliedToRoute extends RouteState {
+  ProConfigAppliedToRoute(this.proConfig);
+
+  final ProactiveRouteOptConfigModel proConfig;
+
+  @override
+  List<Object> get props => [
+        proConfig.id,
+      ];
+}

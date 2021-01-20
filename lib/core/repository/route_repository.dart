@@ -89,6 +89,36 @@ class RouteRepository {
     }
   }
 
+  Future<ProactiveRouteOptConfigModel> fetchProConfig(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$ROUTE',
+        queryParameters: {
+          CRITERIA: {
+            FILTERS: proConfigFilters,
+          },
+        },
+        data: {
+          CRITERIA_CHAIN: [
+            {
+              AND: [
+                {ATTR: 'id', EQUAL: routeId},
+              ]
+            }
+          ]
+        },
+      );
+      final responseDataList = handleResponse(response) as List;
+      final responseData = responseDataList[0];
+      return ProactiveRouteOptConfigModel.fromJson(
+          responseData['proactiveRouteOptConfig']);
+    } on DioError catch (e) {
+      throw StartRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw StartRouteException(e.errorMessage);
+    }
+  }
+
   Future<bool> departOrigin(int routeId) async {
     try {
       final response = await _client.post(

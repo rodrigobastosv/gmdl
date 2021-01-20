@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/cubit/cubits.dart';
+import 'core/repository/notification_repository.dart';
 import 'core/repository/repositories_provider.dart';
 import 'core/store/store.dart';
 import 'main.dart';
@@ -21,8 +22,11 @@ class App extends StatelessWidget {
         context.watch<Store>(),
       ),
       child: BlocProvider<NotificationCubit>(
-        create: (_) =>
-            NotificationCubit(FirebaseMessaging.instance)..initNotifications(),
+        create: (innerContext) => NotificationCubit(
+          firebaseMessaging: FirebaseMessaging.instance,
+          repository: innerContext.read<NotificationRepository>(),
+          store: context.read<Store>(),
+        )..initNotifications(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: alice.getNavigatorKey(),

@@ -1,20 +1,19 @@
 import '../entity/model/models.dart';
 import '../entity/model/route_model.dart';
-import '../utils/utils.dart';
 
 List<StopModel> getPendingStops(RouteModel route) {
   final routeStops = route.stops;
-  return routeStops.where(isPendingStop).toList();
+  return routeStops.where((stop) => stop.isPending).toList();
 }
 
 List<StopModel> getDoneStops(RouteModel route) {
   final routeStops = route.stops;
-  return routeStops.where(isDoneStop).toList();
+  return routeStops.where((stop) => stop.isDone).toList();
 }
 
 bool hasPendingStops(RouteModel route) {
   final routeStops = route.stops;
-  return routeStops.any(isPendingStop);
+  return routeStops.any((stop) => stop.isPending);
 }
 
 double getPlannedDistanceInKm(RouteModel route) {

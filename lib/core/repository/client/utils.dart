@@ -33,9 +33,8 @@ Dio getDefaultClient(String serverName, String sessionId) {
 
 List<Interceptor> _getBasicInterceptors() {
   if (kDebugMode) {
-    return []
-      ..add(alice.getDioInterceptor())
-      ..add(
+    return []..add(alice.getDioInterceptor());
+    /*..add(
         LogInterceptor(
           requestHeader: false,
           requestBody: false,
@@ -43,7 +42,7 @@ List<Interceptor> _getBasicInterceptors() {
           responseBody: true,
           error: true,
         ),
-      );
+      );*/
   }
   return [];
 }

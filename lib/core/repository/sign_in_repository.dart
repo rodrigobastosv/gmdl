@@ -6,9 +6,9 @@ import 'client/query_params.dart';
 import 'client/utils.dart';
 
 class SignInRepository {
-  SignInRepository(this.client);
+  SignInRepository(this._client);
 
-  final Dio client;
+  final Dio _client;
 
   Future<Map<String, dynamic>> signInUser({
     String serverUrl,
@@ -16,7 +16,7 @@ class SignInRepository {
     String password,
   }) async {
     try {
-      final response = await client.post(
+      final response = await _client.post(
         '/$SIGN_IN',
         queryParameters: {
           J_USERNAME: username,
