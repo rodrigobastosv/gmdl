@@ -68,7 +68,9 @@ class _GMScaffoldState extends State<GMScaffold> {
         ? Stack(
             fit: StackFit.passthrough,
             overflow: Overflow.visible,
-            alignment: Alignment.center,
+            alignment: widget.mainActionButtonLabel.length > 13
+                ? Alignment.centerRight
+                : Alignment.center,
             children: [
               widget.mainActionButton,
               if (widget.mainActionButtonLabel != null)
