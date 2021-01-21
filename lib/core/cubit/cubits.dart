@@ -1,3 +1,4 @@
+export 'connectivity/connectivity_cubit.dart';
 export 'initial_settings/initial_settings_cubit.dart';
 export 'load_route/load_route_cubit.dart';
 export 'load_info/load_info_cubit.dart';

@@ -40,6 +40,10 @@ dependencies:
   firebase_messaging: ^8.0.0-dev.14
   device_info: ^1.0.0
 
+  # Util
+  connectivity: ^2.0.2
+  data_connection_checker: ^0.3.4
+
   # UI
   flutter_svg: ^0.19.1
   bot_toast: ^3.0.5

@@ -13,3 +13,15 @@ void showErrorNotification(String errorMessage) {
     ),
   );
 }
+
+void showSuccessNotification(String errorMessage) {
+  BotToast.showNotification(
+    backgroundColor: Colors.green,
+    title: (_) => Text(
+      errorMessage,
+      style: const TextStyle(
+        color: Colors.white,
+      ),
+    ),
+  );
+}
