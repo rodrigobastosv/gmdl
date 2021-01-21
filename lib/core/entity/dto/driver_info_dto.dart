@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../enum/enums.dart';
+
 part 'driver_info_dto.freezed.dart';
 part 'driver_info_dto.g.dart';
 
@@ -10,8 +12,10 @@ abstract class DriverInfoDto with _$DriverInfoDto {
     String key,
     String name,
     String login,
-    String unitSystem,
-    String driverType,
+    @JsonKey(fromJson: unitSystemFromJson, toJson: unitSystemToJson)
+        UnitSystem unitSystem,
+    @JsonKey(fromJson: driverTypeFromJson, toJson: driverTypeToJson)
+        DriverType driverType,
     bool enabled,
     bool restrictEquipments,
     bool restrictDrivers,
