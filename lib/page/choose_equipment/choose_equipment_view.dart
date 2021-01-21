@@ -16,10 +16,7 @@ class ChooseEquipmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.of(context).pop();
-        return true;
-      },
+      onWillPop: () async => false,
       child: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
         listener: _listener,
         builder: _builder,
