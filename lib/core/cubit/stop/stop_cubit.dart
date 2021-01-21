@@ -43,7 +43,7 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     final actualArrival = DateTime.now().toUtcAsString;
     try {
-      await _repository.arriveStop(
+      _repository.arriveStop(
         routeId: route.id,
         stop: stop,
         actualArrival: actualArrival,
@@ -61,18 +61,14 @@ class StopCubit extends Cubit<StopState> {
     final actualDeparture = DateTime.now().toUtcAsString;
     try {
       emit(DepartingStop());
-      final departedStop = await _repository.departStop(
+      _repository.departStop(
         routeId: route.id,
         stop: stop,
         actualDeparture: actualDeparture,
       );
-      if (departedStop) {
-        stop = stop.copyWith(actualDeparture: actualDeparture);
-        _routeCubit.updateRouteDueStopChange(stop);
-        emit(DepartedStopSuccess(stop));
-      } else {
-        emit(DepartedStopFailed());
-      }
+      stop = stop.copyWith(actualDeparture: actualDeparture);
+      _routeCubit.updateRouteDueStopChange(stop);
+      emit(DepartedStopSuccess(stop));
     } on Exception {
       emit(DepartedStopFailed());
     }
@@ -105,7 +101,7 @@ class StopCubit extends Cubit<StopState> {
     try {
       emit(CancellingStop());
       final actualCancel = DateTime.now().toUtcAsString;
-      await _repository.cancelStop(
+      _repository.cancelStop(
         routeId: route.id,
         actualCancel: actualCancel,
         cancelCode: cancelCode.id,
@@ -127,7 +123,7 @@ class StopCubit extends Cubit<StopState> {
     try {
       emit(UndeliveringStop());
       final actualDeparture = DateTime.now().toUtcAsString;
-      await _repository.undeliverStop(
+      _repository.undeliverStop(
         routeId: route.id,
         undeliverableCode: undeliverableCode.id,
         actualDeparture: actualDeparture,

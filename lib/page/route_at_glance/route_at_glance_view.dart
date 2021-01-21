@@ -90,7 +90,9 @@ class RouteAtGlanceView extends StatelessWidget {
   Widget _getMainButtonIcon(RouteCubit cubit) {
     final state = cubit.state;
     final route = cubit.route;
-    if (state is StartingRoute) {
+    if (state is StartingRoute ||
+        state is DepartingOrigin ||
+        state is DepartOriginSuccess) {
       return const GMButtonLoading();
     } else if (route.status == RouteStatus.STARTED) {
       return SvgPicture.asset('assets/icons/driving.svg');

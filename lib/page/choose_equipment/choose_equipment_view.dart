@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/cubit/cubits.dart';
 import '../../widget/alert/notification.dart';
+import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
 
@@ -19,26 +20,9 @@ class ChooseEquipmentView extends StatelessWidget {
         Navigator.of(context).pop();
         return true;
       },
-      child: GMScaffold(
-        backgroundColor: const Color(0xFF24242A),
-        withNavigationBar: true,
-        withBackButton: false,
-        title: 'EQUIPMENT SELECTION',
-        body: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
-          listener: _listener,
-          builder: _builder,
-        ),
-        mainActionButton: FloatingActionButton(
-          onPressed: () {
-            final _form = _formKey.currentState;
-            if (_form.validate()) {
-              _form.save();
-            }
-          },
-          child: SvgPicture.asset('assets/icons/route.svg'),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-        mainActionButtonLabel: 'LOAD ROUTE',
+      child: BlocConsumer<ChooseEquipmentCubit, ChooseEquipmentState>(
+        listener: _listener,
+        builder: _builder,
       ),
     );
   }
@@ -58,39 +42,66 @@ class ChooseEquipmentView extends StatelessWidget {
   }
 
   Widget _builder(BuildContext context, ChooseEquipmentState state) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
-        child: Form(
-          key: _formKey,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Equipment',
-                    fillColor: Colors.white,
-                    filled: true,
-                    prefixIcon: Icon(MdiIcons.truckCheck),
+    return GMScaffold(
+      backgroundColor: const Color(0xFF24242A),
+      withNavigationBar: true,
+      withBackButton: false,
+      title: 'EQUIPMENT SELECTION',
+      mainActionButton: FloatingActionButton(
+        onPressed: state is! LoadingEquipment
+            ? () {
+                final _form = _formKey.currentState;
+                if (_form.validate()) {
+                  _form.save();
+                }
+              }
+            : null,
+        child: _getMainButtonIcon(state),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      mainActionButtonLabel: 'LOAD ROUTE',
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
+          child: Form(
+            key: _formKey,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Equipment',
+                      fillColor: Colors.white,
+                      filled: true,
+                      prefixIcon: Icon(MdiIcons.truckCheck),
+                    ),
+                    onSaved: (equipmentKey) => context
+                        .read<ChooseEquipmentCubit>()
+                        .getEquipmentInfo(equipmentKey),
+                    validator: (equipmentKey) =>
+                        equipmentKey.isEmpty ? 'Required Field' : null,
                   ),
-                  onSaved: (equipmentKey) => context
-                      .read<ChooseEquipmentCubit>()
-                      .getEquipmentInfo(equipmentKey),
-                  validator: (equipmentKey) =>
-                      equipmentKey.isEmpty ? 'Required Field' : null,
                 ),
-              ),
-              const SizedBox(width: 6),
-              SvgPicture.asset(
-                'assets/icons/qrcode.svg',
-                height: 26,
-                width: 26,
-              ),
-            ],
+                const SizedBox(width: 6),
+                SvgPicture.asset(
+                  'assets/icons/qrcode.svg',
+                  height: 26,
+                  width: 26,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _getMainButtonIcon(ChooseEquipmentState state) {
+    if (state is LoadingEquipment || state is EquipmentFound) {
+      return const GMButtonLoading();
+    } else {
+      return SvgPicture.asset('assets/icons/route.svg');
+    }
   }
 }

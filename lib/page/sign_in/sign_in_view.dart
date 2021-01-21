@@ -61,7 +61,7 @@ class _SignInViewState extends State<SignInView> {
   }
 
   Widget _builder(BuildContext context, SignInState state) {
-    if (state is UserSigningLoading) {
+    if (state is UserSigningLoading || state is UserSignedSuccess) {
       return const Center(
         child: GMLoading(),
       );

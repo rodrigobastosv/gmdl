@@ -76,7 +76,7 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> departOrigin() async {
     try {
       emit(DepartingOrigin());
-      await _repository.departOrigin(route.id);
+      _repository.departOrigin(route.id);
       route = route.copyWith(status: RouteStatus.DEPARTED_ORIGIN);
       emit(DepartOriginSuccess());
     } on Exception {
@@ -88,18 +88,14 @@ class RouteCubit extends Cubit<RouteState> {
     try {
       emit(ArrivingStop());
       final actualArrival = DateTime.now().toUtcAsString;
-      final arrivedStop = await _repository.arriveStop(
+      _repository.arriveStop(
         routeId: route.id,
         stop: stop,
         actualArrival: actualArrival,
       );
-      if (arrivedStop) {
-        final _updatedStop = stop.copyWith(actualArrival: actualArrival);
-        route = updateRouteByStopChange(route, _updatedStop);
-        emit(ArrivedStopSuccess(_updatedStop));
-      } else {
-        emit(ArrivedStopFailed());
-      }
+      final _updatedStop = stop.copyWith(actualArrival: actualArrival);
+      route = updateRouteByStopChange(route, _updatedStop);
+      emit(ArrivedStopSuccess(_updatedStop));
     } on Exception {
       emit(ArrivedStopFailed());
     }
@@ -126,12 +122,8 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> arriveWarehouse() async {
     try {
       emit(ArrivingWarehouse());
-      final arrivedWarehouse = await _repository.arriveWarehouse(route.id);
-      if (arrivedWarehouse) {
-        emit(ArrivedWarehouseSuccess());
-      } else {
-        emit(ArrivedWarehouseFailed());
-      }
+      _repository.arriveWarehouse(route.id);
+      emit(ArrivedWarehouseSuccess());
     } on Exception {
       emit(ArrivedWarehouseFailed());
     }
