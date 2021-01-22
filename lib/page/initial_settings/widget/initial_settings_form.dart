@@ -35,7 +35,10 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
               children: [
                 Image.asset('assets/images/banner_gm.png'),
                 Padding(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 10,
+                  ),
                   child: TextFormField(
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
@@ -51,15 +54,19 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 10,
+                  ),
                   child: Container(
                     color: Colors.white,
                     child: DropdownSearch<Locale>(
                       dropdownSearchDecoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            MdiIcons.earth,
-                          ),
-                          contentPadding: EdgeInsets.symmetric(vertical: 4)),
+                        prefixIcon: Icon(
+                          MdiIcons.earth,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 4),
+                      ),
                       mode: Mode.MENU,
                       showSelectedItem: true,
                       compareFn: (l1, l2) => l1 == l2,
@@ -74,7 +81,10 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 10,
+                  ),
                   child: TextFormField(
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
