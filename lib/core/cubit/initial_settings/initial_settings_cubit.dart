@@ -22,6 +22,7 @@ class InitialSettingsCubit extends Cubit<InitialSettingsState> {
 
   Future<void> validateServerName(String serverName) async {
     try {
+      emit(ValidatingServer());
       final serverValidated = await _repository.validateServerName(serverName);
       if (serverValidated) {
         store.changeServerName(serverName);
