@@ -22,6 +22,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
+      key: UniqueKey(),
       providers: getRepositoryProviders(
         context.watch<Store>(),
       ),
@@ -42,7 +43,7 @@ class App extends StatelessWidget {
           BlocProvider<I18nCubit>(
             create: (innerContext) => I18nCubit(
               innerContext.read<I18nRepository>(),
-            ),
+            )..initResources(context.read<Store>()),
           ),
         ],
         child: BlocListener<ConnectivityCubit, ConnectivityState>(
