@@ -10,6 +10,8 @@ import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
 
+import '../../core/extension/i18n_cubit_extension.dart';
+
 class ChooseEquipmentView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
@@ -43,7 +45,7 @@ class ChooseEquipmentView extends StatelessWidget {
       backgroundColor: const Color(0xFF24242A),
       withNavigationBar: true,
       withBackButton: false,
-      title: 'EQUIPMENT SELECTION',
+      title: context.getTextUppercase('menu.load.route'),
       mainActionButton: FloatingActionButton(
         onPressed: state is! LoadingEquipment
             ? () {
@@ -56,7 +58,7 @@ class ChooseEquipmentView extends StatelessWidget {
         child: _getMainButtonIcon(state),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      mainActionButtonLabel: 'LOAD ROUTE',
+      mainActionButtonLabel: context.getTextUppercase('menu.load.route'),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
@@ -66,18 +68,19 @@ class ChooseEquipmentView extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Equipment',
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: context.getText('equipment.login'),
                       fillColor: Colors.white,
                       filled: true,
-                      prefixIcon: Icon(MdiIcons.truckCheck),
+                      prefixIcon: const Icon(MdiIcons.truckCheck),
                     ),
                     onSaved: (equipmentKey) => context
                         .read<ChooseEquipmentCubit>()
                         .getEquipmentInfo(equipmentKey),
-                    validator: (equipmentKey) =>
-                        equipmentKey.isEmpty ? 'Required Field' : null,
+                    validator: (equipmentKey) => equipmentKey.isEmpty
+                        ? context.getText('loader.validation.required')
+                        : null,
                   ),
                 ),
                 const SizedBox(width: 6),

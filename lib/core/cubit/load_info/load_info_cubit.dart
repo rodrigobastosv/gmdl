@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:device_info/device_info.dart';
 import 'package:equatable/equatable.dart';
+import '../cubits.dart';
 
 import '../../constants.dart';
 import '../../repository/repositories.dart';
@@ -15,16 +16,20 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
     @required LoadingInfoRepository repository,
     @required this.store,
     @required DeviceInfoPlugin deviceInfo,
+    @required I18nCubit i18nCubit,
   })  : assert(repository != null),
         assert(store != null),
         assert(deviceInfo != null),
+        assert(i18nCubit != null),
         _repository = repository,
         _deviceInfo = deviceInfo,
+        _i18nCubit = i18nCubit,
         super(LoadingInitial());
 
   final LoadingInfoRepository _repository;
   final Store store;
   final DeviceInfoPlugin _deviceInfo;
+  final I18nCubit _i18nCubit;
 
   Future<void> getDriverInfo(String username) async {
     try {
@@ -55,6 +60,10 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
         deviceId: mobileDevice.id,
       );
       emit(RegisterDeviceSuccess(mobileDevice.id));
+
+      emit(InfoLoading('Loading Resources'));
+      await _i18nCubit.fetchResources();
+      emit(FetchResourcesSuccess());
 
       emit(InfoLoading('Loading Global Configurations'));
       final globalConfigurations = await _repository.getGlobalConfigurations();

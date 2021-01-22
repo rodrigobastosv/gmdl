@@ -19,3 +19,7 @@ class LocaleChanged extends I18nState {
         locale,
       ];
 }
+
+class ResourcesFetchSuccess extends I18nState {}
+
+class ResourcesFetchFailed extends I18nState {}

@@ -26,6 +26,8 @@ class AllInfoLoadedSuccess extends LoadInfoState {}
 
 class FetchGlobalConfigSuccess extends LoadInfoState {}
 
+class FetchResourcesSuccess extends LoadInfoState {}
+
 class FetchUserConfigSuccess extends LoadInfoState {}
 
 class FetchCancelCodesSuccess extends LoadInfoState {}

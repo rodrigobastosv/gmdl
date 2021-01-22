@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../store/store.dart';
 
 import '../../entity/model/models.dart';
 import '../../i18n/local_resources.dart';
@@ -12,8 +13,13 @@ class I18nCubit extends Cubit<I18nState> {
 
   final I18nRepository _repository;
 
-  String locale = 'en';
-  Map<String, String> _resources = localResources['en'];
+  String locale;
+  Map<String, String> _resources;
+
+  void initResources(Store _store) {
+    locale = _store.locale;
+    _resources = localResources[locale];
+  }
 
   void changeLocale(String locale) {
     this.locale = locale;
@@ -25,7 +31,9 @@ class I18nCubit extends Cubit<I18nState> {
     try {
       final _resourcesList = await _repository.fetchResources(locale);
       _resources.addAll(_getResourcesMap(_resourcesList));
+      emit(ResourcesFetchSuccess());
     } on Exception {
+      emit(ResourcesFetchFailed());
       rethrow;
     }
   }

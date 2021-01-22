@@ -8,6 +8,9 @@ import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
 import 'widget/sign_in_form.dart';
 
+import '../../core/extension/i18n_cubit_extension.dart';
+
+
 class SignInView extends StatefulWidget {
   SignInView({Key key}) : super(key: key);
 
@@ -30,9 +33,9 @@ class _SignInViewState extends State<SignInView> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           automaticallyImplyLeading: false,
-          title: const Text(
-            'LOGIN',
-            style: TextStyle(
+          title: Text(
+            context.getTextUppercase('driver.hint.login'),
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),

@@ -6,6 +6,7 @@ import '../entity/model/models.dart';
 class Store extends ChangeNotifier {
   String serverName;
   String sessionId;
+  String locale = 'en';
   DriverInfoDto driverInfo;
   MobileDeviceDto mobileDevice;
   GlobalConfigurationsDto globalConfigurations;

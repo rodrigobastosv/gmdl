@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../core/store/store.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/constants.dart';
@@ -64,8 +65,10 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                       compareFn: (l1, l2) => l1 == l2,
                       items: locales,
                       hint: context.getText('locale.label'),
-                      onChanged: (locale) =>
-                          context.read<I18nCubit>().changeLocale(locale.key),
+                      onChanged: (locale) {
+                        context.read<Store>().locale = locale.key;
+                        context.read<I18nCubit>().changeLocale(locale.key);
+                      },
                       selectedItem: Locale('en', 'English'),
                     ),
                   ),
