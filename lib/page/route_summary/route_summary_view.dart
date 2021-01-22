@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../initial_settings/initial_settings_page.dart';
@@ -36,13 +37,13 @@ class RouteSummaryView extends StatelessWidget {
     final cubit = context.watch<RouteCubit>();
     final route = cubit.route;
     return GMScaffold(
-      title: 'GOOD JOB!',
+      title: context.getTextUppercase('driver.goodjob.beforevocative'),
       mainActionButton: FloatingActionButton(
         onPressed: cubit.completeRoute,
         child: _getMainButtonIcon(cubit),
         backgroundColor: const Color(0xFF3AA348),
       ),
-      mainActionButtonLabel: 'COMPLETE ROUTE',
+      mainActionButtonLabel: context.getTextUppercase('status.complete'),
       body: Column(
         children: [
           Container(
@@ -69,9 +70,9 @@ class RouteSummaryView extends StatelessWidget {
                     size: 38,
                     color: Color(0xFF9b9b9b),
                   ),
-                  const Text(
-                    'NOTHING FOUND',
-                    style: TextStyle(
+                  Text(
+                    context.getTextUppercase('loader.nothing.found'),
+                    style: const TextStyle(
                       color: Color(0xFF9b9b9b),
                     ),
                   ),

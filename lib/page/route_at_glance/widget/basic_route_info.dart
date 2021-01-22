@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/selector/route_selectors.dart';
 
 class BasicRouteInfo extends StatelessWidget {
@@ -23,7 +24,7 @@ class BasicRouteInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'ROUTE AT GLANCE',
+                  context.getText('driver.routeAtGlance'),
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 12,
@@ -62,7 +63,7 @@ class BasicRouteInfo extends StatelessWidget {
                         size: 14,
                       ),
                       Text(
-                        '${route.stops.length} Stops',
+                        '''${route.stops.length} ${context.getText('stopList.title')}''',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,

@@ -23,6 +23,7 @@ class LoadInfoPage extends StatelessWidget {
         repository: context.read<LoadingInfoRepository>(),
         store: context.read<Store>(),
         deviceInfo: DeviceInfoPlugin(),
+        i18nCubit: context.read<I18nCubit>(),
       )..getDriverInfo(username),
       child: const LoadInfoView(),
     );

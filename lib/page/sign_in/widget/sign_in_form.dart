@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/sign_in/sign_in_cubit.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
@@ -35,16 +36,17 @@ class _SignInFormState extends State<SignInForm> {
                     children: <Widget>[
                       Expanded(
                         child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Username',
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: context.getText('loader.username'),
                             fillColor: Colors.white,
                             filled: true,
-                            prefixIcon: Icon(Icons.person_pin),
+                            prefixIcon: const Icon(Icons.person_pin),
                           ),
                           onSaved: (username) => _username = username,
-                          validator: (username) =>
-                              username.isEmpty ? 'Required Field' : null,
+                          validator: (username) => username.isEmpty
+                              ? context.getText('loader.validation.required')
+                              : null,
                         ),
                       ),
                       const SizedBox(width: 6),
@@ -61,16 +63,17 @@ class _SignInFormState extends State<SignInForm> {
                       Expanded(
                         child: TextFormField(
                           obscureText: true,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Password',
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: context.getText('driver.hint.password'),
                             fillColor: Colors.white,
                             filled: true,
-                            prefixIcon: Icon(Icons.lock),
+                            prefixIcon: const Icon(Icons.lock),
                           ),
                           onSaved: (password) => _password = password,
-                          validator: (password) =>
-                              password.isEmpty ? 'Required Field' : null,
+                          validator: (password) => password.isEmpty
+                              ? context.getText('loader.validation.required')
+                              : null,
                         ),
                       ),
                       const SizedBox(width: 6),
@@ -88,9 +91,9 @@ class _SignInFormState extends State<SignInForm> {
                       Expanded(
                         child: RaisedButton(
                           color: Theme.of(context).primaryColor,
-                          child: const Text(
-                            'Sign In',
-                            style: TextStyle(
+                          child: Text(
+                            context.getText('driver.hint.login'),
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),

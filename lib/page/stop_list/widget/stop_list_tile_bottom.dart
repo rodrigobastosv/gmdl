@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
@@ -25,7 +26,9 @@ class StopListTileBottom extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               TextButton.icon(
-                label: const Text('Directions'),
+                label: Text(
+                  context.getText('stopList.tabs.directions'),
+                ),
                 style: TextButton.styleFrom(
                   primary: Colors.black,
                   textStyle: const TextStyle(
@@ -38,7 +41,9 @@ class StopListTileBottom extends StatelessWidget {
               ),
               if (stop.hasNotBeenArrived)
                 TextButton.icon(
-                  label: const Text('Arrival'),
+                  label: Text(
+                    context.getText('route.inlinemenu.arrival'),
+                  ),
                   style: TextButton.styleFrom(
                     primary: Colors.black,
                     textStyle: const TextStyle(

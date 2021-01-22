@@ -29,3 +29,4 @@ export 'udf_model.dart';
 export 'cancel_code_model.dart';
 export 'undeliverable_code_model.dart';
 export 'proactive_route_opt_config_model.dart';
+export 'resource_model.dart';

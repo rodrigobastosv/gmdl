@@ -37,6 +37,7 @@ dependencies:
   bot_toast: ^3.0.5
   roundcheckbox: ^1.0.0+1
   flutter_spinkit: ^4.1.2+1
+  dropdown_search: ^0.4.8
 
 dev_dependencies:
   flutter_test:

@@ -15,6 +15,7 @@ const STOP_TYPE = 'StopType';
 const ORDER_CLASS = 'OrderClass';
 const CANCEL_CODE = 'CancelCode';
 const UNDELIVERABLE_CODE = 'UndeliverableCode';
+const I18N_RESOURCE = 'I18NResource';
 const ARRIVE = 'Arrive';
 const ARRIVE_DESTINATION = 'ArriveDestination';
 const COMPLETE = 'Complete';

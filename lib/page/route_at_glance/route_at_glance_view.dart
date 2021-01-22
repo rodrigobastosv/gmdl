@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/enum/enums.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../stop_list/stop_list_page.dart';
@@ -39,7 +40,8 @@ class RouteAtGlanceView extends StatelessWidget {
   Widget _builder(BuildContext context, RouteState state) {
     final cubit = context.watch<RouteCubit>();
     return GMScaffold(
-      title: 'WELCOME ${cubit.driverName.toUpperCase()}',
+      title:
+          '''${context.getTextUppercase('driver.welcome')} ${cubit.driverName.toUpperCase()}''',
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(18),
         child: const Icon(
@@ -62,7 +64,7 @@ class RouteAtGlanceView extends StatelessWidget {
         child: _getMainButtonIcon(cubit),
         backgroundColor: const Color(0xFF3AA348),
       ),
-      mainActionButtonLabel: _getMainButtonLabel(cubit),
+      mainActionButtonLabel: _getMainButtonLabel(context, cubit),
     );
   }
 
@@ -103,14 +105,14 @@ class RouteAtGlanceView extends StatelessWidget {
     }
   }
 
-  String _getMainButtonLabel(RouteCubit cubit) {
+  String _getMainButtonLabel(BuildContext context, RouteCubit cubit) {
     final route = cubit.route;
     if (route.status == RouteStatus.STARTED) {
-      return 'LEAVE WAREHOUSE';
+      return context.getTextUppercase('driver.leavedc');
     } else if (route.status == RouteStatus.NOT_STARTED) {
-      return 'START ROUTE';
+      return context.getTextUppercase('equipment.button.start');
     } else {
-      return 'STOP LIST';
+      return context.getTextUppercase('stop.list');
     }
   }
 }

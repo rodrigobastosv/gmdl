@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
@@ -30,9 +31,9 @@ class _SignInViewState extends State<SignInView> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           automaticallyImplyLeading: false,
-          title: const Text(
-            'LOGIN',
-            style: TextStyle(
+          title: Text(
+            context.getTextUppercase('driver.hint.login'),
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),

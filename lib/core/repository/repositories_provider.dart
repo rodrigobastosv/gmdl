@@ -45,5 +45,10 @@ List<RepositoryProvider> getRepositoryProviders(Store store) {
         getDefaultClient(serverName, sessionId),
       ),
     ),
+    RepositoryProvider<I18nRepository>(
+      create: (_) => I18nRepository(
+        getDefaultClient(serverName, sessionId),
+      ),
+    ),
   ];
 }

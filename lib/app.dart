@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/cubit/cubits.dart';
+import 'core/extension/i18n_cubit_extension.dart';
 import 'core/repository/repositories.dart';
 import 'core/repository/repositories_provider.dart';
 import 'core/store/store.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
+      key: UniqueKey(),
       providers: getRepositoryProviders(
         context.watch<Store>(),
       ),
@@ -38,14 +40,21 @@ class App extends StatelessWidget {
               connectivity: Connectivity(),
             )..intiConnectionListener(),
           ),
+          BlocProvider<I18nCubit>(
+            create: (innerContext) => I18nCubit(
+              innerContext.read<I18nRepository>(),
+            )..initResources(context.read<Store>()),
+          ),
         ],
         child: BlocListener<ConnectivityCubit, ConnectivityState>(
-          listener: (_, state) {
+          listener: (contextListener, state) {
             if (state is HasConnection) {
               if (state.hasConnection) {
-                showSuccessNotification('You have connection again');
+                showSuccessNotification(
+                    contextListener.getText('loader.server.connected'));
               } else {
-                showErrorNotification('Lost connection');
+                showErrorNotification(
+                    contextListener.getText('loader.server.unreachable'));
               }
             }
           },
