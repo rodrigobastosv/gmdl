@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 
 class DoneStopsTab extends StatelessWidget {
   const DoneStopsTab({Key key, this.stops}) : super(key: key);
@@ -11,7 +12,7 @@ class DoneStopsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tab(
       child: Text(
-        'DONE (${stops.length})',
+        '${context.getTextUppercase('route.tab.done')} (${stops.length})',
         style: const TextStyle(
           fontSize: 12,
         ),

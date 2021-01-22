@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
 import 'widget/sign_in_form.dart';
-
-import '../../core/extension/i18n_cubit_extension.dart';
-
 
 class SignInView extends StatefulWidget {
   SignInView({Key key}) : super(key: key);

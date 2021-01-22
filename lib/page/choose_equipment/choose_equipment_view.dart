@@ -5,12 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
-
-import '../../core/extension/i18n_cubit_extension.dart';
 
 class ChooseEquipmentView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

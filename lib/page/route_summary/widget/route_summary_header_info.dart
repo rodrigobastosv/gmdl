@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/utils/date_utils.dart';
 
 class RouteSummaryHeaderInfo extends StatelessWidget {
@@ -16,9 +17,9 @@ class RouteSummaryHeaderInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'TODAY\'S SUMMARY',
-          style: TextStyle(
+        Text(
+          context.getTextUppercase('driver.todaysummary'),
+          style: const TextStyle(
             color: Color(0xFFB0D25A),
           ),
         ),

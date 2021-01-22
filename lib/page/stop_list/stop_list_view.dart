@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/selector/route_selectors.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../finished_stops/finished_stops_page.dart';
@@ -24,7 +25,7 @@ class StopListView extends StatelessWidget {
     return DefaultTabController(
       length: doneStops.isNotEmpty ? 2 : 1,
       child: GMScaffold(
-        title: 'STOP LIST',
+        title: context.getTextUppercase('stop.list'),
         body: BlocListener<RouteCubit, RouteState>(
           listener: _listener,
           child: Column(

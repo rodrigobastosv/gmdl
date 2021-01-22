@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
 
+import '../../core/extension/i18n_cubit_extension.dart';
 import 'gm_menu_drawer.dart';
 import 'gm_menu_option.dart';
 
@@ -159,9 +160,9 @@ class _GMScaffoldState extends State<GMScaffold> {
                     'assets/icons/more.svg',
                     color: Colors.white,
                   ),
-                  const Text(
-                    'Less',
-                    style: TextStyle(
+                  Text(
+                    context.getText('menu.less'),
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
@@ -200,9 +201,9 @@ class _GMScaffoldState extends State<GMScaffold> {
                             'assets/icons/more.svg',
                             color: Colors.white,
                           ),
-                          const Text(
-                            'More',
-                            style: TextStyle(
+                          Text(
+                            context.getText('menu.more'),
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),

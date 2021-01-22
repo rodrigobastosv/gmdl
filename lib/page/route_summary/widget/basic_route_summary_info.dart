@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/extension/i18n_cubit_extension.dart';
 
 class BasicRouteSummaryInfo extends StatelessWidget {
   const BasicRouteSummaryInfo({
@@ -22,7 +23,7 @@ class BasicRouteSummaryInfo extends StatelessWidget {
           size: 14,
         ),
         Text(
-          '${route.stops.length} Stops',
+          '${route.stops.length} ${context.getText('stopList.title')}',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 12,

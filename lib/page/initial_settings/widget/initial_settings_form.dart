@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../core/store/store.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/constants.dart';
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/locale.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
+import '../../../core/store/store.dart';
 
 class InitialSettingsForm extends StatefulWidget {
   InitialSettingsForm({Key key}) : super(key: key);

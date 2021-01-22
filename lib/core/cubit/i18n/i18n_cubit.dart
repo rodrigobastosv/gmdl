@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../store/store.dart';
 
 import '../../entity/model/models.dart';
 import '../../i18n/local_resources.dart';
 import '../../repository/repositories.dart';
+import '../../store/store.dart';
 
 part 'i18n_state.dart';
 

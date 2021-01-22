@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:device_info/device_info.dart';
 import 'package:equatable/equatable.dart';
-import '../cubits.dart';
 
 import '../../constants.dart';
 import '../../repository/repositories.dart';
 import '../../store/store.dart';
+import '../cubits.dart';
 
 part 'load_info_state.dart';
 

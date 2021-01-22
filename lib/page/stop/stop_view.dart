@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
@@ -19,7 +20,7 @@ class StopView extends StatelessWidget {
     final cubit = context.watch<StopCubit>();
     return GMScaffold(
       backgroundColor: Colors.grey[200],
-      title: 'DEPARTURE',
+      title: context.getTextUppercase('details.label.departure'),
       body: BlocConsumer<StopCubit, StopState>(
         listener: _listener,
         builder: _builder,
@@ -29,7 +30,7 @@ class StopView extends StatelessWidget {
         child: _getMainButtonIcon(cubit),
         backgroundColor: const Color(0xFF3AA348),
       ),
-      mainActionButtonLabel: _getMainButtonLabel(cubit),
+      mainActionButtonLabel: _getMainButtonLabel(context, cubit),
       menuOptions: _getMenuOptions(context),
     );
   }
@@ -82,14 +83,14 @@ class StopView extends StatelessWidget {
     }
   }
 
-  String _getMainButtonLabel(StopCubit cubit) {
+  String _getMainButtonLabel(BuildContext context, StopCubit cubit) {
     final stop = cubit.stop;
     if (stop.canClone) {
-      return 'CLONE';
+      return context.getTextUppercase('stop.clone');
     } else if (stop.hasBeenArrived) {
-      return 'LEAVE';
+      return context.getTextUppercase('driver.leave');
     } else {
-      return 'ARRIVE';
+      return context.getTextUppercase('stop.detail.arrive');
     }
   }
 
@@ -99,7 +100,7 @@ class StopView extends StatelessWidget {
     return [
       if (!stop.isCanceled && !stop.hasBeenArrived)
         GMMenuOption(
-          text: 'Cancel',
+          text: context.getText('stop.cancel'),
           icon: 'cancel-stop',
           onTap: () {
             Navigator.of(context).push(
@@ -114,7 +115,7 @@ class StopView extends StatelessWidget {
         ),
       if (!stop.isUndeliverable && stop.hasBeenArrived) ...[
         GMMenuOption(
-          text: 'Uncompleted',
+          text: context.getText('status.undeliverable'),
           icon: 'undeliverable',
           onTap: () {
             Navigator.of(context).push(
@@ -128,7 +129,7 @@ class StopView extends StatelessWidget {
           },
         ),
         GMMenuOption(
-          text: 'Redeliver',
+          text: context.getText('stop.redelivery'),
           icon: 'redeliver',
           onTap: () {
             Navigator.of(context).push(
