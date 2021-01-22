@@ -56,7 +56,8 @@ abstract class StopModel implements _$StopModel {
 
   @late
   bool get canClone =>
-      !isCloned && (isFinished || isCanceled || isUndeliverable);
+      (!isCloned && (isFinished || isCanceled || isUndeliverable)) ||
+      (isCloned && isDone);
 
   @late
   bool get isPending => hasNotBeenDeparted && !isCanceled;
