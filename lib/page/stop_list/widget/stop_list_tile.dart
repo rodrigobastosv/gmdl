@@ -55,10 +55,13 @@ class StopListTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '${stop.location.key} -  ${stop.location.description}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 100,
+                        child: Text(
+                          '''${stop.location.key} -  ${stop.location.description}''',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(

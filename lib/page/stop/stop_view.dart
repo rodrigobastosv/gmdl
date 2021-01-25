@@ -116,7 +116,7 @@ class StopView extends StatelessWidget {
       if (!stop.isUndeliverable && stop.hasBeenArrived) ...[
         GMMenuOption(
           text: context.getText('status.undeliverable'),
-          icon: 'undeliverable',
+          icon: 'undeliver',
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
