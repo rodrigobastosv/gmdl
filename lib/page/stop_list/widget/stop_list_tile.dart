@@ -61,7 +61,13 @@ class StopListTile extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(stop.location.addressLine1),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 100,
+                        child: Text(
+                          stop.location.addressLine1,
+                          maxLines: 2,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       StopSizes(stop: stop),
                     ],
