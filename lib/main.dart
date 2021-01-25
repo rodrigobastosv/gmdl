@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:alice/alice.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:path_provider/path_provider.dart';
 
-import 'connected_app.dart';
+import 'app.dart';
 import 'core/cubit/cubit_observer.dart';
+import 'core/global/hive.dart';
 
 final alice = Alice(
   showInspectorOnShake: kDebugMode,
@@ -16,9 +19,10 @@ final alice = Alice(
 void main() async {
   initializeDateFormatting('pt_BR', null);
   WidgetsFlutterBinding.ensureInitialized();
+  final directory = await getApplicationDocumentsDirectory();
+  await Hive.init(directory.path);
+  await Hive.openBox(CONFIG_BOX);
   Firebase.initializeApp();
   Bloc.observer = CubitObserver();
-  runApp(
-    const ConnectedApp(),
-  );
+  runApp(const App());
 }

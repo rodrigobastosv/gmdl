@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/entity/model/models.dart';
+import '../../core/global/global_info.dart';
 import '../../core/repository/repositories.dart';
-import '../../core/store/store.dart';
 import 'route_at_glance_view.dart';
 
 class RouteAtGlancePage extends StatelessWidget {
@@ -22,7 +22,7 @@ class RouteAtGlancePage extends StatelessWidget {
       create: (_) => RouteCubit(
         route: route,
         repository: context.read<RouteRepository>(),
-        store: context.read<Store>(),
+        globalInfo: context.read<GlobalInfo>(),
         notificationCubit: context.read<NotificationCubit>(),
       )..listenNotifications(),
       child: const RouteAtGlanceView(),

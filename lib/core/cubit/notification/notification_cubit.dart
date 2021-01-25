@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
-import '../../store/store.dart';
 
 part 'notification_state.dart';
 
@@ -13,24 +13,24 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit({
     @required FirebaseMessaging firebaseMessaging,
     @required NotificationRepository repository,
-    @required Store store,
+    @required GlobalInfo globalInfo,
   })  : assert(firebaseMessaging != null),
         assert(repository != null),
-        assert(store != null),
+        assert(globalInfo != null),
         _firebaseMessaging = firebaseMessaging,
         _repository = repository,
-        _store = store,
+        _globalInfo = globalInfo,
         super(NotificationInitial());
 
   final FirebaseMessaging _firebaseMessaging;
   final NotificationRepository _repository;
-  final Store _store;
+  final GlobalInfo _globalInfo;
   String fcmToken;
 
   Future<void> initNotifications() async {
     try {
       fcmToken = await _firebaseMessaging.getToken();
-      final deviceId = _store.mobileDevice.id;
+      final deviceId = _globalInfo.mobileDevice.id;
       _repository.updateToken(deviceId: deviceId, token: fcmToken);
 
       FirebaseMessaging.onMessage.listen((message) {

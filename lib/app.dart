@@ -6,6 +6,7 @@ import 'global_cubits_widget_provider.dart';
 import 'main.dart';
 import 'page/pages.dart';
 import 'repositories_widget_provider.dart';
+import 'widget/global_info_widget_provider.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -15,17 +16,19 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoriesWidgetProvider(
-      child: GlobalCubitsWidgetProvider(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          navigatorKey: alice.getNavigatorKey(),
-          title: 'Flutter Demo',
-          builder: BotToastInit(),
-          theme: ThemeData(
-            primaryColor: const Color(0xFF3AA348),
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+      child: GlobalInfoWidgetProvider(
+        child: GlobalCubitsWidgetProvider(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            navigatorKey: alice.getNavigatorKey(),
+            title: 'Flutter Demo',
+            builder: BotToastInit(),
+            theme: ThemeData(
+              primaryColor: const Color(0xFF3AA348),
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: const InitialSettingsPage(),
           ),
-          home: const InitialSettingsPage(),
         ),
       ),
     );

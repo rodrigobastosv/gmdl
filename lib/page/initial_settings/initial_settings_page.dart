@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/global/hive.dart';
 import '../../core/repository/client/utils.dart';
 import '../../core/repository/initial_setup_repository.dart';
-import '../../core/store/store.dart';
 import 'initial_settings_view.dart';
 
 class InitialSettingsPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class InitialSettingsPage extends StatelessWidget {
         repository: InitialSetupRepository(
           getBasicClient(),
         ),
-        store: context.read<Store>(),
+        store: Hive.box(CONFIG_BOX),
       ),
       child: InitialSettingsView(),
     );

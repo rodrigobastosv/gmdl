@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
+import '../global/global_info.dart';
+import '../global/hive.dart';
 import '../repository/repositories.dart';
-import '../store/store.dart';
 import 'cubits.dart';
 
 List<BlocProvider> getGlobalCubits(BuildContext context) => [
@@ -13,7 +15,7 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
         create: (innerContext) => NotificationCubit(
           firebaseMessaging: FirebaseMessaging.instance,
           repository: innerContext.read<NotificationRepository>(),
-          store: context.read<Store>(),
+          globalInfo: context.read<GlobalInfo>(),
         )..initNotifications(),
       ),
       BlocProvider<ConnectivityCubit>(
@@ -23,7 +25,7 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
       ),
       BlocProvider<I18nCubit>(
         create: (innerContext) => I18nCubit(
-          innerContext.read<I18nRepository>(),
-        )..initResources(context.read<Store>()),
+          repository: innerContext.read<I18nRepository>(),
+        )..initResources(Hive.box(CONFIG_BOX)),
       ),
     ];

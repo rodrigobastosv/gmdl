@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import 'core/global/hive.dart';
 import 'core/repository/repositories_provider.dart';
-import 'core/store/store.dart';
 
 class RepositoriesWidgetProvider extends StatelessWidget {
   const RepositoriesWidgetProvider({
@@ -16,12 +18,13 @@ class RepositoriesWidgetProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      key: UniqueKey(),
-      providers: getRepositoryProviders(
-        context.watch<Store>(),
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box(CONFIG_BOX).listenable(),
+      builder: (_, box, ___) => MultiRepositoryProvider(
+        key: UniqueKey(),
+        providers: getRepositoryProviders(box),
+        child: child,
       ),
-      child: child,
     );
   }
 }
