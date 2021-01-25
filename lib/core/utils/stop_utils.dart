@@ -33,7 +33,7 @@ String getPendingStopStatusIconAsset(StopModel stop) {
   } else if (stop.isCanceled) {
     return 'assets/icons/canceled.svg';
   } else if (stop.isRedelivered) {
-    return 'assets/icons/redeliver.svg';
+    return 'assets/icons/redelivery.svg';
   } else if (stop.isUndeliverable) {
     return 'assets/icons/stop-undelivered.svg';
   }
@@ -77,7 +77,7 @@ String getDoneStopStatusIconAsset(StopModel stop) {
   } else if (stop.isCanceled) {
     return 'assets/icons/canceled.svg';
   } else if (stop.isRedelivered) {
-    return 'assets/icons/redeliver.svg';
+    return 'assets/icons/redelivery.svg';
   } else if (stop.isUndeliverable) {
     return 'assets/icons/undeliverable.svg';
   }
