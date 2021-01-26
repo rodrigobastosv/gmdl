@@ -102,6 +102,9 @@ class StopView extends StatelessWidget {
   List<GMMenuOption> _getMenuOptions(BuildContext context) {
     final cubit = context.watch<StopCubit>();
     final stop = cubit.stop;
+    if (stop.isDone) {
+      return [];
+    }
     return [
       if (!stop.isCanceled && !stop.hasBeenArrived)
         GMMenuOption(
