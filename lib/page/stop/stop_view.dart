@@ -9,7 +9,7 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
-import '../stop_list/stop_list_page.dart';
+import '../pages_names.dart';
 import 'widget/instructions_card.dart';
 
 class StopView extends StatelessWidget {
@@ -39,17 +39,22 @@ class StopView extends StatelessWidget {
     if (state is DepartedStopSuccess) {
       Navigator.of(context).pop();
     }
-    if (state is CanceledStopSuccess ||
-        state is UndeliveredStopSuccess ||
-        state is RedeliveredStopSuccess) {
+    if (state is ClonedStopSuccess) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: context.read<RouteCubit>(),
-            child: const StopListPage(),
+            child: StopPage(stop: state.stop),
           ),
+          settings: const RouteSettings(name: STOP_PAGE),
         ),
       );
+    }
+    if (state is CanceledStopSuccess ||
+        state is UndeliveredStopSuccess ||
+        state is RedeliveredStopSuccess) {
+      Navigator.of(context)
+          .popUntil((route) => route.settings.name == STOP_LIST_PAGE);
     }
   }
 
@@ -109,6 +114,7 @@ class StopView extends StatelessWidget {
                   value: cubit,
                   child: const ChooseCancelCodePage(),
                 ),
+                settings: const RouteSettings(name: CHOOSE_CANCEL_CODE_PAGE),
               ),
             );
           },
@@ -124,6 +130,8 @@ class StopView extends StatelessWidget {
                   value: cubit,
                   child: const ChooseUndeliverableCodePage(),
                 ),
+                settings:
+                    const RouteSettings(name: CHOOSE_UNDELIVERABLE_CODE_PAGE),
               ),
             );
           },
@@ -138,6 +146,7 @@ class StopView extends StatelessWidget {
                   value: cubit,
                   child: const ChooseRedeliverCodePage(),
                 ),
+                settings: const RouteSettings(name: CHOOSE_REDELIVER_CODE_PAGE),
               ),
             );
           },

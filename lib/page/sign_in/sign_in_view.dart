@@ -7,6 +7,7 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
+import '../pages_names.dart';
 import 'widget/sign_in_form.dart';
 
 class SignInView extends StatefulWidget {
@@ -51,9 +52,8 @@ class _SignInViewState extends State<SignInView> {
     if (state is UserSignedSuccess) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => LoadInfoPage(
-            username: state.loginResult.username,
-          ),
+          builder: (_) => LoadInfoPage(username: state.loginResult.username),
+          settings: const RouteSettings(name: LOAD_INFO_PAGE),
         ),
       );
     } else if (state is UserSigningFailed) {

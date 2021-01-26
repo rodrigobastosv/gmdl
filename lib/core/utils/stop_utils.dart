@@ -24,6 +24,9 @@ StopModel cloneStopWithoutActuals({
     cloneDate: cloneDate,
     actualArrival: null,
     actualDeparture: null,
+    cancelCode: null,
+    undeliverableCode: null,
+    redeliveryStop: null
   );
 }
 

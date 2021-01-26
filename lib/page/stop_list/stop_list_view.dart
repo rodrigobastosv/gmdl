@@ -8,6 +8,7 @@ import '../../core/selector/route_selectors.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../finished_stops/finished_stops_page.dart';
 import '../pages.dart';
+import '../pages_names.dart';
 import '../stop/stop_page.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
@@ -66,10 +67,9 @@ class StopListView extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: context.read<RouteCubit>(),
-            child: StopPage(
-              stop: state.stop,
-            ),
+            child: StopPage(stop: state.stop),
           ),
+          settings: const RouteSettings(name: STOP_PAGE),
         ),
       );
     } else if (state is RouteHasNoPendingStops) {
@@ -79,6 +79,7 @@ class StopListView extends StatelessWidget {
             value: context.read<RouteCubit>(),
             child: const FinishedStopsPage(),
           ),
+          settings: const RouteSettings(name: FINISHED_STOPS_PAGE),
         ),
       );
     } else if (state is ArrivedWarehouseSuccess) {
@@ -88,6 +89,7 @@ class StopListView extends StatelessWidget {
             value: context.read<RouteCubit>(),
             child: const RouteSummaryPage(),
           ),
+          settings: const RouteSettings(name: ROUTE_SUMMARY_PAGE),
         ),
       );
     }

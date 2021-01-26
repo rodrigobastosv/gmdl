@@ -8,6 +8,7 @@ import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/utils.dart';
 import '../../../widget/stop/stop_sizes.dart';
 import '../../pages.dart';
+import '../../pages_names.dart';
 import 'stop_icon.dart';
 import 'stop_list_tile_bottom.dart';
 
@@ -31,6 +32,7 @@ class StopListTile extends StatelessWidget {
                     value: context.read<RouteCubit>(),
                     child: StopPage(stop: stop),
                   ),
+                  settings: const RouteSettings(name: STOP_PAGE),
                 ),
               );
             },

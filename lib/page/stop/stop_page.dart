@@ -10,8 +10,10 @@ import '../../core/repository/repositories.dart';
 import 'stop_view.dart';
 
 class StopPage extends StatelessWidget {
-  const StopPage({Key key, this.stop})
-      : assert(stop != null),
+  const StopPage({
+    Key key,
+    this.stop,
+  })  : assert(stop != null),
         super(key: key);
 
   final StopModel stop;
