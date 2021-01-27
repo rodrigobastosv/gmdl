@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../constants.dart';
 import 'client/client.dart';
 
 class NotificationRepository {
@@ -16,11 +17,24 @@ class NotificationRepository {
         '/$MOBILE_DEVICE/$deviceId/$UPDATE_PUSH_KEY',
         queryParameters: {
           ..._client.options.queryParameters,
-          'module': 'GreenMileDriver7',
+          'module': moduleKey,
         },
         data: {
           'pushKey': token,
         },
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<void> ackNotification(String notificationId) async {
+    try {
+      await _client.post(
+        '/$NOTIFICATION_MESSAGE/$ACK',
+        data: [
+          notificationId,
+        ],
       );
     } on Exception {
       rethrow;

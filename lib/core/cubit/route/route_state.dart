@@ -97,3 +97,35 @@ class ProConfigAppliedToRoute extends RouteState {
         proConfig.id,
       ];
 }
+
+class RouteUpdatedDueNotification extends RouteState {
+  RouteUpdatedDueNotification({
+    @required this.notificationId,
+    @required this.notificationAction,
+  });
+
+  final String notificationId;
+  final NotificationAction notificationAction;
+
+  @override
+  List<Object> get props => [
+        notificationId,
+        notificationAction,
+      ];
+}
+
+class FailedToUpdatedRouteByNotification extends RouteState {
+  FailedToUpdatedRouteByNotification({
+    @required this.notificationId,
+    @required this.notificationAction,
+  });
+
+  final String notificationId;
+  final NotificationAction notificationAction;
+
+  @override
+  List<Object> get props => [
+        notificationId,
+        notificationAction,
+      ];
+}

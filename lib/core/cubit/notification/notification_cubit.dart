@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../entity/dto/notification_dto.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 
@@ -34,12 +37,10 @@ class NotificationCubit extends Cubit<NotificationState> {
       _repository.updateToken(deviceId: deviceId, token: fcmToken);
 
       FirebaseMessaging.onMessage.listen((message) {
-        emit(
-          NotificationReceived(
-            id: message.messageId,
-            data: message.data,
-          ),
-        );
+        final messageData = jsonDecode(message.data['default']);
+        final notification = NotificationDto.fromJson(messageData);
+        emit(NotificationReceived(notification));
+        _repository.ackNotification(notification.id);
       });
 
       _firebaseMessaging.onTokenRefresh.listen((token) async {

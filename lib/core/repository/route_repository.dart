@@ -190,4 +190,26 @@ class RouteRepository {
       throw CompleteRouteException(e.errorMessage);
     }
   }
+
+  Future<RouteModel> syncRouteByNotification(int routeId) async {
+    try {
+      final response = await _client.post(
+        '/$APLICATION_LOAD_DRIVER',
+        data: {
+          'routeId': routeId,
+          'routeFilters': routeByNotificationFilters,
+          'stopFilters': stopFilters,
+          'locationsFilters': locationFilters,
+          'ordersFilters': ordersFilters,
+          'lineItemsFilters': lineItemsFilters,
+        },
+      );
+      final responseData = handleResponse(response);
+      return RouteModel.fromJson(responseData['route']);
+    } on DioError catch (e) {
+      throw FetchRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw FetchRouteException(e.errorMessage);
+    }
+  }
 }

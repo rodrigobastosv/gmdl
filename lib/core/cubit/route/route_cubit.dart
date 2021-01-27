@@ -41,9 +41,29 @@ class RouteCubit extends Cubit<RouteState> {
   String get token => _notificationCubit.fcmToken;
 
   void listenNotifications() {
-    _notificationSubscription = _notificationCubit.listen((state) {
+    _notificationSubscription = _notificationCubit.listen((state) async {
       if (state is NotificationReceived) {
-        print('Process notification!');
+        final notification = state.notification;
+        if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
+          try {
+            final syncRoute =
+                await _repository.syncRouteByNotification(route.id);
+            route = mergeRoutes(route, syncRoute);
+            emit(
+              RouteUpdatedDueNotification(
+                notificationId: notification.id,
+                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+              ),
+            );
+          } on Exception {
+            emit(
+              FailedToUpdatedRouteByNotification(
+                notificationId: notification.id,
+                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+              ),
+            );
+          }
+        }
       }
     });
     emit(RouteBeginListenNotifications());

@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:device_info/device_info.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../constants.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
+import '../../service/services.dart';
+import '../../utils/platform_utils.dart';
 import '../cubits.dart';
 
 part 'load_info_state.dart';
@@ -15,21 +16,25 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
   LoadInfoCubit({
     @required LoadingInfoRepository repository,
     @required this.globalInfo,
-    @required DeviceInfoPlugin deviceInfo,
     @required I18nCubit i18nCubit,
+    @required DeviceInfoService deviceInfoService,
+    @required PackageInfoService packageInfoService,
   })  : assert(repository != null),
         assert(globalInfo != null),
-        assert(deviceInfo != null),
         assert(i18nCubit != null),
+        assert(deviceInfoService != null),
+        assert(packageInfoService != null),
         _repository = repository,
-        _deviceInfo = deviceInfo,
         _i18nCubit = i18nCubit,
+        _deviceInfoService = deviceInfoService,
+        _packageInfoService = packageInfoService,
         super(LoadingInitial());
 
   final LoadingInfoRepository _repository;
   final GlobalInfo globalInfo;
-  final DeviceInfoPlugin _deviceInfo;
   final I18nCubit _i18nCubit;
+  final DeviceInfoService _deviceInfoService;
+  final PackageInfoService _packageInfoService;
 
   Future<void> getDriverInfo(String username) async {
     try {
@@ -39,19 +44,18 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
 
       emit(InfoLoading(
           _i18nCubit.getFormattedText('push.registerDeviceOnServer')));
-      final androidInfo = await _deviceInfo.androidInfo;
       final mobileDevice = await _repository.registerDevice(
-        deviceModel: androidInfo.model,
-        platform: 'ANDROID',
-        platformVersion: androidInfo.version.release,
-        uniqueDeviceId: androidInfo.androidId,
+        deviceModel: _deviceInfoService.getModel(),
+        platform: getPlatform(),
+        platformVersion: _packageInfoService.getVersion(),
+        uniqueDeviceId: _deviceInfoService.getId(),
       );
       emit(RegisterDeviceSuccess(mobileDevice.id));
 
       emit(InfoLoading(_i18nCubit.getFormattedText('push.bindModule')));
       await _repository.bindModule(
         deviceId: mobileDevice.id,
-        appVersion: '1.0.0',
+        appVersion: _packageInfoService.getVersion(),
         moduleKey: moduleKey,
       );
 

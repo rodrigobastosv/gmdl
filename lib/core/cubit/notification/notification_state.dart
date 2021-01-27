@@ -23,17 +23,13 @@ class NotificationSetupSuccess extends NotificationState {
 class NotificationSetupFailed extends NotificationState {}
 
 class NotificationReceived extends NotificationState {
-  NotificationReceived({
-    this.id,
-    this.data,
-  });
+  NotificationReceived(this.notification);
 
-  final String id;
-  final Map<String, dynamic> data;
+  final NotificationDto notification;
 
   @override
   List<Object> get props => [
-        id,
+        notification,
       ];
 }
 

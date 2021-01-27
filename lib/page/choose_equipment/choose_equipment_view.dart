@@ -30,9 +30,8 @@ class ChooseEquipmentView extends StatelessWidget {
     if (state is EquipmentFound) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => const LoadRoutePage(),
-          settings: const RouteSettings(name: LOAD_ROUTE_PAGE)
-        ),
+            builder: (_) => const LoadRoutePage(),
+            settings: const RouteSettings(name: LOAD_ROUTE_PAGE)),
       );
     } else if (state is EquipmentNotFound) {
       showErrorNotification(state.errorMessage);
