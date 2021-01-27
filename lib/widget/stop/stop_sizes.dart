@@ -12,11 +12,14 @@ class StopSizes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        StopSizeInfo(sizeAlias: stop.size1AliasConfig),
+        if (stop.size1AliasConfig != null)
+          StopSizeInfo(sizeAlias: stop.size1AliasConfig),
         const SizedBox(width: 8),
-        StopSizeInfo(sizeAlias: stop.size2AliasConfig),
+        if (stop.size2AliasConfig != null)
+          StopSizeInfo(sizeAlias: stop.size2AliasConfig),
         const SizedBox(width: 8),
-        StopSizeInfo(sizeAlias: stop.size3AliasConfig),
+        if (stop.size3AliasConfig != null)
+          StopSizeInfo(sizeAlias: stop.size3AliasConfig),
       ],
     );
   }

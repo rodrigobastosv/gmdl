@@ -162,3 +162,16 @@ final routeFilters = [
   'notLoadedSkus.sizeAlias.preferredSize',
   'additionalMaterials.sizeAlias.preferredSize'
 ];
+
+final routeByNotificationFilters = [
+  'id',
+  'key',
+  'plannedDeparture',
+  'plannedArrival',
+  'actualArrival',
+  'actualDeparture',
+  'actualStart',
+  'actualComplete',
+  'status',
+  'proactiveRouteOptApplied'
+];

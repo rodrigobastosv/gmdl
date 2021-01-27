@@ -8,9 +8,9 @@ import 'package:equatable/equatable.dart';
 import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
 import '../../extension/datetime_extensions.dart';
+import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
-import '../../store/store.dart';
 import '../../utils/route_utils.dart';
 import '../cubits.dart';
 
@@ -20,30 +20,50 @@ class RouteCubit extends Cubit<RouteState> {
   RouteCubit({
     @required this.route,
     @required RouteRepository repository,
-    @required this.store,
+    @required this.globalInfo,
     @required NotificationCubit notificationCubit,
   })  : assert(repository != null),
-        assert(store != null),
+        assert(globalInfo != null),
         assert(notificationCubit != null),
         _repository = repository,
         _notificationCubit = notificationCubit,
         super(RouteInitial());
 
   final RouteRepository _repository;
-  final Store store;
+  final GlobalInfo globalInfo;
   final NotificationCubit _notificationCubit;
 
   RouteModel route;
   StreamSubscription<NotificationState> _notificationSubscription;
 
-  String get driverName => store.driverInfo.name;
+  String get driverName => globalInfo.driverInfo.name;
 
   String get token => _notificationCubit.fcmToken;
 
   void listenNotifications() {
-    _notificationSubscription = _notificationCubit.listen((state) {
+    _notificationSubscription = _notificationCubit.listen((state) async {
       if (state is NotificationReceived) {
-        print('Process notification!');
+        final notification = state.notification;
+        if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
+          try {
+            final syncRoute =
+                await _repository.syncRouteByNotification(route.id);
+            route = mergeRoutes(route, syncRoute);
+            emit(
+              RouteUpdatedDueNotification(
+                notificationId: notification.id,
+                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+              ),
+            );
+          } on Exception {
+            emit(
+              FailedToUpdatedRouteByNotification(
+                notificationId: notification.id,
+                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+              ),
+            );
+          }
+        }
       }
     });
     emit(RouteBeginListenNotifications());

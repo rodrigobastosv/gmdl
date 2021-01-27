@@ -18,13 +18,15 @@ StopModel cloneStopWithoutActuals({
   @required int plannedSequenceNum,
 }) {
   return stop.copyWith(
-    id: stopId,
-    key: stopKey,
-    plannedSequenceNum: plannedSequenceNum,
-    cloneDate: cloneDate,
-    actualArrival: null,
-    actualDeparture: null,
-  );
+      id: stopId,
+      key: stopKey,
+      plannedSequenceNum: plannedSequenceNum,
+      cloneDate: cloneDate,
+      actualArrival: null,
+      actualDeparture: null,
+      cancelCode: null,
+      undeliverableCode: null,
+      redeliveryStop: null);
 }
 
 String getPendingStopStatusIconAsset(StopModel stop) {

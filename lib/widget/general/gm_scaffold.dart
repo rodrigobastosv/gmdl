@@ -186,7 +186,9 @@ class _GMScaffoldState extends State<GMScaffold> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => setState(() => isBottomMenuOpened = true),
+                  onTap: () => hasMenuOptions
+                      ? setState(() => isBottomMenuOpened = true)
+                      : null,
                   child: Padding(
                     padding: const EdgeInsets.only(
                       left: 8,

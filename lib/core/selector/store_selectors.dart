@@ -1,10 +1,10 @@
 import '../entity/enum/enums.dart';
 import '../entity/model/undeliverable_code_model.dart';
-import '../store/store.dart';
+import '../global/global_info.dart';
 
 List<UndeliverableCodeModel> getUndeliverableAndRedeliveryReasons(
-        Store store) =>
-    store.undeliverableCodes;
+        GlobalInfo globalInfo) =>
+    globalInfo.undeliverableCodes;
 
 List<UndeliverableCodeModel> getRedeliveryReasons(
     List<UndeliverableCodeModel> allUndeliverableCodes) {

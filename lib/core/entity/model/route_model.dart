@@ -25,6 +25,7 @@ abstract class RouteModel with _$RouteModel {
     List<StopModel> stops,
     String plannedArrival,
     String plannedDeparture,
+    String proactiveRouteOptApplied,
     @JsonKey(fromJson: convertToDouble) double plannedDistance,
     String plannedComplete,
     String plannedStart,

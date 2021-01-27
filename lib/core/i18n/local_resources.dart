@@ -11,6 +11,12 @@ final localResources = {
     'loader.server.connected': 'Connected to GM server, it\'s all good again',
     'loader.server.unreachable':
         '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+    'driver.loading.data': 'Loading data...',
+    'push.registerDeviceOnServer': 'Registering device',
+    'push.bindModule': 'Linking it to module',
+    'Locale.list': 'Loading languages',
+    'loading.downloading.configurations': 'Downloading Configurations',
+    'loading.downloading.reasonCodes': 'Loading Reasons',
   },
   'pt': {
     'general.server': 'Servidor',
@@ -24,6 +30,12 @@ final localResources = {
     'loader.server.connected': 'Conectado ao servidor GM, está tudo bem agora',
     'loader.server.unreachable':
         '''Não foi possível acessar o servidor GM, por favor verifique sua conectividade ou comunique o problema, se necessário''',
+    'driver.loading.data': 'Carregando dados...',
+    'push.registerDeviceOnServer': 'Registrando Device no servidor',
+    'push.bindModule': 'Vinculando ao módulo',
+    'Locale.list': 'Carregando idiomas',
+    'loading.downloading.configurations': 'Baixando Configurações',
+    'loading.downloading.reasonCodes': 'Carregando Motivos',
   },
   'es': {
     'general.server': 'Servidor',
@@ -37,6 +49,12 @@ final localResources = {
     'loader.server.connected': 'Re-conectado al servidor GM',
     'loader.server.unreachable':
         '''No se pudo acceder al servidor GM, comprueba tu conectividad o informa del problema, si es necesario''',
+    'driver.loading.data': 'Cargando datos...',
+    'push.registerDeviceOnServer': 'Registrando Dispositivo',
+    'push.bindModule': 'Vinculando con el Módulo',
+    'Locale.list': 'Cargando idiomas',
+    'loading.downloading.configurations': 'Descargando Configuraciones',
+    'loading.downloading.reasonCodes': 'Cargando Motivos',
   },
   'ja': {
     'general.server': 'サーバー',
@@ -49,6 +67,12 @@ final localResources = {
     'loader.validation.required': 'This field is required',
     'loader.server.connected': 'GMサーバに接続しました',
     'loader.server.unreachable': 'GMサーバに接続できませんでした。接続を確認したり、必要に応じて問題を報告してください',
+    'driver.loading.data': 'データを読み込んでいます...',
+    'push.registerDeviceOnServer': '端末を登録しています',
+    'push.bindModule': 'モジュールにリンクさせています',
+    'Locale.list': '言語を読み込んでいます',
+    'loading.downloading.configurations': 'コンフィグレーションをダウンロードしています',
+    'loading.downloading.reasonCodes': '理由を読み込んでいます',
   },
   'th': {
     'general.server': 'เซิร์ฟเวอร์',
@@ -62,6 +86,12 @@ final localResources = {
     'loader.server.connected': 'เชื่อมต่อกับเซิร์ฟเวอร์ GM แล้วก็ดีอีกครั้ง',
     'loader.server.unreachable':
         '''ไม่สามารถเข้าถึงเซิร์ฟเวอร์ GM ได้โปรดตรวจสอบการเชื่อมต่อหรือรายงานปัญหาหากจำเป็น''',
+    'driver.loading.data': 'โหลดข้อมูล...',
+    'push.registerDeviceOnServer': 'กำลังลงทะเบียนอุปกรณ์',
+    'push.bindModule': 'กำลังเชื่อมโยงกับมอดูล',
+    'Locale.list': 'ทำการโหลดภาษา',
+    'loading.downloading.configurations': 'ทำการดาวน์โหลดการตั้งค่า',
+    'loading.downloading.reasonCodes': 'กำลังโหลดเหตุผล',
   },
   'de': {
     'general.server': 'Server',
@@ -75,6 +105,12 @@ final localResources = {
     'loader.server.connected': 'Connected to GM server, it\'s all good again',
     'loader.server.unreachable':
         '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+    'driver.loading.data': 'Daten werden geladen...',
+    'push.registerDeviceOnServer': 'Registrierung des Gerätes',
+    'push.bindModule': 'Am Verknüpfen mit dem Modul',
+    'Locale.list': 'Sprachen werden geladen',
+    'loading.downloading.configurations': 'Konfigurationen herunterladen',
+    'loading.downloading.reasonCodes': 'Gründe werden geladen',
   },
   'it': {
     'general.server': 'Server',
@@ -88,6 +124,12 @@ final localResources = {
     'loader.server.connected': 'Connected to GM server, it\'s all good again',
     'loader.server.unreachable':
         '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+    'driver.loading.data': 'Caricando i dati...',
+    'push.registerDeviceOnServer': 'Registrando il dispositivo',
+    'push.bindModule': 'Collegandolo al modulo',
+    'Locale.list': 'Caricando lingue',
+    'loading.downloading.configurations': 'Scaricando delle configurazioni',
+    'loading.downloading.reasonCodes': 'Motivi di caricamento',
   },
   'fr': {
     'general.server': 'Serveur',
@@ -101,6 +143,12 @@ final localResources = {
     'loader.server.connected': 'Connected to GM server, it\'s all good again',
     'loader.server.unreachable':
         '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+    'driver.loading.data': 'Chargement des données...',
+    'push.registerDeviceOnServer': 'Enregistrement d\'un appareil',
+    'push.bindModule': 'Le relier au module',
+    'Locale.list': 'Chargement des langues',
+    'loading.downloading.configurations': 'Téléchargement des configurations',
+    'loading.downloading.reasonCodes': 'Charger des motifs',
   },
   'ru': {
     'general.server': 'сервер',
@@ -113,6 +161,12 @@ final localResources = {
     'loader.validation.required': 'This field is required',
     'loader.server.connected': 'Подключен к серверу GM, все снова OK',
     'loader.server.unreachable':
-        '''Не удалось связаться с сервером GM, проверьте подключение или сообщите о проблеме, если это необходимо'''
+        '''Не удалось связаться с сервером GM, проверьте подключение или сообщите о проблеме, если это необходимо''',
+    'driver.loading.data': 'Загрузка данных...',
+    'push.registerDeviceOnServer': 'Регистрация устройства',
+    'push.bindModule': 'Связать его с модулем',
+    'Locale.list': 'Загрузка языков',
+    'loading.downloading.configurations': 'Загрузка конфигураций',
+    'loading.downloading.reasonCodes': 'Причины загрузки',
   }
 };

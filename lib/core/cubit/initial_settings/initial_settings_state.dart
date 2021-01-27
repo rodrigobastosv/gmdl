@@ -11,8 +11,7 @@ class ServerValidationInitial extends InitialSettingsState {}
 
 class ValidatingServer extends InitialSettingsState {}
 
-class ServerValidationSuccess extends InitialSettingsState {
-}
+class ServerValidationSuccess extends InitialSettingsState {}
 
 class ServerValidationFailed extends InitialSettingsState {
   ServerValidationFailed(this.errorMessage);

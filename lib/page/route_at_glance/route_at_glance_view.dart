@@ -9,6 +9,7 @@ import '../../core/entity/enum/enums.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../pages_names.dart';
 import '../stop_list/stop_list_page.dart';
 import 'widget/basic_route_info.dart';
 import 'widget/route_map.dart';
@@ -32,6 +33,7 @@ class RouteAtGlanceView extends StatelessWidget {
             value: context.read<RouteCubit>(),
             child: const StopListPage(),
           ),
+          settings: const RouteSettings(name: STOP_LIST_PAGE),
         ),
       );
     }
@@ -84,6 +86,7 @@ class RouteAtGlanceView extends StatelessWidget {
             value: cubit,
             child: const StopListPage(),
           ),
+          settings: const RouteSettings(name: STOP_LIST_PAGE),
         ),
       );
     }

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../entity/dto/dtos.dart';
 import '../entity/model/models.dart';
 
-class Store extends ChangeNotifier {
-  String serverName;
-  String sessionId;
-  String locale = 'en';
+class GlobalInfo {
   DriverInfoDto driverInfo;
   MobileDeviceDto mobileDevice;
   GlobalConfigurationsDto globalConfigurations;
@@ -14,16 +11,6 @@ class Store extends ChangeNotifier {
   List<FeatureStateModel> featureStates;
   List<CancelCodeModel> cancelCodes;
   List<UndeliverableCodeModel> undeliverableCodes;
-
-  void changeServerName(String serverName) {
-    this.serverName = serverName;
-    notifyListeners();
-  }
-
-  void storeSessionId(String sessionId) {
-    this.sessionId = sessionId;
-    notifyListeners();
-  }
 
   void storeGeneralInfo({
     @required DriverInfoDto driverInfo,
@@ -39,6 +26,5 @@ class Store extends ChangeNotifier {
     this.userConfigurations = userConfigurations;
     this.cancelCodes = cancelCodes;
     this.undeliverableCodes = undeliverableCodes;
-    notifyListeners();
   }
 }

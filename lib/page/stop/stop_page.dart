@@ -5,13 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
 import '../../core/entity/model/models.dart';
+import '../../core/global/global_info.dart';
 import '../../core/repository/repositories.dart';
-import '../../core/store/store.dart';
 import 'stop_view.dart';
 
 class StopPage extends StatelessWidget {
-  const StopPage({Key key, this.stop})
-      : assert(stop != null),
+  const StopPage({
+    Key key,
+    this.stop,
+  })  : assert(stop != null),
         super(key: key);
 
   final StopModel stop;
@@ -23,7 +25,7 @@ class StopPage extends StatelessWidget {
         stop: stop,
         repository: context.read<StopRepository>(),
         routeCubit: context.read<RouteCubit>(),
-        store: context.read<Store>(),
+        globalInfo: context.read<GlobalInfo>(),
       ),
       child: const StopView(),
     );

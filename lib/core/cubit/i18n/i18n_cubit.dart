@@ -1,23 +1,26 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
 import '../../entity/model/models.dart';
 import '../../i18n/local_resources.dart';
 import '../../repository/repositories.dart';
-import '../../store/store.dart';
 
 part 'i18n_state.dart';
 
 class I18nCubit extends Cubit<I18nState> {
-  I18nCubit(this._repository) : super(I18nInitial());
+  I18nCubit({
+    I18nRepository repository,
+  })  : _repository = repository,
+        super(I18nInitial());
 
   final I18nRepository _repository;
 
   String locale;
   Map<String, String> _resources;
 
-  void initResources(Store _store) {
-    locale = _store.locale;
+  void initResources(Box _store) {
+    locale = _store.get('locale') ?? 'en';
     _resources = localResources[locale];
   }
 

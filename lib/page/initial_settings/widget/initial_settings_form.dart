@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/constants.dart';
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/locale.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
-import '../../../core/store/store.dart';
+import '../../../core/global/hive.dart';
 
 class InitialSettingsForm extends StatefulWidget {
   InitialSettingsForm({Key key}) : super(key: key);
@@ -73,7 +74,8 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                       items: locales,
                       hint: context.getText('locale.label'),
                       onChanged: (locale) {
-                        context.read<Store>().locale = locale.key;
+                        final store = Hive.box(CONFIG_BOX);
+                        store.put('locale', locale.key);
                         context.read<I18nCubit>().changeLocale(locale.key);
                       },
                       selectedItem: Locale('en', 'English'),

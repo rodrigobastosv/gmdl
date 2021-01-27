@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
 import '../../repository/initial_setup_repository.dart';
-import '../../store/store.dart';
 
 part 'initial_settings_state.dart';
 
@@ -18,14 +18,14 @@ class InitialSettingsCubit extends Cubit<InitialSettingsState> {
         super(ServerValidationInitial());
 
   final InitialSetupRepository _repository;
-  final Store store;
+  final Box store;
 
   Future<void> validateServerName(String serverName) async {
     try {
       emit(ValidatingServer());
       final serverValidated = await _repository.validateServerName(serverName);
       if (serverValidated) {
-        store.changeServerName(serverName);
+        store.put('serverName', serverName);
         emit(ServerValidationSuccess());
       } else {
         emit(

@@ -16,3 +16,26 @@ RouteModel updateRouteByAddStop(RouteModel route, StopModel stop) {
     stops: [...stops],
   );
 }
+
+RouteModel mergeRoutes(RouteModel originalRoute, RouteModel nextRoute) {
+  return originalRoute.copyWith(
+    organization: nextRoute.organization,
+    date: nextRoute.date,
+    description: nextRoute.description,
+    origin: nextRoute.origin,
+    destination: nextRoute.destination,
+    stops: nextRoute.stops,
+    plannedArrival: nextRoute.plannedArrival,
+    plannedDeparture: nextRoute.plannedArrival,
+    plannedDistance: nextRoute.plannedDistance,
+    plannedComplete: nextRoute.plannedComplete,
+    plannedStart: nextRoute.plannedStart,
+    totalStops: nextRoute.totalStops,
+    status: nextRoute.status,
+    plannedServiceTime: nextRoute.plannedServiceTime,
+    hasPicture: nextRoute.hasPicture,
+    proactiveRouteOptConfig: nextRoute.proactiveRouteOptConfig,
+    onRoute: nextRoute.onRoute,
+    proactiveRouteOptApplied: nextRoute.proactiveRouteOptApplied,
+  );
+}

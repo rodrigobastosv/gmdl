@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/cubit/cubits.dart';
 import '../../widget/general/gm_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../pages_names.dart';
 import '../route_at_glance/route_at_glance_page.dart';
 
 class LoadRouteView extends StatelessWidget {
@@ -27,9 +28,8 @@ class LoadRouteView extends StatelessWidget {
     if (state is RouteLoadedSuccess) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => RouteAtGlancePage(
-            route: state.route,
-          ),
+          builder: (_) => RouteAtGlancePage(route: state.route),
+          settings: const RouteSettings(name: ROUTE_AT_GLANCE_PAGE),
         ),
       );
     }

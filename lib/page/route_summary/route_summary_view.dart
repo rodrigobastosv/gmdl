@@ -9,6 +9,7 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../initial_settings/initial_settings_page.dart';
+import '../pages_names.dart';
 import 'widget/basic_route_summary_info.dart';
 import 'widget/route_summary_header_info.dart';
 
@@ -28,6 +29,7 @@ class RouteSummaryView extends StatelessWidget {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (_) => const InitialSettingsPage(),
+            settings: const RouteSettings(name: INITIAL_SETTINGS_PAGE),
           ),
           (_) => false);
     }

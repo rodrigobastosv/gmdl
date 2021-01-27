@@ -10,6 +10,7 @@ import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
+import '../pages_names.dart';
 
 class ChooseEquipmentView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -29,8 +30,8 @@ class ChooseEquipmentView extends StatelessWidget {
     if (state is EquipmentFound) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => const LoadRoutePage(),
-        ),
+            builder: (_) => const LoadRoutePage(),
+            settings: const RouteSettings(name: LOAD_ROUTE_PAGE)),
       );
     } else if (state is EquipmentNotFound) {
       showErrorNotification(state.errorMessage);

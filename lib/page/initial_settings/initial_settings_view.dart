@@ -7,6 +7,7 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages.dart';
+import '../pages_names.dart';
 import 'widget/initial_settings_form.dart';
 
 class InitialSettingsView extends StatelessWidget {
@@ -32,6 +33,7 @@ class InitialSettingsView extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) => SignInPage(),
+          settings: const RouteSettings(name: SIGN_IN_PAGE),
         ),
       );
     } else if (state is ServerValidationFailed) {

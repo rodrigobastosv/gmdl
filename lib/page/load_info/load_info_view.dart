@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/cubit/cubits.dart';
 import '../../widget/general/gm_loading.dart';
 import '../pages.dart';
+import '../pages_names.dart';
 
 class LoadInfoView extends StatelessWidget {
   const LoadInfoView({Key key}) : super(key: key);
@@ -25,6 +26,7 @@ class LoadInfoView extends StatelessWidget {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const ChooseEquipmentPage(),
+          settings: const RouteSettings(name: CHOOSE_EQUIPMENT_PAGE),
         ),
       );
     }
