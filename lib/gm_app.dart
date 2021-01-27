@@ -8,8 +8,8 @@ import 'page/pages.dart';
 import 'repositories_widget_provider.dart';
 import 'widget/global_info_widget_provider.dart';
 
-class App extends StatelessWidget {
-  const App({
+class GMApp extends StatelessWidget {
+  const GMApp({
     Key key,
   }) : super(key: key);
 

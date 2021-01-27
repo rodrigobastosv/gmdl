@@ -1,7 +1,8 @@
 import 'package:device_info/device_info.dart';
 import 'package:get_it/get_it.dart';
-import 'services.dart';
 import 'package:package_info/package_info.dart';
+
+import 'services.dart';
 
 final G = GetIt.I;
 
