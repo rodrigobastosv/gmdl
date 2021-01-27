@@ -18,7 +18,16 @@ class RouteLoadedSuccess extends LoadRouteState {
   List<Object> get props => [route];
 }
 
-class RouteLoadFailed extends LoadRouteState {}
+class RouteLoadFailed extends LoadRouteState {
+  RouteLoadFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
 
 class LoadingInfo extends LoadRouteState {
   const LoadingInfo(this.info);

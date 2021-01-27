@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../entity/dto/route_view_info_dto.dart';
 import '../../entity/model/models.dart';
+import '../../exception/exceptions.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 import '../cubits.dart';
@@ -44,8 +45,8 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
       route = RouteModel.fromJson(dataLoad['route']);
 
       emit(RouteLoadedSuccess(route));
-    } on Exception {
-      emit(RouteLoadFailed());
+    } on NoneRouteFoundException catch (e) {
+      emit(RouteLoadFailed(e.errorMessage));
     }
   }
 }

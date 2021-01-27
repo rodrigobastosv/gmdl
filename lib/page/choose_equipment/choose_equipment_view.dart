@@ -98,7 +98,7 @@ class ChooseEquipmentView extends StatelessWidget {
   }
 
   Widget _getMainButtonIcon(ChooseEquipmentState state) {
-    if (state is LoadingEquipment || state is EquipmentFound) {
+    if (state is LoadingEquipment) {
       return const GMButtonLoading();
     } else {
       return SvgPicture.asset('assets/icons/route.svg');
