@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/enum/enums.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../pages_names.dart';
@@ -36,6 +37,8 @@ class RouteAtGlanceView extends StatelessWidget {
           settings: const RouteSettings(name: STOP_LIST_PAGE),
         ),
       );
+    } else if (state is RouteStartFailed) {
+      showErrorNotification(state.errorMessage);
     }
   }
 

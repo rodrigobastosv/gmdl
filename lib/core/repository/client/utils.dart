@@ -61,7 +61,8 @@ String getErrorMessage(DioError dioError) {
   if (dioError.response.statusCode == HTTP_NOT_FOUND) {
     return 'loader.server.connectivity';
   }
-  return dioError.response.data['message'];
+  return dioError.response.data['message'] ??
+      dioError.response.data['errorMessages'][0]['resource']['value'];
 }
 
 String getCriteria(dynamic criteria) {
