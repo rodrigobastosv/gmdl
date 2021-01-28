@@ -11,6 +11,19 @@ List<StopModel> getDoneStops(RouteModel route) {
   return routeStops.where((stop) => stop.isDone).toList();
 }
 
+List<StopModel> getStopsOrderedByPlannedSequenceNum(List<StopModel> stops) {
+  final stopsToOrder = [...stops];
+  stopsToOrder.sort((s1, s2) => s1.plannedSequenceNum - s2.plannedSequenceNum);
+  return stopsToOrder;
+}
+
+StopModel getNextSuggestedStop(RouteModel route) {
+  final stopsOrderedBySequenceNum = [
+    ...getStopsOrderedByPlannedSequenceNum(route.stops),
+  ];
+  return stopsOrderedBySequenceNum.first;
+}
+
 bool hasPendingStops(RouteModel route) {
   final routeStops = route.stops;
   return routeStops.any((stop) => stop.isPending);

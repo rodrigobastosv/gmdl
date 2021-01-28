@@ -6,10 +6,14 @@ class StopSizeInfo extends StatelessWidget {
   const StopSizeInfo({
     Key key,
     @required this.sizeAlias,
+    @required this.iconColor,
+    @required this.textColor,
   })  : assert(sizeAlias != null),
         super(key: key);
 
   final BaseUnitModel sizeAlias;
+  final Color iconColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +22,31 @@ class StopSizeInfo extends StatelessWidget {
         Container(
           height: 14,
           width: 14,
-          color: const Color(0xFFB0D25A),
-          child: const Center(
+          color: iconColor,
+          child: Center(
             child: Text(
               'S1',
               style: TextStyle(
-                color: Colors.white,
                 fontSize: 10,
+                color: textColor,
               ),
             ),
           ),
         ),
         const SizedBox(width: 3),
-        const Text('5'),
+        Text(
+          '5',
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
         const SizedBox(width: 3),
-        Text(sizeAlias.description.toUpperCase()),
+        Text(
+          sizeAlias.description.toUpperCase(),
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
       ],
     );
   }

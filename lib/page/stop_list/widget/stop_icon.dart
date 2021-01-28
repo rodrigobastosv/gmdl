@@ -7,10 +7,14 @@ import 'pending_stop_status_icon.dart';
 class StopIcon extends StatelessWidget {
   const StopIcon({
     Key key,
-    this.stop,
+    @required this.stop,
+    @required this.iconColor,
+    @required this.textColor,
   }) : super(key: key);
 
   final StopModel stop;
+  final Color iconColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +22,12 @@ class StopIcon extends StatelessWidget {
         ? Stack(
             children: [
               CircleAvatar(
-                backgroundColor: const Color(0xFF464646),
+                backgroundColor: iconColor,
                 child: Text(
                   stop.plannedSequenceNum.toString(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: textColor,
                   ),
                 ),
               ),

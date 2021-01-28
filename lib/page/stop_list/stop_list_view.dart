@@ -48,7 +48,10 @@ class StopListView extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    PendingStopsTabView(stops: pendingStops),
+                    PendingStopsTabView(
+                      stops: pendingStops,
+                      isUsingPro: cubit.route.isUsingPro,
+                    ),
                     if (doneStops.isNotEmpty)
                       DoneStopsTabView(stops: doneStops),
                   ],

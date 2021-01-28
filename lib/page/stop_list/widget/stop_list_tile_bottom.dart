@@ -10,16 +10,18 @@ import '../../../core/extension/i18n_cubit_extension.dart';
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
     Key key,
-    this.stop,
+    @required this.stop,
+    @required this.textColor,
   }) : super(key: key);
 
   final StopModel stop;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(),
+        Divider(color: textColor),
         Container(
           height: 30,
           child: Row(
@@ -30,13 +32,15 @@ class StopListTileBottom extends StatelessWidget {
                   context.getText('stopList.tabs.directions'),
                 ),
                 style: TextButton.styleFrom(
-                  primary: Colors.black,
+                  primary: textColor,
                   textStyle: const TextStyle(
                     fontSize: 14,
                   ),
                 ),
-                icon: SvgPicture.asset('assets/icons/directions.svg',
-                    color: Colors.black),
+                icon: SvgPicture.asset(
+                  'assets/icons/directions.svg',
+                  color: textColor,
+                ),
                 onPressed: () {},
               ),
               if (stop.hasNotBeenArrived)
@@ -45,19 +49,21 @@ class StopListTileBottom extends StatelessWidget {
                     context.getText('route.inlinemenu.arrival'),
                   ),
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
+                    primary: textColor,
                     textStyle: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
-                  icon: SvgPicture.asset('assets/icons/arrival.svg',
-                      color: Colors.black),
+                  icon: SvgPicture.asset(
+                    'assets/icons/arrival.svg',
+                    color: textColor,
+                  ),
                   onPressed: () => context.read<RouteCubit>().arriveStop(stop),
                 ),
             ],
           ),
         ),
-        const Divider(thickness: 2),
+        //const Divider(thickness: 2),
       ],
     );
   }
