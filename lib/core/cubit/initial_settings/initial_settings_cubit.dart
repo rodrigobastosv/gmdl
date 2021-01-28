@@ -15,22 +15,23 @@ part 'initial_settings_state.dart';
 class InitialSettingsCubit extends Cubit<InitialSettingsState> {
   InitialSettingsCubit({
     @required InitialSettingsRepository repository,
-    @required this.globalBox,
+    @required Box globalBox,
   })  : assert(repository != null),
         assert(globalBox != null),
         _repository = repository,
+        _globalBox = globalBox,
         super(ServerValidationInitial());
 
   final InitialSettingsRepository _repository;
-  final Box globalBox;
+  final Box _globalBox;
 
   Future<void> validateServerName(String serverName) async {
     try {
       emit(ValidatingServer());
       final locales = await _repository.fetchAllLocales(serverName);
       _repository.authIdpDiscovery(serverName);
-      globalBox.put(SERVER, serverName);
-      globalBox.put(ALL_LOCALES, jsonEncode(locales));
+      _globalBox.put(SERVER, serverName);
+      _globalBox.put(ALL_LOCALES, jsonEncode(locales));
       emit(ServerValidationSuccess());
     } on GMServerException catch (e) {
       emit(ServerValidationFailed(e.errorMessage));
