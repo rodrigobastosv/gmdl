@@ -74,8 +74,8 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                       items: locales,
                       hint: context.getText('locale.label'),
                       onChanged: (locale) {
-                        final store = Hive.box(CONFIG_BOX);
-                        store.put('locale', locale.key);
+                        final globalBox = Hive.box(GLOBAL_BOX);
+                        globalBox.put(LOCALE_KEY, locale.key);
                         context.read<I18nCubit>().changeLocale(locale.key);
                       },
                       selectedItem: Locale('en', 'English'),

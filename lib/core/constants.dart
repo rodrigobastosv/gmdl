@@ -1,5 +1,6 @@
 import 'entity/locale.dart';
 
+const consumer = 'DRIVER';
 const moduleName = 'DRIVER';
 const moduleKey = 'GreenMileDriverLite';
 const moduleScope = 'driver7:default';

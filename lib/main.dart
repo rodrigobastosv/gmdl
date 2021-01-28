@@ -27,7 +27,7 @@ void main() async {
   await initServices();
   final directory = await getApplicationDocumentsDirectory();
   await Hive.init(directory.path);
-  await Hive.openBox(CONFIG_BOX);
+  await Hive.openBox(GLOBAL_BOX);
   Firebase.initializeApp();
   Bloc.observer = CubitObserver();
   await SentryFlutter.init(

@@ -19,7 +19,7 @@ class RepositoriesWidgetProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(CONFIG_BOX).listenable(),
+      valueListenable: Hive.box(GLOBAL_BOX).listenable(),
       builder: (_, box, ___) => MultiRepositoryProvider(
         key: UniqueKey(),
         providers: getRepositoryProviders(box),

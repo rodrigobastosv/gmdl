@@ -14,7 +14,7 @@ class SignInPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => SignInCubit(
         repository: context.read<SignInRepository>(),
-        store: Hive.box(CONFIG_BOX),
+        globalBox: Hive.box(GLOBAL_BOX),
       ),
       child: SignInView(),
     );

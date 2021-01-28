@@ -8,6 +8,10 @@ final localResources = {
     'loader.username': 'Username',
     'driver.hint.password': 'Password',
     'loader.validation.required': 'This field is required',
+    'loader.server.version':
+        '''Unable to check this server\'s version. Please check the URL and connectivity.''',
+    'loader.server.connectivity':
+        '''Unable to reach this server. Please check the connectivity''',
     'loader.server.connected': 'Connected to GM server, it\'s all good again',
     'loader.server.unreachable':
         '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
@@ -26,7 +30,11 @@ final localResources = {
     'driver.hint.login': 'Login',
     'loader.username': 'Usuario',
     'driver.hint.password': 'Senha',
-    'loader.validation.required': 'This field is required',
+    'loader.validation.required': 'Campo Obrigatório',
+    'loader.server.version':
+        '''Não foi possível verificar a versão deste servidor. Verifique o URL e a conectividade.''',
+    'loader.server.connectivity':
+        '''Não foi possível se comunicar com este servidor. Cheque se tem conectividade''',
     'loader.server.connected': 'Conectado ao servidor GM, está tudo bem agora',
     'loader.server.unreachable':
         '''Não foi possível acessar o servidor GM, por favor verifique sua conectividade ou comunique o problema, se necessário''',
@@ -45,7 +53,11 @@ final localResources = {
     'driver.hint.login': 'Login',
     'loader.username': 'Usuario',
     'driver.hint.password': 'Contraseña',
-    'loader.validation.required': 'This field is required',
+    'loader.validation.required': 'Este campo es requerido',
+    'loader.server.version':
+        '''No se puede comprobar la versión de este servidor. Compruebe la URL y la conectividad.''',
+    'loader.server.connectivity':
+        '''No se puede acceder a este servidor. Comprueba la conectividad''',
     'loader.server.connected': 'Re-conectado al servidor GM',
     'loader.server.unreachable':
         '''No se pudo acceder al servidor GM, comprueba tu conectividad o informa del problema, si es necesario''',
@@ -64,7 +76,9 @@ final localResources = {
     'driver.hint.login': 'ログイン',
     'loader.username': 'ユーザー名',
     'driver.hint.password': 'パスワード',
-    'loader.validation.required': 'This field is required',
+    'loader.validation.required': 'この項目は必須です',
+    'loader.server.version': '''このサーバーのバージョンを確認できません。 URLと接続を確認してください。''',
+    'loader.server.connectivity': '''このサーバーに到達できません。接続を確認してください''',
     'loader.server.connected': 'GMサーバに接続しました',
     'loader.server.unreachable': 'GMサーバに接続できませんでした。接続を確認したり、必要に応じて問題を報告してください',
     'driver.loading.data': 'データを読み込んでいます...',
@@ -82,7 +96,11 @@ final localResources = {
     'driver.hint.login': 'เข้าสู่ระบบ',
     'loader.username': 'ชื่อผู้ใช้',
     'driver.hint.password': 'รหัสผ่าน',
-    'loader.validation.required': 'This field is required',
+    'loader.validation.required': 'ฟิลด์นี้จำเป็น',
+    'loader.server.version':
+        '''ไม่สามารถตรวจสอบเวอร์ชันของเซิร์ฟเวอร์นี้ โปรดตรวจสอบ URL และการเชื่อมต่อ''',
+    'loader.server.connectivity':
+        '''ไม่สามารถเข้าถึงเซิร์ฟเวอร์นี้ โปรดตรวจสอบการเชื่อมต่อ''',
     'loader.server.connected': 'เชื่อมต่อกับเซิร์ฟเวอร์ GM แล้วก็ดีอีกครั้ง',
     'loader.server.unreachable':
         '''ไม่สามารถเข้าถึงเซิร์ฟเวอร์ GM ได้โปรดตรวจสอบการเชื่อมต่อหรือรายงานปัญหาหากจำเป็น''',
@@ -101,10 +119,15 @@ final localResources = {
     'driver.hint.login': 'Anmeldung',
     'loader.username': 'Benutzername',
     'driver.hint.password': 'Passwort',
-    'loader.validation.required': 'This field is required',
-    'loader.server.connected': 'Connected to GM server, it\'s all good again',
+    'loader.validation.required': 'Dieses Feld wird benötigt',
+    'loader.server.version':
+        '''Die Version dieses Servers kann nicht überprüft werden. Bitte überprüfen Sie die URL und die Konnektivität.''',
+    'loader.server.connectivity':
+        '''Dieser Server kann nicht erreicht werden. Bitte überprüfen Sie die Konnektivität''',
+    'loader.server.connected':
+        '''Verbunden mit dem GM-Server ist alles wieder gut''',
     'loader.server.unreachable':
-        '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+        '''Der GM-Server konnte nicht erreicht werden. Überprüfen Sie Ihre Konnektivität oder melden Sie das Problem, falls erforderlich''',
     'driver.loading.data': 'Daten werden geladen...',
     'push.registerDeviceOnServer': 'Registrierung des Gerätes',
     'push.bindModule': 'Am Verknüpfen mit dem Modul',
@@ -120,10 +143,15 @@ final localResources = {
     'driver.hint.login': 'Login',
     'loader.username': 'Nome dell\'utente',
     'driver.hint.password': 'Password',
-    'loader.validation.required': 'This field is required',
-    'loader.server.connected': 'Connected to GM server, it\'s all good again',
+    'loader.validation.required': 'Questo campo è obbligatorio',
+    'loader.server.version':
+        '''Impossibile controllare la versione di questo server. Controlla l'URL e la connettività.''',
+    'loader.server.connectivity':
+        '''Impossibile raggiungere questo server. Si prega di verificare la connettività''',
+    'loader.server.connected':
+        '''Collegato al server GM, è di nuovo tutto a posto''',
     'loader.server.unreachable':
-        '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+        '''Impossibile raggiungere il server GM, controlla la tua connettività o segnala il problema, se necessario''',
     'driver.loading.data': 'Caricando i dati...',
     'push.registerDeviceOnServer': 'Registrando il dispositivo',
     'push.bindModule': 'Collegandolo al modulo',
@@ -139,10 +167,14 @@ final localResources = {
     'driver.hint.login': 'Anmeldung',
     'loader.username': 'Nom d\'utilisateur',
     'driver.hint.password': 'Mot de passe',
-    'loader.validation.required': 'This field is required',
-    'loader.server.connected': 'Connected to GM server, it\'s all good again',
+    'loader.validation.required': 'Ce champ est requis',
+    'loader.server.version':
+        '''Impossible de vérifier la version de ce serveur. Veuillez vérifier l'URL et la connectivité.''',
+    'loader.server.connectivity':
+        '''Impossible d'accéder à ce serveur. Veuillez vérifier la connectivité''',
+    'loader.server.connected': 'Connecté au serveur GM, tout va bien à nouveau',
     'loader.server.unreachable':
-        '''Couldn\'t reach GM server, please check your connectivity or report the issue, if necessary''',
+        '''Impossible d’atteindre le serveur GM, veuillez vérifier votre connectivité ou signaler le problème, si nécessaire''',
     'driver.loading.data': 'Chargement des données...',
     'push.registerDeviceOnServer': 'Enregistrement d\'un appareil',
     'push.bindModule': 'Le relier au module',
@@ -158,7 +190,11 @@ final localResources = {
     'driver.hint.login': 'Войти',
     'loader.username': 'имя пользователя',
     'driver.hint.password': 'пароль',
-    'loader.validation.required': 'This field is required',
+    'loader.validation.required': 'Это поле обязательно к заполнению',
+    'loader.server.version':
+        '''Невозможно проверить версию этого сервера. Пожалуйста, проверьте URL-адрес и подключение.''',
+    'loader.server.connectivity':
+        '''Невозможно связаться с этим сервером. Пожалуйста, проверьте подключение''',
     'loader.server.connected': 'Подключен к серверу GM, все снова OK',
     'loader.server.unreachable':
         '''Не удалось связаться с сервером GM, проверьте подключение или сообщите о проблеме, если это необходимо''',

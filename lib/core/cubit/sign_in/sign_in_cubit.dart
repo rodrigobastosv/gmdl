@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 
 import '../../entity/dto/login_result_dto.dart';
 import '../../exception/exceptions.dart';
+import '../../global/hive.dart';
 import '../../repository/sign_in_repository.dart';
 
 part 'sign_in_state.dart';
@@ -13,14 +14,14 @@ part 'sign_in_state.dart';
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit({
     @required SignInRepository repository,
-    @required this.store,
+    @required this.globalBox,
   })  : assert(repository != null),
-        assert(store != null),
+        assert(globalBox != null),
         _repository = repository,
         super(SignInInitial());
 
   final SignInRepository _repository;
-  final Box store;
+  final Box globalBox;
 
   Future<void> signInUser({
     String serverName,
@@ -34,7 +35,7 @@ class SignInCubit extends Cubit<SignInState> {
         password: password,
       );
       final loginResult = LoginResultDTO.fromJson(username, signInResponse);
-      store.put('sessionId', loginResult.jSessionId);
+      globalBox.put(TOKEN, loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
     } on SignInException catch (e) {
       emit(UserSigningFailed(e.errorMessage));

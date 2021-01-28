@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../main.dart';
 import '../../exception/exceptions.dart';
 import 'client.dart';
+import 'http_status.dart';
 
 Dio getBasicClient() {
   return Dio(
@@ -57,6 +58,9 @@ dynamic handleResponse(Response response) {
 }
 
 String getErrorMessage(DioError dioError) {
+  if (dioError.response.statusCode == HTTP_NOT_FOUND) {
+    return 'loader.server.connectivity';
+  }
   return dioError.response.data['message'];
 }
 

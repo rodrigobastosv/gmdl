@@ -1,14 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
+import '../global/hive.dart';
 import 'client/utils.dart';
 import 'loading_info_repository.dart';
 import 'repositories.dart';
 import 'sign_in_repository.dart';
 
-List<RepositoryProvider> getRepositoryProviders(Box store) {
-  final serverName = store.get('serverName');
-  final sessionId = store.get('sessionId');
+List<RepositoryProvider> getRepositoryProviders(Box globalBox) {
+  final serverName = globalBox.get(SERVER);
+  final sessionId = globalBox.get(TOKEN);
   return [
     RepositoryProvider<SignInRepository>(
       create: (_) => SignInRepository(
