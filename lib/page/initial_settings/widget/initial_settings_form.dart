@@ -8,7 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../core/constants.dart';
 import '../../../core/cubit/cubits.dart';
-import '../../../core/entity/locale.dart';
+import '../../../core/entity/locale_option.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/global/hive.dart';
 
@@ -61,7 +61,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                   ),
                   child: Container(
                     color: Colors.white,
-                    child: DropdownSearch<Locale>(
+                    child: DropdownSearch<LocaleOption>(
                       dropdownSearchDecoration: const InputDecoration(
                         prefixIcon: Icon(
                           MdiIcons.earth,
@@ -71,14 +71,14 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                       mode: Mode.MENU,
                       showSelectedItem: true,
                       compareFn: (l1, l2) => l1 == l2,
-                      items: locales,
+                      items: localeOptions,
                       hint: context.getText('locale.label'),
                       onChanged: (locale) {
                         final globalBox = Hive.box(GLOBAL_BOX);
                         globalBox.put(LOCALE_KEY, locale.key);
                         context.read<I18nCubit>().changeLocale(locale.key);
                       },
-                      selectedItem: Locale('en', 'English'),
+                      selectedItem: LocaleOption('en', 'English'),
                     ),
                   ),
                 ),
