@@ -24,6 +24,7 @@ class PendingStopsTabView extends StatelessWidget {
           stop: stops[i],
           isNextStopSuggested: i == 0,
           isUsingPro: isUsingPro,
+          isBeginNextStops: i == 1,
         ),
         itemCount: stops.length,
       ),
