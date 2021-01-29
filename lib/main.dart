@@ -14,7 +14,7 @@ import 'core/global/hive.dart';
 import 'core/service/services_locator.dart';
 import 'gm_app.dart';
 
-final alice = Alice(
+Alice alice = Alice(
   showInspectorOnShake: kDebugMode,
 );
 
