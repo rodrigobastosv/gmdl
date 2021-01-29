@@ -42,7 +42,7 @@ class StopSizeInfo extends StatelessWidget {
         ),
         const SizedBox(width: 3),
         Text(
-          sizeAlias.description.toUpperCase(),
+          sizeAlias.description?.toUpperCase() ?? '',
           style: TextStyle(
             color: textColor,
           ),

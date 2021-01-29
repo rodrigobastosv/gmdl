@@ -24,7 +24,7 @@ class StopIcon extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: iconColor,
                 child: Text(
-                  stop.plannedSequenceNum.toString(),
+                  stop.plannedSequenceNum?.toString() ?? '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: textColor,

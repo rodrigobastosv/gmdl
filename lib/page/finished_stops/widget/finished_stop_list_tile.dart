@@ -33,7 +33,7 @@ class FinishedStopListTile extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(stop.location.addressLine1),
+                    Text(stop.location.addressLine1 ?? ''),
                   ],
                 ),
               ),
