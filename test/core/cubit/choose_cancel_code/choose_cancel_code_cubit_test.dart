@@ -36,7 +36,7 @@ void main() {
       '''WHEN pickCancelCode is called
          SHOULD emit CancelCodePicked with the same cancel code picked
       ''',
-      build: () => ChooseCancelCodeCubit(),
+      build: () => cubit,
       act: (cubit) => cubit.pickCancelCode(cancelCode),
       expect: [
         CancelCodePicked(cancelCode),
@@ -47,7 +47,7 @@ void main() {
       '''WHEN unpickCancelCode is called
          SHOULD emit CancelCodePicked with null
       ''',
-      build: () => ChooseCancelCodeCubit(),
+      build: () => cubit,
       act: (cubit) => cubit.unpickCancelCode(cancelCode),
       expect: [
         CancelCodePicked(null),
