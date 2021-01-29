@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -5,49 +6,63 @@ import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 
 import '../../../main.dart';
+import '../../constants.dart';
 import '../../exception/exceptions.dart';
 import 'client.dart';
-import 'http_status.dart';
+import 'http_constants.dart';
+import 'interceptor/gm_retry_interceptor.dart';
+import 'interceptor/interceptors.dart';
+
+const DEFAULT_RETRIES_COUNT = 2;
+const DEFAULT_RETRY_INTERVAL_SECONDS = 5;
 
 Dio getBasicClient() {
-  return Dio(
+  final dio = Dio(
     BaseOptions(
       headers: {
-        'Accept': 'application/json',
+        ACCEPT: APPLICATION_JSON,
       },
       queryParameters: {
-        'consumer': 'DRIVER',
+        CONSUMER: consumer,
       },
     ),
-  )..interceptors.addAll(_getBasicInterceptors());
+  );
+  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  return dio;
 }
 
 Dio getDefaultClient(String serverName, String sessionId) {
-  return Dio(
+  final dio = Dio(
     BaseOptions(
-      headers: {'Accept': 'application/json', 'Cookie': 'SESSION=$sessionId'},
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+        COOKIE: '$SESSION=$sessionId',
+      },
       baseUrl: 'https://$serverName.greenmile.com',
       queryParameters: {
-        'consumer': 'DRIVER',
+        CONSUMER: consumer,
       },
     ),
-  )..interceptors.addAll(_getBasicInterceptors());
+  );
+  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  return dio;
 }
 
-List<Interceptor> _getBasicInterceptors() {
-  if (kDebugMode) {
-    return []..add(alice.getDioInterceptor());
-    /*..add(
-        LogInterceptor(
-          requestHeader: false,
-          requestBody: false,
-          responseHeader: false,
-          responseBody: true,
-          error: true,
-        ),
-      );*/
-  }
-  return [];
+List<Interceptor> _getBasicInterceptors(Dio dio) {
+  return [
+    if (kDebugMode) ...[
+      alice.getDioInterceptor(),
+      GMLoggerInterceptor(),
+    ],
+    GMRetryInterceptor(dio),
+  ];
+}
+
+FutureOr<bool> getDefaultRetryPolicy(DioError error) {
+  final method = error.request.method;
+  final url = error.request.path;
+  return method != HTTP_METHOD_DELETE &&
+      (method != HTTP_METHOD_POST || url.contains(RESTRICTIONS));
 }
 
 dynamic handleResponse(Response response) {

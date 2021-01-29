@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/global/hive.dart';
+import '../../core/repository/client/gm_client.dart';
 import '../../core/repository/client/utils.dart';
 import '../../core/repository/initial_settings_repository.dart';
 import 'initial_settings_view.dart';
@@ -17,7 +18,7 @@ class InitialSettingsPage extends StatelessWidget {
     return BlocProvider<InitialSettingsCubit>(
       create: (_) => InitialSettingsCubit(
         repository: InitialSettingsRepository(
-          getBasicClient(),
+          GMClient(getBasicClient()),
         ),
         globalBox: Hive.box(GLOBAL_BOX),
       ),

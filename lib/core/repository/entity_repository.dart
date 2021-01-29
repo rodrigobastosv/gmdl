@@ -1,13 +1,12 @@
-import 'package:dio/dio.dart';
-
 import '../entity/model/models.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 
 class EntityRepository {
   EntityRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<List<StopTypeModel>> fetchStopTypes() async {
     try {

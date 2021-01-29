@@ -1,14 +1,13 @@
-import 'package:dio/dio.dart';
-
 import '../exception/equipment_not_found_exception.dart';
 import '../exception/exceptions.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 
 class EquipmentRepository {
   EquipmentRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<bool> getEquipment(String equipmentKey) async {
     try {
