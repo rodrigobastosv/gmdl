@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/model/locale_model.dart';
@@ -14,25 +15,30 @@ part 'i18n_state.dart';
 
 class I18nCubit extends Cubit<I18nState> {
   I18nCubit({
-    I18nRepository repository,
-  })  : _repository = repository,
+    @required I18nRepository repository,
+    @required Box globalBox,
+  })  : assert(repository != null),
+        assert(globalBox != null),
+        _repository = repository,
+        _globalBox = globalBox,
         super(I18nInitial());
 
   final I18nRepository _repository;
+  final Box _globalBox;
 
   String localeKey;
   Map<String, String> _resources;
   List<LocaleModel> _allLocales;
 
-  void initI18nInfo(Box _globalBox) {
-    _allLocales = _getLocales(_globalBox);
+  void initI18nInfo() {
+    _allLocales = _getLocales();
     localeKey = _globalBox.get(LOCALE_KEY) ?? 'en';
     _resources = localResources[localeKey];
   }
 
   List<LocaleModel> getAllLocales() => _allLocales;
 
-  List<LocaleModel> _getLocales(Box _globalBox) {
+  List<LocaleModel> _getLocales() {
     final _locales = _globalBox.get(ALL_LOCALES) ?? '';
     if (_locales.isNotEmpty) {
       final _localesDecoded = jsonDecode(_locales);
@@ -57,7 +63,6 @@ class I18nCubit extends Cubit<I18nState> {
       emit(ResourcesFetchSuccess());
     } on Exception {
       emit(ResourcesFetchFailed());
-      rethrow;
     }
   }
 
