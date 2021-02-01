@@ -52,7 +52,6 @@ List<Interceptor> _getBasicInterceptors(Dio dio) {
   return [
     if (kDebugMode) ...[
       alice.getDioInterceptor(),
-      GMLoggerInterceptor(),
     ],
     GMRetryInterceptor(dio),
   ];
