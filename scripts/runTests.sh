@@ -13,3 +13,5 @@ echo '############################### Removing generated files #################
 flutter pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '.g.dart$' -r '_state.dart'
 echo '############################### Generating coverage ##########################'
 genhtml coverage/lcov.info -o coverage/html
+echo '############################### Opening coverage on Browser ##################'
+google-chrome coverage/html/index.html
