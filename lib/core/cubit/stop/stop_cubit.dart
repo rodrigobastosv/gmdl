@@ -13,6 +13,7 @@ import '../../selector/route_selectors.dart';
 import '../../utils/utils.dart';
 import '../route/route_cubit.dart';
 
+import '../../extension/extensions.dart';
 part 'stop_state.dart';
 
 class StopCubit extends Cubit<StopState> {
@@ -86,7 +87,7 @@ class StopCubit extends Cubit<StopState> {
         stopId: clonedStop.id,
         stopKey: clonedStop.key,
         plannedSequenceNum: clonedStop.plannedSequenceNum,
-        cloneDate: clonedStop.cloneDate,
+        cloneDate: DateTime.now().toUtcAsString,
         stop: stop,
       );
       emit(ClonedStopSuccess(stop));
