@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'gm_app_bar.dart';
 
 import '../../core/extension/i18n_cubit_extension.dart';
 import 'gm_menu_drawer.dart';
@@ -11,8 +12,9 @@ class GMScaffold extends StatefulWidget {
     Key key,
     this.title,
     @required this.body,
-    this.mainActionButton,
-    this.mainActionButtonLabel,
+    this.mainButtonAction,
+    this.mainButtonIcon,
+    this.mainButtonLabel,
     this.centerButton,
     this.backgroundColor,
     this.leading,
@@ -26,8 +28,9 @@ class GMScaffold extends StatefulWidget {
 
   final String title;
   final Widget body;
-  final FloatingActionButton mainActionButton;
-  final String mainActionButtonLabel;
+  final Function mainButtonAction;
+  final Widget mainButtonIcon;
+  final String mainButtonLabel;
   final Widget centerButton;
   final Color backgroundColor;
   final Widget leading;
@@ -56,69 +59,30 @@ class _GMScaffoldState extends State<GMScaffold> {
       endDrawer: widget.withDrawer ? const GMMenuDrawer() : null,
       body: widget.body,
       floatingActionButton: !isBottomMenuOpened ? _getMainButton() : null,
-      floatingActionButtonLocation: widget.withNavigationBar
-          ? FloatingActionButtonLocation.endDocked
-          : FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar:
           isBottomMenuOpened ? _getMenuOptionsBar() : _getMainNavigationBar(),
     );
   }
 
   Widget _getMainButton() {
-    return widget.mainActionButton != null
-        ? Stack(
-            fit: StackFit.passthrough,
-            overflow: Overflow.visible,
-            alignment: widget.mainActionButtonLabel.length > 13
-                ? Alignment.centerRight
-                : Alignment.center,
-            children: [
-              widget.mainActionButton,
-              if (widget.mainActionButtonLabel != null)
-                Positioned(
-                  bottom: -16,
-                  child: Text(
-                    widget.mainActionButtonLabel,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
-            ],
+    return widget.mainButtonAction != null
+        ? FloatingActionButton.extended(
+            backgroundColor: const Color(0xFF3AA348),
+            elevation: 4.0,
+            icon: widget.mainButtonIcon,
+            label: Text(widget.mainButtonLabel),
+            onPressed: widget.mainButtonAction,
           )
         : null;
   }
 
   Widget _getAppBar() {
     return widget.withAppBar
-        ? AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            automaticallyImplyLeading: false,
-            leading: _getLeadingWidget(),
-            title: widget.title != null
-                ? Text(
-                    widget.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  )
-                : null,
-            centerTitle: true,
-          )
-        : null;
-  }
-
-  Widget _getLeadingWidget() {
-    if (widget.leading != null) {
-      return widget.leading;
-    }
-    return widget.withBackButton
-        ? GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(
-              Icons.arrow_back_ios,
-            ),
+        ? GMAppBar(
+            title: widget.title,
+            leading: widget.leading,
+            withBackButton: widget.withBackButton,
           )
         : null;
   }
@@ -178,22 +142,18 @@ class _GMScaffoldState extends State<GMScaffold> {
   Widget _getMainNavigationBar() {
     return widget.withNavigationBar
         ? BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            notchMargin: -12,
             color: const Color(0xFF181818),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () => hasMenuOptions
-                      ? setState(() => isBottomMenuOpened = true)
-                      : null,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                      bottom: 2,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    bottom: 2,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => setState(() => isBottomMenuOpened = true),
                     child: Opacity(
                       opacity: hasMenuOptions ? 1 : 0,
                       child: Column(
@@ -214,9 +174,6 @@ class _GMScaffoldState extends State<GMScaffold> {
                     ),
                   ),
                 ),
-                const Spacer(),
-                if (widget.centerButton != null) widget.centerButton,
-                const Spacer(),
               ],
             ),
           )

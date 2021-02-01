@@ -1,17 +1,18 @@
-import 'entity/locale.dart';
+import 'entity/locale_option.dart';
 
+const consumer = 'DRIVER';
 const moduleName = 'DRIVER';
 const moduleKey = 'GreenMileDriverLite';
 const moduleScope = 'driver7:default';
 
-final locales = [
-  Locale('en', 'English'),
-  Locale('pt', 'Português'),
-  Locale('es', 'Español'),
-  Locale('ja', '日本語'),
-  Locale('th', 'ไทย'),
-  Locale('de', 'Deutsch'),
-  Locale('it', 'Italiano'),
-  Locale('fr', 'Français'),
-  Locale('ru', 'русский'),
+final localeOptions = [
+  LocaleOption('en', 'English'),
+  LocaleOption('pt', 'Português'),
+  LocaleOption('es', 'Español'),
+  LocaleOption('ja', '日本語'),
+  LocaleOption('th', 'ไทย'),
+  LocaleOption('de', 'Deutsch'),
+  LocaleOption('it', 'Italiano'),
+  LocaleOption('fr', 'Français'),
+  LocaleOption('ru', 'русский'),
 ];

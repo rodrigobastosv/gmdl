@@ -5,12 +5,13 @@ import '../entity/dto/mobile_device_dto.dart';
 import '../entity/model/models.dart';
 import '../exception/exceptions.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 
 class LoadingInfoRepository {
   LoadingInfoRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<DriverInfoDto> getDriverInfo({
     String username,

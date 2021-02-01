@@ -6,12 +6,13 @@ import '../entity/model/models.dart';
 import '../exception/exceptions.dart';
 import '../utils/utils.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 
 class StopRepository {
   StopRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<bool> arriveStop({
     int routeId,

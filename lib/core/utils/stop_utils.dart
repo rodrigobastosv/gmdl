@@ -63,7 +63,7 @@ Widget getStopWidget({
     return CircleAvatar(
       backgroundColor: const Color(0xFF464646),
       child: Text(
-        stop.plannedSequenceNum.toString(),
+        stop.plannedSequenceNum?.toString() ?? '',
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,

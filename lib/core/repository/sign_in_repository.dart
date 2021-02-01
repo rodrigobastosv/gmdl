@@ -2,13 +2,14 @@ import 'package:dio/dio.dart';
 
 import '../exception/exceptions.dart';
 import 'client/endpoints.dart';
+import 'client/gm_client.dart';
 import 'client/query_params.dart';
 import 'client/utils.dart';
 
 class SignInRepository {
   SignInRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<Map<String, dynamic>> signInUser({
     String serverUrl,

@@ -11,7 +11,16 @@ class RouteInitial extends RouteState {}
 
 class RouteStartedSuccess extends RouteState {}
 
-class RouteStartFailed extends RouteState {}
+class RouteStartFailed extends RouteState {
+  RouteStartFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
 
 class StartingRoute extends RouteState {}
 

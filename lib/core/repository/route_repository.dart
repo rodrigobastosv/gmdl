@@ -6,13 +6,14 @@ import '../exception/exceptions.dart';
 import '../exception/none_route_found_exception.dart';
 import '../extension/extensions.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 import 'filters/route_view_filters.dart';
 
 class RouteRepository {
   RouteRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<RouteViewInfoDTO> fetchRouteView(String username) async {
     try {

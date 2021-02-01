@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
+import '../../entity/model/locale_model.dart';
 import '../../entity/model/models.dart';
+import '../../global/hive.dart';
 import '../../i18n/local_resources.dart';
 import '../../repository/repositories.dart';
 
@@ -10,34 +15,54 @@ part 'i18n_state.dart';
 
 class I18nCubit extends Cubit<I18nState> {
   I18nCubit({
-    I18nRepository repository,
-  })  : _repository = repository,
+    @required I18nRepository repository,
+    @required Box globalBox,
+  })  : assert(repository != null),
+        assert(globalBox != null),
+        _repository = repository,
+        _globalBox = globalBox,
         super(I18nInitial());
 
   final I18nRepository _repository;
+  final Box _globalBox;
 
-  String locale;
+  String localeKey;
   Map<String, String> _resources;
+  List<LocaleModel> _allLocales;
 
-  void initResources(Box _store) {
-    locale = _store.get('locale') ?? 'en';
-    _resources = localResources[locale];
+  void initI18nInfo() {
+    _allLocales = _getLocales();
+    localeKey = _globalBox.get(LOCALE_KEY) ?? 'en';
+    _resources = localResources[localeKey];
   }
 
-  void changeLocale(String locale) {
-    this.locale = locale;
-    _resources = localResources[locale];
-    emit(LocaleChanged(locale));
+  List<LocaleModel> getAllLocales() => _allLocales;
+
+  List<LocaleModel> _getLocales() {
+    final _locales = _globalBox.get(ALL_LOCALES) ?? '';
+    if (_locales.isNotEmpty) {
+      final _localesDecoded = jsonDecode(_locales);
+      if (_localesDecoded.isNotEmpty) {
+        return List.generate(_localesDecoded.length,
+            (i) => LocaleModel.fromJson(_localesDecoded[i]));
+      }
+    }
+    return [];
+  }
+
+  void changeLocale(String localeKey) {
+    this.localeKey = localeKey;
+    _resources = localResources[localeKey];
+    emit(LocaleChanged(localeKey));
   }
 
   Future<void> fetchResources() async {
     try {
-      final _resourcesList = await _repository.fetchResources(locale);
+      final _resourcesList = await _repository.fetchResources(localeKey);
       _resources.addAll(_getResourcesMap(_resourcesList));
       emit(ResourcesFetchSuccess());
     } on Exception {
       emit(ResourcesFetchFailed());
-      rethrow;
     }
   }
 

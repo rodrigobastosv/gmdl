@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 @immutable
-class Locale {
-  Locale(
+class LocaleOption {
+  LocaleOption(
     this.key,
     this.label,
   );
@@ -17,7 +17,7 @@ class Locale {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Locale && o.key == key && o.label == label;
+    return o is LocaleOption && o.key == key && o.label == label;
   }
 
   @override

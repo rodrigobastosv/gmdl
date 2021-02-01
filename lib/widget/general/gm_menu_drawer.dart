@@ -25,6 +25,7 @@ class GMMenuDrawer extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 itemBuilder: (_, i) {
                   return ListTile(
+                    onTap: () => menuItems[i].onTap(context),
                     leading: Icon(
                       menuItems[i].icon,
                       color: Colors.white,

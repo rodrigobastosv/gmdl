@@ -10,34 +10,43 @@ import '../../../core/extension/i18n_cubit_extension.dart';
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
     Key key,
-    this.stop,
+    this.isUsingPro = false,
+    @required this.stop,
+    @required this.textColor,
   }) : super(key: key);
 
+  final bool isUsingPro;
   final StopModel stop;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(),
+        Divider(color: textColor),
         Container(
           height: 30,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              TextButton.icon(
-                label: Text(
-                  context.getText('stopList.tabs.directions'),
-                ),
-                style: TextButton.styleFrom(
-                  primary: Colors.black,
-                  textStyle: const TextStyle(
-                    fontSize: 14,
+              Opacity(
+                opacity: isUsingPro ? 0 : 1,
+                child: TextButton.icon(
+                  label: Text(
+                    context.getText('stopList.tabs.directions'),
                   ),
+                  style: TextButton.styleFrom(
+                    primary: textColor,
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  icon: SvgPicture.asset(
+                    'assets/icons/directions.svg',
+                    color: textColor,
+                  ),
+                  onPressed: () {},
                 ),
-                icon: SvgPicture.asset('assets/icons/directions.svg',
-                    color: Colors.black),
-                onPressed: () {},
               ),
               if (stop.hasNotBeenArrived)
                 TextButton.icon(
@@ -45,19 +54,20 @@ class StopListTileBottom extends StatelessWidget {
                     context.getText('route.inlinemenu.arrival'),
                   ),
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
+                    primary: textColor,
                     textStyle: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
-                  icon: SvgPicture.asset('assets/icons/arrival.svg',
-                      color: Colors.black),
+                  icon: SvgPicture.asset(
+                    'assets/icons/arrival.svg',
+                    color: textColor,
+                  ),
                   onPressed: () => context.read<RouteCubit>().arriveStop(stop),
                 ),
             ],
           ),
         ),
-        const Divider(thickness: 2),
       ],
     );
   }

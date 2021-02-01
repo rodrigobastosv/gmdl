@@ -9,7 +9,8 @@ part 'notification_dto.g.dart';
 abstract class NotificationDto with _$NotificationDto {
   factory NotificationDto({
     String id,
-    String type,
+    @JsonKey(fromJson: notificationTypeFromJson, toJson: notificationTypeToJson)
+        NotificationType type,
     // ignore: lines_longer_than_80_chars
     @JsonKey(fromJson: notificationActionFromJson, toJson: notificationActionToJson)
         NotificationAction action,

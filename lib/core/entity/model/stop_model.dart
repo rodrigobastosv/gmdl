@@ -60,6 +60,9 @@ abstract class StopModel implements _$StopModel {
       (isCloned && isDone);
 
   @late
+  bool get isInProgress => hasBeenArrived && hasNotBeenDeparted;
+
+  @late
   bool get isPending => hasNotBeenDeparted && !isCanceled;
 
   @late

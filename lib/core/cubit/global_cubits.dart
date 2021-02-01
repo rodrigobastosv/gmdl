@@ -26,6 +26,7 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
       BlocProvider<I18nCubit>(
         create: (innerContext) => I18nCubit(
           repository: innerContext.read<I18nRepository>(),
-        )..initResources(Hive.box(CONFIG_BOX)),
+          globalBox: Hive.box(GLOBAL_BOX),
+        )..initI18nInfo(),
       ),
     ];

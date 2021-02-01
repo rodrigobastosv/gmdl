@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
+import '../../exception/exceptions.dart';
 import '../../extension/datetime_extensions.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
@@ -88,8 +89,8 @@ class RouteCubit extends Cubit<RouteState> {
       }
 
       emit(RouteStartedSuccess());
-    } on Exception {
-      emit(RouteStartFailed());
+    } on StartRouteException catch (e) {
+      emit(RouteStartFailed(e.errorMessage));
     }
   }
 

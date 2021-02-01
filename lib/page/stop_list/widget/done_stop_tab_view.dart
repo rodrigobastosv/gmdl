@@ -22,7 +22,11 @@ class DoneStopsTabView extends StatelessWidget {
           state is RouteUpdatedDueStopClone ||
           state is RouteUpdatedDueStopRedeliver,
       builder: (_, state) => ListView.builder(
-        itemBuilder: (_, i) => StopListTile(stops[i]),
+        itemBuilder: (_, i) => StopListTile(
+          stop: stops[i],
+          isNextStopSuggested: false,
+          isUsingPro: false,
+        ),
         itemCount: stops.length,
       ),
     );

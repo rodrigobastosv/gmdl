@@ -15,6 +15,6 @@ analyzer:
     unrecognized_error_code: ignore
   exclude:
     - '*/models/*'
-    - "**/*.g.dart"
-    - "**/*.freezed.dart"
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
     

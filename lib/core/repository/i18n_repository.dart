@@ -1,14 +1,13 @@
-import 'package:dio/dio.dart';
-
 import '../entity/model/models.dart';
 import '../i18n/i18n_required.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 import 'filters/filters.dart';
 
 class I18nRepository {
   I18nRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<List<ResourceModel>> fetchResources(String locale) async {
     try {

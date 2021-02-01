@@ -1,12 +1,11 @@
-import 'package:dio/dio.dart';
-
 import '../constants.dart';
 import 'client/client.dart';
+import 'client/gm_client.dart';
 
 class NotificationRepository {
   NotificationRepository(this._client);
 
-  final Dio _client;
+  final GMClient _client;
 
   Future<void> updateToken({
     int deviceId,
@@ -16,7 +15,6 @@ class NotificationRepository {
       await _client.post(
         '/$MOBILE_DEVICE/$deviceId/$UPDATE_PUSH_KEY',
         queryParameters: {
-          ..._client.options.queryParameters,
           'module': moduleKey,
         },
         data: {

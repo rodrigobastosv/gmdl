@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
@@ -9,13 +11,13 @@ part 'connectivity_state.dart';
 
 class ConnectivityCubit extends Cubit<ConnectivityState> {
   ConnectivityCubit({
-    Connectivity connectivity,
+    @required Connectivity connectivity,
   })  : assert(connectivity != null),
         _connectivity = connectivity,
         super(HasConnection(true));
 
   final Connectivity _connectivity;
-  StreamSubscription _subscription;
+  StreamSubscription<ConnectivityResult> _subscription;
 
   @override
   Future<void> close() {

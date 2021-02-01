@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../page/pages.dart';
 
 final menuItems = [
   /*MenuItem(
@@ -24,14 +27,21 @@ final menuItems = [
     MaterialCommunityIcons.key_change,
   ),*/
   MenuItem(
-    'Sign Out',
-    MdiIcons.logout,
+    text: 'Sign Out',
+    icon: MdiIcons.logout,
+    onTap: (context) => Navigator.of(context).pushNamedAndRemoveUntil(
+        InitialSettingsPage.routeName, (route) => false),
   ),
 ];
 
 class MenuItem {
-  MenuItem(this.text, this.icon);
+  MenuItem({
+    this.text,
+    this.icon,
+    this.onTap,
+  });
 
   String text;
   IconData icon;
+  Function(BuildContext) onTap;
 }
