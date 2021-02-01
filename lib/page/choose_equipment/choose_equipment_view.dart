@@ -34,9 +34,9 @@ class ChooseEquipmentView extends StatelessWidget {
             settings: const RouteSettings(name: LOAD_ROUTE_PAGE)),
       );
     } else if (state is EquipmentNotFound) {
-      showErrorNotification(state.errorMessage);
+      showErrorNotification(context, state.errorMessage);
     } else if (state is EquipmentFailed) {
-      showErrorNotification(state.errorMessage);
+      showErrorNotification(context, state.errorMessage);
     }
   }
 

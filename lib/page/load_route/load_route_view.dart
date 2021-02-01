@@ -35,7 +35,10 @@ class LoadRouteView extends StatelessWidget {
         ),
       );
     } else if (state is RouteLoadFailed) {
-      showErrorNotification(context.getText(state.errorMessage));
+      showErrorNotification(
+        context,
+        context.getText(state.errorMessage),
+      );
       Navigator.of(context).pop();
     }
   }

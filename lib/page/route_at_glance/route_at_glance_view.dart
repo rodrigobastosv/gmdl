@@ -38,7 +38,7 @@ class RouteAtGlanceView extends StatelessWidget {
         ),
       );
     } else if (state is RouteStartFailed) {
-      showErrorNotification(state.errorMessage);
+      showErrorNotification(context, state.errorMessage);
     }
   }
 

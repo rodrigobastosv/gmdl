@@ -21,9 +21,15 @@ class ConnectivityListener extends StatelessWidget {
       listener: (_, state) {
         if (state is HasConnection) {
           if (state.hasConnection) {
-            showSuccessNotification(context.getText('loader.server.connected'));
+            showSuccessNotification(
+              context,
+              context.getText('loader.server.connected'),
+            );
           } else {
-            showErrorNotification(context.getText('loader.server.unreachable'));
+            showErrorNotification(
+              context,
+              context.getText('loader.server.unreachable'),
+            );
           }
         }
       },

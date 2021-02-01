@@ -1,3 +1,4 @@
+import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -56,9 +57,7 @@ class _GMScaffoldState extends State<GMScaffold> {
       endDrawer: widget.withDrawer ? const GMMenuDrawer() : null,
       body: widget.body,
       floatingActionButton: !isBottomMenuOpened ? _getMainButton() : null,
-      floatingActionButtonLocation: widget.withNavigationBar
-          ? FloatingActionButtonLocation.endDocked
-          : FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar:
           isBottomMenuOpened ? _getMenuOptionsBar() : _getMainNavigationBar(),
     );
@@ -66,25 +65,20 @@ class _GMScaffoldState extends State<GMScaffold> {
 
   Widget _getMainButton() {
     return widget.mainActionButton != null
-        ? Stack(
-            fit: StackFit.passthrough,
-            overflow: Overflow.visible,
-            alignment: widget.mainActionButtonLabel.length > 13
-                ? Alignment.centerRight
-                : Alignment.center,
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               widget.mainActionButton,
-              if (widget.mainActionButtonLabel != null)
-                Positioned(
-                  bottom: -16,
-                  child: Text(
-                    widget.mainActionButtonLabel,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                    ),
+              if (widget.mainActionButtonLabel != null) ...[
+                const SizedBox(height: 6),
+                Text(
+                  widget.mainActionButtonLabel,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
                   ),
                 ),
+              ]
             ],
           )
         : null;
@@ -178,22 +172,18 @@ class _GMScaffoldState extends State<GMScaffold> {
   Widget _getMainNavigationBar() {
     return widget.withNavigationBar
         ? BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            notchMargin: -12,
             color: const Color(0xFF181818),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () => hasMenuOptions
-                      ? setState(() => isBottomMenuOpened = true)
-                      : null,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                      bottom: 2,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    bottom: 2,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => setState(() => isBottomMenuOpened = true),
                     child: Opacity(
                       opacity: hasMenuOptions ? 1 : 0,
                       child: Column(
@@ -214,9 +204,6 @@ class _GMScaffoldState extends State<GMScaffold> {
                     ),
                   ),
                 ),
-                const Spacer(),
-                if (widget.centerButton != null) widget.centerButton,
-                const Spacer(),
               ],
             ),
           )

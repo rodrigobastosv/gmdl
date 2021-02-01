@@ -37,7 +37,10 @@ class InitialSettingsView extends StatelessWidget {
         ),
       );
     } else if (state is ServerValidationFailed) {
-      showErrorNotification(context.getText(state.errorMessage));
+      showErrorNotification(
+        context,
+        context.getText(state.errorMessage),
+      );
     }
   }
 

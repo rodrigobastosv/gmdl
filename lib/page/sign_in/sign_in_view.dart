@@ -57,7 +57,10 @@ class _SignInViewState extends State<SignInView> {
         ),
       );
     } else if (state is UserSigningFailed) {
-      showErrorNotification(context.getText(state.errorMessage));
+      showErrorNotification(
+        context,
+        context.getText(state.errorMessage),
+      );
     }
   }
 

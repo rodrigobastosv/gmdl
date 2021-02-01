@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:bot_toast/bot_toast.dart';
-
 import 'global_cubits_widget_provider.dart';
 import 'main.dart';
 import 'page/pages.dart';
@@ -22,7 +20,6 @@ class GMApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             navigatorKey: alice.getNavigatorKey(),
             title: 'Flutter Demo',
-            builder: BotToastInit(),
             theme: ThemeData(
               primaryColor: const Color(0xFF3AA348),
               visualDensity: VisualDensity.adaptivePlatformDensity,
