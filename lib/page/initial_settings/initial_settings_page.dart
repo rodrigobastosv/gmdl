@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 import '../../core/cubit/cubits.dart';
-import '../../core/global/hive.dart';
-import '../../core/repository/client/gm_client.dart';
-import '../../core/repository/client/utils.dart';
-import '../../core/repository/initial_settings_repository.dart';
-import 'initial_settings_view.dart';
+import '../../core/extension/i18n_cubit_extension.dart';
+import '../../widget/alert/notification.dart';
+import '../../widget/general/gm_scaffold.dart';
+import '../pages.dart';
+import 'widget/initial_settings_form.dart';
 
 class InitialSettingsPage extends StatelessWidget {
-  const InitialSettingsPage({Key key}) : super(key: key);
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<InitialSettingsCubit>(
-      create: (_) => InitialSettingsCubit(
-        repository: InitialSettingsRepository(
-          GMClient(getBasicClient()),
+    return BlocBuilder<I18nCubit, I18nState>(
+      builder: (_, state) => GMScaffold(
+        backgroundColor: const Color(0xFF24242A),
+        title: context.getTextUppercase('loader.settings'),
+        withDrawer: false,
+        withBackButton: false,
+        withNavigationBar: false,
+        body: BlocConsumer<InitialSettingsCubit, InitialSettingsState>(
+          listener: _listener,
+          builder: _builder,
         ),
-        globalBox: Hive.box(GLOBAL_BOX),
       ),
-      child: InitialSettingsView(),
     );
   }
+
+  void _listener(BuildContext context, InitialSettingsState state) {
+    if (state is ServerValidationSuccess) {
+      Navigator.of(context).pushNamed(SignInPage.routeName);
+    } else if (state is ServerValidationFailed) {
+      showErrorNotification(context, context.getText(state.errorMessage));
+    }
+  }
+
+  Widget _builder(BuildContext context, InitialSettingsState state) =>
+      InitialSettingsForm();
 }

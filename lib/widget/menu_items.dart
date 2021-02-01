@@ -27,15 +27,11 @@ final menuItems = [
     MaterialCommunityIcons.key_change,
   ),*/
   MenuItem(
-      text: 'Sign Out',
-      icon: MdiIcons.logout,
-      onTap: (context) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (_) => const InitialSettingsPage(),
-            ),
-            (route) => false);
-      }),
+    text: 'Sign Out',
+    icon: MdiIcons.logout,
+    onTap: (context) => Navigator.of(context).pushNamedAndRemoveUntil(
+        InitialSettingsPage.routeName, (route) => false),
+  ),
 ];
 
 class MenuItem {

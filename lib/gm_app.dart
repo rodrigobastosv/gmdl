@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'core/route/gm_router.dart';
 import 'global_cubits_widget_provider.dart';
 import 'main.dart';
-import 'page/pages.dart';
 import 'repositories_widget_provider.dart';
 import 'widget/global_info_widget_provider.dart';
 
@@ -24,7 +24,7 @@ class GMApp extends StatelessWidget {
               primaryColor: const Color(0xFF3AA348),
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: const InitialSettingsPage(),
+            onGenerateRoute: GMRouter.generateRoutes,
           ),
         ),
       ),
