@@ -46,19 +46,16 @@ class ChooseEquipmentView extends StatelessWidget {
       withNavigationBar: true,
       withBackButton: false,
       title: context.getTextUppercase('menu.load.route'),
-      mainActionButton: FloatingActionButton(
-        onPressed: state is! LoadingEquipment
-            ? () {
-                final _form = _formKey.currentState;
-                if (_form.validate()) {
-                  _form.save();
-                }
+      mainButtonAction: state is! LoadingEquipment
+          ? () {
+              final _form = _formKey.currentState;
+              if (_form.validate()) {
+                _form.save();
               }
-            : null,
-        child: _getMainButtonIcon(state),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      mainActionButtonLabel: context.getTextUppercase('menu.load.route'),
+            }
+          : null,
+      mainButtonIcon: _getMainButtonIcon(state),
+      mainButtonLabel: context.getTextUppercase('menu.load.route'),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(top: 48, right: 18, left: 18),

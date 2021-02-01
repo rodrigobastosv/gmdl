@@ -40,12 +40,9 @@ class RouteSummaryView extends StatelessWidget {
     final route = cubit.route;
     return GMScaffold(
       title: context.getTextUppercase('driver.goodjob.beforevocative'),
-      mainActionButton: FloatingActionButton(
-        onPressed: cubit.completeRoute,
-        child: _getMainButtonIcon(cubit),
-        backgroundColor: const Color(0xFF3AA348),
-      ),
-      mainActionButtonLabel: context.getTextUppercase('status.complete'),
+      mainButtonAction: cubit.completeRoute,
+      mainButtonIcon: _getMainButtonIcon(cubit),
+      mainButtonLabel: context.getTextUppercase('status.complete'),
       body: Column(
         children: [
           Container(

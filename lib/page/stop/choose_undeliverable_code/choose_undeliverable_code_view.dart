@@ -38,21 +38,18 @@ class ChooseUndeliverableCodeView extends StatelessWidget {
           itemCount: allUndeliverableCodes.length,
         ),
       ),
-      mainActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: cubit.hasUndeliverableCodePicked
-            ? () {
-                final pickedUndeliverableCode = cubit.pickedUndeliverableCode;
-                stopCubit.undeliverStop(pickedUndeliverableCode);
-              }
-            : null,
-        child: SvgPicture.asset(
-          'assets/icons/checkmark.svg',
-          height: 22,
-          width: 22,
-        ),
+      mainButtonAction: cubit.hasUndeliverableCodePicked
+          ? () {
+              final pickedUndeliverableCode = cubit.pickedUndeliverableCode;
+              stopCubit.undeliverStop(pickedUndeliverableCode);
+            }
+          : null,
+      mainButtonIcon: SvgPicture.asset(
+        'assets/icons/checkmark.svg',
+        height: 22,
+        width: 22,
       ),
-      mainActionButtonLabel: 'SELECT',
+      mainButtonLabel: 'SELECT',
     );
   }
 }

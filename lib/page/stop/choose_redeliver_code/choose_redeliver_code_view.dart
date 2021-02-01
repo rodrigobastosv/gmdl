@@ -39,21 +39,18 @@ class ChooseRedeliverCodeView extends StatelessWidget {
           itemCount: allRedeliverCodes.length,
         ),
       ),
-      mainActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: cubit.hasRedeliverableCodePicked
-            ? () {
-                final pickedRedeliverableCode = cubit.pickedRedeliverableCode;
-                stopCubit.redeliverStop(pickedRedeliverableCode);
-              }
-            : null,
-        child: SvgPicture.asset(
-          'assets/icons/checkmark.svg',
-          height: 22,
-          width: 22,
-        ),
+      mainButtonAction: cubit.hasRedeliverableCodePicked
+          ? () {
+              final pickedRedeliverableCode = cubit.pickedRedeliverableCode;
+              stopCubit.redeliverStop(pickedRedeliverableCode);
+            }
+          : null,
+      mainButtonIcon: SvgPicture.asset(
+        'assets/icons/checkmark.svg',
+        height: 22,
+        width: 22,
       ),
-      mainActionButtonLabel: 'SELECT',
+      mainButtonLabel: 'SELECT',
     );
   }
 }

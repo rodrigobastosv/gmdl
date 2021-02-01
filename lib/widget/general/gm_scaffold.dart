@@ -1,4 +1,3 @@
-import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -12,8 +11,9 @@ class GMScaffold extends StatefulWidget {
     Key key,
     this.title,
     @required this.body,
-    this.mainActionButton,
-    this.mainActionButtonLabel,
+    this.mainButtonAction,
+    this.mainButtonIcon,
+    this.mainButtonLabel,
     this.centerButton,
     this.backgroundColor,
     this.leading,
@@ -27,8 +27,9 @@ class GMScaffold extends StatefulWidget {
 
   final String title;
   final Widget body;
-  final FloatingActionButton mainActionButton;
-  final String mainActionButtonLabel;
+  final Function mainButtonAction;
+  final Widget mainButtonIcon;
+  final String mainButtonLabel;
   final Widget centerButton;
   final Color backgroundColor;
   final Widget leading;
@@ -64,24 +65,13 @@ class _GMScaffoldState extends State<GMScaffold> {
   }
 
   Widget _getMainButton() {
-    return widget.mainActionButton != null
-        ? Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              widget.mainActionButton,
-              if (widget.mainActionButtonLabel != null) ...[
-                const SizedBox(height: 6),
-                Text(
-                  widget.mainActionButtonLabel,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                  ),
-                ),
-              ]
-            ],
-          )
-        : null;
+    return widget.mainButtonAction != null ? FloatingActionButton.extended(
+      backgroundColor: const Color(0xFF3AA348),
+      elevation: 4.0,
+      icon: widget.mainButtonIcon,
+      label: Text(widget.mainButtonLabel),
+      onPressed: widget.mainButtonAction,
+    ) : null;
   }
 
   Widget _getAppBar() {

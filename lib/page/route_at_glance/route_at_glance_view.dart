@@ -64,12 +64,9 @@ class RouteAtGlanceView extends StatelessWidget {
           ),
         ],
       ),
-      mainActionButton: FloatingActionButton(
-        onPressed: () => _onPressedButton(cubit, context),
-        child: _getMainButtonIcon(cubit),
-        backgroundColor: const Color(0xFF3AA348),
-      ),
-      mainActionButtonLabel: _getMainButtonLabel(context, cubit),
+      mainButtonAction: () => _onPressedButton(cubit, context),
+      mainButtonIcon: _getMainButtonIcon(cubit),
+      mainButtonLabel: _getMainButtonLabel(context, cubit),
     );
   }
 

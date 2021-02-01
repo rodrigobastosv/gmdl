@@ -37,21 +37,18 @@ class ChooseCancelCodeView extends StatelessWidget {
           itemCount: allCancelCodes.length,
         ),
       ),
-      mainActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: cubit.hasCancelCodePicked
-            ? () {
-                final pickedCancelCode = cubit.pickedCancelCode;
-                stopCubit.cancelStop(pickedCancelCode);
-              }
-            : null,
-        child: SvgPicture.asset(
-          'assets/icons/checkmark.svg',
-          height: 22,
-          width: 22,
-        ),
+      mainButtonAction: cubit.hasCancelCodePicked
+          ? () {
+              final pickedCancelCode = cubit.pickedCancelCode;
+              stopCubit.cancelStop(pickedCancelCode);
+            }
+          : null,
+      mainButtonIcon: SvgPicture.asset(
+        'assets/icons/checkmark.svg',
+        height: 22,
+        width: 22,
       ),
-      mainActionButtonLabel: 'SELECT',
+      mainButtonLabel: 'SELECT',
     );
   }
 }

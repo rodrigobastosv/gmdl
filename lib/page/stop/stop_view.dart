@@ -25,12 +25,9 @@ class StopView extends StatelessWidget {
         listener: _listener,
         builder: _builder,
       ),
-      mainActionButton: FloatingActionButton(
-        onPressed: () => _onPressedButton(cubit),
-        child: _getMainButtonIcon(cubit),
-        backgroundColor: const Color(0xFF3AA348),
-      ),
-      mainActionButtonLabel: _getMainButtonLabel(context, cubit),
+      mainButtonAction: () => _onPressedButton(cubit),
+      mainButtonIcon: _getMainButtonIcon(cubit),
+      mainButtonLabel: _getMainButtonLabel(context, cubit),
       menuOptions: _getMenuOptions(context),
     );
   }
