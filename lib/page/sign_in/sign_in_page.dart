@@ -25,6 +25,7 @@ class _SignInPageState extends State<SignInPage> {
       child: Scaffold(
         backgroundColor: const Color(0xFF24242A),
         appBar: AppBar(
+          backgroundColor: const Color(0xFFB0D25A),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
