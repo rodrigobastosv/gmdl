@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gm_driver_lite/core/cubit/cubits.dart';
-import 'package:gm_driver_lite/core/exception/exceptions.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:gm_driver_lite/core/cubit/cubits.dart';
+import 'package:gm_driver_lite/core/exception/exceptions.dart';
 import '../../../mocks.dart';
 
 void main() {
@@ -21,7 +21,7 @@ void main() {
 
     test('asserts', () {
       expect(() => ChooseEquipmentCubit(null), throwsAssertionError);
-    }); 
+    });
 
     test('initial state is ChooseEquipmentInitial', () {
       expect(cubit.state is ChooseEquipmentInitial, true);
