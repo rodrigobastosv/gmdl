@@ -32,7 +32,7 @@ class StopListTile extends StatelessWidget {
       children: [
         _getStopTileHeaderIfAny(context),
         Container(
-          color: _getColor(context),
+          color: _getColor(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -56,7 +56,7 @@ class StopListTile extends StatelessWidget {
                           StopIcon(
                             stop: stop,
                             iconColor: _getStopIconColor(),
-                            textColor: _getStopIconTextColor(),
+                            textColor: _getColor(),
                           ),
                           const SizedBox(height: 6),
                           Text(
@@ -107,6 +107,7 @@ class StopListTile extends StatelessWidget {
                 ),
                 if (stop.isPending)
                   StopListTileBottom(
+                    isUsingPro: isUsingPro,
                     stop: stop,
                     textColor: _getTextColor(context),
                   ),
@@ -143,18 +144,11 @@ class StopListTile extends StatelessWidget {
     return const Color(0xFF464646);
   }
 
-  Color _getStopIconTextColor() {
+  Color _getColor() {
     if (isUsingPro && isNextStopSuggested) {
       return const Color(0xFF3AA348);
     }
     return Colors.white;
-  }
-
-  Color _getColor(BuildContext context) {
-    if (isUsingPro && isNextStopSuggested) {
-      return const Color(0xFF3AA348);
-    }
-    return Theme.of(context).scaffoldBackgroundColor;
   }
 
   Color _getTextColor(BuildContext context) {

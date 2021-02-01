@@ -10,10 +10,12 @@ import '../../../core/extension/i18n_cubit_extension.dart';
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
     Key key,
+    this.isUsingPro = false,
     @required this.stop,
     @required this.textColor,
   }) : super(key: key);
 
+  final bool isUsingPro;
   final StopModel stop;
   final Color textColor;
 
@@ -27,21 +29,24 @@ class StopListTileBottom extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              TextButton.icon(
-                label: Text(
-                  context.getText('stopList.tabs.directions'),
-                ),
-                style: TextButton.styleFrom(
-                  primary: textColor,
-                  textStyle: const TextStyle(
-                    fontSize: 14,
+              Opacity(
+                opacity: isUsingPro ? 0 : 1,
+                child: TextButton.icon(
+                  label: Text(
+                    context.getText('stopList.tabs.directions'),
                   ),
+                  style: TextButton.styleFrom(
+                    primary: textColor,
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  icon: SvgPicture.asset(
+                    'assets/icons/directions.svg',
+                    color: textColor,
+                  ),
+                  onPressed: () {},
                 ),
-                icon: SvgPicture.asset(
-                  'assets/icons/directions.svg',
-                  color: textColor,
-                ),
-                onPressed: () {},
               ),
               if (stop.hasNotBeenArrived)
                 TextButton.icon(
@@ -63,7 +68,6 @@ class StopListTileBottom extends StatelessWidget {
             ],
           ),
         ),
-        //const Divider(thickness: 2),
       ],
     );
   }

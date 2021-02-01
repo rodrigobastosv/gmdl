@@ -20,11 +20,19 @@ class PendingStopsTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RouteCubit, RouteState>(
       builder: (_, state) => ListView.builder(
-        itemBuilder: (_, i) => StopListTile(
-          stop: stops[i],
-          isNextStopSuggested: i == 0,
-          isUsingPro: isUsingPro,
-          isBeginNextStops: i == 1,
+        itemBuilder: (_, i) => Column(
+          children: [
+            StopListTile(
+              stop: stops[i],
+              isNextStopSuggested: i == 0,
+              isUsingPro: isUsingPro,
+              isBeginNextStops: i == 1,
+            ),
+            const Divider(
+              thickness: 2,
+              height: 4,
+            ),
+          ],
         ),
         itemCount: stops.length,
       ),

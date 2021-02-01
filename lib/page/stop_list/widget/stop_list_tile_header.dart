@@ -21,6 +21,9 @@ class StopListTileHeader extends StatelessWidget {
         child: Text(
           context.getTextUppercase(label),
           textAlign: TextAlign.start,
+          style: const TextStyle(
+            fontSize: 12,
+          ),
         ),
       ),
     );

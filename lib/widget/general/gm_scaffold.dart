@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'gm_app_bar.dart';
 
 import '../../core/extension/i18n_cubit_extension.dart';
 import 'gm_menu_drawer.dart';
@@ -65,44 +66,23 @@ class _GMScaffoldState extends State<GMScaffold> {
   }
 
   Widget _getMainButton() {
-    return widget.mainButtonAction != null ? FloatingActionButton.extended(
-      backgroundColor: const Color(0xFF3AA348),
-      elevation: 4.0,
-      icon: widget.mainButtonIcon,
-      label: Text(widget.mainButtonLabel),
-      onPressed: widget.mainButtonAction,
-    ) : null;
-  }
-
-  Widget _getAppBar() {
-    return widget.withAppBar
-        ? AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            automaticallyImplyLeading: false,
-            leading: _getLeadingWidget(),
-            title: widget.title != null
-                ? Text(
-                    widget.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  )
-                : null,
-            centerTitle: true,
+    return widget.mainButtonAction != null
+        ? FloatingActionButton.extended(
+            backgroundColor: const Color(0xFF3AA348),
+            elevation: 4.0,
+            icon: widget.mainButtonIcon,
+            label: Text(widget.mainButtonLabel),
+            onPressed: widget.mainButtonAction,
           )
         : null;
   }
 
-  Widget _getLeadingWidget() {
-    if (widget.leading != null) {
-      return widget.leading;
-    }
-    return widget.withBackButton
-        ? GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(
-              Icons.arrow_back_ios,
-            ),
+  Widget _getAppBar() {
+    return widget.withAppBar
+        ? GMAppBar(
+            title: widget.title,
+            leading: widget.leading,
+            withBackButton: widget.withBackButton,
           )
         : null;
   }
