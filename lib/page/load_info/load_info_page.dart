@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/route/route.dart';
 import '../../widget/general/gm_loading.dart';
-import '../pages.dart';
 
 class LoadInfoPage extends StatelessWidget {
-  static const routeName = 'LoadInfoView';
-
   const LoadInfoPage({Key key}) : super(key: key);
 
   @override
@@ -24,7 +22,7 @@ class LoadInfoPage extends StatelessWidget {
 
   void _listener(BuildContext context, LoadInfoState state) {
     if (state is AllInfoLoadedSuccess) {
-      Navigator.of(context).pushReplacementNamed(ChooseEquipmentPage.routeName);
+      Navigator.of(context).pushReplacementNamed(CHOOSE_EQUIPMENT_PAGE);
     }
   }
 

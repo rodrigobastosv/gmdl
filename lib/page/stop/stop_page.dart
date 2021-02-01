@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../core/cubit/cubits.dart';
-import 'stop_page_arguments.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../core/route/route.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
-import '../pages.dart';
+import 'stop_page_arguments.dart';
 import 'widget/instructions_card.dart';
 
 class StopPage extends StatelessWidget {
-  static const routeName = 'StopPage';
-
   const StopPage({Key key}) : super(key: key);
 
   @override
@@ -40,7 +38,7 @@ class StopPage extends StatelessWidget {
     }
     if (state is ClonedStopSuccess) {
       Navigator.of(context).pushReplacementNamed(
-        StopPage.routeName,
+        STOP_PAGE,
         arguments: StopPageArguments(
           stop: state.stop,
           routeCubit: context.read<RouteCubit>(),
@@ -51,7 +49,7 @@ class StopPage extends StatelessWidget {
         state is UndeliveredStopSuccess ||
         state is RedeliveredStopSuccess) {
       Navigator.of(context)
-          .popUntil((route) => route.settings.name == StopListPage.routeName);
+          .popUntil((route) => route.settings.name == STOP_LIST_PAGE);
     }
   }
 
@@ -108,7 +106,7 @@ class StopPage extends StatelessWidget {
           text: context.getText('stop.cancel'),
           icon: 'cancel-stop',
           onTap: () => Navigator.of(context).pushNamed(
-            ChooseCancelCodePage.routeName,
+            CHOOSE_CANCEL_CODE_PAGE,
             arguments: cubit,
           ),
         ),
@@ -117,7 +115,7 @@ class StopPage extends StatelessWidget {
           text: context.getText('status.undeliverable'),
           icon: 'undeliver',
           onTap: () => Navigator.of(context).pushNamed(
-            ChooseUndeliverableCodePage.routeName,
+            CHOOSE_UNDELIVERABLE_CODE_PAGE,
             arguments: cubit,
           ),
         ),
@@ -125,7 +123,7 @@ class StopPage extends StatelessWidget {
           text: context.getText('stop.redelivery'),
           icon: 'redeliver',
           onTap: () => Navigator.of(context).pushNamed(
-            ChooseRedeliverCodePage.routeName,
+            CHOOSE_REDELIVER_CODE_PAGE,
             arguments: cubit,
           ),
         ),

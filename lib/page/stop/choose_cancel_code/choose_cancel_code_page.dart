@@ -9,8 +9,6 @@ import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
 class ChooseCancelCodePage extends StatelessWidget {
-  static const routeName = 'ChooseCancelCodePage';
-
   const ChooseCancelCodePage({Key key}) : super(key: key);
 
   @override

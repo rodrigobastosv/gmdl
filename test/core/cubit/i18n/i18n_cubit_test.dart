@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/core/entity/model/locale_model.dart';
 import 'package:gm_driver_lite/core/global/hive.dart';
-import 'package:mockito/mockito.dart';
 import '../../../mocks.dart';
 
 void main() {

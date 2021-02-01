@@ -6,15 +6,13 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../core/route/route.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
-import '../pages.dart';
 import 'widget/basic_route_summary_info.dart';
 import 'widget/route_summary_header_info.dart';
 
 class RouteSummaryPage extends StatelessWidget {
-  static const routeName = 'RouteSummaryPage';
-
   const RouteSummaryPage({Key key}) : super(key: key);
 
   @override
@@ -28,7 +26,7 @@ class RouteSummaryPage extends StatelessWidget {
   void _listener(BuildContext context, RouteState state) {
     if (state is RouteCompletedSuccess) {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(InitialSettingsPage.routeName, (_) => false);
+          .pushNamedAndRemoveUntil(INITIAL_SETTINGS_PAGE, (_) => false);
     }
   }
 

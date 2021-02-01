@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../stop/stop_page_arguments.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../core/route/route.dart';
 import '../../core/selector/route_selectors.dart';
 import '../../widget/general/gm_scaffold.dart';
-import '../pages.dart';
+import '../stop/stop_page_arguments.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
 import 'widget/pending_stops_tab.dart';
 import 'widget/pending_stops_tab_view.dart';
 
 class StopListPage extends StatelessWidget {
-  static const routeName = 'StopListPage';
-
   const StopListPage({Key key}) : super(key: key);
 
   @override
@@ -67,7 +65,7 @@ class StopListPage extends StatelessWidget {
   void _listener(BuildContext context, RouteState state) {
     if (state is ArrivedStopSuccess) {
       Navigator.of(context).pushNamed(
-        StopPage.routeName,
+        STOP_PAGE,
         arguments: StopPageArguments(
           stop: state.stop,
           routeCubit: context.read<RouteCubit>(),
@@ -75,12 +73,12 @@ class StopListPage extends StatelessWidget {
       );
     } else if (state is RouteHasNoPendingStops) {
       Navigator.of(context).pushNamed(
-        FinishedStopsPage.routeName,
+        FINISHED_STOPS_PAGE,
         arguments: context.read<RouteCubit>(),
       );
     } else if (state is ArrivedWarehouseSuccess) {
       Navigator.of(context).pushNamed(
-        RouteSummaryPage.routeName,
+        ROUTE_SUMMARY_PAGE,
         arguments: context.read<RouteCubit>(),
       );
     }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../page/pages.dart';
+import '../core/route/route.dart';
 
 final menuItems = [
   /*MenuItem(
@@ -29,8 +29,8 @@ final menuItems = [
   MenuItem(
     text: 'Sign Out',
     icon: MdiIcons.logout,
-    onTap: (context) => Navigator.of(context).pushNamedAndRemoveUntil(
-        InitialSettingsPage.routeName, (route) => false),
+    onTap: (context) => Navigator.of(context)
+        .pushNamedAndRemoveUntil(INITIAL_SETTINGS_PAGE, (route) => false),
   ),
 ];
 

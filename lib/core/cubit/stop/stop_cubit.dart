@@ -7,13 +7,13 @@ import '../../entity/model/cancel_code_model.dart';
 import '../../entity/model/models.dart';
 import '../../exception/exceptions.dart';
 import '../../extension/datetime_extensions.dart';
+import '../../extension/extensions.dart';
 import '../../global/global_info.dart';
 import '../../repository/stop_repository.dart';
 import '../../selector/route_selectors.dart';
 import '../../utils/utils.dart';
 import '../route/route_cubit.dart';
 
-import '../../extension/extensions.dart';
 part 'stop_state.dart';
 
 class StopCubit extends Cubit<StopState> {

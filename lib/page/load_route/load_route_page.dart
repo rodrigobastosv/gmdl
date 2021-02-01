@@ -4,14 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/extensions.dart';
+import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
-import '../pages.dart';
 
 class LoadRoutePage extends StatelessWidget {
-  static const routeName = 'LoadRouteView';
-
   const LoadRoutePage({Key key}) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class LoadRoutePage extends StatelessWidget {
   void _listener(BuildContext context, LoadRouteState state) {
     if (state is RouteLoadedSuccess) {
       Navigator.of(context).pushReplacementNamed(
-        RouteAtGlancePage.routeName,
+        ROUTE_AT_GLANCE_PAGE,
         arguments: state.route,
       );
     } else if (state is RouteLoadFailed) {

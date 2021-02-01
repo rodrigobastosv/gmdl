@@ -7,16 +7,14 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/enum/enums.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
-import '../pages.dart';
 import 'widget/basic_route_info.dart';
 import 'widget/route_map.dart';
 
 class RouteAtGlancePage extends StatelessWidget {
-  static const routeName = 'RouteAtGlancePage';
-
   const RouteAtGlancePage({Key key}) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class RouteAtGlancePage extends StatelessWidget {
   void _listener(BuildContext context, RouteState state) {
     if (state is DepartOriginSuccess) {
       Navigator.of(context).pushNamed(
-        StopListPage.routeName,
+        STOP_LIST_PAGE,
         arguments: context.read<RouteCubit>(),
       );
     } else if (state is RouteStartFailed) {
@@ -77,7 +75,7 @@ class RouteAtGlancePage extends StatelessWidget {
       await cubit.startRoute();
     } else {
       Navigator.of(context).pushNamed(
-        StopListPage.routeName,
+        STOP_LIST_PAGE,
         arguments: cubit,
       );
     }

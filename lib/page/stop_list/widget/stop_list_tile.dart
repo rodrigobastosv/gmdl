@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../stop/stop_page_arguments.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
+import '../../../core/route/route.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/utils.dart';
 import '../../../widget/stop/stop_sizes.dart';
-import '../../pages.dart';
+import '../../stop/stop_page_arguments.dart';
 import 'stop_icon.dart';
 import 'stop_list_tile_bottom.dart';
 import 'stop_list_tile_header.dart';
@@ -41,7 +41,7 @@ class StopListTile extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      StopPage.routeName,
+                      STOP_PAGE,
                       arguments: StopPageArguments(
                         stop: stop,
                         routeCubit: context.read<RouteCubit>(),

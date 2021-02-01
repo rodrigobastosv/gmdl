@@ -9,8 +9,6 @@ import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
 class ChooseUndeliverableCodePage extends StatelessWidget {
-  static const routeName = 'ChooseUndeliverableCodePage';
-
   const ChooseUndeliverableCodePage({Key key}) : super(key: key);
 
   @override

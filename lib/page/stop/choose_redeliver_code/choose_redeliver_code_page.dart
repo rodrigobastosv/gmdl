@@ -10,8 +10,6 @@ import '../../../core/selector/global_info_selectors.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
 class ChooseRedeliverCodePage extends StatelessWidget {
-  static const routeName = 'ChooseRedeliverCodePage';
-
   const ChooseRedeliverCodePage({Key key}) : super(key: key);
 
   @override

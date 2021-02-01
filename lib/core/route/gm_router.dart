@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../page/stop/stop_page_arguments.dart';
 import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
+import '../../page/stop/stop_page_arguments.dart';
 import '../cubit/cubits.dart';
 import '../cubit/stop/stop_cubit.dart';
 import '../entity/model/models.dart';
@@ -15,6 +15,7 @@ import '../repository/client/gm_client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
 import '../service/services_locator.dart';
+import 'route.dart';
 
 class GMRouter {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -22,7 +23,7 @@ class GMRouter {
     final routeName = settings.name;
 
     switch (routeName) {
-      case InitialSettingsPage.routeName:
+      case INITIAL_SETTINGS_PAGE:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<InitialSettingsCubit>(
             create: (_) => InitialSettingsCubit(
@@ -35,7 +36,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case LoadInfoPage.routeName:
+      case LOAD_INFO_PAGE:
         final username = args as String;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -50,7 +51,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case ChooseEquipmentPage.routeName:
+      case CHOOSE_EQUIPMENT_PAGE:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ChooseEquipmentCubit>(
             create: (_) => ChooseEquipmentCubit(
@@ -60,7 +61,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case LoadRoutePage.routeName:
+      case LOAD_ROUTE_PAGE:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<LoadRouteCubit>(
             create: (_) => LoadRouteCubit(
@@ -72,7 +73,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case RouteAtGlancePage.routeName:
+      case ROUTE_AT_GLANCE_PAGE:
         final route = args as RouteModel;
         return MaterialPageRoute(
           builder: (context) => BlocProvider<RouteCubit>(
@@ -86,7 +87,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case RouteSummaryPage.routeName:
+      case ROUTE_SUMMARY_PAGE:
         final routeCubit = args as RouteCubit;
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
@@ -95,7 +96,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case SignInPage.routeName:
+      case SIGN_IN_PAGE:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (_) => SignInCubit(
@@ -106,7 +107,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case StopPage.routeName:
+      case STOP_PAGE:
         final stopPageArguments = args as StopPageArguments;
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -125,7 +126,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case ChooseCancelCodePage.routeName:
+      case CHOOSE_CANCEL_CODE_PAGE:
         final stopCubit = args as StopCubit;
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -139,7 +140,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case ChooseRedeliverCodePage.routeName:
+      case CHOOSE_REDELIVER_CODE_PAGE:
         final stopCubit = args as StopCubit;
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -153,7 +154,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case ChooseUndeliverableCodePage.routeName:
+      case CHOOSE_UNDELIVERABLE_CODE_PAGE:
         final stopCubit = args as StopCubit;
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -167,7 +168,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case StopListPage.routeName:
+      case STOP_LIST_PAGE:
         final routeCubit = args as RouteCubit;
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
@@ -176,7 +177,7 @@ class GMRouter {
           ),
           settings: settings,
         );
-      case FinishedStopsPage.routeName:
+      case FINISHED_STOPS_PAGE:
         final routeCubit = args as RouteCubit;
         final stops = routeCubit.route.stops;
         return MaterialPageRoute(

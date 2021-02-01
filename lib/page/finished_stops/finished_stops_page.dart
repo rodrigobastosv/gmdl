@@ -10,8 +10,6 @@ import '../../widget/general/gm_scaffold.dart';
 import 'widget/finished_stop_list_tile.dart';
 
 class FinishedStopsPage extends StatelessWidget {
-  static const routeName = 'FinishedStopsView';
-
   const FinishedStopsPage({
     Key key,
     @required this.stops,

@@ -4,14 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
+import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
-import '../pages.dart';
 import 'widget/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
-  static const routeName = 'SignInPage';
-
   SignInPage({Key key}) : super(key: key);
 
   @override
@@ -53,7 +51,7 @@ class _SignInPageState extends State<SignInPage> {
   void _listener(BuildContext context, SignInState state) {
     if (state is UserSignedSuccess) {
       Navigator.of(context).pushNamed(
-        LoadInfoPage.routeName,
+        LOAD_INFO_PAGE,
         arguments: state.loginResult.username,
       );
     } else if (state is UserSigningFailed) {
