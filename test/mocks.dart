@@ -12,6 +12,9 @@ import 'package:gm_driver_lite/core/repository/repositories.dart';
 // Cubit
 class MockI18nCubit extends MockBloc<int> implements I18nCubit {}
 
+class MockNotificationCubit extends MockBloc<int> implements NotificationCubit {
+}
+
 // Repository
 class MockEquipmentRepository extends Mock implements EquipmentRepository {}
 
