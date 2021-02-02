@@ -11,6 +11,7 @@ import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/locale_option.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/global/hive.dart';
+import '../../../core/utils/utils.dart';
 
 class InitialSettingsForm extends StatefulWidget {
   InitialSettingsForm({Key key}) : super(key: key);
@@ -41,6 +42,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     vertical: 10,
                   ),
                   child: TextFormField(
+                    autocorrect: false,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: context.getText('general.server'),
@@ -48,8 +50,9 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                       filled: true,
                       prefixIcon: const Icon(MdiIcons.server),
                     ),
-                    onSaved: (serverName) => _serverName = serverName,
-                    validator: (serverName) => serverName.isEmpty
+                    onSaved: (serverAddress) =>
+                        _serverName = getOnlyTenantFromUrl(serverAddress),
+                    validator: (serverAddress) => serverAddress.isEmpty
                         ? context.getText('loader.validation.required')
                         : null,
                   ),

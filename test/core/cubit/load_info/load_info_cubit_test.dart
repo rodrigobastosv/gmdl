@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gm_driver_lite/core/constants.dart';
-import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
-import 'package:gm_driver_lite/core/entity/enum/enums.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:gm_driver_lite/core/constants.dart';
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
+import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
+import 'package:gm_driver_lite/core/entity/enum/enums.dart';
 import '../../../mocks.dart';
 
 void main() {

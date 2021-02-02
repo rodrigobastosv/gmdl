@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../utils/platform_utils.dart';
 import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
@@ -17,6 +16,7 @@ import '../repository/client/gm_client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
 import '../service/services_locator.dart';
+import '../utils/platform_utils.dart';
 import 'route.dart';
 
 class GMRouter {

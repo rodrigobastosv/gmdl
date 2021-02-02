@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gm_driver_lite/core/entity/model/route_model.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
+import 'package:gm_driver_lite/core/entity/model/route_model.dart';
 import '../../../mocks.dart';
 
 void main() {

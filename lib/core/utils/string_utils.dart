@@ -7,3 +7,11 @@ String generateRandomString(int len) {
   return List.generate(len, (index) => _chars[random.nextInt(_chars.length)])
       .join();
 }
+
+String getOnlyTenantFromUrl(String url) {
+  return url
+      .replaceFirst('http://', '')
+      .replaceFirst('https://', '')
+      .replaceFirst('.greenmile.com', '')
+      .replaceFirst('/', '');
+}
