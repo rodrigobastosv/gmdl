@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../entity/dto/notification_dto.dart';
 
 import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
@@ -43,38 +44,38 @@ class RouteCubit extends Cubit<RouteState> {
   String get token => _notificationCubit.fcmToken;
 
   void listenNotifications() {
-    _notificationSubscription = _notificationCubit.listen((state) async {
-      if (state is NotificationReceived) {
-        final notification = state.notification;
-        if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
-          try {
-            final syncRoute =
-                await _repository.syncRouteByNotification(route.id);
-            route = mergeRoutes(route, syncRoute);
-            emit(
-              RouteUpdatedDueNotification(
-                notificationId: notification.id,
-                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
-              ),
-            );
-          } on Exception {
-            emit(
-              FailedToUpdatedRouteByNotification(
-                notificationId: notification.id,
-                notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
-              ),
-            );
-          }
-        }
-      }
-    });
+    _notificationSubscription = _notificationCubit.listen(_handleNotifications);
     emit(RouteBeginListenNotifications());
   }
 
-  @override
-  Future<void> close() {
-    _notificationSubscription?.cancel();
-    return super.close();
+  Future<void> _handleNotifications(NotificationState state) async {
+    if (state is NotificationReceived) {
+      final notification = state.notification;
+      if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
+        await _handleRoutePlannedUpdateNotification(notification);
+      }
+    }
+  }
+
+  Future<void> _handleRoutePlannedUpdateNotification(
+      NotificationDto notification) async {
+    try {
+      final syncRoute = await _repository.syncRouteByNotification(route.id);
+      route = mergeRoutes(route, syncRoute);
+      emit(
+        RouteUpdatedDueNotification(
+          notificationId: notification.id,
+          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+        ),
+      );
+    } on Exception {
+      emit(
+        FailedToUpdatedRouteByNotification(
+          notificationId: notification.id,
+          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+        ),
+      );
+    }
   }
 
   Future<void> startRoute() async {
@@ -160,5 +161,11 @@ class RouteCubit extends Cubit<RouteState> {
     } on Exception {
       emit(RouteCompletedFailed());
     }
+  }
+
+  @override
+  Future<void> close() {
+    _notificationSubscription?.cancel();
+    return super.close();
   }
 }

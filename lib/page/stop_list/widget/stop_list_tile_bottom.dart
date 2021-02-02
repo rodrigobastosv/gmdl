@@ -23,7 +23,7 @@ class StopListTileBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Divider(color: textColor),
+        const Divider(color: Colors.grey),
         Container(
           height: 30,
           child: Row(

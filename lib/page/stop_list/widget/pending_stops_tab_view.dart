@@ -29,8 +29,8 @@ class PendingStopsTabView extends StatelessWidget {
               isBeginNextStops: i == 1,
             ),
             const Divider(
-              thickness: 2,
-              height: 4,
+              thickness: 1,
+              height: 3,
             ),
           ],
         ),
