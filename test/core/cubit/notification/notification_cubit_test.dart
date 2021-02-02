@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
+import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
 import '../../../mocks.dart';
 
 void main() {
@@ -109,8 +109,7 @@ void main() {
          SHOULD emit NotificationSetupFailed
       ''',
       build: () {
-        when(mockFirebaseMessaging.getToken())
-            .thenThrow(Exception());
+        when(mockFirebaseMessaging.getToken()).thenThrow(Exception());
         return cubit;
       },
       act: (cubit) => cubit.initNotifications(),
