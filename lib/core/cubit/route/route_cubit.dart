@@ -73,7 +73,7 @@ class RouteCubit extends Cubit<RouteState> {
 
   @override
   Future<void> close() {
-    _notificationSubscription.cancel();
+    _notificationSubscription?.cancel();
     return super.close();
   }
 
