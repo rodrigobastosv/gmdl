@@ -2,17 +2,33 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 
-class GMClient {
-  GMClient(this._dio);
+import 'client.dart';
 
-  final Dio _dio;
+class GMClient {
+  String username;
+  String password;
+  String serverName;
+  String sessionId;
+
+  void init({
+    String username,
+    String password,
+    String serverName,
+    String sessionId,
+  }) {
+    this.username = username;
+    this.password = password;
+    this.serverName = serverName;
+    this.sessionId = sessionId;
+  }
 
   Future<Response> get(
     String path, {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    return _dio.get(
+    final _client = getDefaultClientProvider(serverName, sessionId);
+    return _client.get(
       path,
       queryParameters: queryParameters,
       options: options,
@@ -25,7 +41,8 @@ class GMClient {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    return _dio.post(
+    final _client = getDefaultClientProvider(serverName, sessionId);
+    return _client.post(
       path,
       data: data,
       queryParameters: queryParameters,

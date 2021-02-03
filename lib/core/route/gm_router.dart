@@ -12,7 +12,6 @@ import '../entity/model/models.dart';
 import '../global/global_info.dart';
 import '../global/hive.dart';
 import '../repository/client/client.dart';
-import '../repository/client/gm_client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
 import '../service/services_locator.dart';
@@ -29,9 +28,7 @@ class GMRouter {
       case INITIAL_SETTINGS_PAGE:
         routeWidget = BlocProvider<InitialSettingsCubit>(
           create: (_) => InitialSettingsCubit(
-            repository: InitialSettingsRepository(
-              GMClient(getBasicClient()),
-            ),
+            repository: InitialSettingsRepository(getBasicClient()),
             globalBox: Hive.box(GLOBAL_BOX),
           ),
           child: InitialSettingsPage(),

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../utils/utils.dart';
 import 'package:hive/hive.dart';
 
 import '../../entity/dto/login_result_dto.dart';
@@ -35,6 +36,8 @@ class SignInCubit extends Cubit<SignInState> {
         password: password,
       );
       final loginResult = LoginResultDTO.fromJson(username, signInResponse);
+      globalBox.put(USERNAME, username);
+      globalBox.put(PASSWORD, encodeString(password));
       globalBox.put(TOKEN, loginResult.jSessionId);
       emit(UserSignedSuccess(loginResult));
     } on SignInException catch (e) {

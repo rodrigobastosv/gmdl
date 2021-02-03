@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
+import '../../global/hive.dart';
+import 'package:hive/hive.dart';
 
 import '../../../main.dart';
 import '../../constants.dart';
@@ -31,7 +33,7 @@ Dio getBasicClient() {
   return dio;
 }
 
-Dio getDefaultClient(String serverName, String sessionId) {
+Dio getDefaultClientProvider(String serverName, String sessionId) {
   final dio = Dio(
     BaseOptions(
       headers: {
@@ -54,18 +56,24 @@ List<Interceptor> _getBasicInterceptors(Dio dio) {
       alice.getDioInterceptor(),
     ],
     GMRetryInterceptor(dio),
+    GMAuthInterceptor(
+      dio: dio,
+      globalBox: Hive.box(GLOBAL_BOX),
+    ),
   ];
 }
 
 FutureOr<bool> getDefaultRetryPolicy(DioError error) {
   final method = error.request.method;
   final url = error.request.path;
+  final statusCode = error.response.statusCode;
   return method != HTTP_METHOD_DELETE &&
+      statusCode != HTTP_FORBIDDEN &&
       (method != HTTP_METHOD_POST || url.contains(RESTRICTIONS));
 }
 
 dynamic handleResponse(Response response) {
-  if (response.isNotOk) {
+  if (response.isNotOk && response.statusCode != HTTP_FORBIDDEN) {
     throw GMServerException(response.statusMessage);
   }
   return response.data;

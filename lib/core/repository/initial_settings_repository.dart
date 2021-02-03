@@ -1,13 +1,14 @@
+import 'package:dio/dio.dart';
+
 import '../constants.dart';
 import '../entity/model/locale_model.dart';
 import '../exception/gm_server_exception.dart';
 import 'client/client.dart';
-import 'client/gm_client.dart';
 
 class InitialSettingsRepository {
   InitialSettingsRepository(this.client);
 
-  final GMClient client;
+  final Dio client;
 
   Future<List<LocaleModel>> fetchAllLocales(String serverName) async {
     try {

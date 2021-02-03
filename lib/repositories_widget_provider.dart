@@ -1,13 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/repository/client/gm_client.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/global/hive.dart';
 import 'core/repository/repositories_provider.dart';
+import 'core/service/services_locator.dart';
 
-class RepositoriesWidgetProvider extends StatelessWidget {
+class RepositoriesWidgetProvider extends StatefulWidget {
   const RepositoriesWidgetProvider({
     Key key,
     @required this.child,
@@ -17,14 +20,58 @@ class RepositoriesWidgetProvider extends StatelessWidget {
   final Widget child;
 
   @override
+  _RepositoriesWidgetProviderState createState() =>
+      _RepositoriesWidgetProviderState();
+}
+
+class _RepositoriesWidgetProviderState
+    extends State<RepositoriesWidgetProvider> {
+  StreamSubscription serverNameSubscription;
+  StreamSubscription tokenSubscription;
+  StreamSubscription usernameSubscription;
+  StreamSubscription passwordSubscription;
+
+  @override
+  void initState() {
+    serverNameSubscription =
+        Hive.box(GLOBAL_BOX).watch(key: SERVER).listen((e) {
+      final gmClient = G<GMClient>();
+      gmClient.serverName = e.value;
+    });
+
+    tokenSubscription = Hive.box(GLOBAL_BOX).watch(key: TOKEN).listen((e) {
+      final gmClient = G<GMClient>();
+      gmClient.sessionId = e.value;
+    });
+
+    usernameSubscription =
+        Hive.box(GLOBAL_BOX).watch(key: USERNAME).listen((e) {
+      final gmClient = G<GMClient>();
+      gmClient.username = e.value;
+    });
+
+    passwordSubscription =
+        Hive.box(GLOBAL_BOX).watch(key: PASSWORD).listen((e) {
+      final gmClient = G<GMClient>();
+      gmClient.password = e.value;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    serverNameSubscription.cancel();
+    tokenSubscription.cancel();
+    usernameSubscription.cancel();
+    passwordSubscription.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(GLOBAL_BOX).listenable(),
-      builder: (_, box, ___) => MultiRepositoryProvider(
-        key: UniqueKey(),
-        providers: getRepositoryProviders(box),
-        child: child,
-      ),
+    return MultiRepositoryProvider(
+      providers: getRepositoryProviders(),
+      child: widget.child,
     );
   }
 }
