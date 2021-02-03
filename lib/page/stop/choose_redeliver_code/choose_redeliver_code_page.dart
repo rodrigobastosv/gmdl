@@ -9,6 +9,8 @@ import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../core/selector/global_info_selectors.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
+import '../../../core/extension/extensions.dart';
+
 class ChooseRedeliverCodePage extends StatelessWidget {
   const ChooseRedeliverCodePage({Key key}) : super(key: key);
 
@@ -42,7 +44,10 @@ class ChooseRedeliverCodePage extends StatelessWidget {
       mainButtonAction: cubit.hasRedeliverableCodePicked
           ? () {
               final pickedRedeliverableCode = cubit.pickedRedeliverableCode;
-              stopCubit.redeliverStop(pickedRedeliverableCode);
+              stopCubit.redeliverStop(
+                undeliverableCode: pickedRedeliverableCode,
+                actualDeparture: DateTime.now().toUtcAsString,
+              );
             }
           : null,
       mainButtonIcon: SvgPicture.asset(

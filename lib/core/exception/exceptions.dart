@@ -13,3 +13,5 @@ export 'start_route_exception.dart';
 export 'depart_origin_exception.dart';
 export 'arrive_stop_exception.dart';
 export 'arrive_warehouse_exception.dart';
+export 'undeliver_stop_exception.dart';
+export 'redeliver_stop_exception.dart';

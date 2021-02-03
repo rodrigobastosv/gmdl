@@ -8,6 +8,8 @@ import '../../../core/cubit/cubits.dart';
 import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
+import '../../../core/extension/extensions.dart';
+
 class ChooseCancelCodePage extends StatelessWidget {
   const ChooseCancelCodePage({Key key}) : super(key: key);
 
@@ -40,7 +42,10 @@ class ChooseCancelCodePage extends StatelessWidget {
       mainButtonAction: cubit.hasCancelCodePicked
           ? () {
               final pickedCancelCode = cubit.pickedCancelCode;
-              stopCubit.cancelStop(pickedCancelCode);
+              stopCubit.cancelStop(
+                cancelCode: pickedCancelCode,
+                actualCancel: DateTime.now().toUtcAsString,
+              );
             }
           : null,
       mainButtonIcon: SvgPicture.asset(

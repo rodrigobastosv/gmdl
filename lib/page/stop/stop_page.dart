@@ -12,6 +12,8 @@ import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
 import 'widget/instructions_card.dart';
 
+import '../../core/extension/extensions.dart';
+
 class StopPage extends StatelessWidget {
   const StopPage({Key key}) : super(key: key);
 
@@ -65,12 +67,13 @@ class StopPage extends StatelessWidget {
 
   Future<void> _onPressedButton(StopCubit cubit) async {
     final stop = cubit.stop;
+    final date = DateTime.now().toUtcAsString;
     if (stop.canClone) {
-      await cubit.cloneStop();
+      await cubit.cloneStop(date);
     } else if (stop.hasBeenArrived) {
-      await cubit.departStop();
+      await cubit.departStop(date);
     } else {
-      await cubit.arriveStop();
+      await cubit.arriveStop(date);
     }
   }
 

@@ -3,8 +3,8 @@
 cd ..
 echo '############################### Cleaning stuff ###############################'
 #flutter clean
-flutter pub get
-flutter pub global activate remove_from_coverage
+#flutter pub get
+#flutter pub global activate remove_from_coverage
 echo '############################### Generating files #############################'
 #flutter pub run build_runner build --delete-conflicting-outputs
 echo '############################### Running tests ################################'

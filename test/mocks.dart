@@ -12,6 +12,8 @@ import 'package:gm_driver_lite/core/service/services.dart';
 // Cubit
 class MockI18nCubit extends MockBloc<I18nState> implements I18nCubit {}
 
+class MockRouteCubit extends MockBloc<RouteState> implements RouteCubit {}
+
 class MockNotificationCubit extends MockBloc<NotificationState>
     implements NotificationCubit {}
 
@@ -31,6 +33,8 @@ class MockLoadingInfoRepository extends Mock implements LoadingInfoRepository {}
 class MockRouteRepository extends Mock implements RouteRepository {}
 
 class MockSignInRepository extends Mock implements SignInRepository {}
+
+class MockStopRepository extends Mock implements StopRepository {}
 
 // Services
 class MockDeviceInfoService extends Mock implements DeviceInfoService {}

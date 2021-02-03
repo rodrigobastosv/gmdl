@@ -120,9 +120,9 @@ class StopRepository {
       );
       return response.isOk;
     } on DioError catch (e) {
-      throw CancelStopException(getErrorMessage(e));
+      throw UndeliverStopException(getErrorMessage(e));
     } on GMServerException catch (e) {
-      throw CancelStopException(e.errorMessage);
+      throw UndeliverStopException(e.errorMessage);
     }
   }
 
@@ -145,9 +145,9 @@ class StopRepository {
       final responseData = handleResponse(response);
       return StopModel.fromJson(responseData);
     } on DioError catch (e) {
-      throw CancelStopException(getErrorMessage(e));
+      throw RedeliverStopException(getErrorMessage(e));
     } on GMServerException catch (e) {
-      throw CancelStopException(e.errorMessage);
+      throw RedeliverStopException(e.errorMessage);
     }
   }
 }
