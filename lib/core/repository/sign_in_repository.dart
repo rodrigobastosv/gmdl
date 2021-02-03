@@ -12,7 +12,6 @@ class SignInRepository {
   final GMClient _client;
 
   Future<Map<String, dynamic>> signInUser({
-    String serverUrl,
     String username,
     String password,
   }) async {

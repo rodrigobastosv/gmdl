@@ -30,6 +30,8 @@ class MockLoadingInfoRepository extends Mock implements LoadingInfoRepository {}
 
 class MockRouteRepository extends Mock implements RouteRepository {}
 
+class MockSignInRepository extends Mock implements SignInRepository {}
+
 // Services
 class MockDeviceInfoService extends Mock implements DeviceInfoService {}
 

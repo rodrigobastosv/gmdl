@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
-import '../../global/hive.dart';
 import 'package:hive/hive.dart';
 
 import '../../../main.dart';
 import '../../constants.dart';
 import '../../exception/exceptions.dart';
+import '../../global/hive.dart';
 import 'client.dart';
 import 'http_constants.dart';
 import 'interceptor/gm_retry_interceptor.dart';

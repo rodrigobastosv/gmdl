@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/core/entity/dto/driver_info_dto.dart';
@@ -8,10 +9,8 @@ import 'package:gm_driver_lite/core/entity/enum/enums.dart';
 import 'package:gm_driver_lite/core/entity/model/models.dart';
 import 'package:gm_driver_lite/core/entity/model/route_model.dart';
 import 'package:gm_driver_lite/core/exception/exceptions.dart';
-import 'package:mockito/mockito.dart';
-import '../../../mocks.dart';
-
 import 'package:gm_driver_lite/core/extension/extensions.dart';
+import '../../../mocks.dart';
 
 void main() {
   RouteCubit cubit;
@@ -21,11 +20,9 @@ void main() {
 
   RouteModel route;
   StopModel stopToArrive;
-  final departedStop = StopModel(
-    id: 1,
-    actualDeparture: DateTime.now().toUtcAsString,
-  );
+
   final actualArrivalStop = DateTime.now().toUtcAsString;
+  final actualDepartureStop = DateTime.now().toUtcAsString;
 
   group('RouteCubit', () {
     setUpAll(() {
@@ -370,7 +367,10 @@ void main() {
           ).thenAnswer((_) => Future.value());
           return cubit;
         },
-        act: (cubit) => cubit.arriveStop(stopToArrive),
+        act: (cubit) => cubit.arriveStop(
+          stop: stopToArrive,
+          actualArrival: actualArrivalStop,
+        ),
         expect: [
           ArrivingStop(),
           ArrivedStopSuccess(
@@ -393,7 +393,10 @@ void main() {
               actualArrival: actualArrivalStop,
             ),
           ).thenAnswer((_) => Future.value());
-          await cubit.arriveStop(stopToArrive);
+          await cubit.arriveStop(
+            stop: stopToArrive,
+            actualArrival: actualArrivalStop,
+          );
           expect(cubit.route.stops[0].actualArrival, actualArrivalStop);
         },
       );
@@ -412,7 +415,10 @@ void main() {
           ).thenThrow(Exception());
           return cubit;
         },
-        act: (cubit) => cubit.arriveStop(stopToArrive),
+        act: (cubit) => cubit.arriveStop(
+          stop: stopToArrive,
+          actualArrival: actualArrivalStop,
+        ),
         expect: [
           ArrivingStop(),
           ArrivedStopFailed(),
@@ -442,7 +448,7 @@ void main() {
             stops: [
               StopModel(
                 id: 1,
-                actualDeparture: DateTime.now().toUtcAsString,
+                actualDeparture: actualDepartureStop,
               ),
             ],
           );
@@ -451,11 +457,16 @@ void main() {
         act: (cubit) => cubit.updateRouteDueStopChange(
           StopModel(
             id: 1,
-            actualDeparture: DateTime.now().toUtcAsString,
+            actualDeparture: actualDepartureStop,
           ),
         ),
         expect: [
-          RouteUpdatedDueStopChange(departedStop),
+          RouteUpdatedDueStopChange(
+            StopModel(
+              id: 1,
+              actualDeparture: actualDepartureStop,
+            ),
+          ),
           RouteHasNoPendingStops(),
         ],
       );

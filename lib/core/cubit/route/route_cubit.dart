@@ -4,12 +4,11 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../entity/dto/notification_dto.dart';
 
+import '../../entity/dto/notification_dto.dart';
 import '../../entity/enum/enums.dart';
 import '../../entity/model/models.dart';
 import '../../exception/exceptions.dart';
-import '../../extension/datetime_extensions.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
@@ -107,10 +106,12 @@ class RouteCubit extends Cubit<RouteState> {
     }
   }
 
-  Future<void> arriveStop(StopModel stop) async {
+  Future<void> arriveStop({
+    StopModel stop,
+    String actualArrival,
+  }) async {
     try {
       emit(ArrivingStop());
-      final actualArrival = DateTime.now().toUtcAsString;
       _repository.arriveStop(
         routeId: route.id,
         stop: stop,

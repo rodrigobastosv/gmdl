@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../service/services_locator.dart';
 
+import '../service/services_locator.dart';
 import 'client/gm_client.dart';
 import 'loading_info_repository.dart';
 import 'repositories.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
-import '../../../core/extension/i18n_cubit_extension.dart';
+import '../../../core/extension/extensions.dart';
 
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
@@ -63,7 +63,10 @@ class StopListTileBottom extends StatelessWidget {
                     'assets/icons/arrival.svg',
                     color: textColor,
                   ),
-                  onPressed: () => context.read<RouteCubit>().arriveStop(stop),
+                  onPressed: () => context.read<RouteCubit>().arriveStop(
+                        stop: stop,
+                        actualArrival: DateTime.now().toUtcAsString,
+                      ),
                 ),
             ],
           ),
