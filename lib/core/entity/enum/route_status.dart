@@ -6,7 +6,17 @@ enum RouteStatus {
 }
 
 String statusToJson(RouteStatus status) {
-  return status.toString();
+  switch (status) {
+    case RouteStatus.NOT_STARTED:
+      return 'NOT_STARTED';
+    case RouteStatus.STARTED:
+      return 'STARTED';
+    case RouteStatus.DEPARTED_ORIGIN:
+      return 'DEPARTED_ORIGIN';
+    case RouteStatus.COMPLETED:
+      return 'COMPLETED';
+  }
+  return null;
 }
 
 RouteStatus statusFromJson(String status) {
