@@ -1,25 +1,18 @@
-import 'package:flutter/foundation.dart';
 
-@immutable
-class LocaleOption {
-  LocaleOption(
-    this.key,
-    this.label,
-  );
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String key;
-  final String label;
+part 'locale_option.freezed.dart';
+
+@freezed
+abstract class LocaleOption with _$LocaleOption {
+  // ignore: unused_element
+  const LocaleOption._();
+
+  factory LocaleOption(
+    String key,
+    String label,
+  ) = _LocaleOption;
 
   @override
   String toString() => label;
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is LocaleOption && o.key == key && o.label == label;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ label.hashCode;
 }

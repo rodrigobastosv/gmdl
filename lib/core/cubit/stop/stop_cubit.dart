@@ -6,8 +6,6 @@ import 'package:equatable/equatable.dart';
 import '../../entity/model/cancel_code_model.dart';
 import '../../entity/model/models.dart';
 import '../../exception/exceptions.dart';
-import '../../extension/datetime_extensions.dart';
-import '../../extension/extensions.dart';
 import '../../global/global_info.dart';
 import '../../repository/stop_repository.dart';
 import '../../selector/route_selectors.dart';
@@ -37,12 +35,12 @@ class StopCubit extends Cubit<StopState> {
   final GlobalInfo _globalInfo;
 
   List<CancelCodeModel> get allCancelCodes => _globalInfo.cancelCodes;
+
   List<UndeliverableCodeModel> get allUndeliveableCodes =>
       _globalInfo.undeliverableCodes;
 
-  Future<void> arriveStop() async {
+  Future<void> arriveStop(String actualArrival) async {
     final route = _routeCubit.route;
-    final actualArrival = DateTime.now().toUtcAsString;
     try {
       _repository.arriveStop(
         routeId: route.id,
@@ -57,9 +55,8 @@ class StopCubit extends Cubit<StopState> {
     }
   }
 
-  Future<void> departStop() async {
+  Future<void> departStop(String actualDeparture) async {
     final route = _routeCubit.route;
-    final actualDeparture = DateTime.now().toUtcAsString;
     try {
       emit(DepartingStop());
       _repository.departStop(
@@ -75,7 +72,7 @@ class StopCubit extends Cubit<StopState> {
     }
   }
 
-  Future<void> cloneStop() async {
+  Future<void> cloneStop(String cloneDate) async {
     final route = _routeCubit.route;
     try {
       emit(CloningStop());
@@ -87,21 +84,23 @@ class StopCubit extends Cubit<StopState> {
         stopId: clonedStop.id,
         stopKey: clonedStop.key,
         plannedSequenceNum: clonedStop.plannedSequenceNum,
-        cloneDate: DateTime.now().toUtcAsString,
+        cloneDate: cloneDate,
         stop: stop,
       );
       emit(ClonedStopSuccess(stop));
       _routeCubit.updateRouteDueClonedStop(stop);
     } on Exception {
-      emit(DepartedStopFailed());
+      emit(ClonedStopFailed());
     }
   }
 
-  Future<void> cancelStop(CancelCodeModel cancelCode) async {
+  Future<void> cancelStop({
+    CancelCodeModel cancelCode,
+    String actualCancel,
+  }) async {
     final route = _routeCubit.route;
     try {
       emit(CancellingStop());
-      final actualCancel = DateTime.now().toUtcAsString;
       _repository.cancelStop(
         routeId: route.id,
         actualCancel: actualCancel,
@@ -119,11 +118,13 @@ class StopCubit extends Cubit<StopState> {
     }
   }
 
-  Future<void> undeliverStop(UndeliverableCodeModel undeliverableCode) async {
+  Future<void> undeliverStop({
+    UndeliverableCodeModel undeliverableCode,
+    String actualDeparture,
+  }) async {
     final route = _routeCubit.route;
     try {
       emit(UndeliveringStop());
-      final actualDeparture = DateTime.now().toUtcAsString;
       _repository.undeliverStop(
         routeId: route.id,
         undeliverableCode: undeliverableCode.id,
@@ -136,17 +137,19 @@ class StopCubit extends Cubit<StopState> {
       );
       emit(UndeliveredStopSuccess(stop));
       _routeCubit.updateRouteDueStopChange(stop);
-    } on CancelStopException catch (e) {
+    } on UndeliverStopException catch (e) {
       emit(UndeliveredStopFailed(e.errorMessage));
     }
   }
 
-  Future<void> redeliverStop(UndeliverableCodeModel undeliverableCode) async {
+  Future<void> redeliverStop({
+    UndeliverableCodeModel undeliverableCode,
+    String actualDeparture,
+  }) async {
     final route = _routeCubit.route;
     try {
       emit(RedeliveringStop());
       final newStopKey = generateNewStopKey();
-      final actualDeparture = DateTime.now().toUtcAsString;
       _repository.redeliverStop(
         routeId: route.id,
         undeliverableCode: undeliverableCode.id,
@@ -170,7 +173,7 @@ class StopCubit extends Cubit<StopState> {
       );
       _routeCubit.updateRouteDueStopChange(stop);
       emit(RedeliveredStopSuccess(stop));
-    } on CancelStopException catch (e) {
+    } on RedeliverStopException catch (e) {
       emit(RedeliveredStopFailed(e.errorMessage));
     }
   }

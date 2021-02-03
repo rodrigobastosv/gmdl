@@ -8,6 +8,8 @@ import '../../../core/cubit/cubits.dart';
 import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
+import '../../../core/extension/extensions.dart';
+
 class ChooseUndeliverableCodePage extends StatelessWidget {
   const ChooseUndeliverableCodePage({Key key}) : super(key: key);
 
@@ -41,7 +43,10 @@ class ChooseUndeliverableCodePage extends StatelessWidget {
       mainButtonAction: cubit.hasUndeliverableCodePicked
           ? () {
               final pickedUndeliverableCode = cubit.pickedUndeliverableCode;
-              stopCubit.undeliverStop(pickedUndeliverableCode);
+              stopCubit.undeliverStop(
+                undeliverableCode: pickedUndeliverableCode,
+                actualDeparture: DateTime.now().toUtcAsString,
+              );
             }
           : null,
       mainButtonIcon: SvgPicture.asset(

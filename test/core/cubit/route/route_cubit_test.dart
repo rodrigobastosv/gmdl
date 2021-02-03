@@ -483,6 +483,17 @@ void main() {
           RouteUpdatedDueStopClone(StopModel(id: 1)),
         ],
       );
+
+      test(
+        '''WHEN updateRouteDueClonedStop is called
+           SHOULD add one more stop to the route
+        ''',
+        () {
+          expect(cubit.route.stops.length, 1);
+          cubit.updateRouteDueClonedStop(StopModel(id: 1));
+          expect(cubit.route.stops.length, 2);
+        },
+      );
     });
 
     group('updateRouteDueRedeliverStop', () {
