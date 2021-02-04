@@ -7,4 +7,16 @@ class CubitObserver extends BlocObserver {
         '${cubit.runtimeType}: ${change.currentState} -> ${change.nextState}');
     super.onChange(cubit, change);
   }
+
+  @override
+  void onCreate(Cubit cubit) {
+    print('Creating ${cubit.runtimeType}');
+    super.onCreate(cubit);
+  }
+
+  @override
+  void onClose(Cubit cubit) {
+    print('Closing ${cubit.runtimeType}');
+    super.onClose(cubit);
+  }
 }
