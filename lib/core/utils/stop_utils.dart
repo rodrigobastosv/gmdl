@@ -42,6 +42,19 @@ String getPendingStopStatusIconAsset(StopModel stop) {
   return '';
 }
 
+String getDoneStopStatusIconAsset(StopModel stop) {
+  if (stop.isCloned) {
+    return 'assets/icons/cloned-stop.svg';
+  } else if (stop.isCanceled) {
+    return 'assets/icons/canceled.svg';
+  } else if (stop.isRedelivered) {
+    return 'assets/icons/redelivery.svg';
+  } else if (stop.isUndeliverable) {
+    return 'assets/icons/undeliverable.svg';
+  }
+  return '';
+}
+
 Widget getStopWidget({
   bool isRouteFinished,
   StopModel stop,
@@ -73,17 +86,11 @@ Widget getStopWidget({
   }
 }
 
-String getDoneStopStatusIconAsset(StopModel stop) {
-  if (stop.isCloned) {
-    return 'assets/icons/cloned-stop.svg';
-  } else if (stop.isCanceled) {
-    return 'assets/icons/canceled.svg';
-  } else if (stop.isRedelivered) {
-    return 'assets/icons/redelivery.svg';
-  } else if (stop.isUndeliverable) {
-    return 'assets/icons/undeliverable.svg';
+String getLocationInfo(StopModel stop) {
+  if (stop.location == null) {
+    return '';
   }
-  return '';
+  return '${stop.location.key ?? ''} - ${stop.location.description ?? ''}';
 }
 
 String getLocationInfo(StopModel stop) {
