@@ -44,6 +44,7 @@ class StopSizeInfo extends StatelessWidget {
         Text(
           sizeAlias.description?.toUpperCase() ?? '',
           style: TextStyle(
+            fontSize: 12,
             color: textColor,
           ),
         ),

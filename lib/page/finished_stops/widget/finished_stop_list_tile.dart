@@ -28,12 +28,12 @@ class FinishedStopListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${stop.location.key} -  ${stop.location.description}',
+                      getLocationInfo(stop),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(stop.location.addressLine1 ?? ''),
+                    Text(stop.location?.addressLine1 ?? ''),
                   ],
                 ),
               ),
