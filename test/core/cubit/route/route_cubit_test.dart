@@ -336,12 +336,12 @@ void main() {
       );
 
       blocTest(
-        '''WHEN departOrigin throws Exception
+        '''WHEN departOrigin throws DepartOriginException
            SHOULD emit DepartingOrigin and DepartOriginFailed
         ''',
         build: () {
           when(mockRouteRepository.departOrigin(route.id))
-              .thenThrow(Exception());
+              .thenThrow(DepartOriginException('error'));
           return cubit;
         },
         act: (cubit) => cubit.departOrigin(),
@@ -412,7 +412,7 @@ void main() {
               stop: stopToArrive,
               actualArrival: actualArrivalStop,
             ),
-          ).thenThrow(Exception());
+          ).thenThrow(ArriveStopException('error'));
           return cubit;
         },
         act: (cubit) => cubit.arriveStop(
@@ -551,7 +551,7 @@ void main() {
         ''',
         build: () {
           when(mockRouteRepository.arriveWarehouse(route.id))
-              .thenThrow(Exception());
+              .thenThrow(ArriveWarehouseException('error'));
           return cubit;
         },
         act: (cubit) => cubit.arriveWarehouse(),
@@ -594,12 +594,12 @@ void main() {
       );
 
       blocTest(
-        '''WHEN completeRoute throws Exception
+        '''WHEN completeRoute throws CompleteRouteException
            SHOULD emit CompletingRoute and RouteCompletedFailed
         ''',
         build: () {
           when(mockRouteRepository.completeRoute(route.id))
-              .thenThrow(Exception());
+              .thenThrow(CompleteRouteException('error'));
           return cubit;
         },
         act: (cubit) => cubit.completeRoute(),

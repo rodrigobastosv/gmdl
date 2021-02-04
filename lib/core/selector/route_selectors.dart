@@ -39,7 +39,7 @@ String getPlannedServiceInHoursAndMinutes(RouteModel route) {
   final plannedArrival = DateTime.parse(route.plannedArrival);
   final plannedDifferenceInMinutes =
       plannedArrival.difference(plannedDeparture).inMinutes;
-  final plannedHours = (plannedDifferenceInMinutes / 60).round();
+  final plannedHours = (plannedDifferenceInMinutes / 60).floor();
   final plannedMinutes = (plannedDifferenceInMinutes % 60).round();
   return '${plannedHours}h ${plannedMinutes}m';
 }

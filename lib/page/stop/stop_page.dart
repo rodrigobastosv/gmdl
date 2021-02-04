@@ -5,14 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
+import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
 import 'widget/instructions_card.dart';
-
-import '../../core/extension/extensions.dart';
 
 class StopPage extends StatelessWidget {
   const StopPage({Key key}) : super(key: key);

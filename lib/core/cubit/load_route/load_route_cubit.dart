@@ -47,6 +47,8 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
       emit(RouteLoadedSuccess(route));
     } on NoneRouteFoundException catch (e) {
       emit(RouteLoadFailed(e.errorMessage));
+    } on FetchRouteException catch (e) {
+      emit(RouteLoadFailed(e.errorMessage));
     }
   }
 }

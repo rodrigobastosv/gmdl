@@ -1,12 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
 import 'package:gm_driver_lite/core/cubit/stop/stop_cubit.dart';
 import 'package:gm_driver_lite/core/entity/model/models.dart';
 import 'package:gm_driver_lite/core/exception/exceptions.dart';
-import 'package:mockito/mockito.dart';
-
 import '../../../mocks.dart';
-
 import 'mock_data.dart';
 
 void main() {
@@ -301,7 +300,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN cloneStop throws Exception
+        '''WHEN cloneStop throws CloneStopException
            SHOULD emit DepartingStop and DepartedStopFailed
         ''',
         build: () {
@@ -311,7 +310,7 @@ void main() {
               routeId: routeWithOneStop.id,
               stop: stop,
             ),
-          ).thenThrow(Exception());
+          ).thenThrow(CloneStopException('error'));
           return cubit;
         },
         act: (cubit) => cubit.cloneStop(cloneDateStop),
