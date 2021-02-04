@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:device_info/device_info.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
@@ -44,6 +45,8 @@ class MockPackageInfoService extends Mock implements PackageInfoService {}
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
 
 // General
+class MockDeviceInfoPlugin extends Mock implements DeviceInfoPlugin {}
+
 class MockConnectivity extends Mock implements Connectivity {}
 
 class MockBox extends Mock implements Box {}
