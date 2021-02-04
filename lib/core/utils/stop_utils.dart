@@ -92,10 +92,3 @@ String getLocationInfo(StopModel stop) {
   }
   return '${stop.location.key ?? ''} - ${stop.location.description ?? ''}';
 }
-
-String getLocationInfo(StopModel stop) {
-    if (stop.location == null) {
-      return '';
-    }
-    return '${stop.location.key ?? ''} -  ${stop.location.description ?? ''}';
-  }
