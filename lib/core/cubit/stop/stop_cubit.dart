@@ -42,7 +42,8 @@ class StopCubit extends Cubit<StopState> {
   Future<void> arriveStop(String actualArrival) async {
     final route = _routeCubit.route;
     try {
-      _repository.arriveStop(
+      emit(ArrivingOnStop());
+      await _repository.arriveStop(
         routeId: route.id,
         stop: stop,
         actualArrival: actualArrival,
@@ -50,8 +51,8 @@ class StopCubit extends Cubit<StopState> {
       stop = stop.copyWith(actualArrival: actualArrival);
       _routeCubit.updateRouteDueStopChange(stop);
       emit(ArrivedStopSuccess());
-    } on Exception {
-      emit(ArrivedStopFailed());
+    } on ArriveStopException catch (e) {
+      emit(ArriveStopFailed(e.errorMessage));
     }
   }
 
@@ -59,7 +60,7 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     try {
       emit(DepartingStop());
-      _repository.departStop(
+      await _repository.departStop(
         routeId: route.id,
         stop: stop,
         actualDeparture: actualDeparture,
@@ -67,8 +68,8 @@ class StopCubit extends Cubit<StopState> {
       stop = stop.copyWith(actualDeparture: actualDeparture);
       _routeCubit.updateRouteDueStopChange(stop);
       emit(DepartedStopSuccess(stop));
-    } on Exception {
-      emit(DepartedStopFailed());
+    } on DepartStopException catch (e) {
+      emit(DepartStopFailed(e.errorMessage));
     }
   }
 
@@ -89,8 +90,8 @@ class StopCubit extends Cubit<StopState> {
       );
       emit(ClonedStopSuccess(stop));
       _routeCubit.updateRouteDueClonedStop(stop);
-    } on Exception {
-      emit(ClonedStopFailed());
+    } on CloneStopException catch (e) {
+      emit(CloneStopFailed(e.errorMessage));
     }
   }
 

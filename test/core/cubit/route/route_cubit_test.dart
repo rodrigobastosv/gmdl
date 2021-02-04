@@ -372,7 +372,11 @@ void main() {
           actualArrival: actualArrivalStop,
         ),
         expect: [
-          ArrivingStop(),
+          ArrivingStop(
+            StopModel(
+              id: 1,
+            ),
+          ),
           ArrivedStopSuccess(
             StopModel(
               id: 1,
@@ -402,7 +406,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN arriveStop throws Exception
+        '''WHEN arriveStop throws ArriveStopException
            SHOULD emit ArrivingStop and ArrivedStopFailed
         ''',
         build: () {
@@ -420,8 +424,12 @@ void main() {
           actualArrival: actualArrivalStop,
         ),
         expect: [
-          ArrivingStop(),
-          ArrivedStopFailed(),
+          ArrivingStop(
+            StopModel(
+              id: 1,
+            ),
+          ),
+          ArrivedStopFailed('error'),
         ],
       );
     });

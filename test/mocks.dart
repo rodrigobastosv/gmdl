@@ -4,12 +4,12 @@ import 'package:device_info/device_info.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
+import 'package:package_info/package_info.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/repository/repositories.dart';
 import 'package:gm_driver_lite/core/service/services.dart';
-import 'package:package_info/package_info.dart';
 
 // Cubit
 class MockI18nCubit extends MockBloc<I18nState> implements I18nCubit {}

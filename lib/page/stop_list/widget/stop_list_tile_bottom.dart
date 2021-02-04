@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
 import '../../../core/extension/extensions.dart';
+import '../../../widget/general/gm_button_loading.dart';
 
 class StopListTileBottom extends StatelessWidget {
   const StopListTileBottom({
@@ -49,24 +50,30 @@ class StopListTileBottom extends StatelessWidget {
                 ),
               ),
               if (stop.hasNotBeenArrived)
-                TextButton.icon(
-                  label: Text(
-                    context.getText('route.inlinemenu.arrival'),
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: textColor,
-                    textStyle: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/arrival.svg',
-                    color: textColor,
-                  ),
-                  onPressed: () => context.read<RouteCubit>().arriveStop(
-                        stop: stop,
-                        actualArrival: DateTime.now().toUtcAsString,
-                      ),
+                BlocBuilder<RouteCubit, RouteState>(
+                  builder: (_, state) => (state is ArrivingStop &&
+                          state.stop == stop)
+                      ? const GMButtonLoading()
+                      : TextButton.icon(
+                          label: Text(
+                            context.getText('route.inlinemenu.arrival'),
+                          ),
+                          style: TextButton.styleFrom(
+                            primary: textColor,
+                            textStyle: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                          icon: SvgPicture.asset(
+                            'assets/icons/arrival.svg',
+                            color: textColor,
+                          ),
+                          onPressed: () =>
+                              context.read<RouteCubit>().arriveStop(
+                                    stop: stop,
+                                    actualArrival: DateTime.now().toUtcAsString,
+                                  ),
+                        ),
                 ),
             ],
           ),
