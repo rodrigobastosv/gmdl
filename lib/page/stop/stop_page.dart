@@ -8,6 +8,8 @@ import '../../core/cubit/stop/stop_cubit.dart';
 import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
+import '../../widget/alert/notification.dart';
+import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
@@ -36,6 +38,15 @@ class StopPage extends StatelessWidget {
   void _listener(BuildContext context, StopState state) {
     if (state is DepartedStopSuccess) {
       Navigator.of(context).pop();
+    }
+    if (state is ArriveStopFailed) {
+      showErrorNotification(context, state.errorMessage);
+    }
+    if (state is DepartStopFailed) {
+      showErrorNotification(context, state.errorMessage);
+    }
+    if (state is CloneStopFailed) {
+      showErrorNotification(context, state.errorMessage);
     }
     if (state is ClonedStopSuccess) {
       Navigator.of(context).pushReplacementNamed(
@@ -78,7 +89,12 @@ class StopPage extends StatelessWidget {
 
   Widget _getMainButtonIcon(StopCubit cubit) {
     final stop = cubit.stop;
-    if (stop.canClone) {
+    final state = cubit.state;
+    if (state is ArrivingOnStop ||
+        state is DepartingStop ||
+        state is CloningStop) {
+      return const GMButtonLoading();
+    } else if (stop.canClone) {
       return SvgPicture.asset('assets/icons/clone-stop.svg');
     } else {
       return SvgPicture.asset('assets/icons/driving.svg');

@@ -1,11 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:gm_driver_lite/core/entity/model/models.dart';
 import 'package:gm_driver_lite/core/route/gm_router.dart';
 import 'package:gm_driver_lite/core/route/route.dart';
-
 import '../../setup_firebase.dart';
 import 'mock_data.dart';
 

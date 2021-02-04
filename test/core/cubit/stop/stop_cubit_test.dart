@@ -16,7 +16,7 @@ void main() {
 
   StopModel stop;
 
-  group('SignInCubit', () {
+  group('StopCubit', () {
     setUp(() {
       stop = stopToArrival;
       mockStopRepository = MockStopRepository();
@@ -98,6 +98,7 @@ void main() {
         },
         act: (cubit) => cubit.arriveStop(actualArrivalStop),
         expect: [
+          ArrivingOnStop(),
           ArrivedStopSuccess(),
         ],
         verify: (cubit) {
@@ -115,7 +116,7 @@ void main() {
         '''WHEN arriveStop is called on a Stop
            SHOULD update stop's actualArrival
         ''',
-        () {
+        () async {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
           when(
             mockStopRepository.arriveStop(
@@ -124,14 +125,14 @@ void main() {
               actualArrival: actualArrivalStop,
             ),
           ).thenAnswer((_) async => Future.value());
-          cubit.arriveStop(actualArrivalStop);
+          await cubit.arriveStop(actualArrivalStop);
           expect(cubit.stop.actualArrival, actualArrivalStop);
         },
       );
 
       blocTest(
-        '''WHEN arriveStop throws Exception
-           SHOULD emit ArrivedStopFailed
+        '''WHEN arriveStop throws ArriveStopException
+           SHOULD emit ArriveStopFailed
         ''',
         build: () {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
@@ -141,12 +142,13 @@ void main() {
               stop: stop,
               actualArrival: actualArrivalStop,
             ),
-          ).thenThrow(Exception());
+          ).thenThrow(ArriveStopException('error'));
           return cubit;
         },
         act: (cubit) => cubit.arriveStop(actualArrivalStop),
         expect: [
-          ArrivedStopFailed(),
+          ArrivingOnStop(),
+          ArriveStopFailed('error'),
         ],
       );
     });
@@ -194,7 +196,7 @@ void main() {
         '''WHEN departStop is called on a Stop
            SHOULD update stop's actualDeparture
         ''',
-        () {
+        () async {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
           when(
             mockStopRepository.departStop(
@@ -203,13 +205,13 @@ void main() {
               actualDeparture: actualDepartureStop,
             ),
           ).thenAnswer((_) async => Future.value());
-          cubit.departStop(actualDepartureStop);
+          await cubit.departStop(actualDepartureStop);
           expect(cubit.stop.actualDeparture, actualDepartureStop);
         },
       );
 
       blocTest(
-        '''WHEN departStop throws Exception
+        '''WHEN departStop throws DepartStopException
            SHOULD emit DepartingStop and DepartedStopFailed
         ''',
         build: () {
@@ -226,7 +228,7 @@ void main() {
         act: (cubit) => cubit.departStop(actualArrivalStop),
         expect: [
           DepartingStop(),
-          DepartedStopFailed(),
+          DepartStopFailed('error'),
         ],
       );
     });
@@ -316,7 +318,7 @@ void main() {
         act: (cubit) => cubit.cloneStop(cloneDateStop),
         expect: [
           CloningStop(),
-          ClonedStopFailed(),
+          CloneStopFailed('error'),
         ],
       );
     });
@@ -398,7 +400,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN cancelStop throws Exception
+        '''WHEN cancelStop throws CancelStopException
            SHOULD emit CancellingStop and CanceledStopFailed
         ''',
         build: () {
@@ -505,7 +507,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN undeliverStop throws Exception
+        '''WHEN undeliverStop throws UndeliverStopException
            SHOULD emit UndeliveringStop and UndeliveredStopFailed
         ''',
         build: () {
@@ -581,7 +583,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN redeliverStop throws Exception
+        '''WHEN redeliverStop throws RedeliverStopException
            SHOULD emit RedeliveringStop and RedeliveredStopFailed
         ''',
         build: () {

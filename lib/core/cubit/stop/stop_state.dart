@@ -9,9 +9,20 @@ abstract class StopState extends Equatable {
 
 class StopInitial extends StopState {}
 
+class ArrivingOnStop extends StopState {}
+
 class ArrivedStopSuccess extends StopState {}
 
-class ArrivedStopFailed extends StopState {}
+class ArriveStopFailed extends StopState {
+  ArriveStopFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
 
 class DepartingStop extends StopState {}
 
@@ -26,7 +37,16 @@ class DepartedStopSuccess extends StopState {
       ];
 }
 
-class DepartedStopFailed extends StopState {}
+class DepartStopFailed extends StopState {
+  DepartStopFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
 
 class CloningStop extends StopState {}
 
@@ -41,7 +61,16 @@ class ClonedStopSuccess extends StopState {
       ];
 }
 
-class ClonedStopFailed extends StopState {}
+class CloneStopFailed extends StopState {
+  CloneStopFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
 
 class CancellingStop extends StopState {}
 

@@ -111,8 +111,8 @@ class RouteCubit extends Cubit<RouteState> {
     String actualArrival,
   }) async {
     try {
-      emit(ArrivingStop());
-      _repository.arriveStop(
+      emit(ArrivingStop(stop));
+      await _repository.arriveStop(
         routeId: route.id,
         stop: stop,
         actualArrival: actualArrival,
@@ -120,8 +120,8 @@ class RouteCubit extends Cubit<RouteState> {
       final _updatedStop = stop.copyWith(actualArrival: actualArrival);
       route = updateRouteByStopChange(route, _updatedStop);
       emit(ArrivedStopSuccess(_updatedStop));
-    } on Exception {
-      emit(ArrivedStopFailed());
+    } on ArriveStopException catch (e) {
+      emit(ArrivedStopFailed(e.errorMessage));
     }
   }
 

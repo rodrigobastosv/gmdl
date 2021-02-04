@@ -1,8 +1,8 @@
 import 'package:device_info/device_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gm_driver_lite/core/service/services.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:gm_driver_lite/core/service/services.dart';
 import '../../mocks.dart';
 
 void main() {
