@@ -120,5 +120,34 @@ void main() {
         verify(mockRouteRepository.fetchRouteView('driver')).called(1);
       },
     );
+
+    blocTest(
+      '''WHEN fetchRouteInformation throws FetchRouteException 
+         SHOULD emit Loading state and RouteLoadFailed at the end
+      ''',
+      build: () {
+        when(mockGlobalInfo.driverInfo).thenReturn(
+          DriverInfoDto(login: 'driver'),
+        );
+        when(mockI18nCubit.getFormattedText('loading.downloading.route'))
+            .thenReturn('loading.downloading.route');
+        when(mockRouteRepository.fetchRouteView('driver')).thenAnswer(
+          (_) async => RouteViewInfoDTO(
+            route: RouteDTO(id: 1),
+          ),
+        );
+        when(mockRouteRepository.fetchRoute(1))
+            .thenThrow(FetchRouteException('error'));
+        return cubit;
+      },
+      act: (cubit) => cubit.fetchRouteInformation(),
+      expect: [
+        const LoadingInfo('loading.downloading.route'),
+        RouteLoadFailed('error'),
+      ],
+      verify: (cubit) {
+        verify(mockRouteRepository.fetchRouteView('driver')).called(1);
+      },
+    );
   });
 }

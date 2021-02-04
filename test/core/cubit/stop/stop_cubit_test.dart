@@ -301,7 +301,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN cloneStop throws Exception
+        '''WHEN cloneStop throws CloneStopException
            SHOULD emit DepartingStop and DepartedStopFailed
         ''',
         build: () {
@@ -311,7 +311,7 @@ void main() {
               routeId: routeWithOneStop.id,
               stop: stop,
             ),
-          ).thenThrow(Exception());
+          ).thenThrow(CloneStopException('error'));
           return cubit;
         },
         act: (cubit) => cubit.cloneStop(cloneDateStop),
