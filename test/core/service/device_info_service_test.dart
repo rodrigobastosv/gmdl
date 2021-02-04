@@ -9,7 +9,7 @@ void main() {
   DeviceInfoService deviceInfoService;
   MockDeviceInfoPlugin mockDeviceInfoPlugin;
 
-  group('DeviceInfoService test', () {
+  group('DeviceInfoService', () {
     setUp(() {
       mockDeviceInfoPlugin = MockDeviceInfoPlugin();
       deviceInfoService = DeviceInfoService(mockDeviceInfoPlugin);
@@ -24,9 +24,22 @@ void main() {
         (_) async => IosDeviceInfo(identifierForVendor: 'identifierForVendor'),
       );
       await deviceInfoService.init();
-      
+
       final id = deviceInfoService.getId();
       expect(id, 'identifierForVendor');
+    });
+
+    test('getModel', () async {
+      when(mockDeviceInfoPlugin.iosInfo).thenAnswer(
+        (_) async => IosDeviceInfo(
+          identifierForVendor: 'identifierForVendor',
+          model: 'model',
+        ),
+      );
+      await deviceInfoService.init();
+
+      final model = deviceInfoService.getModel();
+      expect(model, 'model');
     });
   });
 }

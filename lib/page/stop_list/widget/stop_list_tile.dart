@@ -76,7 +76,7 @@ class StopListTile extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 100,
                               child: Text(
-                                _getLocationInfo(),
+                                getLocationInfo(stop),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: _getTextColor(context),
@@ -135,13 +135,6 @@ class StopListTile extends StatelessWidget {
       return const SizedBox();
     }
     return const SizedBox();
-  }
-
-  String _getLocationInfo() {
-    if (stop.location == null) {
-      return '';
-    }
-    return '${stop.location.key ?? ''} -  ${stop.location.description ?? ''}';
   }
 
   Color _getStopIconColor() {

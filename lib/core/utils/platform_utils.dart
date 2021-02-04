@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
 String getPlatform() {
-  if (isAndroid()) {
+  if (Platform.isAndroid) {
     return 'ANDROID';
   } else {
     return 'IOS';

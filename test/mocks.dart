@@ -9,6 +9,7 @@ import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/repository/repositories.dart';
 import 'package:gm_driver_lite/core/service/services.dart';
+import 'package:package_info/package_info.dart';
 
 // Cubit
 class MockI18nCubit extends MockBloc<I18nState> implements I18nCubit {}
@@ -46,6 +47,8 @@ class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
 
 // General
 class MockDeviceInfoPlugin extends Mock implements DeviceInfoPlugin {}
+
+class MockPackageInfo extends Mock implements PackageInfo {}
 
 class MockConnectivity extends Mock implements Connectivity {}
 
