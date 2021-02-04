@@ -1,5 +1,4 @@
 import 'package:gm_driver_lite/core/entity/model/models.dart';
-
 import 'package:gm_driver_lite/core/extension/extensions.dart';
 
 final actualArrivalStop = DateTime.now().toUtcAsString;

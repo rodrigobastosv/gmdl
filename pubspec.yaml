@@ -51,6 +51,7 @@ dev_dependencies:
     sdk: flutter
 
   # Test
+  integration_test: ^1.0.2+2
   bloc_test: ^7.1.0
   mockito: ^4.1.4
 

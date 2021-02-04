@@ -6,9 +6,8 @@ import 'package:roundcheckbox/roundcheckbox.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/cubit/stop/stop_cubit.dart';
-import '../../../widget/general/gm_scaffold.dart';
-
 import '../../../core/extension/extensions.dart';
+import '../../../widget/general/gm_scaffold.dart';
 
 class ChooseUndeliverableCodePage extends StatelessWidget {
   const ChooseUndeliverableCodePage({Key key}) : super(key: key);
