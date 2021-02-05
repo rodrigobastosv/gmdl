@@ -28,7 +28,7 @@ class GMClient {
     Options options,
   }) async {
     final _client = getDefaultClientProvider(serverName, sessionId);
-    return _client.get(
+    return await _client.get(
       path,
       queryParameters: queryParameters,
       options: options,
@@ -42,7 +42,7 @@ class GMClient {
     Options options,
   }) async {
     final _client = getDefaultClientProvider(serverName, sessionId);
-    return _client.post(
+    return await _client.post(
       path,
       data: data,
       queryParameters: queryParameters,

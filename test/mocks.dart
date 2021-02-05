@@ -48,6 +48,8 @@ class MockPackageInfoService extends Mock implements PackageInfoService {}
 
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
 
+class MockLaunchService extends Mock implements LaunchService {}
+
 // General
 class MockDeviceInfoPlugin extends Mock implements DeviceInfoPlugin {}
 

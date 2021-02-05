@@ -92,3 +92,19 @@ String getLocationInfo(StopModel stop) {
   }
   return '${stop.location.key ?? ''} - ${stop.location.description ?? ''}';
 }
+
+int getStopServiceTimeInSeconds(StopModel stop) {
+  if (stop.hasNotBeenArrived) {
+    return 0;
+  } else if (stop.isPending) {
+    final actualArrival = DateTime.parse(stop.actualArrival);
+    final now = DateTime.now();
+    final difference = now.difference(actualArrival);
+    return difference.inSeconds;
+  } else {
+    final actualArrival = DateTime.parse(stop.actualArrival);
+    final actualDeparture = DateTime.parse(stop.actualDeparture);
+    final difference = actualDeparture.difference(actualArrival);
+    return difference.inSeconds;
+  }
+}

@@ -75,6 +75,7 @@ class GMRouter {
             globalInfo: context.read<GlobalInfo>(),
             notificationCubit: context.read<NotificationCubit>(),
             clientCubit: context.read<ClientCubit>(),
+            launchService: G<LaunchService>(),
           )..listenNotifications(),
           child: const RouteAtGlancePage(),
         );
@@ -106,7 +107,7 @@ class GMRouter {
                 repository: context.read<StopRepository>(),
                 clientCubit: context.read<ClientCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
-              ),
+              )..calculateServiceTime(),
             ),
             BlocProvider.value(value: stopPageArguments.routeCubit),
           ],

@@ -15,7 +15,7 @@ import 'http_constants.dart';
 import 'interceptor/gm_retry_interceptor.dart';
 import 'interceptor/interceptors.dart';
 
-const DEFAULT_RETRIES_COUNT = 2;
+const DEFAULT_RETRIES_COUNT = 3;
 const DEFAULT_RETRY_INTERVAL_SECONDS = 5;
 
 Dio getBasicClient() {
@@ -69,7 +69,13 @@ FutureOr<bool> getDefaultRetryPolicy(DioError error) {
   final statusCode = error.response.statusCode;
   return method != HTTP_METHOD_DELETE &&
       statusCode != HTTP_FORBIDDEN &&
-      (method != HTTP_METHOD_POST || url.contains(RESTRICTIONS));
+      (method != HTTP_METHOD_POST ||
+          url.contains(RESTRICTIONS) ||
+          isStopActionRequest(url));
+}
+
+bool isStopActionRequest(String url) {
+  return url.contains(ROUTE) && url.contains(STOP);
 }
 
 dynamic handleResponse(Response response) {

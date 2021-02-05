@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../service/services.dart';
 
 import '../../entity/dto/notification_dto.dart';
 import '../../entity/enum/enums.dart';
@@ -24,20 +25,24 @@ class RouteCubit extends Cubit<RouteState> {
     @required this.globalInfo,
     @required NotificationCubit notificationCubit,
     @required ClientCubit clientCubit,
+    @required LaunchService launchService,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
         assert(clientCubit != null),
+        assert(launchService != null),
         _repository = repository,
         _notificationCubit = notificationCubit,
         _clientCubit = clientCubit,
+        _launchService = launchService,
         super(RouteInitial());
 
   final RouteRepository _repository;
   final GlobalInfo globalInfo;
   final NotificationCubit _notificationCubit;
   final ClientCubit _clientCubit;
+  final LaunchService _launchService;
 
   RouteModel route;
   StreamSubscription<NotificationState> _notificationSubscription;
@@ -167,6 +172,20 @@ class RouteCubit extends Cubit<RouteState> {
       emit(RouteCompletedSuccess());
     } on Exception {
       emit(RouteCompletedFailed());
+    }
+  }
+
+  Future<void> launchMapForDirections({
+    double latitude = 0.0,
+    double longitude = 0.0,
+  }) async {
+    try {
+      await _launchService.launchMap(
+        latitude: latitude,
+        longitude: longitude,
+      );
+    } on LaunchActionException catch (e) {
+      emit(LaunchMapForDirectionsFailed(e.errorMessage));
     }
   }
 

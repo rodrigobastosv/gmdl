@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import '../../utils/time_utils.dart';
 
 import '../../entity/model/cancel_code_model.dart';
 import '../../entity/model/models.dart';
@@ -33,6 +37,8 @@ class StopCubit extends Cubit<StopState> {
         super(StopInitial());
 
   StopModel stop;
+  int serviceTimeInSeconds = 0;
+  StreamSubscription timeSubscription;
   final StopRepository _repository;
   final RouteCubit _routeCubit;
   final ClientCubit _clientCubit;
@@ -59,6 +65,21 @@ class StopCubit extends Cubit<StopState> {
       emit(ArrivedStopSuccess());
     } on ArriveStopException catch (e) {
       emit(ArriveStopFailed(e.errorMessage));
+    }
+  }
+
+  void calculateServiceTime() {
+    if (stop.isPending) {
+      if (stop.hasBeenArrived) {
+        serviceTimeInSeconds = getStopServiceTimeInSeconds(stop);
+        emit(ServiceTimeUpdated(serviceTimeInSeconds));
+        timeSubscription = Stream.periodic(ONE_SECOND).listen((_) {
+          serviceTimeInSeconds++;
+          emit(ServiceTimeUpdated(serviceTimeInSeconds));
+        });
+      } else {
+        serviceTimeInSeconds = 0;
+      }
     }
   }
 
@@ -185,5 +206,11 @@ class StopCubit extends Cubit<StopState> {
     } on RedeliverStopException catch (e) {
       emit(RedeliveredStopFailed(e.errorMessage));
     }
+  }
+
+  @override
+  Future<void> close() {
+    timeSubscription?.cancel();
+    return super.close();
   }
 }

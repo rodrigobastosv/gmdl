@@ -156,3 +156,14 @@ class FailedToUpdatedRouteByNotification extends RouteState {
         notificationAction,
       ];
 }
+
+class LaunchMapForDirectionsFailed extends RouteState {
+  LaunchMapForDirectionsFailed(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}

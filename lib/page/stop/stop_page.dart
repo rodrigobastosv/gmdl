@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'widget/basic_stop_info.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
@@ -66,9 +67,11 @@ class StopPage extends StatelessWidget {
   }
 
   Widget _builder(BuildContext context, StopState state) {
+    final cubit = context.watch<StopCubit>();
     return SingleChildScrollView(
       child: Column(
         children: [
+          BasicStopInfo(stop: cubit.stop),
           const InstructionsCard(),
         ],
       ),

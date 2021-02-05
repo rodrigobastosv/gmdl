@@ -18,6 +18,7 @@ void main() {
   MockGlobalInfo mockGlobalInfo;
   MockNotificationCubit mockNotificationCubit;
   MockClientCubit mockClientCubit;
+  MockLaunchService mockLaunchService;
 
   RouteModel route;
   StopModel stopToArrive;
@@ -31,6 +32,7 @@ void main() {
       mockGlobalInfo = MockGlobalInfo();
       mockNotificationCubit = MockNotificationCubit();
       mockClientCubit = MockClientCubit();
+      mockLaunchService = MockLaunchService();
     });
 
     setUp(() {
@@ -49,6 +51,7 @@ void main() {
         globalInfo: mockGlobalInfo,
         notificationCubit: mockNotificationCubit,
         clientCubit: mockClientCubit,
+        launchService: mockLaunchService,
       );
     });
 
@@ -62,6 +65,7 @@ void main() {
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
                 clientCubit: mockClientCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
       expect(
@@ -71,6 +75,7 @@ void main() {
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
                 clientCubit: mockClientCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
       expect(
@@ -80,6 +85,7 @@ void main() {
                 globalInfo: null,
                 notificationCubit: mockNotificationCubit,
                 clientCubit: mockClientCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
 
@@ -90,16 +96,29 @@ void main() {
                 globalInfo: mockGlobalInfo,
                 notificationCubit: null,
                 clientCubit: mockClientCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
 
-          expect(
+      expect(
           () => RouteCubit(
                 route: route,
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
                 clientCubit: null,
+                launchService: mockLaunchService,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                launchService: null,
               ),
           throwsAssertionError);
     });

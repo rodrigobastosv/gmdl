@@ -13,6 +13,17 @@ class ArrivingOnStop extends StopState {}
 
 class ArrivedStopSuccess extends StopState {}
 
+class ServiceTimeUpdated extends StopState {
+  ServiceTimeUpdated(this.serviceTime);
+
+  final int serviceTime;
+
+  @override
+  List<Object> get props => [
+        serviceTime,
+      ];
+}
+
 class ArriveStopFailed extends StopState {
   ArriveStopFailed(this.errorMessage);
 

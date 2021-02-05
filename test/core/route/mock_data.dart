@@ -6,6 +6,7 @@ import 'package:gm_driver_lite/core/entity/model/models.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/repository/client/gm_client.dart';
 import 'package:gm_driver_lite/core/repository/repositories.dart';
+import 'package:gm_driver_lite/core/service/services.dart';
 import 'package:gm_driver_lite/page/stop/stop_page_arguments.dart';
 
 final routeCubit = RouteCubit(
@@ -14,6 +15,7 @@ final routeCubit = RouteCubit(
   globalInfo: GlobalInfo(),
   notificationCubit: notificationCubit,
   clientCubit: clientCubit,
+  launchService: LaunchService(),
 );
 
 final stopCubit = StopCubit(

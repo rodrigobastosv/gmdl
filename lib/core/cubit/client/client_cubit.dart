@@ -5,40 +5,32 @@ import 'package:equatable/equatable.dart';
 
 part 'client_state.dart';
 
-const QUEUE_TIME = Duration(seconds: 5);
+const QUEUE_TIME = Duration(seconds: 3);
 
 class ClientCubit extends Cubit<ClientState> {
   ClientCubit() : super(ClientInitial());
 
   final queue = <Future>[];
+  StreamController<Future> queueStreamController;
   StreamSubscription queueSubscription;
 
   void init() {
-    queueSubscription = Stream.periodic(QUEUE_TIME).listen((_) async {
-      if (queue.isNotEmpty) {
-        await _dequeue();
-      }
+    queueStreamController = StreamController();
+    queueSubscription = queueStreamController.stream.listen((func) async {
+      await Future.delayed(QUEUE_TIME);
+      await func;
+      emit(RequestDequeued());
     });
   }
 
   Future<void> schedule(Future func) async {
-    queue.add(func);
+    queueStreamController.add(func);
     emit(RequestEnqueued());
-  }
-
-  Future<void> _dequeue() async {
-    try {
-      final func = queue[0];
-      await func;
-      queue.removeAt(0);
-      emit(RequestDequeued());
-    } on Exception {
-      rethrow;
-    }
   }
 
   @override
   Future<void> close() {
+    queueStreamController?.close();
     queueSubscription?.cancel();
     return super.close();
   }
