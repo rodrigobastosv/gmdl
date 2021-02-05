@@ -10,7 +10,7 @@ import '../../global/global_info.dart';
 import '../../repository/stop_repository.dart';
 import '../../selector/route_selectors.dart';
 import '../../utils/utils.dart';
-import '../route/route_cubit.dart';
+import '../cubits.dart';
 
 part 'stop_state.dart';
 
@@ -19,19 +19,23 @@ class StopCubit extends Cubit<StopState> {
     @required this.stop,
     @required StopRepository repository,
     @required RouteCubit routeCubit,
+    @required ClientCubit clientCubit,
     @required GlobalInfo globalInfo,
   })  : assert(stop != null),
         assert(repository != null),
         assert(routeCubit != null),
+        assert(clientCubit != null),
         assert(globalInfo != null),
         _repository = repository,
         _routeCubit = routeCubit,
+        _clientCubit = clientCubit,
         _globalInfo = globalInfo,
         super(StopInitial());
 
   StopModel stop;
   final StopRepository _repository;
   final RouteCubit _routeCubit;
+  final ClientCubit _clientCubit;
   final GlobalInfo _globalInfo;
 
   List<CancelCodeModel> get allCancelCodes => _globalInfo.cancelCodes;
@@ -43,10 +47,12 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     try {
       emit(ArrivingOnStop());
-      await _repository.arriveStop(
-        routeId: route.id,
-        stop: stop,
-        actualArrival: actualArrival,
+      _clientCubit.schedule(
+        _repository.arriveStop(
+          routeId: route.id,
+          stop: stop,
+          actualArrival: actualArrival,
+        ),
       );
       stop = stop.copyWith(actualArrival: actualArrival);
       _routeCubit.updateRouteDueStopChange(stop);
@@ -60,10 +66,12 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     try {
       emit(DepartingStop());
-      await _repository.departStop(
-        routeId: route.id,
-        stop: stop,
-        actualDeparture: actualDeparture,
+      _clientCubit.schedule(
+        _repository.departStop(
+          routeId: route.id,
+          stop: stop,
+          actualDeparture: actualDeparture,
+        ),
       );
       stop = stop.copyWith(actualDeparture: actualDeparture);
       _routeCubit.updateRouteDueStopChange(stop);

@@ -13,6 +13,7 @@ void main() {
   MockStopRepository mockStopRepository;
   MockRouteCubit mockRouteCubit;
   MockGlobalInfo mockGlobalInfo;
+  MockClientCubit mockClientCubit;
 
   StopModel stop;
 
@@ -22,11 +23,13 @@ void main() {
       mockStopRepository = MockStopRepository();
       mockRouteCubit = MockRouteCubit();
       mockGlobalInfo = MockGlobalInfo();
+      mockClientCubit = MockClientCubit();
       cubit = StopCubit(
         stop: stop,
         repository: mockStopRepository,
         routeCubit: mockRouteCubit,
         globalInfo: mockGlobalInfo,
+        clientCubit: mockClientCubit,
       );
     });
 
@@ -37,6 +40,7 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -45,6 +49,7 @@ void main() {
                 repository: null,
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -53,6 +58,7 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: null,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -61,6 +67,17 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: mockRouteCubit,
                 globalInfo: null,
+                clientCubit: mockClientCubit,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => StopCubit(
+                stop: stop,
+                repository: mockStopRepository,
+                routeCubit: mockRouteCubit,
+                globalInfo: mockGlobalInfo,
+                clientCubit: null,
               ),
           throwsAssertionError);
     });

@@ -23,17 +23,21 @@ class RouteCubit extends Cubit<RouteState> {
     @required RouteRepository repository,
     @required this.globalInfo,
     @required NotificationCubit notificationCubit,
+    @required ClientCubit clientCubit,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
+        assert(clientCubit != null),
         _repository = repository,
         _notificationCubit = notificationCubit,
+        _clientCubit = clientCubit,
         super(RouteInitial());
 
   final RouteRepository _repository;
   final GlobalInfo globalInfo;
   final NotificationCubit _notificationCubit;
+  final ClientCubit _clientCubit;
 
   RouteModel route;
   StreamSubscription<NotificationState> _notificationSubscription;
@@ -112,10 +116,12 @@ class RouteCubit extends Cubit<RouteState> {
   }) async {
     try {
       emit(ArrivingStop(stop));
-      await _repository.arriveStop(
-        routeId: route.id,
-        stop: stop,
-        actualArrival: actualArrival,
+      _clientCubit.schedule(
+        _repository.arriveStop(
+          routeId: route.id,
+          stop: stop,
+          actualArrival: actualArrival,
+        ),
       );
       final _updatedStop = stop.copyWith(actualArrival: actualArrival);
       route = updateRouteByStopChange(route, _updatedStop);

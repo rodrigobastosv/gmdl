@@ -19,6 +19,9 @@ class MockRouteCubit extends MockBloc<RouteState> implements RouteCubit {}
 class MockNotificationCubit extends MockBloc<NotificationState>
     implements NotificationCubit {}
 
+class MockClientCubit extends MockBloc<NotificationState>
+    implements ClientCubit {}
+
 // Repository
 class MockEquipmentRepository extends Mock implements EquipmentRepository {}
 

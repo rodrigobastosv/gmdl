@@ -17,6 +17,7 @@ void main() {
   MockRouteRepository mockRouteRepository;
   MockGlobalInfo mockGlobalInfo;
   MockNotificationCubit mockNotificationCubit;
+  MockClientCubit mockClientCubit;
 
   RouteModel route;
   StopModel stopToArrive;
@@ -29,6 +30,7 @@ void main() {
       mockRouteRepository = MockRouteRepository();
       mockGlobalInfo = MockGlobalInfo();
       mockNotificationCubit = MockNotificationCubit();
+      mockClientCubit = MockClientCubit();
     });
 
     setUp(() {
@@ -46,6 +48,7 @@ void main() {
         repository: mockRouteRepository,
         globalInfo: mockGlobalInfo,
         notificationCubit: mockNotificationCubit,
+        clientCubit: mockClientCubit,
       );
     });
 
@@ -58,6 +61,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -66,6 +70,7 @@ void main() {
                 repository: null,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -74,6 +79,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: null,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
 
@@ -83,6 +89,17 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: null,
+                clientCubit: mockClientCubit,
+              ),
+          throwsAssertionError);
+
+          expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                clientCubit: null,
               ),
           throwsAssertionError);
     });

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/client/client_cubit.dart';
 import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
@@ -73,6 +74,7 @@ class GMRouter {
             repository: context.read<RouteRepository>(),
             globalInfo: context.read<GlobalInfo>(),
             notificationCubit: context.read<NotificationCubit>(),
+            clientCubit: context.read<ClientCubit>(),
           )..listenNotifications(),
           child: const RouteAtGlancePage(),
         );
@@ -102,6 +104,7 @@ class GMRouter {
                 stop: stopPageArguments.stop,
                 routeCubit: stopPageArguments.routeCubit,
                 repository: context.read<StopRepository>(),
+                clientCubit: context.read<ClientCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
               ),
             ),

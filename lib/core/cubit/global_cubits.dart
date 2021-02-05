@@ -8,9 +8,15 @@ import 'package:hive/hive.dart';
 import '../global/global_info.dart';
 import '../global/hive.dart';
 import '../repository/repositories.dart';
+import 'client/client_cubit.dart';
 import 'cubits.dart';
 
 List<BlocProvider> getGlobalCubits(BuildContext context) => [
+      BlocProvider<ClientCubit>(
+        create: (_) => ClientCubit(
+        )..init(),
+        lazy: false,
+      ),
       BlocProvider<NotificationCubit>(
         create: (innerContext) => NotificationCubit(
           firebaseMessaging: FirebaseMessaging.instance,

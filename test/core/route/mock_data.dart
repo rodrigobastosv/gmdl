@@ -13,6 +13,7 @@ final routeCubit = RouteCubit(
   route: RouteModel(),
   globalInfo: GlobalInfo(),
   notificationCubit: notificationCubit,
+  clientCubit: clientCubit,
 );
 
 final stopCubit = StopCubit(
@@ -20,7 +21,10 @@ final stopCubit = StopCubit(
   repository: StopRepository(GMClient()),
   routeCubit: routeCubit,
   globalInfo: GlobalInfo(),
+  clientCubit: clientCubit,
 );
+
+final clientCubit = ClientCubit();
 
 final notificationCubit = NotificationCubit(
   globalInfo: GlobalInfo(),
