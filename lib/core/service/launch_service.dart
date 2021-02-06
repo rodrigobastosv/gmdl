@@ -1,5 +1,6 @@
-import '../exception/exceptions.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../exception/exceptions.dart';
 
 class LaunchService {
   Future<void> launchMap({

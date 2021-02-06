@@ -112,8 +112,6 @@ class RouteCompletedSuccess extends RouteState {}
 
 class RouteCompletedFailed extends RouteState {}
 
-class RouteBeginListenNotifications extends RouteState {}
-
 class ProConfigAppliedToRoute extends RouteState {
   ProConfigAppliedToRoute(this.proConfig);
 
@@ -165,5 +163,17 @@ class LaunchMapForDirectionsFailed extends RouteState {
   @override
   List<Object> get props => [
         errorMessage,
+      ];
+}
+
+class DriverPositionUpdated extends RouteState {
+  DriverPositionUpdated(this.position);
+
+  final Position position;
+
+  @override
+  List<Object> get props => [
+        position.latitude,
+        position.longitude,
       ];
 }

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../service/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../entity/dto/notification_dto.dart';
 import '../../entity/enum/enums.dart';
@@ -13,6 +13,7 @@ import '../../exception/exceptions.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 import '../../selector/route_selectors.dart';
+import '../../service/services.dart';
 import '../../utils/route_utils.dart';
 import '../cubits.dart';
 
@@ -22,38 +23,45 @@ class RouteCubit extends Cubit<RouteState> {
   RouteCubit({
     @required this.route,
     @required RouteRepository repository,
-    @required this.globalInfo,
+    @required GlobalInfo globalInfo,
     @required NotificationCubit notificationCubit,
     @required ClientCubit clientCubit,
+    @required GpsCubit gpsCubit,
     @required LaunchService launchService,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
         assert(clientCubit != null),
+        assert(gpsCubit != null),
         assert(launchService != null),
         _repository = repository,
+        _globalInfo = globalInfo,
         _notificationCubit = notificationCubit,
         _clientCubit = clientCubit,
+        _gpsCubit = gpsCubit,
         _launchService = launchService,
         super(RouteInitial());
 
   final RouteRepository _repository;
-  final GlobalInfo globalInfo;
+  final GlobalInfo _globalInfo;
   final NotificationCubit _notificationCubit;
   final ClientCubit _clientCubit;
+  final GpsCubit _gpsCubit;
   final LaunchService _launchService;
 
   RouteModel route;
+  Position lastPosition;
   StreamSubscription<NotificationState> _notificationSubscription;
+  StreamSubscription<GpsState> _positionSubscription;
 
-  String get driverName => globalInfo.driverInfo.name;
+  String get driverName => _globalInfo.driverInfo.name;
 
   String get token => _notificationCubit.fcmToken;
 
-  void listenNotifications() {
+  void init() {
     _notificationSubscription = _notificationCubit.listen(_handleNotifications);
-    emit(RouteBeginListenNotifications());
+    _positionSubscription = _gpsCubit.listen(_handlePositionUpdate);
   }
 
   Future<void> _handleNotifications(NotificationState state) async {
@@ -83,6 +91,13 @@ class RouteCubit extends Cubit<RouteState> {
           notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
         ),
       );
+    }
+  }
+
+  Future<void> _handlePositionUpdate(GpsState state) async {
+    if (state is NewPosition) {
+      lastPosition = state.position;
+      emit(DriverPositionUpdated(lastPosition));
     }
   }
 
@@ -192,6 +207,7 @@ class RouteCubit extends Cubit<RouteState> {
   @override
   Future<void> close() {
     _notificationSubscription?.cancel();
+    _positionSubscription?.cancel();
     return super.close();
   }
 }

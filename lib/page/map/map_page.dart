@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gm_driver_lite/widget/general/gm_scaffold.dart';
-import '../../core/utils/map_utils.dart';
-import '../../core/entity/model/models.dart';
-import 'widget/map_stop_marker.dart';
-import '../../core/cubit/route/route_cubit.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../core/cubit/route/route_cubit.dart';
+import '../../core/entity/model/models.dart';
 import '../../core/extension/extensions.dart';
+import '../../core/utils/map_utils.dart';
+import '../../widget/general/gm_scaffold.dart';
+import 'widget/map_stop_marker.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({
@@ -21,6 +23,7 @@ class MapPage extends StatelessWidget {
     final routeCubit = context.watch<RouteCubit>();
     final route = routeCubit.route;
     final stops = route.stops;
+    final lastPosition = routeCubit.lastPosition;
     final routePath = route.routePath;
     return BlocBuilder<RouteCubit, RouteState>(
       builder: (_, state) => GMScaffold(
@@ -29,8 +32,8 @@ class MapPage extends StatelessWidget {
           body: FlutterMap(
             options: MapOptions(
               center: LatLng(
-                route.origLatitude,
-                route.origLongitude,
+                lastPosition.latitude,
+                lastPosition.longitude,
               ),
               zoom: 13,
             ),
@@ -42,7 +45,7 @@ class MapPage extends StatelessWidget {
               ),
               MarkerLayerOptions(
                 markers: [
-                  _getCurrentPositionMarker(route),
+                  _getCurrentPositionMarker(lastPosition),
                   ..._getStopMarkers(stops),
                 ],
               ),
@@ -72,13 +75,13 @@ class MapPage extends StatelessWidget {
     );
   }
 
-  Marker _getCurrentPositionMarker(RouteModel route) {
+  Marker _getCurrentPositionMarker(Position lastPosition) {
     return Marker(
       width: 30,
       height: 30,
       point: LatLng(
-        route.origLatitude,
-        route.origLongitude,
+        lastPosition.latitude,
+        lastPosition.longitude,
       ),
       builder: (_) => SvgPicture.asset(
         'assets/icons/map-current-position.svg',

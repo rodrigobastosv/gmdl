@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/client/client_cubit.dart';
 import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
 import '../../page/stop/stop_page_arguments.dart';
+import '../cubit/client/client_cubit.dart';
 import '../cubit/cubits.dart';
 import '../cubit/stop/stop_cubit.dart';
 import '../entity/model/models.dart';
@@ -75,8 +75,9 @@ class GMRouter {
             globalInfo: context.read<GlobalInfo>(),
             notificationCubit: context.read<NotificationCubit>(),
             clientCubit: context.read<ClientCubit>(),
+            gpsCubit: context.read<GpsCubit>(),
             launchService: G<LaunchService>(),
-          )..listenNotifications(),
+          )..init(),
           child: const RouteAtGlancePage(),
         );
         break;

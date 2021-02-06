@@ -15,6 +15,7 @@ final routeCubit = RouteCubit(
   globalInfo: GlobalInfo(),
   notificationCubit: notificationCubit,
   clientCubit: clientCubit,
+  gpsCubit: gpsCubit,
   launchService: LaunchService(),
 );
 
@@ -27,6 +28,8 @@ final stopCubit = StopCubit(
 );
 
 final clientCubit = ClientCubit();
+
+final gpsCubit = GpsCubit(GpsService());
 
 final notificationCubit = NotificationCubit(
   globalInfo: GlobalInfo(),

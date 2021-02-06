@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^0.7.0
   firebase_messaging: ^8.0.0-dev.14
   url_launcher: ^5.7.10
+  geolocator: ^6.2.0
 
   # UI
   material_design_icons_flutter: ^4.0.5855

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'widget/basic_stop_info.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/cubit/stop/stop_cubit.dart';
@@ -14,6 +13,7 @@ import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
+import 'widget/basic_stop_info.dart';
 import 'widget/instructions_card.dart';
 
 class StopPage extends StatelessWidget {

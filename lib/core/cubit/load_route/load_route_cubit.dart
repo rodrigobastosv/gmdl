@@ -44,8 +44,7 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
       globalInfo.featureStates = featureStates;
       route = RouteModel.fromJson(dataLoad['route']);
 
-      final routePath =
-          await _repository.fetchRoutePath(route.id);
+      final routePath = await _repository.fetchRoutePath(route.id);
       route = route.copyWith(
         routePath: routePath,
       );

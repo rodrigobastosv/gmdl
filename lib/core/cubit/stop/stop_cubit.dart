@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import '../../utils/time_utils.dart';
 
 import '../../entity/model/cancel_code_model.dart';
 import '../../entity/model/models.dart';
@@ -13,6 +12,7 @@ import '../../exception/exceptions.dart';
 import '../../global/global_info.dart';
 import '../../repository/stop_repository.dart';
 import '../../selector/route_selectors.dart';
+import '../../utils/time_utils.dart';
 import '../../utils/utils.dart';
 import '../cubits.dart';
 

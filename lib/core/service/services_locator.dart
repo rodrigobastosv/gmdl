@@ -10,6 +10,7 @@ final G = GetIt.I;
 Future<void> initServices() async {
   G.registerSingleton<GMClient>(GMClient());
   G.registerSingleton<LaunchService>(LaunchService());
+  G.registerSingleton<GpsService>(GpsService());
   G.registerSingleton<DeviceInfoService>(
       DeviceInfoService(DeviceInfoPlugin())..init());
   final _packageInfo = await PackageInfo.fromPlatform();
