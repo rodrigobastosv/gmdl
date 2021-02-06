@@ -198,9 +198,7 @@ void main() {
           );
           return cubit;
         },
-        act: (cubit) {
-          cubit.listenNotifications();
-        },
+        act: (cubit) => cubit.init(),
         expect: [
           RouteUpdatedDueNotification(
             notificationId: '1',
@@ -237,9 +235,7 @@ void main() {
           );
           return cubit;
         },
-        act: (cubit) {
-          cubit.listenNotifications();
-        },
+        act: (cubit) => cubit.init(),
         expect: [
           FailedToUpdatedRouteByNotification(
             notificationId: '1',
