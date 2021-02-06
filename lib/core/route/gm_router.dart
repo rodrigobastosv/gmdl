@@ -167,6 +167,13 @@ class GMRouter {
           ),
         );
         break;
+      case MAP_PAGE:
+        final routeCubit = args as RouteCubit;
+        routeWidget = BlocProvider.value(
+          value: routeCubit,
+          child: const MapPage(),
+        );
+        break;
       default:
         routeWidget = Scaffold(
           body: Center(

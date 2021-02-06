@@ -11,3 +11,4 @@ const FINISHED_STOPS_PAGE = 'FinishedStopsPage';
 const CHOOSE_CANCEL_CODE_PAGE = 'ChooseCancelCodePage';
 const CHOOSE_REDELIVER_CODE_PAGE = 'ChooseRedeliverCodePage';
 const CHOOSE_UNDELIVERABLE_CODE_PAGE = 'ChooseUndeliverableCodePage';
+const MAP_PAGE = 'MapPage';

@@ -47,6 +47,7 @@ abstract class RouteModel with _$RouteModel {
     BaseUnitModel size3AliasConfig,
     ProactiveRouteOptConfigModel proactiveRouteOptConfig,
     bool onRoute,
+    String routePath,
   }) = _RouteModel;
 
   @late

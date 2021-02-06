@@ -242,7 +242,7 @@ void main() {
           ).thenThrow(DepartStopException('error'));
           return cubit;
         },
-        act: (cubit) => cubit.departStop(actualArrivalStop),
+        act: (cubit) async => await cubit.departStop(actualArrivalStop),
         expect: [
           DepartingStop(),
           DepartStopFailed('error'),
