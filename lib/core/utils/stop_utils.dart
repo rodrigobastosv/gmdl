@@ -52,7 +52,7 @@ String getDoneStopStatusIconAsset(StopModel stop) {
   } else if (stop.isUndeliverable) {
     return 'assets/icons/undeliverable.svg';
   }
-  return '';
+  return 'assets/icons/circled-checkmark.svg';
 }
 
 Widget getStopWidget({

@@ -15,16 +15,22 @@ import 'stop_list_tile_header.dart';
 
 class StopListTile extends StatelessWidget {
   StopListTile({
-    this.stop,
+    Key key,
+    @required this.stop,
     this.isUsingPro = false,
     this.isNextStopSuggested = false,
     this.isBeginNextStops = false,
-  });
+    this.headerBackgroundColor,
+    this.headerTextColor,
+  })  : assert(stop != null),
+        super(key: key);
 
   final StopModel stop;
   final bool isUsingPro;
   final bool isNextStopSuggested;
   final bool isBeginNextStops;
+  final Color headerBackgroundColor;
+  final Color headerTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -126,10 +132,18 @@ class StopListTile extends StatelessWidget {
           stop.isInProgress
               ? 'route.stopInProgrees'
               : 'driver.nextStopSuggested',
+          backgroundColor: headerBackgroundColor ??
+              Theme.of(context).scaffoldBackgroundColor,
+          textColor:
+              headerTextColor ?? Theme.of(context).textTheme.bodyText2.color,
         );
       } else if (isBeginNextStops) {
-        return const StopListTileHeader(
+        return StopListTileHeader(
           'driver.nextStops',
+          backgroundColor: headerBackgroundColor ??
+              Theme.of(context).scaffoldBackgroundColor,
+          textColor:
+              headerTextColor ?? Theme.of(context).textTheme.bodyText2.color,
         );
       }
       return const SizedBox();

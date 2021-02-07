@@ -1,6 +1,8 @@
 import 'package:latlong/latlong.dart';
 import 'package:polyline/polyline.dart';
 
+const DEFAULT_MAP_ZOOM = 13.0;
+
 List<LatLng> decodeEncodedPath(String encoded) {
   final polyline = Polyline.Decode(
     encodedString: encoded,

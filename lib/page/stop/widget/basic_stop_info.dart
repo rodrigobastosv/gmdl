@@ -32,6 +32,7 @@ class BasicStopInfo extends StatelessWidget {
                         buildWhen: (prevState, state) =>
                             state is ServiceTimeUpdated,
                         builder: (_, state) => GMTimer(
+                          // TODO remove this hard code
                           expirationTime: const Duration(
                             minutes: 1,
                           ),
