@@ -170,8 +170,17 @@ class GMRouter {
         break;
       case MAP_PAGE:
         final routeCubit = args as RouteCubit;
-        routeWidget = BlocProvider.value(
-          value: routeCubit,
+        routeWidget = MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: routeCubit,
+            ),
+            BlocProvider(
+              create: (context) => MapCubit(
+                routeCubit: routeCubit,
+              )..init(),
+            ),
+          ],
           child: const MapPage(),
         );
         break;

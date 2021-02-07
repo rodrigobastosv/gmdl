@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../core/cubit/cubits.dart';
 import '../../core/utils/utils.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../core/cubit/route/route_cubit.dart';
 import '../../core/extension/extensions.dart';
 import '../../core/utils/map_utils.dart';
 import '../../widget/general/gm_scaffold.dart';
@@ -34,11 +34,12 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final routeCubit = context.watch<RouteCubit>();
+    final mapCubit = context.watch<MapCubit>();
+    final routeCubit = mapCubit.routeCubit;
     final route = routeCubit.route;
     final lastPosition = routeCubit.lastPosition;
     final routePath = route.routePath;
-    return BlocBuilder<RouteCubit, RouteState>(
+    return BlocBuilder<MapCubit, MapState>(
       builder: (_, state) => GMScaffold(
         withAppBar: false,
         body: Scaffold(
@@ -68,7 +69,7 @@ class _MapPageState extends State<MapPage> {
                     MarkerLayerOptions(
                       markers: [
                         _getCurrentPositionMarker(lastPosition),
-                        ..._getStopMarkers(routeCubit),
+                        ..._getStopMarkers(mapCubit),
                       ],
                     ),
                   ],
@@ -85,7 +86,7 @@ class _MapPageState extends State<MapPage> {
                   left: 20,
                   bottom: 20,
                   child: FloatingActionButton(
-                    onPressed: () => routeCubit.showStopOnMap(null),
+                    onPressed: () => mapCubit.showStopOnMap(null),
                     child: const Icon(
                       Icons.map,
                       color: Colors.black,
@@ -132,8 +133,8 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
-  List<Marker> _getStopMarkers(RouteCubit routeCubit) {
-    final route = routeCubit.route;
+  List<Marker> _getStopMarkers(MapCubit mapCubit) {
+    final route = mapCubit.routeCubit.route;
     final stops = route.stops;
     return stops
         .map(
@@ -145,7 +146,7 @@ class _MapPageState extends State<MapPage> {
               stop.longitude,
             ),
             builder: (_) => GestureDetector(
-              onTap: () => routeCubit.showStopOnMap(stop),
+              onTap: () => mapCubit.showStopOnMap(stop),
               child: MapStopMarker(
                 stop: stop,
                 isNextSuggestion: isStopNextSuggestion(route, stop),

@@ -12,3 +12,4 @@ export 'choose_undeliverable_code/choose_undeliverable_code_cubit.dart';
 export 'choose_redeliver_code/choose_redeliver_code_cubit.dart';
 export 'route/route_cubit.dart';
 export 'i18n/i18n_cubit.dart';
+export 'map/map_cubit.dart';

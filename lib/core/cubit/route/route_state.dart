@@ -177,14 +177,3 @@ class DriverPositionUpdated extends RouteState {
         position.longitude,
       ];
 }
-
-class ShowedStopOnMap extends RouteState {
-  ShowedStopOnMap(this.stop);
-
-  final StopModel stop;
-
-  @override
-  List<Object> get props => [
-        stop,
-      ];
-}

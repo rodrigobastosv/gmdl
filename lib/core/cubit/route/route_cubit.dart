@@ -204,13 +204,6 @@ class RouteCubit extends Cubit<RouteState> {
     }
   }
 
-  // Map Actions
-  // TODO isolate this on a cubit
-  void showStopOnMap(StopModel stop) {
-    emit(ShowedStopOnMap(stop));
-  }
-  //
-
   @override
   Future<void> close() {
     _notificationSubscription?.cancel();
