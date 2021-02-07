@@ -61,6 +61,7 @@ class StopCubit extends Cubit<StopState> {
         ),
       );
       stop = stop.copyWith(actualArrival: actualArrival);
+      startServiceTime();
       _routeCubit.updateRouteDueStopChange(stop);
       emit(ArrivedStopSuccess());
     } on ArriveStopException catch (e) {
@@ -68,7 +69,7 @@ class StopCubit extends Cubit<StopState> {
     }
   }
 
-  void calculateServiceTime() {
+  void startServiceTime() {
     if (stop.isPending) {
       if (stop.hasBeenArrived) {
         serviceTimeInSeconds = getStopServiceTimeInSeconds(stop);

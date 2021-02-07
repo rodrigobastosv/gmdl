@@ -108,7 +108,7 @@ class GMRouter {
                 repository: context.read<StopRepository>(),
                 clientCubit: context.read<ClientCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
-              )..calculateServiceTime(),
+              )..startServiceTime(),
             ),
             BlocProvider.value(value: stopPageArguments.routeCubit),
           ],

@@ -49,26 +49,19 @@ class _MapPageState extends State<MapPage> {
                   mapController: _mapController,
                   options: MapOptions(
                     center: LatLng(
-                      // TODO
-                      route.stops[1].latitude,
-                      route.stops[1].longitude,
-                      //lastPosition.latitude,
-                      //lastPosition.longitude,
+                      lastPosition.latitude,
+                      lastPosition.longitude,
                     ),
                     zoom: DEFAULT_MAP_ZOOM,
                   ),
                   layers: [
-                    TileLayerOptions(
-                      urlTemplate:
-                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      subdomains: ['a', 'b', 'c'],
-                    ),
+                    tileOptions,
                     PolylineLayerOptions(
                       polylines: [
                         Polyline(
                           points: decodeEncodedPath(routePath),
-                          strokeWidth: 2,
-                          color: const Color(0xFF800080),
+                          strokeWidth: DEFAULT_POLYLINE_WIDTH,
+                          color: PLANNED_PATH_COLOR,
                         ),
                       ],
                     ),
@@ -80,7 +73,7 @@ class _MapPageState extends State<MapPage> {
                     ),
                   ],
                 ),
-                if (state is ShowedStopOnMap)
+                if (state is ShowedStopOnMap && state.stop != null)
                   MapStopListTile(
                     stop: state.stop,
                     isNextStopSuggested: isStopNextSuggestion(
@@ -88,6 +81,19 @@ class _MapPageState extends State<MapPage> {
                       state.stop,
                     ),
                   ),
+                Positioned(
+                  left: 20,
+                  bottom: 20,
+                  child: FloatingActionButton(
+                    onPressed: () => routeCubit.showStopOnMap(null),
+                    child: const Icon(
+                      Icons.map,
+                      color: Colors.black,
+                    ),
+                    heroTag: 'clear-map',
+                    backgroundColor: Colors.white,
+                  ),
+                ),
               ],
             ),
           ),
@@ -139,10 +145,7 @@ class _MapPageState extends State<MapPage> {
               stop.longitude,
             ),
             builder: (_) => GestureDetector(
-              onTap: () {
-                print('aaaa');
-                routeCubit.showStopOnMap(stop);
-              },
+              onTap: () => routeCubit.showStopOnMap(stop),
               child: MapStopMarker(
                 stop: stop,
                 isNextSuggestion: isStopNextSuggestion(route, stop),

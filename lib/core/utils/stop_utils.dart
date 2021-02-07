@@ -93,6 +93,13 @@ String getLocationInfo(StopModel stop) {
   return '${stop.location.key ?? ''} - ${stop.location.description ?? ''}';
 }
 
+int getStopPlannedServiceTimeInSeconds(StopModel stop) {
+  final plannedArrival = DateTime.parse(stop.plannedArrival);
+  final plannedDeparture = DateTime.parse(stop.plannedDeparture);
+  final difference = plannedDeparture.difference(plannedArrival);
+  return difference.inSeconds;
+}
+
 int getStopServiceTimeInSeconds(StopModel stop) {
   if (stop.hasNotBeenArrived) {
     return 0;

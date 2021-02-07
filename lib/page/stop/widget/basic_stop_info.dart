@@ -32,9 +32,8 @@ class BasicStopInfo extends StatelessWidget {
                         buildWhen: (prevState, state) =>
                             state is ServiceTimeUpdated,
                         builder: (_, state) => GMTimer(
-                          // TODO remove this hard code
-                          expirationTime: const Duration(
-                            minutes: 1,
+                          expirationTime: Duration(
+                            minutes: getStopPlannedServiceTimeInSeconds(stop),
                           ),
                           timeInSeconds:
                               context.read<StopCubit>().serviceTimeInSeconds,
@@ -49,9 +48,11 @@ class BasicStopInfo extends StatelessWidget {
                         ),
                       ),
                 const SizedBox(height: 6),
-                const Text(
-                  '15:00',
-                  style: TextStyle(
+                Text(
+                  getHourAndMinuteFromSeconds(
+                    getStopPlannedServiceTimeInSeconds(stop)
+                  ),
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
