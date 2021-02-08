@@ -11,25 +11,19 @@ class PendingStopsTabView extends StatelessWidget {
     Key key,
     @required this.stops,
     @required this.isUsingPro,
-    this.term,
   }) : super(key: key);
 
   final List<StopModel> stops;
   final bool isUsingPro;
-  final String term;
 
   @override
   Widget build(BuildContext context) {
-    final filteredStops = stops.where((stop) {
-      final description = stop?.location?.description ?? '';
-      return description.contains(term);
-    }).toList();
     return BlocBuilder<RouteCubit, RouteState>(
       builder: (_, state) => ListView.builder(
         itemBuilder: (_, i) => Column(
           children: [
             StopListTile(
-              stop: filteredStops[i],
+              stop: stops[i],
               isNextStopSuggested: i == 0,
               isUsingPro: isUsingPro,
               isBeginNextStops: i == 1,
@@ -40,7 +34,7 @@ class PendingStopsTabView extends StatelessWidget {
             ),
           ],
         ),
-        itemCount: filteredStops.length,
+        itemCount: stops.length,
       ),
     );
   }
