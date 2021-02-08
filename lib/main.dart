@@ -22,8 +22,8 @@ const sentryDSN =
     'https://824d89780eb8463b821ce4f6febb8f34@o401245.ingest.sentry.io/5610722';
 
 void main() async {
-  initializeDateFormatting('pt_BR', null);
   WidgetsFlutterBinding.ensureInitialized();
+  initializeDateFormatting('pt_BR', null);
   final _packageInfo = await PackageInfo.fromPlatform();
   final _directory = await getApplicationDocumentsDirectory();
   await Hive.init(_directory.path);

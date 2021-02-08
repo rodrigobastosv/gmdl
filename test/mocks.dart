@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:device_info/device_info.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:gm_driver_lite/core/cubit/stop/stop_cubit.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info/package_info.dart';
@@ -12,9 +14,35 @@ import 'package:gm_driver_lite/core/repository/repositories.dart';
 import 'package:gm_driver_lite/core/service/services.dart';
 
 // Cubit
+class MockInitialSettingsCubit extends MockBloc<InitialSettingsState>
+    implements InitialSettingsCubit {}
+
+class MockLoadInfoCubit extends MockBloc<LoadInfoState>
+    implements LoadInfoCubit {}
+
+class MockChooseEquipmentCubit extends MockBloc<ChooseEquipmentState>
+    implements ChooseEquipmentCubit {}
+
+class MockChooseCancelCodeCubit extends MockBloc<ChooseCancelCodeState>
+    implements ChooseCancelCodeCubit {}
+
+class MockChooseRedeliverCodeCubit extends MockBloc<ChooseRedeliverCodeState>
+    implements ChooseRedeliverCodeCubit {}
+
+class MockChooseUndeliverableCodeCubit
+    extends MockBloc<ChooseUndeliverableCodeState>
+    implements ChooseUndeliverableCodeCubit {}
+
+class MockLoadRouteCubit extends MockBloc<LoadRouteState>
+    implements LoadRouteCubit {}
+
 class MockI18nCubit extends MockBloc<I18nState> implements I18nCubit {}
 
 class MockRouteCubit extends MockBloc<RouteState> implements RouteCubit {}
+
+class MockSignInCubit extends MockBloc<SignInState> implements SignInCubit {}
+
+class MockStopCubit extends MockBloc<StopState> implements StopCubit {}
 
 class MockNotificationCubit extends MockBloc<NotificationState>
     implements NotificationCubit {}
@@ -64,3 +92,5 @@ class MockConnectivity extends Mock implements Connectivity {}
 class MockBox extends Mock implements Box {}
 
 class MockGlobalInfo extends Mock implements GlobalInfo {}
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
