@@ -1,4 +1,6 @@
+export 'client/client_cubit.dart';
 export 'connectivity/connectivity_cubit.dart';
+export 'gps/gps_cubit.dart';
 export 'initial_settings/initial_settings_cubit.dart';
 export 'load_route/load_route_cubit.dart';
 export 'load_info/load_info_cubit.dart';
@@ -10,3 +12,4 @@ export 'choose_undeliverable_code/choose_undeliverable_code_cubit.dart';
 export 'choose_redeliver_code/choose_redeliver_code_cubit.dart';
 export 'route/route_cubit.dart';
 export 'i18n/i18n_cubit.dart';
+export 'map/map_cubit.dart';

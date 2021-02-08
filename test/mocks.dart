@@ -47,6 +47,11 @@ class MockStopCubit extends MockBloc<StopState> implements StopCubit {}
 class MockNotificationCubit extends MockBloc<NotificationState>
     implements NotificationCubit {}
 
+class MockClientCubit extends MockBloc<NotificationState>
+    implements ClientCubit {}
+
+class MockGpsCubit extends MockBloc<GpsState> implements GpsCubit {}
+
 // Repository
 class MockEquipmentRepository extends Mock implements EquipmentRepository {}
 
@@ -72,6 +77,10 @@ class MockDeviceInfoService extends Mock implements DeviceInfoService {}
 class MockPackageInfoService extends Mock implements PackageInfoService {}
 
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
+
+class MockLaunchService extends Mock implements LaunchService {}
+
+class MockGpsService extends Mock implements GpsService {}
 
 // General
 class MockDeviceInfoPlugin extends Mock implements DeviceInfoPlugin {}

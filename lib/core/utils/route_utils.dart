@@ -1,3 +1,5 @@
+import '../selector/route_selectors.dart';
+
 import '../entity/model/models.dart';
 
 RouteModel updateRouteByStopChange(RouteModel route, StopModel stop) {
@@ -15,6 +17,11 @@ RouteModel updateRouteByAddStop(RouteModel route, StopModel stop) {
   return route.copyWith(
     stops: [...stops],
   );
+}
+
+bool isStopNextSuggestion(RouteModel route, StopModel stop) {
+  final pendingStops = getPendingStops(route);
+  return stop == pendingStops[0];
 }
 
 RouteModel mergeRoutes(RouteModel originalRoute, RouteModel nextRoute) {

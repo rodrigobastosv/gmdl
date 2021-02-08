@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../widget/stop/stop_location_info.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
@@ -15,16 +16,22 @@ import 'stop_list_tile_header.dart';
 
 class StopListTile extends StatelessWidget {
   StopListTile({
-    this.stop,
+    Key key,
+    @required this.stop,
     this.isUsingPro = false,
     this.isNextStopSuggested = false,
     this.isBeginNextStops = false,
-  });
+    this.headerBackgroundColor,
+    this.headerTextColor,
+  })  : assert(stop != null),
+        super(key: key);
 
   final StopModel stop;
   final bool isUsingPro;
   final bool isNextStopSuggested;
   final bool isBeginNextStops;
+  final Color headerBackgroundColor;
+  final Color headerTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -73,25 +80,9 @@ class StopListTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Text(
-                                getLocationInfo(stop),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: _getTextColor(context),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Text(
-                                stop.location?.addressLine1 ?? '',
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: _getTextColor(context),
-                                ),
-                              ),
+                            StopLocationInfo(
+                              stop: stop,
+                              textColor: _getTextColor(context),
                             ),
                             const SizedBox(height: 8),
                             StopSizes(
@@ -126,10 +117,18 @@ class StopListTile extends StatelessWidget {
           stop.isInProgress
               ? 'route.stopInProgrees'
               : 'driver.nextStopSuggested',
+          backgroundColor: headerBackgroundColor ??
+              Theme.of(context).scaffoldBackgroundColor,
+          textColor:
+              headerTextColor ?? Theme.of(context).textTheme.bodyText2.color,
         );
       } else if (isBeginNextStops) {
-        return const StopListTileHeader(
+        return StopListTileHeader(
           'driver.nextStops',
+          backgroundColor: headerBackgroundColor ??
+              Theme.of(context).scaffoldBackgroundColor,
+          textColor:
+              headerTextColor ?? Theme.of(context).textTheme.bodyText2.color,
         );
       }
       return const SizedBox();

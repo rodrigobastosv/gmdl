@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
 import '../../page/stop/stop_page_arguments.dart';
+import '../cubit/client/client_cubit.dart';
 import '../cubit/cubits.dart';
 import '../cubit/stop/stop_cubit.dart';
 import '../entity/model/models.dart';
@@ -14,7 +15,6 @@ import '../global/hive.dart';
 import '../repository/client/client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
-import '../service/services_locator.dart';
 import '../utils/platform_utils.dart';
 import 'route.dart';
 
@@ -41,8 +41,8 @@ class GMRouter {
             repository: context.read<LoadingInfoRepository>(),
             globalInfo: context.read<GlobalInfo>(),
             i18nCubit: context.read<I18nCubit>(),
-            deviceInfoService: G<DeviceInfoService>(),
-            packageInfoService: G<PackageInfoService>(),
+            deviceInfoService: context.read<DeviceInfoService>(),
+            packageInfoService: context.read<PackageInfoService>(),
           )..getDriverInfo(username),
           child: const LoadInfoPage(),
         );
@@ -73,7 +73,10 @@ class GMRouter {
             repository: context.read<RouteRepository>(),
             globalInfo: context.read<GlobalInfo>(),
             notificationCubit: context.read<NotificationCubit>(),
-          )..listenNotifications(),
+            clientCubit: context.read<ClientCubit>(),
+            gpsCubit: context.read<GpsCubit>(),
+            launchService: context.read<LaunchService>(),
+          )..init(),
           child: const RouteAtGlancePage(),
         );
         break;
@@ -102,8 +105,9 @@ class GMRouter {
                 stop: stopPageArguments.stop,
                 routeCubit: stopPageArguments.routeCubit,
                 repository: context.read<StopRepository>(),
+                clientCubit: context.read<ClientCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
-              ),
+              )..startServiceTime(),
             ),
             BlocProvider.value(value: stopPageArguments.routeCubit),
           ],
@@ -161,6 +165,22 @@ class GMRouter {
           child: FinishedStopsPage(
             stops: stops,
           ),
+        );
+        break;
+      case MAP_PAGE:
+        final routeCubit = args as RouteCubit;
+        routeWidget = MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: routeCubit,
+            ),
+            BlocProvider(
+              create: (context) => MapCubit(
+                routeCubit: routeCubit,
+              )..init(),
+            ),
+          ],
+          child: const MapPage(),
         );
         break;
       default:

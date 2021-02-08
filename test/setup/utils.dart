@@ -8,9 +8,10 @@ import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
 import 'package:gm_driver_lite/core/entity/dto/mobile_device_dto.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/route/route.dart';
-import 'package:gm_driver_lite/global_cubits_widget_provider.dart';
 import 'package:gm_driver_lite/page/pages.dart';
-import 'package:gm_driver_lite/repositories_widget_provider.dart';
+import 'package:gm_driver_lite/widget/core/dependencies_widget_provider.dart';
+import 'package:gm_driver_lite/widget/core/global_cubits_widget_provider.dart';
+import 'package:gm_driver_lite/widget/core/repositories_widget_provider.dart';
 import 'package:gm_driver_lite/widget/global_info_widget_provider.dart';
 
 import '../mocks.dart';
@@ -29,34 +30,37 @@ Widget connectedWidgetForTesting({
 }) {
   assert(child != null);
 
-  return RepositoriesWidgetProvider(
-    child: GlobalInfoWidgetProvider(
-      child: GlobalCubitsWidgetProvider(
-        child: MaterialApp(
-          home: child,
-          navigatorObservers: [
-            mockNavigatorObserver ?? MockNavigatorObserver(),
-          ],
-          onGenerateRoute: generateTestRoutes,
+  return DependenciesWidgetProvider(
+    packageInfo: MockPackageInfo(),
+    child: RepositoriesWidgetProvider(
+      child: GlobalInfoWidgetProvider(
+        child: GlobalCubitsWidgetProvider(
+          child: MaterialApp(
+            home: child,
+            navigatorObservers: [
+              mockNavigatorObserver ?? MockNavigatorObserver(),
+            ],
+            onGenerateRoute: generateTestRoutes,
+          ),
         ),
+        globalInfo: GlobalInfo()
+          ..storeGeneralInfo(
+            driverInfo: DriverInfoDto(
+              id: 1,
+              login: 'driver',
+              name: 'driver',
+            ),
+            mobileDevice: MobileDeviceDto(
+              id: 1,
+            ),
+            globalConfigurations: GlobalConfigurationsDto(
+              id: 1,
+            ),
+            userConfigurations: {},
+            cancelCodes: [],
+            undeliverableCodes: [],
+          ),
       ),
-      globalInfo: GlobalInfo()
-        ..storeGeneralInfo(
-          driverInfo: DriverInfoDto(
-            id: 1,
-            login: 'driver',
-            name: 'driver',
-          ),
-          mobileDevice: MobileDeviceDto(
-            id: 1,
-          ),
-          globalConfigurations: GlobalConfigurationsDto(
-            id: 1,
-          ),
-          userConfigurations: {},
-          cancelCodes: [],
-          undeliverableCodes: [],
-        ),
     ),
   );
 }

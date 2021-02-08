@@ -13,6 +13,7 @@ void main() {
   MockStopRepository mockStopRepository;
   MockRouteCubit mockRouteCubit;
   MockGlobalInfo mockGlobalInfo;
+  MockClientCubit mockClientCubit;
 
   StopModel stop;
 
@@ -22,11 +23,13 @@ void main() {
       mockStopRepository = MockStopRepository();
       mockRouteCubit = MockRouteCubit();
       mockGlobalInfo = MockGlobalInfo();
+      mockClientCubit = MockClientCubit();
       cubit = StopCubit(
         stop: stop,
         repository: mockStopRepository,
         routeCubit: mockRouteCubit,
         globalInfo: mockGlobalInfo,
+        clientCubit: mockClientCubit,
       );
     });
 
@@ -37,6 +40,7 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -45,6 +49,7 @@ void main() {
                 repository: null,
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -53,6 +58,7 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: null,
                 globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
               ),
           throwsAssertionError);
       expect(
@@ -61,6 +67,17 @@ void main() {
                 repository: mockStopRepository,
                 routeCubit: mockRouteCubit,
                 globalInfo: null,
+                clientCubit: mockClientCubit,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => StopCubit(
+                stop: stop,
+                repository: mockStopRepository,
+                routeCubit: mockRouteCubit,
+                globalInfo: mockGlobalInfo,
+                clientCubit: null,
               ),
           throwsAssertionError);
     });
@@ -82,7 +99,7 @@ void main() {
     group('arriveStop', () {
       blocTest(
         '''WHEN arriveStop is called
-           SHOULD emit ArrivedStopSuccess
+           SHOULD emit ArrivingOnStop, ServiceTimeUpdated and ArrivedStopSuccess
            AND updateRouteDueStopChange of route cubit should be called
         ''',
         build: () {
@@ -99,6 +116,7 @@ void main() {
         act: (cubit) => cubit.arriveStop(actualArrivalStop),
         expect: [
           ArrivingOnStop(),
+          ServiceTimeUpdated(0),
           ArrivedStopSuccess(),
         ],
         verify: (cubit) {
@@ -136,6 +154,8 @@ void main() {
         ''',
         build: () {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
+          when(mockClientCubit.schedule(any))
+              .thenThrow(ArriveStopException('error'));
           when(
             mockStopRepository.arriveStop(
               routeId: routeWithOneStop.id,
@@ -216,6 +236,8 @@ void main() {
         ''',
         build: () {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
+          when(mockClientCubit.schedule(any))
+              .thenThrow(DepartStopException('error'));
           when(
             mockStopRepository.departStop(
               routeId: routeWithOneStop.id,
@@ -225,7 +247,7 @@ void main() {
           ).thenThrow(DepartStopException('error'));
           return cubit;
         },
-        act: (cubit) => cubit.departStop(actualArrivalStop),
+        act: (cubit) async => await cubit.departStop(actualArrivalStop),
         expect: [
           DepartingStop(),
           DepartStopFailed('error'),

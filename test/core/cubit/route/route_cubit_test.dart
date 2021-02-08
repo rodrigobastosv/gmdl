@@ -17,6 +17,9 @@ void main() {
   MockRouteRepository mockRouteRepository;
   MockGlobalInfo mockGlobalInfo;
   MockNotificationCubit mockNotificationCubit;
+  MockClientCubit mockClientCubit;
+  MockGpsCubit mockGpsCubit;
+  MockLaunchService mockLaunchService;
 
   RouteModel route;
   StopModel stopToArrive;
@@ -29,6 +32,9 @@ void main() {
       mockRouteRepository = MockRouteRepository();
       mockGlobalInfo = MockGlobalInfo();
       mockNotificationCubit = MockNotificationCubit();
+      mockClientCubit = MockClientCubit();
+      mockGpsCubit = MockGpsCubit();
+      mockLaunchService = MockLaunchService();
     });
 
     setUp(() {
@@ -46,6 +52,9 @@ void main() {
         repository: mockRouteRepository,
         globalInfo: mockGlobalInfo,
         notificationCubit: mockNotificationCubit,
+        clientCubit: mockClientCubit,
+        gpsCubit: mockGpsCubit,
+        launchService: mockLaunchService,
       );
     });
 
@@ -58,6 +67,9 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
       expect(
@@ -66,6 +78,9 @@ void main() {
                 repository: null,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
       expect(
@@ -74,6 +89,9 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: null,
                 notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
               ),
           throwsAssertionError);
 
@@ -83,6 +101,45 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: null,
+                clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                clientCubit: null,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                gpsCubit: null,
+                launchService: mockLaunchService,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
+                launchService: null,
               ),
           throwsAssertionError);
     });
@@ -101,22 +158,20 @@ void main() {
       expect(cubit.token, 'myToken');
     });
 
-    group('listenNotifications', () {
+    group('init', () {
       blocTest(
-        '''WHEN listenNotifications is called
-           SHOULD emit RouteBeginListenNotifications
+        '''WHEN init is called
+           SHOULD emit nothing
         ''',
         build: () {
           return cubit;
         },
-        act: (cubit) => cubit.listenNotifications(),
-        expect: [
-          RouteBeginListenNotifications(),
-        ],
+        act: (cubit) => cubit.init(),
+        expect: [],
       );
 
       blocTest(
-        '''WHEN listenNotifications is called
+        '''WHEN init is called
            AND NotificationCubit emits NotificationReceived
            AND the notification action is ROUTE_PLANNED_UPDATE
            SHOULD emit RouteBeginListenNotifications and RouteUpdatedDueNotification
@@ -143,11 +198,8 @@ void main() {
           );
           return cubit;
         },
-        act: (cubit) {
-          cubit.listenNotifications();
-        },
+        act: (cubit) => cubit.init(),
         expect: [
-          RouteBeginListenNotifications(),
           RouteUpdatedDueNotification(
             notificationId: '1',
             notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
@@ -159,7 +211,7 @@ void main() {
       );
 
       blocTest(
-        '''WHEN listenNotifications is called
+        '''WHEN init is called
            AND NotificationCubit emits NotificationReceived
            AND the notification action is ROUTE_PLANNED_UPDATE
            AND fails to sync route
@@ -183,11 +235,8 @@ void main() {
           );
           return cubit;
         },
-        act: (cubit) {
-          cubit.listenNotifications();
-        },
+        act: (cubit) => cubit.init(),
         expect: [
-          RouteBeginListenNotifications(),
           FailedToUpdatedRouteByNotification(
             notificationId: '1',
             notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,

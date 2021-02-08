@@ -118,13 +118,13 @@ void main() {
           undeliverableCode: UndeliverableCodeModel(),
         );
 
-        final noIcon = getDoneStopStatusIconAsset(stop);
+        final checkIcon = getDoneStopStatusIconAsset(stop);
         final cloneIcon = getDoneStopStatusIconAsset(clonedStop);
         final cancelIcon = getDoneStopStatusIconAsset(canceledStop);
         final redeliverIcon = getDoneStopStatusIconAsset(redeliveredStop);
         final undeliverIcon = getDoneStopStatusIconAsset(undeliveredStop);
 
-        expect(noIcon, '');
+        expect(checkIcon, 'assets/icons/circled-checkmark.svg');
         expect(cloneIcon, 'assets/icons/cloned-stop.svg');
         expect(cancelIcon, 'assets/icons/canceled.svg');
         expect(redeliverIcon, 'assets/icons/redelivery.svg');

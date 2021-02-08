@@ -58,6 +58,12 @@ class StopListPage extends StatelessWidget {
             ],
           ),
         ),
+        mainButtonLabel: context.getTextUppercase('driver.seeMap'),
+        mainButtonIcon: const Icon(Icons.map),
+        mainButtonAction: () => Navigator.of(context).pushNamed(
+          MAP_PAGE,
+          arguments: cubit,
+        ),
       ),
     );
   }

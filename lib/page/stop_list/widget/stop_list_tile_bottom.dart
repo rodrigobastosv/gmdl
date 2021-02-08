@@ -30,24 +30,25 @@ class StopListTileBottom extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Opacity(
-                opacity: isUsingPro ? 0 : 1,
-                child: TextButton.icon(
-                  label: Text(
-                    context.getText('stopList.tabs.directions'),
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: textColor,
-                    textStyle: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/directions.svg',
-                    color: textColor,
-                  ),
-                  onPressed: () {},
+              TextButton.icon(
+                label: Text(
+                  context.getText('stopList.tabs.directions'),
                 ),
+                style: TextButton.styleFrom(
+                  primary: textColor,
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                icon: SvgPicture.asset(
+                  'assets/icons/directions.svg',
+                  color: textColor,
+                ),
+                onPressed: () async =>
+                    await context.read<RouteCubit>().launchMapForDirections(
+                          latitude: stop.latitude,
+                          longitude: stop.longitude,
+                        ),
               ),
               if (stop.hasNotBeenArrived)
                 BlocBuilder<RouteCubit, RouteState>(

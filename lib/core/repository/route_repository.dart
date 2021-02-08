@@ -74,6 +74,17 @@ class RouteRepository {
     }
   }
 
+  Future<String> fetchRoutePath(int routeId) async {
+    try {
+      final response = await _client.get('/$ROUTE/$routeId/$ENCODED_PATH');
+      return response.data as String;
+    } on DioError catch (e) {
+      throw FetchRouteException(getErrorMessage(e));
+    } on GMServerException catch (e) {
+      throw FetchRouteException(e.errorMessage);
+    }
+  }
+
   Future<bool> startRoute(int routeId) async {
     try {
       final response = await _client.post(

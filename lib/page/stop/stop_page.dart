@@ -13,6 +13,7 @@ import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
+import 'widget/basic_stop_info.dart';
 import 'widget/instructions_card.dart';
 
 class StopPage extends StatelessWidget {
@@ -60,15 +61,17 @@ class StopPage extends StatelessWidget {
     if (state is CanceledStopSuccess ||
         state is UndeliveredStopSuccess ||
         state is RedeliveredStopSuccess) {
-      Navigator.of(context)
-          .popUntil((route) => route.settings.name == STOP_LIST_PAGE);
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
     }
   }
 
   Widget _builder(BuildContext context, StopState state) {
+    final cubit = context.watch<StopCubit>();
     return SingleChildScrollView(
       child: Column(
         children: [
+          BasicStopInfo(stop: cubit.stop),
           const InstructionsCard(),
         ],
       ),
