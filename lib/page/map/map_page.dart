@@ -50,8 +50,8 @@ class _MapPageState extends State<MapPage> {
                   mapController: _mapController,
                   options: MapOptions(
                     center: LatLng(
-                      lastPosition.latitude,
-                      lastPosition.longitude,
+                      lastPosition?.latitude ?? 0.0,
+                      lastPosition?.longitude ?? 0.0,
                     ),
                     zoom: DEFAULT_MAP_ZOOM,
                   ),
@@ -104,8 +104,8 @@ class _MapPageState extends State<MapPage> {
             child: SvgPicture.asset('assets/icons/map-locate-vehicle.svg'),
             onPressed: () => _mapController.move(
               LatLng(
-                lastPosition.latitude,
-                lastPosition.longitude,
+                lastPosition?.latitude ?? 0.0,
+                lastPosition?.longitude ?? 0.0,
               ),
               DEFAULT_MAP_ZOOM,
             ),
@@ -124,8 +124,8 @@ class _MapPageState extends State<MapPage> {
       width: 30,
       height: 30,
       point: LatLng(
-        lastPosition.latitude,
-        lastPosition.longitude,
+        lastPosition?.latitude ?? 0.0,
+        lastPosition?.longitude ?? 0.0,
       ),
       builder: (_) => SvgPicture.asset(
         'assets/icons/map-current-position.svg',
