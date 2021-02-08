@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../core/entity/model/models.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
-import '../../../core/selector/route_selectors.dart';
+import '../../../core/utils/utils.dart';
 
 class BasicRouteInfo extends StatelessWidget {
   const BasicRouteInfo({Key key, this.route}) : super(key: key);

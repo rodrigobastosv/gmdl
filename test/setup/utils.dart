@@ -1,7 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/core/entity/dto/driver_info_dto.dart';
 import 'package:gm_driver_lite/core/entity/dto/dtos.dart';
@@ -13,7 +15,6 @@ import 'package:gm_driver_lite/widget/core/dependencies_widget_provider.dart';
 import 'package:gm_driver_lite/widget/core/global_cubits_widget_provider.dart';
 import 'package:gm_driver_lite/widget/core/repositories_widget_provider.dart';
 import 'package:gm_driver_lite/widget/global_info_widget_provider.dart';
-
 import '../mocks.dart';
 import 'setups.dart';
 

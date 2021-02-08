@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
-import '../../core/cubit/cubits.dart';
-import '../../core/utils/utils.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/extension/extensions.dart';
-import '../../core/utils/map_utils.dart';
+import '../../core/utils/business/map_utils.dart';
+import '../../core/utils/utils.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'widget/map_stop_list_tile.dart';
 import 'widget/map_stop_marker.dart';

@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+
 import '../../core/global/hive.dart';
 import '../../core/repository/client/gm_client.dart';
 import '../../core/repository/repositories.dart';
-import 'package:hive/hive.dart';
 
 class RepositoriesWidgetProvider extends StatefulWidget {
   const RepositoriesWidgetProvider({

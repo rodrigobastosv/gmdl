@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gm_driver_lite/core/utils/crypt_utils.dart';
+import 'package:gm_driver_lite/core/utils/general/crypt_utils.dart';
 
 void main() {
   group('Crypt Utils', () {

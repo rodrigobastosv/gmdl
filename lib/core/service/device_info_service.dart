@@ -1,6 +1,6 @@
 import 'package:device_info/device_info.dart';
 
-import '../utils/platform_utils.dart';
+import '../utils/general/platform_utils.dart';
 
 class DeviceInfoService {
   DeviceInfoService(this._deviceInfo);

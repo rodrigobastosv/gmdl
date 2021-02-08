@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../extension/datetime_extensions.dart';
+import '../../extension/datetime_extensions.dart';
 
 String getBasicDateHourMinute(String dateString) {
   final date = dateString.local;

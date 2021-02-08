@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../widget/stop/stop_location_info.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
 import '../../../core/route/route.dart';
-import '../../../core/utils/date_utils.dart';
+import '../../../core/utils/general/date_utils.dart';
 import '../../../core/utils/utils.dart';
+import '../../../widget/stop/stop_location_info.dart';
 import '../../../widget/stop/stop_sizes.dart';
 import '../../stop/stop_page_arguments.dart';
 import 'stop_icon.dart';

@@ -1,9 +1,11 @@
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import '../../core/repository/client/gm_client.dart';
-import '../../core/service/services.dart';
+
+import 'package:device_info/device_info.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/repository/client/gm_client.dart';
+import '../../core/service/services.dart';
 
 class DependenciesWidgetProvider extends StatelessWidget {
   const DependenciesWidgetProvider({

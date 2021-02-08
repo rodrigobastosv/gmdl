@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../core/entity/model/models.dart';
-import '../../../core/utils/time_utils.dart';
+import '../../../core/utils/general/time_utils.dart';
 import '../../../core/utils/utils.dart';
 import '../../../widget/general/gm_timer.dart';
 
@@ -50,8 +50,7 @@ class BasicStopInfo extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   getHourAndMinuteFromSeconds(
-                    getStopPlannedServiceTimeInSeconds(stop)
-                  ),
+                      getStopPlannedServiceTimeInSeconds(stop)),
                   style: const TextStyle(
                     color: Colors.white,
                   ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/entity/model/models.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
-import '../../../core/utils/date_utils.dart';
+import '../../../core/utils/general/date_utils.dart';
 
 class RouteSummaryHeaderInfo extends StatelessWidget {
   const RouteSummaryHeaderInfo({

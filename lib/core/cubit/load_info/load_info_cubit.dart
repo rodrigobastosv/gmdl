@@ -7,7 +7,7 @@ import '../../constants.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
 import '../../service/services.dart';
-import '../../utils/platform_utils.dart';
+import '../../utils/general/platform_utils.dart';
 import '../cubits.dart';
 
 part 'load_info_state.dart';

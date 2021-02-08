@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../entity/model/models.dart';
-import 'utils.dart';
+import '../../entity/model/models.dart';
+import '../utils.dart';
 
 String generateNewStopKey() => generateRandomString(30);
 

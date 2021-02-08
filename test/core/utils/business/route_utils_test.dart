@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gm_driver_lite/core/entity/model/route_model.dart';
 import 'package:gm_driver_lite/core/entity/model/stop_model.dart';
 import 'package:gm_driver_lite/core/extension/extensions.dart';
-import 'package:gm_driver_lite/core/selector/route_selectors.dart';
+import 'package:gm_driver_lite/core/utils/utils.dart';
 
 void main() {
   final routePlannedDeparture = DateTime.now().toUtcAsString;

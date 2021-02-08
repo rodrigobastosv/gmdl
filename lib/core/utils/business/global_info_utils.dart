@@ -1,6 +1,6 @@
-import '../entity/enum/enums.dart';
-import '../entity/model/undeliverable_code_model.dart';
-import '../global/global_info.dart';
+import '../../entity/enum/enums.dart';
+import '../../entity/model/undeliverable_code_model.dart';
+import '../../global/global_info.dart';
 
 List<UndeliverableCodeModel> getUndeliverableAndRedeliveryReasons(
         GlobalInfo globalInfo) =>

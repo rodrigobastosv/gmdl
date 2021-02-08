@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/utils/time_utils.dart';
+import '../../core/utils/general/time_utils.dart';
 
 class GMTimer extends StatelessWidget {
   GMTimer({

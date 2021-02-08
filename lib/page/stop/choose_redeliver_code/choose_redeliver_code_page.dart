@@ -7,7 +7,7 @@ import 'package:roundcheckbox/roundcheckbox.dart';
 import '../../../core/cubit/cubits.dart';
 import '../../../core/cubit/stop/stop_cubit.dart';
 import '../../../core/extension/extensions.dart';
-import '../../../core/selector/global_info_selectors.dart';
+import '../../../core/utils/business/global_info_utils.dart';
 import '../../../widget/general/gm_scaffold.dart';
 
 class ChooseRedeliverCodePage extends StatelessWidget {

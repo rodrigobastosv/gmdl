@@ -15,7 +15,7 @@ import '../global/hive.dart';
 import '../repository/client/client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
-import '../utils/platform_utils.dart';
+import '../utils/general/platform_utils.dart';
 import 'route.dart';
 
 class GMRouter {
