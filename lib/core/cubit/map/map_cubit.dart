@@ -27,6 +27,8 @@ class MapCubit extends Cubit<MapState> {
         emit(UpdateDriverPosition(state.position));
       } else if (state is ArrivedStopSuccess) {
         emit(ShowedStopOnMap(null));
+      } else if (state is RouteUpdatedDueStopChange) {
+        emit(RouteUpdated());
       }
     });
   }

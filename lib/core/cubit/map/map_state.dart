@@ -31,3 +31,10 @@ class ShowedStopOnMap extends MapState {
         stop,
       ];
 }
+
+class RouteUpdated extends MapState {
+
+  @override
+  List<Object> get props => [
+      ];
+}
