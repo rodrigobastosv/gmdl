@@ -15,7 +15,6 @@ import '../global/hive.dart';
 import '../repository/client/client.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
-import '../service/services_locator.dart';
 import '../utils/platform_utils.dart';
 import 'route.dart';
 
@@ -42,8 +41,8 @@ class GMRouter {
             repository: context.read<LoadingInfoRepository>(),
             globalInfo: context.read<GlobalInfo>(),
             i18nCubit: context.read<I18nCubit>(),
-            deviceInfoService: G<DeviceInfoService>(),
-            packageInfoService: G<PackageInfoService>(),
+            deviceInfoService: context.read<DeviceInfoService>(),
+            packageInfoService: context.read<PackageInfoService>(),
           )..getDriverInfo(username),
           child: const LoadInfoPage(),
         );
@@ -76,7 +75,7 @@ class GMRouter {
             notificationCubit: context.read<NotificationCubit>(),
             clientCubit: context.read<ClientCubit>(),
             gpsCubit: context.read<GpsCubit>(),
-            launchService: G<LaunchService>(),
+            launchService: context.read<LaunchService>(),
           )..init(),
           child: const RouteAtGlancePage(),
         );

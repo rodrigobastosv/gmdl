@@ -9,7 +9,6 @@ import '../global/global_info.dart';
 import '../global/hive.dart';
 import '../repository/repositories.dart';
 import '../service/services.dart';
-import '../service/services_locator.dart';
 import 'client/client_cubit.dart';
 import 'cubits.dart';
 
@@ -19,7 +18,9 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
         lazy: false,
       ),
       BlocProvider<GpsCubit>(
-        create: (_) => GpsCubit(G<GpsService>())..initPositionTracking(),
+        create: (_) => GpsCubit(
+          context.read<GpsService>(),
+        )..initPositionTracking(),
       ),
       BlocProvider<NotificationCubit>(
         create: (innerContext) => NotificationCubit(
