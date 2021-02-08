@@ -154,6 +154,8 @@ void main() {
         ''',
         build: () {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
+          when(mockClientCubit.schedule(any))
+              .thenThrow(ArriveStopException('error'));
           when(
             mockStopRepository.arriveStop(
               routeId: routeWithOneStop.id,
@@ -234,6 +236,8 @@ void main() {
         ''',
         build: () {
           when(mockRouteCubit.route).thenReturn(routeWithOneStop);
+          when(mockClientCubit.schedule(any))
+              .thenThrow(DepartStopException('error'));
           when(
             mockStopRepository.departStop(
               routeId: routeWithOneStop.id,

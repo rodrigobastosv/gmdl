@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../widget/stop/stop_location_info.dart';
 
 import '../../../core/entity/model/models.dart';
 import '../../../core/utils/utils.dart';
@@ -24,18 +25,7 @@ class FinishedStopListTile extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 14),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      getLocationInfo(stop),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(stop.location?.addressLine1 ?? ''),
-                  ],
-                ),
+                child: StopLocationInfo(stop: stop),
               ),
             ],
           ),

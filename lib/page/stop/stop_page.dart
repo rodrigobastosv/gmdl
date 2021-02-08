@@ -61,8 +61,8 @@ class StopPage extends StatelessWidget {
     if (state is CanceledStopSuccess ||
         state is UndeliveredStopSuccess ||
         state is RedeliveredStopSuccess) {
-      Navigator.of(context)
-          .popUntil((route) => route.settings.name == STOP_LIST_PAGE);
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
     }
   }
 

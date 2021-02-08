@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../widget/stop/stop_location_info.dart';
 
 import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
@@ -79,25 +80,9 @@ class StopListTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Text(
-                                getLocationInfo(stop),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: _getTextColor(context),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Text(
-                                stop.location?.addressLine1 ?? '',
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: _getTextColor(context),
-                                ),
-                              ),
+                            StopLocationInfo(
+                              stop: stop,
+                              textColor: _getTextColor(context),
                             ),
                             const SizedBox(height: 8),
                             StopSizes(
