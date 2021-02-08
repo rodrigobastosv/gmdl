@@ -99,7 +99,7 @@ void main() {
     group('arriveStop', () {
       blocTest(
         '''WHEN arriveStop is called
-           SHOULD emit ArrivedStopSuccess
+           SHOULD emit ArrivingOnStop, ServiceTimeUpdated and ArrivedStopSuccess
            AND updateRouteDueStopChange of route cubit should be called
         ''',
         build: () {
@@ -116,6 +116,7 @@ void main() {
         act: (cubit) => cubit.arriveStop(actualArrivalStop),
         expect: [
           ArrivingOnStop(),
+          ServiceTimeUpdated(0),
           ArrivedStopSuccess(),
         ],
         verify: (cubit) {

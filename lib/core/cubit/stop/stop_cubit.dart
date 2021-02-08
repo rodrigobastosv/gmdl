@@ -70,9 +70,13 @@ class StopCubit extends Cubit<StopState> {
   }
 
   void startServiceTime() {
+    print('a');
     if (stop.isPending) {
+      print('b');
       if (stop.hasBeenArrived) {
+        print('c');
         serviceTimeInSeconds = getStopServiceTimeInSeconds(stop);
+        print(serviceTimeInSeconds);
         emit(ServiceTimeUpdated(serviceTimeInSeconds));
         timeSubscription = Stream.periodic(ONE_SECOND).listen((_) {
           serviceTimeInSeconds++;
