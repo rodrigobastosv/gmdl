@@ -23,7 +23,7 @@ class GMSearchTextField extends StatelessWidget {
         initialValue: initialValue,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: context.getText('search'),
+          hintText: context.getText('DetailListForm.Search'),
           suffixIcon: const Icon(Icons.search),
           contentPadding: const EdgeInsets.all(20.0),
           isDense: true,
