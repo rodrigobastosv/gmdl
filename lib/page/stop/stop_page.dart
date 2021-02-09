@@ -14,7 +14,7 @@ import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'stop_page_arguments.dart';
 import 'widget/basic_stop_info.dart';
-import 'widget/instructions_card.dart';
+import 'widget/times_card.dart';
 
 class StopPage extends StatelessWidget {
   const StopPage({Key key}) : super(key: key);
@@ -23,8 +23,7 @@ class StopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<StopCubit>();
     return GMScaffold(
-      backgroundColor: Colors.grey[200],
-      title: context.getTextUppercase('details.label.departure'),
+      backgroundColor: const Color(0xFFE3E3E3),
       body: BlocConsumer<StopCubit, StopState>(
         listener: _listener,
         builder: _builder,
@@ -72,7 +71,10 @@ class StopPage extends StatelessWidget {
       child: Column(
         children: [
           BasicStopInfo(stop: cubit.stop),
-          const InstructionsCard(),
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: TimesCard(stop: cubit.stop),
+          ),
         ],
       ),
     );
