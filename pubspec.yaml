@@ -62,11 +62,11 @@ dev_dependencies:
 
   # Util
   dependency_validator: ^2.0.1
+  import_sorter: ^4.4.1
 
   # Code Generation
   build_runner: ^1.10.13
   freezed: ^0.12.7
-  import_sorter: ^4.4.1
   json_serializable: ^3.5.1
 
 flutter:
