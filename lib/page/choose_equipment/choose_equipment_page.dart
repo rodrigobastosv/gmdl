@@ -41,14 +41,12 @@ class ChooseEquipmentPage extends StatelessWidget {
       withNavigationBar: true,
       withBackButton: false,
       title: context.getTextUppercase('menu.load.route'),
-      mainButtonAction: state is! LoadingEquipment
-          ? () {
-              final _form = _formKey.currentState;
-              if (_form.validate()) {
-                _form.save();
-              }
-            }
-          : null,
+      mainButtonAction: () {
+        final _form = _formKey.currentState;
+        if (_form.validate()) {
+          _form.save();
+        }
+      },
       mainButtonIcon: _getMainButtonIcon(state),
       mainButtonLabel: context.getTextUppercase('menu.load.route'),
       body: Container(
