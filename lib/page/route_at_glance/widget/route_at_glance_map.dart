@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
+
 import '../../../core/cubit/cubits.dart';
 import '../../../core/utils/map_utils.dart';
-import 'package:latlong/latlong.dart';
 
 class RouteAtGlanceMap extends StatelessWidget {
   const RouteAtGlanceMap({

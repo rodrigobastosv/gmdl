@@ -1,6 +1,5 @@
-import '../selector/route_selectors.dart';
-
 import '../entity/model/models.dart';
+import '../selector/route_selectors.dart';
 
 RouteModel updateRouteByStopChange(RouteModel route, StopModel stop) {
   final stops = route.stops;

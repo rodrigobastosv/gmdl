@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
-import '../entity/model/models.dart';
-import '../../page/map/widget/map_stop_marker.dart';
 import 'package:latlong/latlong.dart';
 import 'package:polyline/polyline.dart' as p;
+
+import '../../page/map/widget/map_stop_marker.dart';
+import '../entity/model/models.dart';
 
 final tileOptions = TileLayerOptions(
   urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",

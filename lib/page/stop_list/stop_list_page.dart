@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/utils/utils.dart';
-import '../../widget/general/gm_search_text_field.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../core/selector/route_selectors.dart';
+import '../../core/utils/utils.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../../widget/general/gm_search_text_field.dart';
 import '../stop/stop_page_arguments.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
@@ -32,14 +32,19 @@ class StopListPage extends StatelessWidget {
           listener: _listener,
           child: BlocBuilder<StopSearchCubit, StopSearchState>(
             builder: (_, state) {
-              final term = context.watch<StopSearchCubit>().term;
-              final pendingStopsFiltered =
-                  filterStopsByTerm(pendingStops, term);
-              final doneStopsFiltered = filterStopsByTerm(doneStops, term);
+              final term = state is SearchTermChanged ? state.searchTerm : '';
+              final pendingStopsFiltered = filterStopsByTerm(
+                pendingStops,
+                term,
+              );
+              final doneStopsFiltered = filterStopsByTerm(
+                doneStops,
+                term,
+              );
               return Column(
                 children: [
                   GMSearchTextField(
-                    initialValue: context.read<StopSearchCubit>().term,
+                    initialValue: term,
                     onChanged:
                         context.read<StopSearchCubit>().onChangeSearchTerm,
                   ),

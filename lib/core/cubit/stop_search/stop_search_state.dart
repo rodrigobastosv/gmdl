@@ -16,6 +16,6 @@ class SearchTermChanged extends StopSearchState {
 
   @override
   List<Object> get props => [
-    searchTerm,
-  ];
+        searchTerm,
+      ];
 }

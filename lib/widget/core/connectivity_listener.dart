@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/cubit/cubits.dart';
-import '../alert/notification.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/extension/extensions.dart';
+import '../alert/notification.dart';
 
 class ConnectivityListener extends StatelessWidget {
   const ConnectivityListener({

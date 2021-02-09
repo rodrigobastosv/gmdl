@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../widget/stop/stop_location_info.dart';
 
 import '../../../core/entity/model/models.dart';
 import '../../../core/utils/utils.dart';
+import '../../../widget/stop/stop_location_info.dart';
 
 class FinishedStopListTile extends StatelessWidget {
   FinishedStopListTile(this.stop);

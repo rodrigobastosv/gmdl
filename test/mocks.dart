@@ -1,14 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:device_info/device_info.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:gm_driver_lite/core/cubit/stop/stop_cubit.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info/package_info.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
+import 'package:gm_driver_lite/core/cubit/stop/stop_cubit.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/repository/repositories.dart';
 import 'package:gm_driver_lite/core/service/services.dart';

@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
 import 'package:gm_driver_lite/page/choose_equipment/choose_equipment_page.dart';
 import 'package:gm_driver_lite/page/pages.dart';
-import 'package:mockito/mockito.dart';
-
 import '../constants.dart';
 import '../mocks.dart';
 import '../setup/setups.dart';
