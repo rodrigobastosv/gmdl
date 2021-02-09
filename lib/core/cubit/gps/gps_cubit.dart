@@ -12,11 +12,13 @@ class GpsCubit extends Cubit<GpsState> {
   GpsCubit(this._gpsService) : super(GpsInitial());
 
   final GpsService _gpsService;
+  Position lastPosition;
   StreamSubscription<Position> _positionsSubscription;
 
   void initPositionTracking() {
     _positionsSubscription = _gpsService.getLocationStream().listen((position) {
-      emit(NewPosition(position));
+      lastPosition = position;
+      emit(NewPosition(lastPosition));
     });
     emit(DriverPositionTrackingStarted());
   }

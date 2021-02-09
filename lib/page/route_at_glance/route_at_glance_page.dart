@@ -12,7 +12,7 @@ import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
 import 'widget/basic_route_info.dart';
-import 'widget/route_map.dart';
+import 'widget/route_at_glance_map.dart';
 
 class RouteAtGlancePage extends StatelessWidget {
   const RouteAtGlancePage({Key key}) : super(key: key);
@@ -54,7 +54,7 @@ class RouteAtGlancePage extends StatelessWidget {
             route: cubit.route,
           ),
           Expanded(
-            child: RouteMap(route: cubit.route),
+            child: RouteAtGlanceMap(routeCubit: cubit),
           ),
         ],
       ),

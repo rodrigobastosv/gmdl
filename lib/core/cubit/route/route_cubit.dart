@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../utils/map_utils.dart';
 
 import '../../entity/dto/notification_dto.dart';
 import '../../entity/enum/enums.dart';
@@ -60,6 +61,7 @@ class RouteCubit extends Cubit<RouteState> {
   String get token => _notificationCubit.fcmToken;
 
   void init() {
+    lastPosition = _gpsCubit.lastPosition ?? DEFAULT_LAT_LNG_IF_NONE_GIVEN;
     _notificationSubscription = _notificationCubit.listen(_handleNotifications);
     _positionSubscription = _gpsCubit.listen(_handlePositionUpdate);
   }

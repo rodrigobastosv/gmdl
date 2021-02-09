@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 import '../../core/cubit/cubits.dart';
 import '../../core/utils/utils.dart';
 import 'package:latlong/latlong.dart';
@@ -68,7 +67,7 @@ class _MapPageState extends State<MapPage> {
                     ),
                     MarkerLayerOptions(
                       markers: [
-                        _getCurrentPositionMarker(lastPosition),
+                        getMarkerOnPosition(lastPosition),
                         ..._getStopMarkers(mapCubit),
                       ],
                     ),
@@ -115,20 +114,6 @@ class _MapPageState extends State<MapPage> {
             context.getTextUppercase('driver.forro.map.seestoplist'),
         mainButtonIcon: const Icon(Icons.list),
         mainButtonAction: () => Navigator.of(context).pop(),
-      ),
-    );
-  }
-
-  Marker _getCurrentPositionMarker(Position lastPosition) {
-    return Marker(
-      width: 30,
-      height: 30,
-      point: LatLng(
-        lastPosition.latitude,
-        lastPosition.longitude,
-      ),
-      builder: (_) => SvgPicture.asset(
-        'assets/icons/map-current-position.svg',
       ),
     );
   }
