@@ -15,3 +15,10 @@ String getOnlyTenantFromUrl(String url) {
       .replaceFirst('.greenmile.com', '')
       .replaceFirst('/', '');
 }
+
+String padLeftWithZeros({
+  dynamic value,
+  int n = 2,
+}) {
+  return value.toString().padLeft(2, '0');
+}
