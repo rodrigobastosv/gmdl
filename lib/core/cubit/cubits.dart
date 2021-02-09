@@ -13,3 +13,4 @@ export 'choose_redeliver_code/choose_redeliver_code_cubit.dart';
 export 'route/route_cubit.dart';
 export 'i18n/i18n_cubit.dart';
 export 'map/map_cubit.dart';
+export 'stop_search/stop_search_cubit.dart';

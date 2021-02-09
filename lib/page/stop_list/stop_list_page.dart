@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/utils/utils.dart';
+import '../../widget/general/gm_search_text_field.dart';
 
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
@@ -10,6 +12,7 @@ import '../../widget/general/gm_scaffold.dart';
 import '../stop/stop_page_arguments.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
+import 'widget/no_stop_found.dart';
 import 'widget/pending_stops_tab.dart';
 import 'widget/pending_stops_tab_view.dart';
 
@@ -27,35 +30,55 @@ class StopListPage extends StatelessWidget {
         title: context.getTextUppercase('stop.list'),
         body: BlocListener<RouteCubit, RouteState>(
           listener: _listener,
-          child: Column(
-            children: [
-              Container(
-                height: 38,
-                color: Colors.black,
-                child: TabBar(
-                  indicatorWeight: 3,
-                  labelColor: const Color(0xFFB0D25A),
-                  unselectedLabelColor: const Color(0xFFE0E0E0),
-                  indicatorColor: const Color(0xFFB0D25A),
-                  tabs: [
-                    PendingStopsTab(stops: pendingStops),
-                    if (doneStops.isNotEmpty) DoneStopsTab(stops: doneStops),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    PendingStopsTabView(
-                      stops: pendingStops,
-                      isUsingPro: cubit.route.isUsingPro,
+          child: BlocBuilder<StopSearchCubit, StopSearchState>(
+            builder: (_, state) {
+              final term = context.watch<StopSearchCubit>().term;
+              final pendingStopsFiltered =
+                  filterStopsByTerm(pendingStops, term);
+              final doneStopsFiltered = filterStopsByTerm(doneStops, term);
+              return Column(
+                children: [
+                  GMSearchTextField(
+                    initialValue: context.read<StopSearchCubit>().term,
+                    onChanged:
+                        context.read<StopSearchCubit>().onChangeSearchTerm,
+                  ),
+                  Container(
+                    height: 38,
+                    color: Colors.black,
+                    child: TabBar(
+                      key: UniqueKey(),
+                      indicatorWeight: 3,
+                      labelColor: const Color(0xFFB0D25A),
+                      unselectedLabelColor: const Color(0xFFE0E0E0),
+                      indicatorColor: const Color(0xFFB0D25A),
+                      tabs: [
+                        PendingStopsTab(stops: pendingStopsFiltered),
+                        if (doneStops.isNotEmpty)
+                          DoneStopsTab(stops: doneStopsFiltered),
+                      ],
                     ),
-                    if (doneStops.isNotEmpty)
-                      DoneStopsTabView(stops: doneStops),
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      key: UniqueKey(),
+                      children: [
+                        pendingStopsFiltered.isNotEmpty
+                            ? PendingStopsTabView(
+                                stops: pendingStopsFiltered,
+                                isUsingPro: cubit.route.isUsingPro,
+                              )
+                            : const NoStopFound(),
+                        if (doneStops.isNotEmpty)
+                          doneStopsFiltered.isNotEmpty
+                              ? DoneStopsTabView(stops: doneStopsFiltered)
+                              : const NoStopFound(),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
         mainButtonLabel: context.getTextUppercase('driver.seeMap'),

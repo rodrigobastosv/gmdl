@@ -152,8 +152,15 @@ class GMRouter {
         break;
       case STOP_LIST_PAGE:
         final routeCubit = args as RouteCubit;
-        routeWidget = BlocProvider.value(
-          value: routeCubit,
+        routeWidget = MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: routeCubit,
+            ),
+            BlocProvider(
+              create: (_) => StopSearchCubit(),
+            ),
+          ],
           child: const StopListPage(),
         );
         break;
