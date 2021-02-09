@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import '../route/route_cubit.dart';
+
 import '../../entity/model/models.dart';
+import '../route/route_cubit.dart';
 
 part 'map_state.dart';
 

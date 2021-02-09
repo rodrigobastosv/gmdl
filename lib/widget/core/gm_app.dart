@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:package_info/package_info.dart';
+
 import '../../core/route/route.dart';
 import '../../main.dart';
 import '../global_info_widget_provider.dart';
 import 'dependencies_widget_provider.dart';
-import 'package:package_info/package_info.dart';
-
 import 'global_cubits_widget_provider.dart';
 import 'repositories_widget_provider.dart';
 

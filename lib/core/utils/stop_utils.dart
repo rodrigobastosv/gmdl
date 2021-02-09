@@ -115,3 +115,14 @@ int getStopServiceTimeInSeconds(StopModel stop) {
     return difference.inSeconds;
   }
 }
+
+List<StopModel> filterStopsByTerm(List<StopModel> stops, String term) {
+  return stops.where((stop) {
+    if (stop.location != null) {
+      return stop.location.description
+          .toUpperCase()
+          .contains(term.toUpperCase());
+    }
+    return false;
+  }).toList();
+}

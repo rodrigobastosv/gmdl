@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../core/utils/utils.dart';
 
 import '../../../core/entity/model/models.dart';
+import '../../../core/utils/utils.dart';
 
 class MapStopMarker extends StatelessWidget {
   const MapStopMarker({

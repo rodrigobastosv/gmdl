@@ -50,8 +50,7 @@ class BasicStopInfo extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   getHourAndMinuteFromSeconds(
-                    getStopPlannedServiceTimeInSeconds(stop)
-                  ),
+                      getStopPlannedServiceTimeInSeconds(stop)),
                   style: const TextStyle(
                     color: Colors.white,
                   ),
