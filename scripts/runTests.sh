@@ -10,14 +10,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 echo '############################### Running tests ################################'
 flutter test --coverage
 echo '############################### Removing unwanted files ######################'
-flutter pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info \
-    -r '.g.dart$' \
-    -r '.freezed.dart' \
-    -r '_state.dart' \
-    -r '_model.dart' \
-    -r '_dto.dart' \
-    -r 'locale_option.dart' \
-    -r 'lib/core/repository*' \
+flutter pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '.g.dart$' -r '.freezed.dart' -r '_state.dart' -r '_model.dart' -r '_dto.dart' -r 'locale_option.dart' -r 'lib/core/repository*'
 echo '############################### Generating coverage ##########################'
 genhtml coverage/lcov.info -o coverage/html
 echo '############################### Opening coverage on Browser ##################'
