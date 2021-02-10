@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/cubit/cubits.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
-import '../../core/selector/route_selectors.dart';
 import '../../core/utils/utils.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../../widget/general/gm_search_text_field.dart';

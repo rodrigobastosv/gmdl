@@ -11,7 +11,7 @@ class StopInitial extends StopState {}
 
 class ArrivingOnStop extends StopState {}
 
-class ArrivedStopSuccess extends StopState {}
+class ArrivedStopSuccessOnStop extends StopState {}
 
 class ServiceTimeUpdated extends StopState {
   ServiceTimeUpdated(this.serviceTime);

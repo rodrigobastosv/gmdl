@@ -9,7 +9,6 @@ import 'package:mockito/mockito.dart';
 import 'package:package_info/package_info.dart';
 
 import 'package:gm_driver_lite/core/cubit/cubits.dart';
-import 'package:gm_driver_lite/core/cubit/stop/stop_cubit.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
 import 'package:gm_driver_lite/core/repository/repositories.dart';
 import 'package:gm_driver_lite/core/service/services.dart';

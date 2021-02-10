@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gm_driver_lite/core/entity/enum/enums.dart';
 import 'package:gm_driver_lite/core/entity/model/undeliverable_code_model.dart';
 import 'package:gm_driver_lite/core/global/global_info.dart';
-import 'package:gm_driver_lite/core/selector/global_info_selectors.dart';
+import 'package:gm_driver_lite/core/utils/utils.dart';
 
 void main() {
-  group('GlobalInfo selectors', () {
+  group('GlobalInfo utils', () {
     test(
       '''WHEN getUndeliverableAndRedeliveryReasons is called
          SHOULD return all undeliverableCodes

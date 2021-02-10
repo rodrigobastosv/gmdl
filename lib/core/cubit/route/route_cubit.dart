@@ -12,7 +12,6 @@ import '../../entity/model/models.dart';
 import '../../exception/exceptions.dart';
 import '../../global/global_info.dart';
 import '../../repository/repositories.dart';
-import '../../selector/route_selectors.dart';
 import '../../service/services.dart';
 import '../../utils/map_utils.dart';
 import '../../utils/route_utils.dart';

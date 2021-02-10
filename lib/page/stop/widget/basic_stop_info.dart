@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/cubit/stop/stop_cubit.dart';
+import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/model/models.dart';
 import '../../../core/utils/time_utils.dart';
 import '../../../core/utils/utils.dart';
