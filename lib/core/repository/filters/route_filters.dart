@@ -173,5 +173,6 @@ final routeByNotificationFilters = [
   'actualStart',
   'actualComplete',
   'status',
+  'proactiveRouteOptConfig.*',
   'proactiveRouteOptApplied'
 ];

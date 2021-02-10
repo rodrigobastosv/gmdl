@@ -36,3 +36,8 @@ class RouteUpdated extends MapState {
   @override
   List<Object> get props => [];
 }
+
+class RouteUpdatedDueOptimization extends MapState {
+  @override
+  List<Object> get props => [];
+}

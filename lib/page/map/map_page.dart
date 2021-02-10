@@ -53,6 +53,7 @@ class _MapPageState extends State<MapPage> {
                       lastPosition.longitude,
                     ),
                     zoom: DEFAULT_MAP_ZOOM,
+                    onTap: (position) => mapCubit.showStopOnMap(null),
                   ),
                   layers: [
                     tileOptions,
@@ -81,19 +82,6 @@ class _MapPageState extends State<MapPage> {
                       state.stop,
                     ),
                   ),
-                Positioned(
-                  left: 20,
-                  bottom: 20,
-                  child: FloatingActionButton(
-                    onPressed: () => mapCubit.showStopOnMap(null),
-                    child: const Icon(
-                      Icons.map,
-                      color: Colors.black,
-                    ),
-                    heroTag: 'clear-map',
-                    backgroundColor: Colors.white,
-                  ),
-                ),
               ],
             ),
           ),
@@ -134,6 +122,7 @@ class _MapPageState extends State<MapPage> {
               onTap: () => mapCubit.showStopOnMap(stop),
               child: MapStopMarker(
                 stop: stop,
+                isInProgress: stop.isInProgress,
                 isNextSuggestion: isStopNextSuggestion(route, stop),
               ),
             ),

@@ -10,10 +10,12 @@ class MapStopMarker extends StatelessWidget {
   const MapStopMarker({
     Key key,
     @required this.stop,
+    @required this.isInProgress,
     @required this.isNextSuggestion,
   }) : super(key: key);
 
   final StopModel stop;
+  final bool isInProgress;
   final bool isNextSuggestion;
 
   @override
@@ -25,7 +27,7 @@ class MapStopMarker extends StatelessWidget {
   }
 
   Widget _getStopIcon(StopModel stop) {
-    if (isNextSuggestion) {
+    if (isInProgress) {
       return Stack(
         alignment: Alignment.center,
         children: [
@@ -37,10 +39,29 @@ class MapStopMarker extends StatelessWidget {
               ),
             ),
           ),
-          const SpinKitDualRing(
+          const SpinKitRing(
+            color: Colors.green,
+            size: 32,
+            lineWidth: 5,
+          )
+        ],
+      );
+    } else if (isNextSuggestion) {
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          Center(
+            child: Text(
+              stop.plannedSequenceNum.toString(),
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SpinKitRing(
             color: Colors.blue,
             size: 32,
-            lineWidth: 3,
+            lineWidth: 5,
           )
         ],
       );

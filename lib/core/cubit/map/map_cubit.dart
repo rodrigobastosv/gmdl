@@ -31,6 +31,8 @@ class MapCubit extends Cubit<MapState> {
         emit(ShowedStopOnMap(null));
       } else if (state is RouteUpdatedDueStopChange) {
         emit(RouteUpdated());
+      } else if (state is RouteUpdatedDueNotification) {
+        emit(RouteUpdatedDueOptimization());
       }
     });
   }

@@ -64,6 +64,7 @@ List<Marker> getStopMarkers(List<StopModel> stops) {
           ),
           builder: (_) => MapStopMarker(
             stop: stop,
+            isInProgress: false,
             isNextSuggestion: false,
           ),
         ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dash/flutter_dash.dart';
-import '../../../core/utils/time_utils.dart';
-import '../../../core/entity/model/stop_model.dart';
 
+import 'package:flutter_dash/flutter_dash.dart';
+
+import '../../../core/entity/model/stop_model.dart';
 import '../../../core/extension/extensions.dart';
+import '../../../core/utils/time_utils.dart';
 
 class TimesCard extends StatelessWidget {
   const TimesCard({

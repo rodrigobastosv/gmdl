@@ -9,6 +9,8 @@ import 'dependencies_widget_provider.dart';
 import 'global_cubits_widget_provider.dart';
 import 'repositories_widget_provider.dart';
 
+final navigatorKey = alice.getNavigatorKey();
+
 class GMApp extends StatelessWidget {
   const GMApp({
     Key key,
@@ -28,7 +30,7 @@ class GMApp extends StatelessWidget {
           child: GlobalCubitsWidgetProvider(
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              navigatorKey: alice.getNavigatorKey(),
+              navigatorKey: navigatorKey,
               title: 'Flutter Demo',
               theme: ThemeData(
                 primaryColor: const Color(0xFF3AA348),
