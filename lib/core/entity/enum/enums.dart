@@ -5,3 +5,4 @@ export 'unit_system.dart';
 export 'notification_action.dart';
 export 'notification_type.dart';
 export 'stop_event.dart';
+export 'hos_event_type.dart';

@@ -15,3 +15,4 @@ export 'arrive_stop_exception.dart';
 export 'arrive_warehouse_exception.dart';
 export 'undeliver_stop_exception.dart';
 export 'redeliver_stop_exception.dart';
+export 'hos_event_exception.dart';

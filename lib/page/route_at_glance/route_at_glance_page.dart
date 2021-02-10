@@ -4,13 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/enum/enums.dart';
+import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
+import '../../core/utils/utils.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
+import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../stop_list/stop_list_page_arguments.dart';
 import 'widget/basic_route_info.dart';
 import 'widget/route_at_glance_map.dart';
 
@@ -29,7 +34,10 @@ class RouteAtGlancePage extends StatelessWidget {
     if (state is DepartOriginSuccess) {
       Navigator.of(context).pushNamed(
         STOP_LIST_PAGE,
-        arguments: context.read<RouteCubit>(),
+        arguments: StopListPageArguments(
+          routeCubit: context.read<RouteCubit>(),
+          hosCubit: context.read<HosCubit>(),
+        ),
       );
     } else if (state is RouteStartFailed) {
       showErrorNotification(context, state.errorMessage);
@@ -48,19 +56,29 @@ class RouteAtGlancePage extends StatelessWidget {
           size: 36,
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          BasicRouteInfo(
-            route: cubit.route,
-          ),
-          Expanded(
-            child: RouteAtGlanceMap(routeCubit: cubit),
-          ),
-        ],
+      body: BlocListener<HosCubit, HosState>(
+        listener: (context, state) async {
+          if (state is LunchStarted) {
+            await showLunchDialog(context);
+          } else if (state is LunchEnded) {
+            Navigator.of(context).pop();
+          }
+        },
+        child: Column(
+          children: <Widget>[
+            BasicRouteInfo(
+              route: cubit.route,
+            ),
+            Expanded(
+              child: RouteAtGlanceMap(routeCubit: cubit),
+            ),
+          ],
+        ),
       ),
       mainButtonAction: () => _onPressedButton(cubit, context),
       mainButtonIcon: _getMainButtonIcon(cubit),
       mainButtonLabel: _getMainButtonLabel(context, cubit),
+      menuOptions: _getMenuOptions(context),
     );
   }
 
@@ -76,7 +94,10 @@ class RouteAtGlancePage extends StatelessWidget {
     } else {
       Navigator.of(context).pushNamed(
         STOP_LIST_PAGE,
-        arguments: cubit,
+        arguments: StopListPageArguments(
+          routeCubit: context.read<RouteCubit>(),
+          hosCubit: context.read<HosCubit>(),
+        ),
       );
     }
   }
@@ -106,5 +127,18 @@ class RouteAtGlancePage extends StatelessWidget {
     } else {
       return context.getTextUppercase('stop.list');
     }
+  }
+
+  List<GMMenuOption> _getMenuOptions(BuildContext context) {
+    final cubit = context.watch<HosCubit>();
+    return [
+      GMMenuOption(
+        text: context.getText('hos.lunch.title'),
+        icon: 'lunch',
+        onTap: () => cubit.startLunch(
+          DateTime.now().toUtcAsString,
+        ),
+      ),
+    ];
   }
 }

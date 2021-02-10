@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'string_utils.dart';
 
 const Duration ONE_SECOND = Duration(seconds: 1);
+const Duration ONE_MINUTE = Duration(minutes: 1);
 
 String padDataField(int dataField) {
   return padLeftWithZeros(value: dataField);

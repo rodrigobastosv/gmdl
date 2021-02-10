@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
 import '../../page/stop/stop_page_arguments.dart';
+import '../../page/stop_list/stop_list_page_arguments.dart';
 import '../cubit/client/client_cubit.dart';
 import '../cubit/cubits.dart';
 import '../entity/model/models.dart';
@@ -66,16 +67,26 @@ class GMRouter {
         break;
       case ROUTE_AT_GLANCE_PAGE:
         final route = args as RouteModel;
-        routeWidget = BlocProvider<RouteCubit>(
-          create: (context) => RouteCubit(
-            route: route,
-            repository: context.read<RouteRepository>(),
-            globalInfo: context.read<GlobalInfo>(),
-            notificationCubit: context.read<NotificationCubit>(),
-            clientCubit: context.read<ClientCubit>(),
-            gpsCubit: context.read<GpsCubit>(),
-            launchService: context.read<LaunchService>(),
-          )..init(),
+        routeWidget = MultiBlocProvider(
+          providers: [
+            BlocProvider<RouteCubit>(
+              create: (context) => RouteCubit(
+                route: route,
+                repository: context.read<RouteRepository>(),
+                globalInfo: context.read<GlobalInfo>(),
+                notificationCubit: context.read<NotificationCubit>(),
+                clientCubit: context.read<ClientCubit>(),
+                gpsCubit: context.read<GpsCubit>(),
+                launchService: context.read<LaunchService>(),
+              )..init(),
+            ),
+            BlocProvider(
+              create: (context) => HosCubit(
+                repository: context.read<HosRepository>(),
+                globalInfo: context.read<GlobalInfo>(),
+              ),
+            ),
+          ],
           child: const RouteAtGlancePage(),
         );
         break;
@@ -151,11 +162,16 @@ class GMRouter {
         );
         break;
       case STOP_LIST_PAGE:
-        final routeCubit = args as RouteCubit;
+        final stopListPageArguments = args as StopListPageArguments;
+        final routeCubit = stopListPageArguments.routeCubit;
+        final hosCubit = stopListPageArguments.hosCubit;
         routeWidget = MultiBlocProvider(
           providers: [
             BlocProvider.value(
               value: routeCubit,
+            ),
+            BlocProvider.value(
+              value: hosCubit,
             ),
             BlocProvider(
               create: (_) => StopSearchCubit(),

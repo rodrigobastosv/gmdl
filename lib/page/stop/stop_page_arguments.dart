@@ -1,4 +1,4 @@
-import '../../core/cubit/route/route_cubit.dart';
+import '../../core/cubit/cubits.dart';
 import '../../core/entity/model/models.dart';
 
 class StopPageArguments {
