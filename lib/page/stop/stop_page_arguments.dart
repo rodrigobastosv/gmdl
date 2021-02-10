@@ -7,10 +7,8 @@ class StopPageArguments {
   StopPageArguments({
     @required this.stop,
     @required this.routeCubit,
-    @required this.hosCubit,
   });
 
   final StopModel stop;
   final RouteCubit routeCubit;
-  final HosCubit hosCubit;
 }

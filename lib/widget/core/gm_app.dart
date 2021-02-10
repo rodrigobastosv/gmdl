@@ -6,6 +6,7 @@ import '../../core/route/route.dart';
 import '../../main.dart';
 import '../global_info_widget_provider.dart';
 import 'dependencies_widget_provider.dart';
+import 'global_cubits_listeners.dart';
 import 'global_cubits_widget_provider.dart';
 import 'repositories_widget_provider.dart';
 
@@ -28,15 +29,17 @@ class GMApp extends StatelessWidget {
       child: RepositoriesWidgetProvider(
         child: GlobalInfoWidgetProvider(
           child: GlobalCubitsWidgetProvider(
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              navigatorKey: navigatorKey,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primaryColor: const Color(0xFF3AA348),
-                visualDensity: VisualDensity.adaptivePlatformDensity,
+            child: GlobalCubitsListeners(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                navigatorKey: navigatorKey,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                  primaryColor: const Color(0xFF3AA348),
+                  visualDensity: VisualDensity.adaptivePlatformDensity,
+                ),
+                onGenerateRoute: GMRouter.generateRoutes,
               ),
-              onGenerateRoute: GMRouter.generateRoutes,
             ),
           ),
         ),

@@ -7,7 +7,6 @@ import '../../core/cubit/cubits.dart';
 import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
-import '../../core/utils/utils.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_menu_option.dart';
@@ -24,18 +23,9 @@ class StopPage extends StatelessWidget {
     final cubit = context.watch<StopCubit>();
     return GMScaffold(
       backgroundColor: const Color(0xFFE3E3E3),
-      body: BlocListener<HosCubit, HosState>(
-        listener: (context, state) async {
-          if (state is LunchStarted) {
-            await showLunchDialog(context);
-          } else if (state is LunchEnded) {
-            Navigator.of(context).pop();
-          }
-        },
-        child: BlocConsumer<StopCubit, StopState>(
-          listener: _listener,
-          builder: _builder,
-        ),
+      body: BlocConsumer<StopCubit, StopState>(
+        listener: _listener,
+        builder: _builder,
       ),
       mainButtonAction: () => _onPressedButton(cubit),
       mainButtonIcon: _getMainButtonIcon(cubit),
@@ -63,7 +53,6 @@ class StopPage extends StatelessWidget {
         arguments: StopPageArguments(
           stop: state.stop,
           routeCubit: context.read<RouteCubit>(),
-          hosCubit: context.read<HosCubit>(),
         ),
       );
     }

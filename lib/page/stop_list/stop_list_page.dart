@@ -29,71 +29,62 @@ class StopListPage extends StatelessWidget {
       length: doneStops.isNotEmpty ? 2 : 1,
       child: GMScaffold(
         title: context.getTextUppercase('stop.list'),
-        body: BlocListener<HosCubit, HosState>(
-          listener: (context, state) async {
-            if (state is LunchStarted) {
-              await showLunchDialog(context);
-            } else if (state is LunchEnded) {
-              Navigator.of(context).pop();
-            }
-          },
-          child: BlocListener<RouteCubit, RouteState>(
-            listener: _listener,
-            child: BlocBuilder<StopSearchCubit, StopSearchState>(
-              builder: (_, state) {
-                final term = state is SearchTermChanged ? state.searchTerm : '';
-                final pendingStopsFiltered = filterStopsByTerm(
-                  pendingStops,
-                  term,
-                );
-                final doneStopsFiltered = filterStopsByTerm(
-                  doneStops,
-                  term,
-                );
-                return Column(
-                  children: [
-                    GMSearchTextField(
-                      initialValue: term,
-                      onChanged:
-                          context.read<StopSearchCubit>().onChangeSearchTerm,
+        body: BlocListener<RouteCubit, RouteState>(
+          listener: _listener,
+          child: BlocBuilder<StopSearchCubit, StopSearchState>(
+            builder: (_, state) {
+              final term = state is SearchTermChanged ? state.searchTerm : '';
+              final pendingStopsFiltered = filterStopsByTerm(
+                pendingStops,
+                term,
+              );
+              final doneStopsFiltered = filterStopsByTerm(
+                doneStops,
+                term,
+              );
+              return Column(
+                children: [
+                  GMSearchTextField(
+                    initialValue: term,
+                    onChanged:
+                        context.read<StopSearchCubit>().onChangeSearchTerm,
+                  ),
+                  Container(
+                    height: 38,
+                    color: Colors.black,
+                    child: TabBar(
+                      key: UniqueKey(),
+                      indicatorWeight: 3,
+                      labelColor: const Color(0xFFB0D25A),
+                      unselectedLabelColor: const Color(0xFFE0E0E0),
+                      indicatorColor: const Color(0xFFB0D25A),
+                      tabs: [
+                        PendingStopsTab(stops: pendingStopsFiltered),
+                        if (doneStops.isNotEmpty)
+                          DoneStopsTab(stops: doneStopsFiltered),
+                      ],
                     ),
-                    Container(
-                      height: 38,
-                      color: Colors.black,
-                      child: TabBar(
-                        key: UniqueKey(),
-                        indicatorWeight: 3,
-                        labelColor: const Color(0xFFB0D25A),
-                        unselectedLabelColor: const Color(0xFFE0E0E0),
-                        indicatorColor: const Color(0xFFB0D25A),
-                        tabs: [
-                          PendingStopsTab(stops: pendingStopsFiltered),
-                          if (doneStops.isNotEmpty)
-                            DoneStopsTab(stops: doneStopsFiltered),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: TabBarView(
-                        key: UniqueKey(),
-                        children: [
-                          pendingStopsFiltered.isNotEmpty
-                              ? PendingStopsTabView(
-                                  stops: pendingStopsFiltered,
-                                  isUsingPro: cubit.route.isUsingPro,
-                                )
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      key: UniqueKey(),
+                      children: [
+                        pendingStopsFiltered.isNotEmpty
+                            ? PendingStopsTabView(
+                                stops: pendingStopsFiltered,
+                                isUsingPro: cubit.route.isUsingPro,
+                              )
+                            : const NoStopFound(),
+                        if (doneStops.isNotEmpty)
+                          doneStopsFiltered.isNotEmpty
+                              ? DoneStopsTabView(stops: doneStopsFiltered)
                               : const NoStopFound(),
-                          if (doneStops.isNotEmpty)
-                            doneStopsFiltered.isNotEmpty
-                                ? DoneStopsTabView(stops: doneStopsFiltered)
-                                : const NoStopFound(),
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
         mainButtonLabel: context.getTextUppercase('driver.seeMap'),
@@ -114,7 +105,6 @@ class StopListPage extends StatelessWidget {
         arguments: StopPageArguments(
           stop: state.stop,
           routeCubit: context.read<RouteCubit>(),
-          hosCubit: context.read<HosCubit>(),
         ),
       );
     } else if (state is RouteHasNoPendingStops) {

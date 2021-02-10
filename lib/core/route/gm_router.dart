@@ -6,7 +6,6 @@ import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
 import '../../page/stop/stop_page_arguments.dart';
-import '../../page/stop_list/stop_list_page_arguments.dart';
 import '../cubit/client/client_cubit.dart';
 import '../cubit/cubits.dart';
 import '../entity/model/models.dart';
@@ -80,12 +79,6 @@ class GMRouter {
                 launchService: context.read<LaunchService>(),
               )..init(),
             ),
-            BlocProvider(
-              create: (context) => HosCubit(
-                repository: context.read<HosRepository>(),
-                globalInfo: context.read<GlobalInfo>(),
-              ),
-            ),
           ],
           child: const RouteAtGlancePage(),
         );
@@ -122,9 +115,6 @@ class GMRouter {
             ),
             BlocProvider.value(
               value: stopPageArguments.routeCubit,
-            ),
-            BlocProvider.value(
-              value: stopPageArguments.hosCubit,
             ),
           ],
           child: const StopPage(),
@@ -167,16 +157,11 @@ class GMRouter {
         );
         break;
       case STOP_LIST_PAGE:
-        final stopListPageArguments = args as StopListPageArguments;
-        final routeCubit = stopListPageArguments.routeCubit;
-        final hosCubit = stopListPageArguments.hosCubit;
+        final routeCubit = args as RouteCubit;
         routeWidget = MultiBlocProvider(
           providers: [
             BlocProvider.value(
               value: routeCubit,
-            ),
-            BlocProvider.value(
-              value: hosCubit,
             ),
             BlocProvider(
               create: (_) => StopSearchCubit(),

@@ -48,5 +48,4 @@ final notificationCubit = NotificationCubit(
 final stopPageArguments = StopPageArguments(
   stop: StopModel(),
   routeCubit: routeCubit,
-  hosCubit: hosCubit,
 );

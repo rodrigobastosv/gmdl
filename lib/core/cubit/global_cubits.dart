@@ -41,4 +41,11 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
           globalBox: Hive.box(GLOBAL_BOX),
         )..initI18nInfo(),
       ),
+      BlocProvider<HosCubit>(
+        create: (_) => HosCubit(
+          repository: context.read<HosRepository>(),
+          globalInfo: context.read<GlobalInfo>(),
+        ),
+        lazy: false,
+      ),
     ];
