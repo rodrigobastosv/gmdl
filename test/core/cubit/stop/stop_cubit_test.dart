@@ -14,6 +14,7 @@ void main() {
   MockRouteCubit mockRouteCubit;
   MockGlobalInfo mockGlobalInfo;
   MockClientCubit mockClientCubit;
+  MockGpsCubit mockGpsCubit;
 
   StopModel stop;
 
@@ -24,12 +25,14 @@ void main() {
       mockRouteCubit = MockRouteCubit();
       mockGlobalInfo = MockGlobalInfo();
       mockClientCubit = MockClientCubit();
+      mockGpsCubit = MockGpsCubit();
       cubit = StopCubit(
         stop: stop,
         repository: mockStopRepository,
         routeCubit: mockRouteCubit,
         globalInfo: mockGlobalInfo,
         clientCubit: mockClientCubit,
+        gpsCubit: mockGpsCubit,
       );
     });
 
@@ -41,6 +44,7 @@ void main() {
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
                 clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
               ),
           throwsAssertionError);
       expect(
@@ -50,6 +54,7 @@ void main() {
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
                 clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
               ),
           throwsAssertionError);
       expect(
@@ -59,6 +64,7 @@ void main() {
                 routeCubit: null,
                 globalInfo: mockGlobalInfo,
                 clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
               ),
           throwsAssertionError);
       expect(
@@ -68,6 +74,7 @@ void main() {
                 routeCubit: mockRouteCubit,
                 globalInfo: null,
                 clientCubit: mockClientCubit,
+                gpsCubit: mockGpsCubit,
               ),
           throwsAssertionError);
 
@@ -78,6 +85,18 @@ void main() {
                 routeCubit: mockRouteCubit,
                 globalInfo: mockGlobalInfo,
                 clientCubit: null,
+                gpsCubit: mockGpsCubit,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => StopCubit(
+                stop: stop,
+                repository: mockStopRepository,
+                routeCubit: mockRouteCubit,
+                globalInfo: mockGlobalInfo,
+                clientCubit: mockClientCubit,
+                gpsCubit: null,
               ),
           throwsAssertionError);
     });

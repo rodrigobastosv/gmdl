@@ -144,6 +144,13 @@ class RouteCubit extends Cubit<RouteState> {
           actualArrival: actualArrival,
         ),
       );
+      _clientCubit.schedule(
+        _gpsCubit.sendStopGpsInfo(
+          StopEvent.ARRIVE_STOP,
+          routeId: route.id,
+          stopKey: stop.key,
+        ),
+      );
       final _updatedStop = stop.copyWith(actualArrival: actualArrival);
       route = updateRouteByStopChange(route, _updatedStop);
       emit(ArrivedStopSuccess(_updatedStop));

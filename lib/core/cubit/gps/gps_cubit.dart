@@ -1,17 +1,30 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../entity/enum/enums.dart';
+import '../../repository/gps_repository.dart';
 import '../../service/gps_service.dart';
 
 part 'gps_state.dart';
 
 class GpsCubit extends Cubit<GpsState> {
-  GpsCubit(this._gpsService) : super(GpsInitial());
+  GpsCubit({
+    GpsRepository repository,
+    GpsService gpsService,
+  })  : assert(repository != null),
+        assert(gpsService != null),
+        _repository = repository,
+        _gpsService = gpsService,
+        super(GpsInitial());
 
+  final GpsRepository _repository;
   final GpsService _gpsService;
+
   Position lastPosition;
   StreamSubscription<Position> _positionsSubscription;
 
@@ -21,6 +34,39 @@ class GpsCubit extends Cubit<GpsState> {
       emit(NewPosition(lastPosition));
     });
     emit(DriverPositionTrackingStarted());
+  }
+
+  Future<void> sendStopGpsInfo(
+    StopEvent stopEvent, {
+    @required int routeId,
+    @required String stopKey,
+  }) async {
+    final currentPosition = await _gpsService.getCurrentPosition();
+    if (stopEvent == StopEvent.ARRIVE_STOP) {
+      await _repository.sendStopArrivalGpsInfo(
+        routeId: routeId,
+        stopKey: stopKey,
+        accuracyMeters: currentPosition.accuracy,
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+      );
+    } else if (stopEvent == StopEvent.DEPART_STOP) {
+      await _repository.sendStopDepartureGpsInfo(
+        routeId: routeId,
+        stopKey: stopKey,
+        accuracyMeters: currentPosition.accuracy,
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+      );
+    } else if (stopEvent == StopEvent.CANCEL_STOP) {
+      await _repository.sendStopCancelGpsInfo(
+        routeId: routeId,
+        stopKey: stopKey,
+        accuracyMeters: currentPosition.accuracy,
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+      );
+    }
   }
 
   @override

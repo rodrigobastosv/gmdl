@@ -19,7 +19,8 @@ List<BlocProvider> getGlobalCubits(BuildContext context) => [
       ),
       BlocProvider<GpsCubit>(
         create: (_) => GpsCubit(
-          context.read<GpsService>(),
+          repository: context.read<GpsRepository>(),
+          gpsService: context.read<GpsService>(),
         )..initPositionTracking(),
       ),
       BlocProvider<NotificationCubit>(
