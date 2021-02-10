@@ -105,6 +105,7 @@ class GMRouter {
                 routeCubit: stopPageArguments.routeCubit,
                 repository: context.read<StopRepository>(),
                 clientCubit: context.read<ClientCubit>(),
+                gpsCubit: context.read<GpsCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
               )..startServiceTime(),
             ),

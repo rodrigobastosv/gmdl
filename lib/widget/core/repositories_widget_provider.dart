@@ -95,6 +95,9 @@ class _RepositoriesWidgetProviderState
         RepositoryProvider<I18nRepository>(
           create: (_) => I18nRepository(context.read<GMClient>()),
         ),
+        RepositoryProvider<GpsRepository>(
+          create: (_) => GpsRepository(context.read<GMClient>()),
+        ),
       ],
       child: widget.child,
     );

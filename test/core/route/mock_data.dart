@@ -22,13 +22,17 @@ final stopCubit = StopCubit(
   stop: StopModel(),
   repository: StopRepository(GMClient()),
   routeCubit: routeCubit,
+  gpsCubit: gpsCubit,
   globalInfo: GlobalInfo(),
   clientCubit: clientCubit,
 );
 
 final clientCubit = ClientCubit();
 
-final gpsCubit = GpsCubit(GpsService());
+final gpsCubit = GpsCubit(
+  repository: GpsRepository(GMClient()),
+  gpsService: GpsService(),
+);
 
 final notificationCubit = NotificationCubit(
   globalInfo: GlobalInfo(),
