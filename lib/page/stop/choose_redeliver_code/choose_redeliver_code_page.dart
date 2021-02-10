@@ -40,11 +40,21 @@ class ChooseRedeliverCodePage extends StatelessWidget {
         ),
       ),
       mainButtonAction: cubit.hasRedeliverableCodePicked
-          ? () {
+          ? () async {
               final pickedRedeliverableCode = cubit.pickedRedeliverableCode;
+              final suggestedTimeWindowTime = await showGMTimePicker(
+                context,
+                helperText: context.getText('driver.reschedule.popup.content'),
+                confirmText: context.getText('general.button.confirm'),
+                cancelText:
+                    context.getText('driver.cancel.suggestedTimeWindowOpen'),
+              );
+              final suggestedTimeWindow =
+                  getHourMinuteFromTimeOfDay(suggestedTimeWindowTime);
               stopCubit.redeliverStop(
                 undeliverableCode: pickedRedeliverableCode,
                 actualDeparture: DateTime.now().toUtcAsString,
+                suggestedTimeWindow: suggestedTimeWindow,
               );
             }
           : null,
