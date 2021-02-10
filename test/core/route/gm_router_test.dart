@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gm_driver_lite/core/entity/model/models.dart';
 import 'package:gm_driver_lite/core/route/gm_router.dart';
 import 'package:gm_driver_lite/core/route/route.dart';
+import 'package:gm_driver_lite/page/stop_list/stop_list_page_arguments.dart';
 import '../../setup/setup_firebase.dart';
 import 'mock_data.dart';
 
@@ -141,7 +142,10 @@ void main() {
       final route = GMRouter.generateRoutes(
         RouteSettings(
           name: STOP_LIST_PAGE,
-          arguments: routeCubit,
+          arguments: StopListPageArguments(
+            routeCubit: routeCubit,
+            hosCubit: hosCubit,
+          ),
         ),
       );
       final matchedRoute = route as CupertinoPageRoute;

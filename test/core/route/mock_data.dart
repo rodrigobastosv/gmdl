@@ -18,6 +18,11 @@ final routeCubit = RouteCubit(
   launchService: LaunchService(),
 );
 
+final hosCubit = HosCubit(
+  repository: HosRepository(GMClient()),
+  globalInfo: GlobalInfo(),
+);
+
 final stopCubit = StopCubit(
   stop: StopModel(),
   repository: StopRepository(GMClient()),
