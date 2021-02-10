@@ -114,6 +114,7 @@ class StopListPage extends StatelessWidget {
         arguments: StopPageArguments(
           stop: state.stop,
           routeCubit: context.read<RouteCubit>(),
+          hosCubit: context.read<HosCubit>(),
         ),
       );
     } else if (state is RouteHasNoPendingStops) {
@@ -130,14 +131,13 @@ class StopListPage extends StatelessWidget {
   }
 
   List<GMMenuOption> _getMenuOptions(BuildContext context) {
-    final cubit = context.watch<HosCubit>();
     return [
       GMMenuOption(
         text: context.getText('hos.lunch.title'),
         icon: 'lunch',
-        onTap: () => cubit.startLunch(
-          DateTime.now().toUtcAsString,
-        ),
+        onTap: () => context.read<HosCubit>().startLunch(
+              DateTime.now().toUtcAsString,
+            ),
       ),
     ];
   }

@@ -130,14 +130,13 @@ class RouteAtGlancePage extends StatelessWidget {
   }
 
   List<GMMenuOption> _getMenuOptions(BuildContext context) {
-    final cubit = context.watch<HosCubit>();
     return [
       GMMenuOption(
         text: context.getText('hos.lunch.title'),
         icon: 'lunch',
-        onTap: () => cubit.startLunch(
-          DateTime.now().toUtcAsString,
-        ),
+        onTap: () => context.read<HosCubit>().startLunch(
+              DateTime.now().toUtcAsString,
+            ),
       ),
     ];
   }

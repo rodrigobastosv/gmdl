@@ -52,6 +52,7 @@ class StopListTile extends StatelessWidget {
                       arguments: StopPageArguments(
                         stop: stop,
                         routeCubit: context.read<RouteCubit>(),
+                        hosCubit: context.read<HosCubit>(),
                       ),
                     );
                   },

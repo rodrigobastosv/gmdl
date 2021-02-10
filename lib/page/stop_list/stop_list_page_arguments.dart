@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 import '../../core/cubit/cubits.dart';
 
 class StopListPageArguments {
   StopListPageArguments({
-    this.routeCubit,
-    this.hosCubit,
+    @required this.routeCubit,
+    @required this.hosCubit,
   });
 
   final RouteCubit routeCubit;

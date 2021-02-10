@@ -25,7 +25,7 @@ Future<void> showLunchDialog(BuildContext context) async {
     context: context,
     barrierDismissible: false,
     builder: (_) => BlocProvider.value(
-      value: context.watch<HosCubit>(),
+      value: context.read<HosCubit>(),
       child: Builder(
         builder: (context) => WillPopScope(
           onWillPop: () async => false,

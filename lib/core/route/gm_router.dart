@@ -120,7 +120,12 @@ class GMRouter {
                 globalInfo: context.read<GlobalInfo>(),
               )..startServiceTime(),
             ),
-            BlocProvider.value(value: stopPageArguments.routeCubit),
+            BlocProvider.value(
+              value: stopPageArguments.routeCubit,
+            ),
+            BlocProvider.value(
+              value: stopPageArguments.hosCubit,
+            ),
           ],
           child: const StopPage(),
         );
