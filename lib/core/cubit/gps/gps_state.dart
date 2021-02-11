@@ -9,10 +9,10 @@ abstract class GpsState extends Equatable {
 
 class GpsInitial extends GpsState {}
 
-class DriverPositionTrackingStarted extends GpsState {}
+class GpsDriverPositionTrackingStartSuccess extends GpsState {}
 
-class NewPosition extends GpsState {
-  NewPosition(this.position);
+class GpsNewPosition extends GpsState {
+  GpsNewPosition(this.position);
 
   final Position position;
 }

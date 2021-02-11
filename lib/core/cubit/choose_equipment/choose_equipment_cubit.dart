@@ -15,13 +15,13 @@ class ChooseEquipmentCubit extends Cubit<ChooseEquipmentState> {
 
   Future<void> getEquipmentInfo(String equipmentKey) async {
     try {
-      emit(LoadingEquipment());
+      emit(ChooseEquipmentLoad());
       await _repository.getEquipment(equipmentKey);
-      emit(EquipmentFound());
+      emit(ChooseEquipmentFound());
     } on EquipmentNotFoundException catch (e) {
-      emit(EquipmentNotFound(e.errorMessage));
+      emit(ChooseEquipmentNotFound(e.errorMessage));
     } on GMServerException catch (e) {
-      emit(EquipmentFailed(e.errorMessage));
+      emit(ChooseEquipmentFailure(e.errorMessage));
     }
   }
 }

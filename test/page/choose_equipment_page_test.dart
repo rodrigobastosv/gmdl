@@ -34,16 +34,16 @@ void main() async {
     });
 
     testWidgets(
-      '''WHEN state is EquipmentFound
-           SHOULD navigate to LOAD_ROUTE_PAGE route
-        ''',
+      '''WHEN state is ChooseEquipmentFound
+         SHOULD navigate to LOAD_ROUTE_PAGE route
+      ''',
       (tester) async {
         final mockNavigatorObserver = MockNavigatorObserver();
         whenListen(
           mockChooseEquipmentCubit,
           Stream.fromIterable(
             [
-              EquipmentFound(),
+              ChooseEquipmentFound(),
             ],
           ),
         );
@@ -62,7 +62,7 @@ void main() async {
     );
 
     testWidgets(
-      '''WHEN state is EquipmentNotFound
+      '''WHEN state is ChooseEquipmentNotFound
          SHOULD show error notification
       ''',
       (tester) async {
@@ -71,7 +71,7 @@ void main() async {
           mockChooseEquipmentCubit,
           Stream.fromIterable(
             [
-              EquipmentNotFound('error'),
+              ChooseEquipmentNotFound('error'),
             ],
           ),
         );
@@ -91,7 +91,7 @@ void main() async {
     );
 
     testWidgets(
-      '''WHEN state is EquipmentFailed
+      '''WHEN state is ChooseEquipmentFailure
          SHOULD show error notification
       ''',
       (tester) async {
@@ -100,7 +100,7 @@ void main() async {
           mockChooseEquipmentCubit,
           Stream.fromIterable(
             [
-              EquipmentFailed('error'),
+              ChooseEquipmentFailure('error'),
             ],
           ),
         );
@@ -120,12 +120,12 @@ void main() async {
     );
 
     testWidgets(
-      '''WHEN state is LoadingEquipment
+      '''WHEN state is ChooseEquipmentLoad
          SHOULD show loading
       ''',
       (tester) async {
         final mockNavigatorObserver = MockNavigatorObserver();
-        when(mockChooseEquipmentCubit.state).thenReturn(LoadingEquipment());
+        when(mockChooseEquipmentCubit.state).thenReturn(ChooseEquipmentLoad());
         await tester.pumpWidget(
           connectedWidgetForTesting(
             child: BlocProvider<ChooseEquipmentCubit>(

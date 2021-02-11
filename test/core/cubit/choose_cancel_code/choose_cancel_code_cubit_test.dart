@@ -35,23 +35,23 @@ void main() {
 
     blocTest(
       '''WHEN pickCancelCode is called
-         SHOULD emit CancelCodePicked with the same cancel code picked
+         SHOULD emit ChooseCancelCodePickCode with the same cancel code picked
       ''',
       build: () => cubit,
       act: (cubit) => cubit.pickCancelCode(cancelCode),
       expect: [
-        CancelCodePicked(cancelCode),
+        ChooseCancelCodePickCode(cancelCode),
       ],
     );
 
     blocTest(
       '''WHEN unpickCancelCode is called
-         SHOULD emit CancelCodePicked with null
+         SHOULD emit ChooseCancelCodePickCode with null
       ''',
       build: () => cubit,
       act: (cubit) => cubit.unpickCancelCode(cancelCode),
       expect: [
-        CancelCodePicked(null),
+        ChooseCancelCodePickCode(null),
       ],
     );
   });

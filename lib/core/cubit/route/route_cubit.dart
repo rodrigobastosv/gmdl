@@ -62,7 +62,7 @@ class RouteCubit extends Cubit<RouteState> {
   }
 
   Future<void> _handleNotifications(NotificationState state) async {
-    if (state is NotificationReceived) {
+    if (state is NotificationReceive) {
       final notification = state.notification;
       if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
         await _handleRoutePlannedUpdateNotification(notification);
@@ -76,14 +76,14 @@ class RouteCubit extends Cubit<RouteState> {
       final syncRoute = await _repository.syncRouteByNotification(route.id);
       route = mergeRoutes(route, syncRoute);
       emit(
-        RouteUpdatedDueNotification(
+        RouteUpdateDueNotificationSuccess(
           notificationId: notification.id,
           notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
         ),
       );
     } on Exception {
       emit(
-        FailedToUpdatedRouteByNotification(
+        RouteUpdateDueNotificationFailure(
           notificationId: notification.id,
           notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
         ),
@@ -92,25 +92,25 @@ class RouteCubit extends Cubit<RouteState> {
   }
 
   Future<void> _handlePositionUpdate(GpsState state) async {
-    if (state is NewPosition) {
+    if (state is GpsNewPosition) {
       lastPosition = state.position;
-      emit(DriverPositionUpdated(lastPosition));
+      emit(RouteDriverPositionUpdate(lastPosition));
     }
   }
 
   Future<void> startRoute() async {
     try {
-      emit(StartingRoute());
+      emit(RouteStartLoad());
       await _repository.startRoute(route.id);
       route = route.copyWith(status: RouteStatus.STARTED);
 
       final proConfig = await _repository.fetchProConfig(route.id);
       if (proConfig != null) {
         route = route.copyWith(proactiveRouteOptConfig: proConfig);
-        emit(ProConfigAppliedToRoute(proConfig));
+        emit(RouteProConfigApply(proConfig));
       }
 
-      emit(RouteStartedSuccess());
+      emit(RouteStartSuccess());
     } on StartRouteException catch (e) {
       emit(RouteStartFailed(e.errorMessage));
     }
@@ -118,12 +118,12 @@ class RouteCubit extends Cubit<RouteState> {
 
   Future<void> departOrigin() async {
     try {
-      emit(DepartingOrigin());
+      emit(RouteDepartOriginLoad());
       _repository.departOrigin(route.id);
       route = route.copyWith(status: RouteStatus.DEPARTED_ORIGIN);
-      emit(DepartOriginSuccess());
+      emit(RouteDepartOriginSuccess());
     } on Exception {
-      emit(DepartOriginFailed());
+      emit(RouteDepartOriginFailure());
     }
   }
 
@@ -132,7 +132,7 @@ class RouteCubit extends Cubit<RouteState> {
     String actualArrival,
   }) async {
     try {
-      emit(ArrivingStop(stop));
+      emit(RouteArriveStopLoad(stop));
       _repository.arriveStop(
         routeId: route.id,
         stop: stop,
@@ -145,15 +145,15 @@ class RouteCubit extends Cubit<RouteState> {
       );
       final _updatedStop = stop.copyWith(actualArrival: actualArrival);
       route = updateRouteByStopChange(route, _updatedStop);
-      emit(ArrivedStopSuccess(_updatedStop));
+      emit(RouteArriveStopSuccess(_updatedStop));
     } on ArriveStopException catch (e) {
-      emit(ArrivedStopFailed(e.errorMessage));
+      emit(RouteArriveStopFailure(e.errorMessage));
     }
   }
 
   void updateRouteDueStopChange(StopModel stop) {
     route = updateRouteByStopChange(route, stop);
-    emit(RouteUpdatedDueStopChange(stop));
+    emit(RouteUpdateDueStopChange(stop));
     if (!hasPendingStops(route)) {
       emit(RouteHasNoPendingStops());
     }
@@ -161,32 +161,32 @@ class RouteCubit extends Cubit<RouteState> {
 
   void updateRouteDueClonedStop(StopModel clonedStop) {
     route = updateRouteByAddStop(route, clonedStop);
-    emit(RouteUpdatedDueStopClone(clonedStop));
+    emit(RouteUpdateDueStopClone(clonedStop));
   }
 
   void updateRouteDueRedeliverStop(StopModel newStop) {
     route = updateRouteByAddStop(route, newStop);
-    emit(RouteUpdatedDueStopRedeliver(newStop));
+    emit(RouteUpdateDueStopRedeliver(newStop));
   }
 
   Future<void> arriveWarehouse() async {
     try {
-      emit(ArrivingWarehouse());
+      emit(RouteArriveWarehouseLoad());
       _repository.arriveWarehouse(route.id);
-      emit(ArrivedWarehouseSuccess());
+      emit(RouteArriveWarehouseSuccess());
     } on Exception {
-      emit(ArrivedWarehouseFailed());
+      emit(RouteArriveWarehouseFailure());
     }
   }
 
   Future<void> completeRoute() async {
     try {
-      emit(CompletingRoute());
+      emit(RouteCompleteLoad());
       await _repository.completeRoute(route.id);
       route = route.copyWith(status: RouteStatus.COMPLETED);
-      emit(RouteCompletedSuccess());
+      emit(RouteCompleteSuccess());
     } on Exception {
-      emit(RouteCompletedFailed());
+      emit(RouteCompleteFailure());
     }
   }
 
@@ -200,7 +200,7 @@ class RouteCubit extends Cubit<RouteState> {
         longitude: longitude,
       );
     } on LaunchActionException catch (e) {
-      emit(LaunchMapForDirectionsFailed(e.errorMessage));
+      emit(RouteLaunchMapForDirectionsFailure(e.errorMessage));
     }
   }
 

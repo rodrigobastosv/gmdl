@@ -9,7 +9,7 @@ abstract class RouteState extends Equatable {
 
 class RouteInitial extends RouteState {}
 
-class RouteStartedSuccess extends RouteState {}
+class RouteStartSuccess extends RouteState {}
 
 class RouteStartFailed extends RouteState {
   RouteStartFailed(this.errorMessage);
@@ -22,27 +22,16 @@ class RouteStartFailed extends RouteState {
       ];
 }
 
-class StartingRoute extends RouteState {}
+class RouteStartLoad extends RouteState {}
 
-class DepartingOrigin extends RouteState {}
+class RouteDepartOriginLoad extends RouteState {}
 
-class DepartOriginSuccess extends RouteState {}
+class RouteDepartOriginSuccess extends RouteState {}
 
-class DepartOriginFailed extends RouteState {}
+class RouteDepartOriginFailure extends RouteState {}
 
-class ArrivingStop extends RouteState {
-  ArrivingStop(this.stop);
-
-  final StopModel stop;
-
-  @override
-  List<Object> get props => [
-        stop.id,
-      ];
-}
-
-class ArrivedStopSuccess extends RouteState {
-  ArrivedStopSuccess(this.stop);
+class RouteArriveStopLoad extends RouteState {
+  RouteArriveStopLoad(this.stop);
 
   final StopModel stop;
 
@@ -52,8 +41,19 @@ class ArrivedStopSuccess extends RouteState {
       ];
 }
 
-class ArrivedStopFailed extends RouteState {
-  ArrivedStopFailed(this.errorMessage);
+class RouteArriveStopSuccess extends RouteState {
+  RouteArriveStopSuccess(this.stop);
+
+  final StopModel stop;
+
+  @override
+  List<Object> get props => [
+        stop.id,
+      ];
+}
+
+class RouteArriveStopFailure extends RouteState {
+  RouteArriveStopFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -63,8 +63,8 @@ class ArrivedStopFailed extends RouteState {
       ];
 }
 
-class RouteUpdatedDueStopChange extends RouteState {
-  RouteUpdatedDueStopChange(this.stop);
+class RouteUpdateDueStopChange extends RouteState {
+  RouteUpdateDueStopChange(this.stop);
 
   final StopModel stop;
 
@@ -76,8 +76,8 @@ class RouteUpdatedDueStopChange extends RouteState {
       ];
 }
 
-class RouteUpdatedDueStopClone extends RouteState {
-  RouteUpdatedDueStopClone(this.stop);
+class RouteUpdateDueStopClone extends RouteState {
+  RouteUpdateDueStopClone(this.stop);
 
   final StopModel stop;
 
@@ -87,8 +87,8 @@ class RouteUpdatedDueStopClone extends RouteState {
       ];
 }
 
-class RouteUpdatedDueStopRedeliver extends RouteState {
-  RouteUpdatedDueStopRedeliver(this.stop);
+class RouteUpdateDueStopRedeliver extends RouteState {
+  RouteUpdateDueStopRedeliver(this.stop);
 
   final StopModel stop;
 
@@ -100,20 +100,20 @@ class RouteUpdatedDueStopRedeliver extends RouteState {
 
 class RouteHasNoPendingStops extends RouteState {}
 
-class ArrivingWarehouse extends RouteState {}
+class RouteArriveWarehouseLoad extends RouteState {}
 
-class ArrivedWarehouseSuccess extends RouteState {}
+class RouteArriveWarehouseSuccess extends RouteState {}
 
-class ArrivedWarehouseFailed extends RouteState {}
+class RouteArriveWarehouseFailure extends RouteState {}
 
-class CompletingRoute extends RouteState {}
+class RouteCompleteLoad extends RouteState {}
 
-class RouteCompletedSuccess extends RouteState {}
+class RouteCompleteSuccess extends RouteState {}
 
-class RouteCompletedFailed extends RouteState {}
+class RouteCompleteFailure extends RouteState {}
 
-class ProConfigAppliedToRoute extends RouteState {
-  ProConfigAppliedToRoute(this.proConfig);
+class RouteProConfigApply extends RouteState {
+  RouteProConfigApply(this.proConfig);
 
   final ProactiveRouteOptConfigModel proConfig;
 
@@ -123,8 +123,8 @@ class ProConfigAppliedToRoute extends RouteState {
       ];
 }
 
-class RouteUpdatedDueNotification extends RouteState {
-  RouteUpdatedDueNotification({
+class RouteUpdateDueNotificationSuccess extends RouteState {
+  RouteUpdateDueNotificationSuccess({
     @required this.notificationId,
     @required this.notificationAction,
   });
@@ -139,8 +139,8 @@ class RouteUpdatedDueNotification extends RouteState {
       ];
 }
 
-class FailedToUpdatedRouteByNotification extends RouteState {
-  FailedToUpdatedRouteByNotification({
+class RouteUpdateDueNotificationFailure extends RouteState {
+  RouteUpdateDueNotificationFailure({
     @required this.notificationId,
     @required this.notificationAction,
   });
@@ -155,8 +155,8 @@ class FailedToUpdatedRouteByNotification extends RouteState {
       ];
 }
 
-class LaunchMapForDirectionsFailed extends RouteState {
-  LaunchMapForDirectionsFailed(this.errorMessage);
+class RouteLaunchMapForDirectionsFailure extends RouteState {
+  RouteLaunchMapForDirectionsFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -166,8 +166,8 @@ class LaunchMapForDirectionsFailed extends RouteState {
       ];
 }
 
-class DriverPositionUpdated extends RouteState {
-  DriverPositionUpdated(this.position);
+class RouteDriverPositionUpdate extends RouteState {
+  RouteDriverPositionUpdate(this.position);
 
   final Position position;
 

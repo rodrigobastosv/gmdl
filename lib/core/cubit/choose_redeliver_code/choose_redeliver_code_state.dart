@@ -9,8 +9,8 @@ abstract class ChooseRedeliverCodeState extends Equatable {
 
 class ChooseRedeliverCodeInitial extends ChooseRedeliverCodeState {}
 
-class RedeliverCodePicked extends ChooseRedeliverCodeState {
-  RedeliverCodePicked(this.redeliverableCodeModel);
+class ChooseRedeliverCodePickCode extends ChooseRedeliverCodeState {
+  ChooseRedeliverCodePickCode(this.redeliverableCodeModel);
 
   final UndeliverableCodeModel redeliverableCodeModel;
 

@@ -30,7 +30,7 @@ void main() {
     blocTest(
       '''WHEN getEquipmentInfo is called
          AND it founds equipment
-         SHOULD emit [LoadingEquipment, EquipmentFound]
+         SHOULD emit ChooseEquipmentLoad and ChooseEquipmentFound
       ''',
       build: () {
         when(mockEquipmentRepository.getEquipment('equip'))
@@ -39,15 +39,15 @@ void main() {
       },
       act: (cubit) => cubit.getEquipmentInfo('equip'),
       expect: [
-        LoadingEquipment(),
-        EquipmentFound(),
+        ChooseEquipmentLoad(),
+        ChooseEquipmentFound(),
       ],
     );
 
     blocTest(
       '''WHEN getEquipmentInfo is called
          AND it did throws EquipmentNotFoundException
-         SHOULD emit [LoadingEquipment, EquipmentNotFound]
+         SHOULD emit ChooseEquipmentLoad and ChooseEquipmentNotFound
       ''',
       build: () {
         when(mockEquipmentRepository.getEquipment('equip'))
@@ -56,15 +56,15 @@ void main() {
       },
       act: (cubit) => cubit.getEquipmentInfo('equip'),
       expect: [
-        LoadingEquipment(),
-        EquipmentNotFound('Equipment was not found'),
+        ChooseEquipmentLoad(),
+        ChooseEquipmentNotFound('Equipment was not found'),
       ],
     );
 
     blocTest(
       '''WHEN getEquipmentInfo is called
          AND it did throws GMServerException
-         SHOULD emit [LoadingEquipment, EquipmentNotFound]
+         SHOULD emit ChooseEquipmentLoad and ChooseEquipmentFailure
       ''',
       build: () {
         when(mockEquipmentRepository.getEquipment('equip'))
@@ -73,8 +73,8 @@ void main() {
       },
       act: (cubit) => cubit.getEquipmentInfo('equip'),
       expect: [
-        LoadingEquipment(),
-        EquipmentFailed('server error'),
+        ChooseEquipmentLoad(),
+        ChooseEquipmentFailure('server error'),
       ],
     );
   });

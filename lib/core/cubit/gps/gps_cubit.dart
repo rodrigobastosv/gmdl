@@ -31,9 +31,9 @@ class GpsCubit extends Cubit<GpsState> {
   void initPositionTracking() {
     _positionsSubscription = _gpsService.getLocationStream().listen((position) {
       lastPosition = position;
-      emit(NewPosition(lastPosition));
+      emit(GpsNewPosition(lastPosition));
     });
-    emit(DriverPositionTrackingStarted());
+    emit(GpsDriverPositionTrackingStartSuccess());
   }
 
   Future<void> sendStopGpsInfo(

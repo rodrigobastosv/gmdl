@@ -9,12 +9,10 @@ abstract class HosState extends Equatable {
 
 class HosInitial extends HosState {}
 
-class LunchStarted extends HosState {}
+class HosLunchStartSuccess extends HosState {}
 
-class LunchEnded extends HosState {}
-
-class LunchStartFailed extends HosState {
-  LunchStartFailed(this.errorMessage);
+class HosLunchStartFailure extends HosState {
+  HosLunchStartFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -24,8 +22,10 @@ class LunchStartFailed extends HosState {
       ];
 }
 
-class LunchEndFailed extends HosState {
-  LunchEndFailed(this.errorMessage);
+class HosLunchEndSuccess extends HosState {}
+
+class HosLunchEndFailure extends HosState {
+  HosLunchEndFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -35,8 +35,8 @@ class LunchEndFailed extends HosState {
       ];
 }
 
-class LunchTimeMinutePassed extends HosState {
-  LunchTimeMinutePassed(this.minutesPassed);
+class HosLunchTimeMinutePass extends HosState {
+  HosLunchTimeMinutePass(this.minutesPassed);
 
   final int minutesPassed;
 

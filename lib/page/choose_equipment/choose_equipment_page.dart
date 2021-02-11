@@ -26,11 +26,11 @@ class ChooseEquipmentPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, ChooseEquipmentState state) {
-    if (state is EquipmentFound) {
+    if (state is ChooseEquipmentFound) {
       Navigator.of(context).pushNamed(LOAD_ROUTE_PAGE);
-    } else if (state is EquipmentNotFound) {
+    } else if (state is ChooseEquipmentNotFound) {
       showErrorNotification(context, state.errorMessage);
-    } else if (state is EquipmentFailed) {
+    } else if (state is ChooseEquipmentFailure) {
       showErrorNotification(context, state.errorMessage);
     }
   }
@@ -88,7 +88,7 @@ class ChooseEquipmentPage extends StatelessWidget {
   }
 
   Widget _getMainButtonIcon(ChooseEquipmentState state) {
-    if (state is LoadingEquipment) {
+    if (state is ChooseEquipmentLoad) {
       return const GMButtonLoading();
     } else {
       return SvgPicture.asset('assets/icons/route.svg');

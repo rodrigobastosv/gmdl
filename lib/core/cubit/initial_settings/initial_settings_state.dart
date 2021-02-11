@@ -7,14 +7,14 @@ abstract class InitialSettingsState extends Equatable {
   List<Object> get props => [];
 }
 
-class ServerValidationInitial extends InitialSettingsState {}
+class InitialSettingsInitial extends InitialSettingsState {}
 
-class ValidatingServer extends InitialSettingsState {}
+class InitialSettingsValidateServerLoad extends InitialSettingsState {}
 
-class ServerValidationSuccess extends InitialSettingsState {}
+class InitialSettingsValidateServerSuccess extends InitialSettingsState {}
 
-class ServerValidationFailed extends InitialSettingsState {
-  ServerValidationFailed(this.errorMessage);
+class InitialSettingsValidateServerFailure extends InitialSettingsState {
+  InitialSettingsValidateServerFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -23,5 +23,3 @@ class ServerValidationFailed extends InitialSettingsState {
         errorMessage,
       ];
 }
-
-class ServerValidationLoading extends InitialSettingsState {}

@@ -22,7 +22,7 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
         assert(i18nCubit != null),
         _repository = repository,
         _i18nCubit = i18nCubit,
-        super(RouteAtGlanceInitial());
+        super(LoadRouteInitial());
 
   final RouteRepository _repository;
   final GlobalInfo globalInfo;
@@ -32,7 +32,8 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
   RouteModel route;
 
   Future<void> fetchRouteInformation() async {
-    emit(LoadingInfo(_i18nCubit.getFormattedText('loading.downloading.route')));
+    emit(LoadRouteLoad(
+        _i18nCubit.getFormattedText('loading.downloading.route')));
     final driverInfo = globalInfo.driverInfo;
     final username = driverInfo.login;
     try {
@@ -49,11 +50,11 @@ class LoadRouteCubit extends Cubit<LoadRouteState> {
         routePath: routePath,
       );
 
-      emit(RouteLoadedSuccess(route));
+      emit(LoadRouteSuccess(route));
     } on NoneRouteFoundException catch (e) {
-      emit(RouteLoadFailed(e.errorMessage));
+      emit(LoadRouteFailure(e.errorMessage));
     } on FetchRouteException catch (e) {
-      emit(RouteLoadFailed(e.errorMessage));
+      emit(LoadRouteFailure(e.errorMessage));
     }
   }
 }

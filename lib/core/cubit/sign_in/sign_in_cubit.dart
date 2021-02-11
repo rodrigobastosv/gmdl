@@ -29,7 +29,7 @@ class SignInCubit extends Cubit<SignInState> {
     String username,
     String password,
   }) async {
-    emit(UserSigningLoading());
+    emit(SignInLoad());
     try {
       final signInResponse = await _repository.signInUser(
         username: username,
@@ -39,9 +39,9 @@ class SignInCubit extends Cubit<SignInState> {
       _globalBox.put(USERNAME, username);
       _globalBox.put(PASSWORD, encodeString(password));
       _globalBox.put(TOKEN, loginResult.jSessionId);
-      emit(UserSignedSuccess(loginResult));
+      emit(SignInSuccess(loginResult));
     } on SignInException catch (e) {
-      emit(UserSigningFailed(e.errorMessage));
+      emit(SignInFailure(e.errorMessage));
     }
   }
 }

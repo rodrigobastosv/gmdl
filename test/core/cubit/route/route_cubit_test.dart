@@ -153,7 +153,7 @@ void main() {
         '''WHEN init is called
            AND NotificationCubit emits NotificationReceived
            AND the notification action is ROUTE_PLANNED_UPDATE
-           SHOULD emit RouteBeginListenNotifications and RouteUpdatedDueNotification
+           SHOULD emit RouteUpdateDueNotificationSuccess
         ''',
         build: () {
           when(mockRouteRepository.syncRouteByNotification(route.id))
@@ -166,7 +166,7 @@ void main() {
             mockNotificationCubit,
             Stream.fromIterable(
               [
-                NotificationReceived(
+                NotificationReceive(
                   NotificationDto(
                     id: '1',
                     action: NotificationAction.ROUTE_PLANNED_UPDATE,
@@ -179,7 +179,7 @@ void main() {
         },
         act: (cubit) => cubit.init(),
         expect: [
-          RouteUpdatedDueNotification(
+          RouteUpdateDueNotificationSuccess(
             notificationId: '1',
             notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
           ),
@@ -194,7 +194,7 @@ void main() {
            AND NotificationCubit emits NotificationReceived
            AND the notification action is ROUTE_PLANNED_UPDATE
            AND fails to sync route
-           SHOULD emit RouteBeginListenNotifications and FailedToUpdatedRouteByNotification
+           SHOULD emit RouteUpdateDueNotificationFailure
         ''',
         build: () {
           when(mockRouteRepository.syncRouteByNotification(route.id))
@@ -203,7 +203,7 @@ void main() {
             mockNotificationCubit,
             Stream.fromIterable(
               [
-                NotificationReceived(
+                NotificationReceive(
                   NotificationDto(
                     id: '1',
                     action: NotificationAction.ROUTE_PLANNED_UPDATE,
@@ -216,7 +216,7 @@ void main() {
         },
         act: (cubit) => cubit.init(),
         expect: [
-          FailedToUpdatedRouteByNotification(
+          RouteUpdateDueNotificationFailure(
             notificationId: '1',
             notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
           ),
@@ -230,7 +230,7 @@ void main() {
     group('startRoute', () {
       blocTest(
         '''WHEN startRoute is called
-           SHOULD emit StartingRoute and RouteStartedSuccess
+           SHOULD emit RouteStartLoad and RouteStartSuccess
         ''',
         build: () {
           when(mockRouteRepository.startRoute(route.id))
@@ -241,8 +241,8 @@ void main() {
         },
         act: (cubit) => cubit.startRoute(),
         expect: [
-          StartingRoute(),
-          RouteStartedSuccess(),
+          RouteStartLoad(),
+          RouteStartSuccess(),
         ],
       );
 
@@ -265,7 +265,7 @@ void main() {
       blocTest(
         '''WHEN startRoute is called 
            AND has PRO config
-           SHOULD emit StartingRoute, ProConfigAppliedToRoute, RouteStartedSuccess
+           SHOULD emit RouteStartLoad, RouteProConfigApply, RouteStartSuccess
         ''',
         build: () {
           when(mockRouteRepository.startRoute(route.id))
@@ -276,9 +276,9 @@ void main() {
         },
         act: (cubit) => cubit.startRoute(),
         expect: [
-          StartingRoute(),
-          ProConfigAppliedToRoute(ProactiveRouteOptConfigModel()),
-          RouteStartedSuccess(),
+          RouteStartLoad(),
+          RouteProConfigApply(ProactiveRouteOptConfigModel()),
+          RouteStartSuccess(),
         ],
       );
 
@@ -301,7 +301,7 @@ void main() {
 
       blocTest(
         '''WHEN startRoute throws Exception
-           SHOULD emit StartingRoute and RouteStartFailed
+           SHOULD emit RouteStartLoad and RouteStartFailed
         ''',
         build: () {
           when(mockRouteRepository.startRoute(route.id))
@@ -310,7 +310,7 @@ void main() {
         },
         act: (cubit) => cubit.startRoute(),
         expect: [
-          StartingRoute(),
+          RouteStartLoad(),
           RouteStartFailed('error'),
         ],
       );
@@ -319,7 +319,7 @@ void main() {
     group('departOrigin', () {
       blocTest(
         '''WHEN departOrigin is called
-           SHOULD emit DepartingOrigin and DepartOriginSuccess
+           SHOULD emit RouteDepartOriginLoad and DepartOriginSuccess
         ''',
         build: () {
           when(mockRouteRepository.departOrigin(route.id))
@@ -328,8 +328,8 @@ void main() {
         },
         act: (cubit) => cubit.departOrigin(),
         expect: [
-          DepartingOrigin(),
-          DepartOriginSuccess(),
+          RouteDepartOriginLoad(),
+          RouteDepartOriginSuccess(),
         ],
       );
 
@@ -349,7 +349,7 @@ void main() {
 
       blocTest(
         '''WHEN departOrigin is called
-           SHOULD emit DepartingOrigin and DepartOriginSuccess
+           SHOULD emit RouteDepartOriginLoad and RouteDepartOriginSuccess
         ''',
         build: () {
           when(mockRouteRepository.departOrigin(route.id))
@@ -358,14 +358,14 @@ void main() {
         },
         act: (cubit) => cubit.departOrigin(),
         expect: [
-          DepartingOrigin(),
-          DepartOriginSuccess(),
+          RouteDepartOriginLoad(),
+          RouteDepartOriginSuccess(),
         ],
       );
 
       blocTest(
         '''WHEN departOrigin throws DepartOriginException
-           SHOULD emit DepartingOrigin and DepartOriginFailed
+           SHOULD emit RouteDepartOriginLoad and RouteDepartOriginFailure
         ''',
         build: () {
           when(mockRouteRepository.departOrigin(route.id))
@@ -374,8 +374,8 @@ void main() {
         },
         act: (cubit) => cubit.departOrigin(),
         expect: [
-          DepartingOrigin(),
-          DepartOriginFailed(),
+          RouteDepartOriginLoad(),
+          RouteDepartOriginFailure(),
         ],
       );
     });
@@ -383,7 +383,7 @@ void main() {
     group('arriveStop', () {
       blocTest(
         '''WHEN arriveStop is called
-           SHOULD emit ArrivingStop and ArrivedStopSuccess
+           SHOULD emit RouteArriveStopLoad and RouteArriveStopSuccess
         ''',
         build: () {
           when(
@@ -400,12 +400,12 @@ void main() {
           actualArrival: actualArrivalStop,
         ),
         expect: [
-          ArrivingStop(
+          RouteArriveStopLoad(
             StopModel(
               id: 1,
             ),
           ),
-          ArrivedStopSuccess(
+          RouteArriveStopSuccess(
             StopModel(
               id: 1,
             ).copyWith(actualArrival: actualArrivalStop),
@@ -435,7 +435,7 @@ void main() {
 
       blocTest(
         '''WHEN arriveStop throws ArriveStopException
-           SHOULD emit ArrivingStop and ArrivedStopFailed
+           SHOULD emit RouteArriveStopLoad and RouteArriveStopFailure
         ''',
         build: () {
           when(
@@ -452,12 +452,12 @@ void main() {
           actualArrival: actualArrivalStop,
         ),
         expect: [
-          ArrivingStop(
+          RouteArriveStopLoad(
             StopModel(
               id: 1,
             ),
           ),
-          ArrivedStopFailed('error'),
+          RouteArriveStopFailure('error'),
         ],
       );
     });
@@ -465,19 +465,19 @@ void main() {
     group('updateRouteDueStopChange', () {
       blocTest(
         '''WHEN updateRouteDueStopChange is called
-           SHOULD emit RouteUpdatedDueStopChange
+           SHOULD emit RouteUpdateDueStopChange
         ''',
         build: () => cubit,
         act: (cubit) => cubit.updateRouteDueStopChange(StopModel(id: 1)),
         expect: [
-          RouteUpdatedDueStopChange(StopModel(id: 1)),
+          RouteUpdateDueStopChange(StopModel(id: 1)),
         ],
       );
 
       blocTest(
         '''WHEN updateRouteDueStopChange is called
            AND theres no pending stop left
-           SHOULD emit RouteUpdatedDueStopChange and RouteHasNoPendingStops
+           SHOULD emit RouteUpdateDueStopChange and RouteHasNoPendingStops
         ''',
         build: () {
           cubit.route = cubit.route.copyWith(
@@ -497,7 +497,7 @@ void main() {
           ),
         ),
         expect: [
-          RouteUpdatedDueStopChange(
+          RouteUpdateDueStopChange(
             StopModel(
               id: 1,
               actualDeparture: actualDepartureStop,
@@ -511,12 +511,12 @@ void main() {
     group('updateRouteDueClonedStop', () {
       blocTest(
         '''WHEN updateRouteDueClonedStop is called
-           SHOULD emit RouteUpdatedDueStopClone
+           SHOULD emit RouteUpdateDueStopClone
         ''',
         build: () => cubit,
         act: (cubit) => cubit.updateRouteDueClonedStop(StopModel(id: 1)),
         expect: [
-          RouteUpdatedDueStopClone(StopModel(id: 1)),
+          RouteUpdateDueStopClone(StopModel(id: 1)),
         ],
       );
 
@@ -535,7 +535,7 @@ void main() {
     group('updateRouteDueRedeliverStop', () {
       blocTest(
         '''WHEN updateRouteDueRedeliverStop is called
-           SHOULD emit RouteUpdatedDueStopRedeliver
+           SHOULD emit RouteUpdateDueStopRedeliver
         ''',
         build: () {
           when(mockRouteRepository.arriveWarehouse(route.id))
@@ -544,13 +544,13 @@ void main() {
         },
         act: (cubit) => cubit.updateRouteDueRedeliverStop(StopModel(id: 1)),
         expect: [
-          RouteUpdatedDueStopRedeliver(StopModel(id: 1)),
+          RouteUpdateDueStopRedeliver(StopModel(id: 1)),
         ],
       );
 
       blocTest(
         '''WHEN updateRouteDueRedeliverStop is called
-           SHOULD emit RouteUpdatedDueStopRedeliver
+           SHOULD emit RouteUpdateDueStopRedeliver
         ''',
         build: () {
           when(mockRouteRepository.arriveWarehouse(route.id))
@@ -559,7 +559,7 @@ void main() {
         },
         act: (cubit) => cubit.updateRouteDueRedeliverStop(StopModel(id: 1)),
         expect: [
-          RouteUpdatedDueStopRedeliver(StopModel(id: 1)),
+          RouteUpdateDueStopRedeliver(StopModel(id: 1)),
         ],
       );
     });
@@ -567,7 +567,7 @@ void main() {
     group('arriveWarehouse', () {
       blocTest(
         '''WHEN arriveWarehouse is called successfuly
-           SHOULD emit ArrivingWarehouse and ArrivedWarehouseSuccess
+           SHOULD emit RouteArriveWarehouseLoad and RouteArriveWarehouseSuccess
         ''',
         build: () {
           when(mockRouteRepository.arriveWarehouse(route.id))
@@ -576,14 +576,14 @@ void main() {
         },
         act: (cubit) => cubit.arriveWarehouse(),
         expect: [
-          ArrivingWarehouse(),
-          ArrivedWarehouseSuccess(),
+          RouteArriveWarehouseLoad(),
+          RouteArriveWarehouseSuccess(),
         ],
       );
 
       blocTest(
         '''WHEN arriveWarehouse throws Exception
-           SHOULD emit ArrivingWarehouse and ArrivedWarehouseSuccess
+           SHOULD emit RouteArriveWarehouseLoad and RouteArriveWarehouseFailure
         ''',
         build: () {
           when(mockRouteRepository.arriveWarehouse(route.id))
@@ -592,8 +592,8 @@ void main() {
         },
         act: (cubit) => cubit.arriveWarehouse(),
         expect: [
-          ArrivingWarehouse(),
-          ArrivedWarehouseFailed(),
+          RouteArriveWarehouseLoad(),
+          RouteArriveWarehouseFailure(),
         ],
       );
     });
@@ -601,7 +601,7 @@ void main() {
     group('completeRoute', () {
       blocTest(
         '''WHEN completeRoute is called successfuly
-           SHOULD emit CompletingRoute and RouteCompletedSuccess
+           SHOULD emit RouteCompleteLoad and RouteCompleteSuccess
         ''',
         build: () {
           when(mockRouteRepository.completeRoute(route.id))
@@ -610,8 +610,8 @@ void main() {
         },
         act: (cubit) => cubit.completeRoute(),
         expect: [
-          CompletingRoute(),
-          RouteCompletedSuccess(),
+          RouteCompleteLoad(),
+          RouteCompleteSuccess(),
         ],
       );
 
@@ -631,7 +631,7 @@ void main() {
 
       blocTest(
         '''WHEN completeRoute throws CompleteRouteException
-           SHOULD emit CompletingRoute and RouteCompletedFailed
+           SHOULD emit RouteCompleteLoad and RouteCompleteFailure
         ''',
         build: () {
           when(mockRouteRepository.completeRoute(route.id))
@@ -640,8 +640,8 @@ void main() {
         },
         act: (cubit) => cubit.completeRoute(),
         expect: [
-          CompletingRoute(),
-          RouteCompletedFailed(),
+          RouteCompleteLoad(),
+          RouteCompleteFailure(),
         ],
       );
     });

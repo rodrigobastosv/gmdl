@@ -46,7 +46,7 @@ void main() {
     group('signInUser', () {
       blocTest(
         '''WHEN signInUser is called
-           SHOULD emit UserSigningLoading and UserSignedSuccess when success
+           SHOULD emit SignInLoad and SignInSuccess when success
            AND should add sign in info to GlobalBox
         ''',
         build: () {
@@ -68,8 +68,8 @@ void main() {
           password: 'password',
         ),
         expect: [
-          UserSigningLoading(),
-          UserSignedSuccess(
+          SignInLoad(),
+          SignInSuccess(
             LoginResultDTO.fromJson(
               'username',
               {
@@ -90,8 +90,7 @@ void main() {
 
       blocTest(
         '''WHEN signInUser is called
-           SHOULD emit UserSigningLoading and UserSignedSuccess when success
-           AND should add sign in info to GlobalBox
+           SHOULD emit SignInLoad and UserSigningFailure when fails
         ''',
         build: () {
           when(mockSignInRepository.signInUser(
@@ -105,8 +104,8 @@ void main() {
           password: 'password',
         ),
         expect: [
-          UserSigningLoading(),
-          UserSigningFailed('error'),
+          SignInLoad(),
+          SignInFailure('error'),
         ],
         verify: (cubit) {
           verifyNever(mockBox.put(USERNAME, 'username'));

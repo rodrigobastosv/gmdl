@@ -9,8 +9,8 @@ abstract class MapState extends Equatable {
 
 class MapInitial extends MapState {}
 
-class UpdateDriverPosition extends MapState {
-  UpdateDriverPosition(this.position);
+class MapUpdateDriverPosition extends MapState {
+  MapUpdateDriverPosition(this.position);
 
   final Position position;
 
@@ -21,8 +21,8 @@ class UpdateDriverPosition extends MapState {
       ];
 }
 
-class ShowedStopOnMap extends MapState {
-  ShowedStopOnMap(this.stop);
+class MapShowStop extends MapState {
+  MapShowStop(this.stop);
 
   final StopModel stop;
 
