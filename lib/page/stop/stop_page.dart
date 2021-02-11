@@ -9,8 +9,8 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
-import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../../widget/menu_items/menu_items.dart';
 import 'stop_page_arguments.dart';
 import 'widget/basic_stop_info.dart';
 import 'widget/times_card.dart';
@@ -116,7 +116,7 @@ class StopPage extends StatelessWidget {
     }
   }
 
-  List<GMMenuOption> _getMenuOptions(BuildContext context) {
+  List<Widget> _getMenuOptions(BuildContext context) {
     final cubit = context.watch<StopCubit>();
     final stop = cubit.stop;
     if (stop.isDone) {
@@ -124,32 +124,27 @@ class StopPage extends StatelessWidget {
     }
     return [
       if (!stop.isCanceled && !stop.hasBeenArrived)
-        GMMenuOption(
-          text: context.getText('stop.cancel'),
-          icon: 'cancel-stop',
+        CancelStopMenuItem(
           onTap: () => Navigator.of(context).pushNamed(
             CHOOSE_CANCEL_CODE_PAGE,
             arguments: cubit,
           ),
         ),
       if (!stop.isUndeliverable && stop.hasBeenArrived) ...[
-        GMMenuOption(
-          text: context.getText('status.undeliverable'),
-          icon: 'undeliver',
+        UndeliverStopMenuItem(
           onTap: () => Navigator.of(context).pushNamed(
             CHOOSE_UNDELIVERABLE_CODE_PAGE,
             arguments: cubit,
           ),
         ),
-        GMMenuOption(
-          text: context.getText('stop.redelivery'),
-          icon: 'redeliver',
+        RedeliverStopMenuItem(
           onTap: () => Navigator.of(context).pushNamed(
             CHOOSE_REDELIVER_CODE_PAGE,
             arguments: cubit,
           ),
         ),
-      ]
+      ],
+      const HosMenuItem(),
     ];
   }
 }

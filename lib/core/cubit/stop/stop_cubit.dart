@@ -202,6 +202,7 @@ class StopCubit extends Cubit<StopState> {
   Future<void> redeliverStop({
     UndeliverableCodeModel undeliverableCode,
     String actualDeparture,
+    String suggestedTimeWindow,
   }) async {
     final route = _routeCubit.route;
     try {
@@ -213,6 +214,7 @@ class StopCubit extends Cubit<StopState> {
         actualDeparture: actualDeparture,
         undeliveredStopKey: stop.key,
         newStopKey: newStopKey,
+        suggestedTimeWindow: suggestedTimeWindow,
       );
       final lastStopById = getLastStopOrderedById(route);
       final lastPlannedStop = getLastPlannedStop(route);

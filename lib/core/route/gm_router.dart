@@ -66,16 +66,20 @@ class GMRouter {
         break;
       case ROUTE_AT_GLANCE_PAGE:
         final route = args as RouteModel;
-        routeWidget = BlocProvider<RouteCubit>(
-          create: (context) => RouteCubit(
-            route: route,
-            repository: context.read<RouteRepository>(),
-            globalInfo: context.read<GlobalInfo>(),
-            notificationCubit: context.read<NotificationCubit>(),
-            clientCubit: context.read<ClientCubit>(),
-            gpsCubit: context.read<GpsCubit>(),
-            launchService: context.read<LaunchService>(),
-          )..init(),
+        routeWidget = MultiBlocProvider(
+          providers: [
+            BlocProvider<RouteCubit>(
+              create: (context) => RouteCubit(
+                route: route,
+                repository: context.read<RouteRepository>(),
+                globalInfo: context.read<GlobalInfo>(),
+                notificationCubit: context.read<NotificationCubit>(),
+                clientCubit: context.read<ClientCubit>(),
+                gpsCubit: context.read<GpsCubit>(),
+                launchService: context.read<LaunchService>(),
+              )..init(),
+            ),
+          ],
           child: const RouteAtGlancePage(),
         );
         break;
@@ -109,7 +113,9 @@ class GMRouter {
                 globalInfo: context.read<GlobalInfo>(),
               )..startServiceTime(),
             ),
-            BlocProvider.value(value: stopPageArguments.routeCubit),
+            BlocProvider.value(
+              value: stopPageArguments.routeCubit,
+            ),
           ],
           child: const StopPage(),
         );

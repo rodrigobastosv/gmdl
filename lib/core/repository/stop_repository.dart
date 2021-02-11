@@ -132,15 +132,23 @@ class StopRepository {
     @required String actualDeparture,
     @required String undeliveredStopKey,
     @required String newStopKey,
+    String suggestedTimeWindow,
   }) async {
     try {
       final response = await _client.post(
         '/$ROUTE/$routeId/$STOP/$undeliveredStopKey/$REDELIVERY',
-        data: {
-          'actualDeparture': actualDeparture,
-          'undeliverableCode': {'id': undeliverableCode},
-          'key': newStopKey,
-        },
+        data: suggestedTimeWindow != null
+            ? {
+                'actualDeparture': actualDeparture,
+                'undeliverableCode': {'id': undeliverableCode},
+                'key': newStopKey,
+                'suggestedTimeWindowOpen': suggestedTimeWindow,
+              }
+            : {
+                'actualDeparture': actualDeparture,
+                'undeliverableCode': {'id': undeliverableCode},
+                'key': newStopKey,
+              },
       );
       final responseData = handleResponse(response);
       return StopModel.fromJson(responseData);

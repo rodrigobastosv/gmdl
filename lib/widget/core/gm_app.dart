@@ -4,9 +4,10 @@ import 'package:package_info/package_info.dart';
 
 import '../../core/route/route.dart';
 import '../../main.dart';
-import '../global_info_widget_provider.dart';
 import 'dependencies_widget_provider.dart';
+import 'global_cubits_listeners.dart';
 import 'global_cubits_widget_provider.dart';
+import 'global_info_widget_provider.dart';
 import 'repositories_widget_provider.dart';
 
 final navigatorKey = alice.getNavigatorKey();
@@ -35,6 +36,9 @@ class GMApp extends StatelessWidget {
               theme: ThemeData(
                 primaryColor: const Color(0xFF3AA348),
                 visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              builder: (context, child) => GlobalCubitsListeners(
+                child: child,
               ),
               onGenerateRoute: GMRouter.generateRoutes,
             ),

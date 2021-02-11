@@ -4,13 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../core/cubit/cubits.dart';
 import '../../core/cubit/route/route_cubit.dart';
 import '../../core/entity/enum/enums.dart';
+import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../../widget/menu_items/menu_items.dart';
 import 'widget/basic_route_info.dart';
 import 'widget/route_at_glance_map.dart';
 
@@ -61,6 +64,7 @@ class RouteAtGlancePage extends StatelessWidget {
       mainButtonAction: () => _onPressedButton(cubit, context),
       mainButtonIcon: _getMainButtonIcon(cubit),
       mainButtonLabel: _getMainButtonLabel(context, cubit),
+      menuOptions: _getMenuOptions(context),
     );
   }
 
@@ -76,7 +80,7 @@ class RouteAtGlancePage extends StatelessWidget {
     } else {
       Navigator.of(context).pushNamed(
         STOP_LIST_PAGE,
-        arguments: cubit,
+        arguments: context.read<RouteCubit>(),
       );
     }
   }
@@ -106,5 +110,11 @@ class RouteAtGlancePage extends StatelessWidget {
     } else {
       return context.getTextUppercase('stop.list');
     }
+  }
+
+  List<Widget> _getMenuOptions(BuildContext context) {
+    return [
+      const HosMenuItem(),
+    ];
   }
 }

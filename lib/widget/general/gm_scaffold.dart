@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import 'gm_app_bar.dart';
 import 'gm_menu_drawer.dart';
-import 'gm_menu_option.dart';
 
 class GMScaffold extends StatefulWidget {
   const GMScaffold({
@@ -38,7 +37,7 @@ class GMScaffold extends StatefulWidget {
   final bool withBackButton;
   final bool withDrawer;
   final bool withNavigationBar;
-  final List<GMMenuOption> menuOptions;
+  final List<Widget> menuOptions;
 
   @override
   _GMScaffoldState createState() => _GMScaffoldState();
@@ -47,7 +46,7 @@ class GMScaffold extends StatefulWidget {
 class _GMScaffoldState extends State<GMScaffold> {
   bool isBottomMenuOpened = false;
 
-  List<GMMenuOption> get menuOptions => widget.menuOptions;
+  List<Widget> get menuOptions => widget.menuOptions;
   bool get hasMenuOptions => menuOptions != null && menuOptions.isNotEmpty;
   int get optionsLength => menuOptions?.length ?? 0;
 
