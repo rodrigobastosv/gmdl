@@ -12,8 +12,8 @@ import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_button_loading.dart';
-import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
+import '../../widget/menu_items/menu_items.dart';
 import 'widget/basic_route_info.dart';
 import 'widget/route_at_glance_map.dart';
 
@@ -112,15 +112,9 @@ class RouteAtGlancePage extends StatelessWidget {
     }
   }
 
-  List<GMMenuOption> _getMenuOptions(BuildContext context) {
+  List<Widget> _getMenuOptions(BuildContext context) {
     return [
-      GMMenuOption(
-        text: context.getText('hos.lunch.title'),
-        icon: 'lunch',
-        onTap: () => context.read<HosCubit>().startLunch(
-              DateTime.now().toUtcAsString,
-            ),
-      ),
+      const HosMenuItem(),
     ];
   }
 }

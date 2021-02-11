@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../menu_items.dart';
+import '../side_menu_items.dart';
 
 class GMMenuDrawer extends StatelessWidget {
   const GMMenuDrawer({Key key}) : super(key: key);
@@ -25,13 +25,13 @@ class GMMenuDrawer extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 itemBuilder: (_, i) {
                   return ListTile(
-                    onTap: () => menuItems[i].onTap(context),
+                    onTap: () => sideMenuItems[i].onTap(context),
                     leading: Icon(
-                      menuItems[i].icon,
+                      sideMenuItems[i].icon,
                       color: Colors.white,
                     ),
                     title: Text(
-                      menuItems[i].text,
+                      sideMenuItems[i].text,
                       style: const TextStyle(
                         color: Colors.white,
                       ),
@@ -41,7 +41,7 @@ class GMMenuDrawer extends StatelessWidget {
                 separatorBuilder: (_, i) => const Divider(
                   color: Colors.white,
                 ),
-                itemCount: menuItems.length,
+                itemCount: sideMenuItems.length,
               ),
             ),
           ],

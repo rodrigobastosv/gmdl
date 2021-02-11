@@ -7,9 +7,9 @@ import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../core/utils/utils.dart';
-import '../../widget/general/gm_menu_option.dart';
 import '../../widget/general/gm_scaffold.dart';
 import '../../widget/general/gm_search_text_field.dart';
+import '../../widget/menu_items/menu_items.dart';
 import '../stop/stop_page_arguments.dart';
 import 'widget/done_stop_tab_view.dart';
 import 'widget/done_stops_tab.dart';
@@ -120,15 +120,9 @@ class StopListPage extends StatelessWidget {
     }
   }
 
-  List<GMMenuOption> _getMenuOptions(BuildContext context) {
+  List<Widget> _getMenuOptions(BuildContext context) {
     return [
-      GMMenuOption(
-        text: context.getText('hos.lunch.title'),
-        icon: 'lunch',
-        onTap: () => context.read<HosCubit>().startLunch(
-              DateTime.now().toUtcAsString,
-            ),
-      ),
+      const HosMenuItem(),
     ];
   }
 }

@@ -5,28 +5,28 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../core/route/route.dart';
 
-final menuItems = [
-  /*MenuItem(
+final sideMenuItems = [
+  /*SideMenuItem(
     'HOS Summary',
     MaterialCommunityIcons.calendar_clock,
   ),
-  MenuItem(
+  SideMenuItem(
     'Mileage Report',
     MaterialCommunityIcons.file_document_edit_outline,
   ),
-  MenuItem(
+  SideMenuItem(
     'Clear Data',
     FontAwesome.eraser,
   ),
-  MenuItem(
+  SideMenuItem(
     'Settings',
     MaterialCommunityIcons.settings,
   ),
-  MenuItem(
+  SideMenuItem(
     'Change Password',
     MaterialCommunityIcons.key_change,
   ),*/
-  MenuItem(
+  SideMenuItem(
     text: 'Sign Out',
     icon: MdiIcons.logout,
     onTap: (context) => Navigator.of(context)
@@ -34,8 +34,8 @@ final menuItems = [
   ),
 ];
 
-class MenuItem {
-  MenuItem({
+class SideMenuItem {
+  SideMenuItem({
     this.text,
     this.icon,
     this.onTap,

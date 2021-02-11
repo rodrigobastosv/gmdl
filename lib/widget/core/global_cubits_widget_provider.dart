@@ -1,15 +1,15 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
+import 'package:connectivity/connectivity.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+
 import '../../core/cubit/cubits.dart';
 import '../../core/global/global_info.dart';
 import '../../core/global/hive.dart';
 import '../../core/repository/repositories.dart';
 import '../../core/service/services.dart';
-import 'package:hive/hive.dart';
-
 import 'connectivity_listener.dart';
 
 class GlobalCubitsWidgetProvider extends StatelessWidget {
