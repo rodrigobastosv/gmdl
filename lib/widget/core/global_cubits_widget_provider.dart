@@ -25,10 +25,6 @@ class GlobalCubitsWidgetProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ClientCubit>(
-          create: (_) => ClientCubit()..init(),
-          lazy: false,
-        ),
         BlocProvider<GpsCubit>(
           create: (_) => GpsCubit(
             repository: context.read<GpsRepository>(),

@@ -23,18 +23,15 @@ class StopCubit extends Cubit<StopState> {
     @required this.stop,
     @required StopRepository repository,
     @required RouteCubit routeCubit,
-    @required ClientCubit clientCubit,
     @required GpsCubit gpsCubit,
     @required GlobalInfo globalInfo,
   })  : assert(stop != null),
         assert(repository != null),
         assert(routeCubit != null),
-        assert(clientCubit != null),
         assert(gpsCubit != null),
         assert(globalInfo != null),
         _repository = repository,
         _routeCubit = routeCubit,
-        _clientCubit = clientCubit,
         _gpsCubit = gpsCubit,
         _globalInfo = globalInfo,
         super(StopInitial());
@@ -42,7 +39,6 @@ class StopCubit extends Cubit<StopState> {
   final StopRepository _repository;
   final RouteCubit _routeCubit;
   final GpsCubit _gpsCubit;
-  final ClientCubit _clientCubit;
   final GlobalInfo _globalInfo;
 
   StopModel stop;
@@ -58,19 +54,15 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     try {
       emit(ArrivingOnStop());
-      _clientCubit.schedule(
-        _repository.arriveStop(
-          routeId: route.id,
-          stop: stop,
-          actualArrival: actualArrival,
-        ),
+      _repository.arriveStop(
+        routeId: route.id,
+        stop: stop,
+        actualArrival: actualArrival,
       );
-      _clientCubit.schedule(
-        _gpsCubit.sendStopGpsInfo(
-          StopEvent.ARRIVE_STOP,
-          routeId: route.id,
-          stopKey: stop.key,
-        ),
+      _gpsCubit.sendStopGpsInfo(
+        StopEvent.ARRIVE_STOP,
+        routeId: route.id,
+        stopKey: stop.key,
       );
       stop = stop.copyWith(actualArrival: actualArrival);
       startServiceTime();
@@ -100,19 +92,15 @@ class StopCubit extends Cubit<StopState> {
     final route = _routeCubit.route;
     try {
       emit(DepartingStop());
-      _clientCubit.schedule(
-        _repository.departStop(
-          routeId: route.id,
-          stop: stop,
-          actualDeparture: actualDeparture,
-        ),
+      _repository.departStop(
+        routeId: route.id,
+        stop: stop,
+        actualDeparture: actualDeparture,
       );
-      _clientCubit.schedule(
-        _gpsCubit.sendStopGpsInfo(
-          StopEvent.DEPART_STOP,
-          routeId: route.id,
-          stopKey: stop.key,
-        ),
+      _gpsCubit.sendStopGpsInfo(
+        StopEvent.DEPART_STOP,
+        routeId: route.id,
+        stopKey: stop.key,
       );
       stop = stop.copyWith(actualDeparture: actualDeparture);
       _routeCubit.updateRouteDueStopChange(stop);
@@ -157,12 +145,10 @@ class StopCubit extends Cubit<StopState> {
         cancelCode: cancelCode.id,
         stopKey: stop.key,
       );
-      _clientCubit.schedule(
-        _gpsCubit.sendStopGpsInfo(
-          StopEvent.CANCEL_STOP,
-          routeId: route.id,
-          stopKey: stop.key,
-        ),
+      _gpsCubit.sendStopGpsInfo(
+        StopEvent.CANCEL_STOP,
+        routeId: route.id,
+        stopKey: stop.key,
       );
       stop = stop.copyWith(
         canceled: true,

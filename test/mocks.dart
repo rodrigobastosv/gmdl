@@ -47,9 +47,6 @@ class MockStopCubit extends MockBloc<StopState> implements StopCubit {}
 class MockNotificationCubit extends MockBloc<NotificationState>
     implements NotificationCubit {}
 
-class MockClientCubit extends MockBloc<NotificationState>
-    implements ClientCubit {}
-
 class MockGpsCubit extends MockBloc<GpsState> implements GpsCubit {}
 
 // Repository

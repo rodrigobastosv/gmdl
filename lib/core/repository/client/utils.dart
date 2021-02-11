@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
+import 'package:dio_retry/dio_retry.dart';
 import 'package:hive/hive.dart';
 
 import '../../../main.dart';
@@ -17,6 +18,41 @@ import 'interceptor/interceptors.dart';
 
 const DEFAULT_RETRIES_COUNT = 3;
 const DEFAULT_RETRY_INTERVAL_SECONDS = 5;
+const DEFAULT_RETRY_OPTIONS = RetryOptions(
+  retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
+  retries: DEFAULT_RETRIES_COUNT,
+  retryEvaluator: getDefaultRetryPolicy,
+);
+
+const QUEUE_RETRIES_COUNT = 5;
+const QUEUE_RETRY_INTERVAL_SECONDS = 60;
+const QUEUE_RETRY_OPTIONS = RetryOptions(
+  retryInterval: Duration(seconds: QUEUE_RETRY_INTERVAL_SECONDS),
+  retries: QUEUE_RETRIES_COUNT,
+  retryEvaluator: getQueueRetryPolicy,
+);
+
+FutureOr<bool> getDefaultRetryPolicy(DioError error) {
+  final method = error.request.method;
+  final url = error.request.path;
+  final statusCode = error.response?.statusCode;
+  return method != HTTP_METHOD_DELETE &&
+      statusCode != HTTP_FORBIDDEN &&
+      (method != HTTP_METHOD_POST ||
+          url.contains(RESTRICTIONS) ||
+          isStopActionRequest(url));
+}
+
+FutureOr<bool> getQueueRetryPolicy(DioError error) {
+  final method = error.request.method;
+  final url = error.request.path;
+  final statusCode = error.response?.statusCode;
+  return method != HTTP_METHOD_DELETE &&
+      statusCode != HTTP_FORBIDDEN &&
+      (method != HTTP_METHOD_POST ||
+          url.contains(RESTRICTIONS) ||
+          isStopActionRequest(url));
+}
 
 Dio getBasicClient() {
   final dio = Dio(
@@ -33,7 +69,24 @@ Dio getBasicClient() {
   return dio;
 }
 
-Dio getDefaultClientProvider(String serverName, String sessionId) {
+Dio getDefaultClient(String serverName, String sessionId) {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+        COOKIE: '$SESSION=$sessionId',
+      },
+      baseUrl: 'https://$serverName.greenmile.com',
+      queryParameters: {
+        CONSUMER: consumer,
+      },
+    ),
+  );
+  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  return dio;
+}
+
+Dio getQueueClient(String serverName, String sessionId) {
   final dio = Dio(
     BaseOptions(
       headers: {
@@ -55,23 +108,15 @@ List<Interceptor> _getBasicInterceptors(Dio dio) {
     if (kDebugMode) ...[
       alice.getDioInterceptor(),
     ],
-    GMRetryInterceptor(dio),
+    GMRetryInterceptor(
+      dio: dio,
+      retryOptions: DEFAULT_RETRY_OPTIONS,
+    ),
     GMAuthInterceptor(
       dio: dio,
       globalBox: Hive.box(GLOBAL_BOX),
     ),
   ];
-}
-
-FutureOr<bool> getDefaultRetryPolicy(DioError error) {
-  final method = error.request.method;
-  final url = error.request.path;
-  final statusCode = error.response.statusCode;
-  return method != HTTP_METHOD_DELETE &&
-      statusCode != HTTP_FORBIDDEN &&
-      (method != HTTP_METHOD_POST ||
-          url.contains(RESTRICTIONS) ||
-          isStopActionRequest(url));
 }
 
 bool isStopActionRequest(String url) {

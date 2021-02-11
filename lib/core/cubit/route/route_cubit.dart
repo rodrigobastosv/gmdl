@@ -25,20 +25,17 @@ class RouteCubit extends Cubit<RouteState> {
     @required RouteRepository repository,
     @required GlobalInfo globalInfo,
     @required NotificationCubit notificationCubit,
-    @required ClientCubit clientCubit,
     @required GpsCubit gpsCubit,
     @required LaunchService launchService,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
-        assert(clientCubit != null),
         assert(gpsCubit != null),
         assert(launchService != null),
         _repository = repository,
         _globalInfo = globalInfo,
         _notificationCubit = notificationCubit,
-        _clientCubit = clientCubit,
         _gpsCubit = gpsCubit,
         _launchService = launchService,
         super(RouteInitial());
@@ -46,7 +43,6 @@ class RouteCubit extends Cubit<RouteState> {
   final RouteRepository _repository;
   final GlobalInfo _globalInfo;
   final NotificationCubit _notificationCubit;
-  final ClientCubit _clientCubit;
   final GpsCubit _gpsCubit;
   final LaunchService _launchService;
 
@@ -137,19 +133,15 @@ class RouteCubit extends Cubit<RouteState> {
   }) async {
     try {
       emit(ArrivingStop(stop));
-      _clientCubit.schedule(
-        _repository.arriveStop(
-          routeId: route.id,
-          stop: stop,
-          actualArrival: actualArrival,
-        ),
+      _repository.arriveStop(
+        routeId: route.id,
+        stop: stop,
+        actualArrival: actualArrival,
       );
-      _clientCubit.schedule(
-        _gpsCubit.sendStopGpsInfo(
-          StopEvent.ARRIVE_STOP,
-          routeId: route.id,
-          stopKey: stop.key,
-        ),
+      _gpsCubit.sendStopGpsInfo(
+        StopEvent.ARRIVE_STOP,
+        routeId: route.id,
+        stopKey: stop.key,
       );
       final _updatedStop = stop.copyWith(actualArrival: actualArrival);
       route = updateRouteByStopChange(route, _updatedStop);
