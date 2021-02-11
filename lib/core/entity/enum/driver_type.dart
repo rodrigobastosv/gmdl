@@ -1,17 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 enum DriverType {
   DEFAULT,
   HELPER,
 }
 
-String driverTypeToJson(DriverType type) {
-  switch (type) {
-    case DriverType.DEFAULT:
-      return 'DEFAULT';
-    case DriverType.HELPER:
-      return 'HELPER';
-  }
-  return 'DEFAULT';
-}
+String driverTypeToJson(DriverType type) => describeEnum(type);
 
 DriverType driverTypeFromJson(String type) {
   switch (type) {

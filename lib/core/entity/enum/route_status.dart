@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 enum RouteStatus {
   NOT_STARTED,
   STARTED,
@@ -5,19 +7,7 @@ enum RouteStatus {
   COMPLETED,
 }
 
-String statusToJson(RouteStatus status) {
-  switch (status) {
-    case RouteStatus.NOT_STARTED:
-      return 'NOT_STARTED';
-    case RouteStatus.STARTED:
-      return 'STARTED';
-    case RouteStatus.DEPARTED_ORIGIN:
-      return 'DEPARTED_ORIGIN';
-    case RouteStatus.COMPLETED:
-      return 'COMPLETED';
-  }
-  return null;
-}
+String statusToJson(RouteStatus status) => describeEnum(status);
 
 RouteStatus statusFromJson(String status) {
   switch (status) {
