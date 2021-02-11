@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
@@ -12,6 +14,7 @@ import '../../constants.dart';
 import '../../exception/exceptions.dart';
 import '../../global/hive.dart';
 import 'client.dart';
+import 'gm_connectivity_retrier.dart';
 import 'http_constants.dart';
 import 'interceptor/gm_retry_interceptor.dart';
 import 'interceptor/interceptors.dart';
@@ -22,6 +25,12 @@ const DEFAULT_RETRY_OPTIONS = RetryOptions(
   retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
   retries: DEFAULT_RETRIES_COUNT,
   retryEvaluator: getDefaultRetryPolicy,
+);
+
+const CONNECTIVITY_RETRY_OPTIONS = RetryOptions(
+  retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
+  retries: DEFAULT_RETRIES_COUNT,
+  retryEvaluator: getConnectivityRetryPolicy,
 );
 
 const QUEUE_RETRIES_COUNT = 5;
@@ -41,6 +50,12 @@ FutureOr<bool> getDefaultRetryPolicy(DioError error) {
       (method != HTTP_METHOD_POST ||
           url.contains(RESTRICTIONS) ||
           isStopActionRequest(url));
+}
+
+FutureOr<bool> getConnectivityRetryPolicy(DioError error) {
+  return error.type == DioErrorType.DEFAULT &&
+      error.error != null &&
+      (error.error is SocketException || error.error is TimeoutException);
 }
 
 FutureOr<bool> getQueueRetryPolicy(DioError error) {
@@ -65,7 +80,7 @@ Dio getBasicClient() {
       },
     ),
   );
-  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  dio.interceptors.addAll(_getInterceptors(dio));
   return dio;
 }
 
@@ -82,7 +97,7 @@ Dio getDefaultClient(String serverName, String sessionId) {
       },
     ),
   );
-  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  dio.interceptors.addAll(_getInterceptors(dio));
   return dio;
 }
 
@@ -99,11 +114,11 @@ Dio getQueueClient(String serverName, String sessionId) {
       },
     ),
   );
-  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  dio.interceptors.addAll(_getInterceptors(dio));
   return dio;
 }
 
-List<Interceptor> _getBasicInterceptors(Dio dio) {
+List<Interceptor> _getInterceptors(Dio dio) {
   return [
     if (kDebugMode) ...[
       alice.getDioInterceptor(),
@@ -111,6 +126,13 @@ List<Interceptor> _getBasicInterceptors(Dio dio) {
     GMRetryInterceptor(
       dio: dio,
       retryOptions: DEFAULT_RETRY_OPTIONS,
+    ),
+    RetryOnConnectionChangeInterceptor(
+      requestRetrier: GMConnectivityRetrier(
+        dio: dio,
+        connectivity: Connectivity(),
+      ),
+      retryOptions: CONNECTIVITY_RETRY_OPTIONS,
     ),
     GMAuthInterceptor(
       dio: dio,
