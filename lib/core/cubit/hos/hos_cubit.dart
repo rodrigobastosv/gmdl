@@ -52,6 +52,8 @@ class HosCubit extends Cubit<HosState> {
         driverId: driverId,
         eventTime: eventTime,
       );
+      lunchTimeInMinutes = 0;
+      lunchTimeSubscription.cancel();
       emit(LunchEnded());
     } on HosEventException catch (e) {
       emit(LunchEndFailed(e.errorMessage));

@@ -18,7 +18,6 @@ class GlobalCubitsListeners extends StatelessWidget {
       listeners: [
         BlocListener<HosCubit, HosState>(
           listener: (context, state) async {
-            print(state);
             if (state is LunchStarted) {
               await showLunchDialog(navigatorKey.currentContext);
             } else if (state is LunchEnded) {

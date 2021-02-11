@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../core/global/global_info.dart';
+import '../../core/global/global_info.dart';
 
 class GlobalInfoWidgetProvider extends StatelessWidget {
   const GlobalInfoWidgetProvider({
