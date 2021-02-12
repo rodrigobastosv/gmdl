@@ -9,8 +9,8 @@ abstract class I18nState extends Equatable {
 
 class I18nInitial extends I18nState {}
 
-class LocaleChanged extends I18nState {
-  const LocaleChanged(this.locale);
+class I18nLocaleChange extends I18nState {
+  const I18nLocaleChange(this.locale);
 
   final String locale;
 
@@ -20,6 +20,6 @@ class LocaleChanged extends I18nState {
       ];
 }
 
-class ResourcesFetchSuccess extends I18nState {}
+class I18nResourcesFetchSuccess extends I18nState {}
 
-class ResourcesFetchFailed extends I18nState {}
+class I18nResourcesFetchFailure extends I18nState {}

@@ -13,7 +13,6 @@ final routeCubit = RouteCubit(
   route: RouteModel(),
   globalInfo: GlobalInfo(),
   notificationCubit: notificationCubit,
-  clientCubit: clientCubit,
   gpsCubit: gpsCubit,
   launchService: LaunchService(),
 );
@@ -29,10 +28,7 @@ final stopCubit = StopCubit(
   routeCubit: routeCubit,
   gpsCubit: gpsCubit,
   globalInfo: GlobalInfo(),
-  clientCubit: clientCubit,
 );
-
-final clientCubit = ClientCubit();
 
 final gpsCubit = GpsCubit(
   repository: GpsRepository(GMClient()),

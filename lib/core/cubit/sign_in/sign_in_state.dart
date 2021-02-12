@@ -7,8 +7,8 @@ abstract class SignInState extends Equatable {
 
 class SignInInitial extends SignInState {}
 
-class UserSignedSuccess extends SignInState {
-  UserSignedSuccess(this.loginResult);
+class SignInSuccess extends SignInState {
+  SignInSuccess(this.loginResult);
 
   final LoginResultDTO loginResult;
 
@@ -16,8 +16,8 @@ class UserSignedSuccess extends SignInState {
   List<Object> get props => [loginResult];
 }
 
-class UserSigningFailed extends SignInState {
-  UserSigningFailed(this.errorMessage);
+class SignInFailure extends SignInState {
+  SignInFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -27,4 +27,4 @@ class UserSigningFailed extends SignInState {
       ];
 }
 
-class UserSigningLoading extends SignInState {}
+class SignInLoad extends SignInState {}

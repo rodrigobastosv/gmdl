@@ -7,8 +7,8 @@ abstract class ConnectivityState extends Equatable {
   List<Object> get props => [];
 }
 
-class HasConnection extends ConnectivityState {
-  HasConnection(this.hasConnection);
+class ConnectivityHasConnection extends ConnectivityState {
+  ConnectivityHasConnection(this.hasConnection);
 
   final hasConnection;
 

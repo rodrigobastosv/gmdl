@@ -90,8 +90,8 @@ void main() {
       act: (cubit) => cubit.initNotifications(),
       expect: [
         NotificationSetupSuccess('myToken'),
-        NotificationTokenRefreshed('token1'),
-        NotificationTokenRefreshed('token2'),
+        NotificationTokenRefresh('token1'),
+        NotificationTokenRefresh('token2'),
       ],
       verify: (cubit) {
         verify(mockFirebaseMessaging.getToken()).called(1);
@@ -106,7 +106,7 @@ void main() {
 
     blocTest(
       '''WHEN initNotifications throws Exception
-         SHOULD emit NotificationSetupFailed
+         SHOULD emit NotificationSetupFailure
       ''',
       build: () {
         when(mockFirebaseMessaging.getToken()).thenThrow(Exception());
@@ -114,7 +114,7 @@ void main() {
       },
       act: (cubit) => cubit.initNotifications(),
       expect: [
-        NotificationSetupFailed(),
+        NotificationSetupFailure(),
       ],
     );
   });

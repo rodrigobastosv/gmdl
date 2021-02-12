@@ -36,13 +36,13 @@ class HosCubit extends Cubit<HosState> {
         driverId: driverId,
         eventTime: eventTime,
       );
-      emit(LunchStarted());
+      emit(HosLunchStartSuccess());
       lunchTimeSubscription = Stream.periodic(ONE_MINUTE).listen((_) {
         lunchTimeInMinutes++;
-        emit(LunchTimeMinutePassed(lunchTimeInMinutes));
+        emit(HosLunchTimeMinutePass(lunchTimeInMinutes));
       });
     } on HosEventException catch (e) {
-      emit(LunchStartFailed(e.errorMessage));
+      emit(HosLunchStartFailure(e.errorMessage));
     }
   }
 
@@ -54,9 +54,9 @@ class HosCubit extends Cubit<HosState> {
       );
       lunchTimeInMinutes = 0;
       lunchTimeSubscription.cancel();
-      emit(LunchEnded());
+      emit(HosLunchEndSuccess());
     } on HosEventException catch (e) {
-      emit(LunchEndFailed(e.errorMessage));
+      emit(HosLunchEndFailure(e.errorMessage));
     }
   }
 

@@ -9,8 +9,8 @@ abstract class ChooseCancelCodeState extends Equatable {
 
 class ChooseCancelCodeInitial extends ChooseCancelCodeState {}
 
-class CancelCodePicked extends ChooseCancelCodeState {
-  CancelCodePicked(this.cancelCode);
+class ChooseCancelCodePickCode extends ChooseCancelCodeState {
+  ChooseCancelCodePickCode(this.cancelCode);
 
   final CancelCodeModel cancelCode;
 

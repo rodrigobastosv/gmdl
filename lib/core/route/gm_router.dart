@@ -6,7 +6,6 @@ import 'package:hive/hive.dart';
 
 import '../../page/pages.dart';
 import '../../page/stop/stop_page_arguments.dart';
-import '../cubit/client/client_cubit.dart';
 import '../cubit/cubits.dart';
 import '../entity/model/models.dart';
 import '../global/global_info.dart';
@@ -74,7 +73,6 @@ class GMRouter {
                 repository: context.read<RouteRepository>(),
                 globalInfo: context.read<GlobalInfo>(),
                 notificationCubit: context.read<NotificationCubit>(),
-                clientCubit: context.read<ClientCubit>(),
                 gpsCubit: context.read<GpsCubit>(),
                 launchService: context.read<LaunchService>(),
               )..init(),
@@ -108,7 +106,6 @@ class GMRouter {
                 stop: stopPageArguments.stop,
                 routeCubit: stopPageArguments.routeCubit,
                 repository: context.read<StopRepository>(),
-                clientCubit: context.read<ClientCubit>(),
                 gpsCubit: context.read<GpsCubit>(),
                 globalInfo: context.read<GlobalInfo>(),
               )..startServiceTime(),

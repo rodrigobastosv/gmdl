@@ -27,8 +27,12 @@ class GMAuthInterceptor extends Interceptor {
 
   @override
   onError(DioError error) async {
+    print(error);
+    print(error.request);
+    print(error.response);
+    print(error.type);
     final request = error.request;
-    final statusCode = error.response.statusCode;
+    final statusCode = error.response?.statusCode;
 
     if (statusCode == HTTP_FORBIDDEN) {
       final username = globalBox.get(USERNAME);

@@ -1,17 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 enum UnitSystem {
   METRIC,
   NON_METRIC,
 }
 
-String unitSystemToJson(UnitSystem unit) {
-  switch (unit) {
-    case UnitSystem.METRIC:
-      return 'METRIC';
-    case UnitSystem.NON_METRIC:
-      return 'NON_METRIC';
-  }
-  return 'METRIC';
-}
+String unitSystemToJson(UnitSystem unit) => describeEnum(unit);
 
 UnitSystem unitSystemFromJson(String unit) {
   switch (unit) {

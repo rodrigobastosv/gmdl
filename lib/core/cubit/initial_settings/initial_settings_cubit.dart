@@ -20,21 +20,21 @@ class InitialSettingsCubit extends Cubit<InitialSettingsState> {
         assert(globalBox != null),
         _repository = repository,
         _globalBox = globalBox,
-        super(ServerValidationInitial());
+        super(InitialSettingsInitial());
 
   final InitialSettingsRepository _repository;
   final Box _globalBox;
 
   Future<void> validateServerName(String serverName) async {
     try {
-      emit(ValidatingServer());
+      emit(InitialSettingsValidateServerLoad());
       final locales = await _repository.fetchAllLocales(serverName);
       _repository.authIdpDiscovery(serverName);
       _globalBox.put(SERVER, serverName);
       _globalBox.put(ALL_LOCALES, jsonEncode(locales));
-      emit(ServerValidationSuccess());
+      emit(InitialSettingsValidateServerSuccess());
     } on GMServerException catch (e) {
-      emit(ServerValidationFailed(e.errorMessage));
+      emit(InitialSettingsValidateServerFailure(e.errorMessage));
     }
   }
 }

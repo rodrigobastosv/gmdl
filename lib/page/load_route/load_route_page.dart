@@ -26,12 +26,12 @@ class LoadRoutePage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, LoadRouteState state) {
-    if (state is RouteLoadedSuccess) {
+    if (state is LoadRouteSuccess) {
       Navigator.of(context).pushReplacementNamed(
         ROUTE_AT_GLANCE_PAGE,
         arguments: state.route,
       );
-    } else if (state is RouteLoadFailed) {
+    } else if (state is LoadRouteFailure) {
       showErrorNotification(context, context.getText(state.errorMessage));
       Navigator.of(context).pop();
     }
@@ -46,7 +46,7 @@ class LoadRoutePage extends StatelessWidget {
             child: GMLoading(),
           ),
           const SizedBox(height: 12),
-          if (state is LoadingInfo)
+          if (state is LoadRouteLoad)
             Text(
               state.info,
               style: const TextStyle(

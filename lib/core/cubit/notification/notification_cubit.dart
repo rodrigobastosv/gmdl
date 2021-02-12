@@ -39,19 +39,19 @@ class NotificationCubit extends Cubit<NotificationState> {
       FirebaseMessaging.onMessage.listen((message) {
         final messageData = jsonDecode(message.data['default']);
         final notification = NotificationDto.fromJson(messageData);
-        emit(NotificationReceived(notification));
+        emit(NotificationReceive(notification));
         _repository.ackNotification(notification.id);
       });
 
       _firebaseMessaging.onTokenRefresh.listen((token) async {
         fcmToken = token;
         _repository.updateToken(deviceId: deviceId, token: fcmToken);
-        emit(NotificationTokenRefreshed(token));
+        emit(NotificationTokenRefresh(token));
       });
 
       emit(NotificationSetupSuccess(fcmToken));
     } on Exception {
-      emit(NotificationSetupFailed());
+      emit(NotificationSetupFailure());
     }
   }
 }

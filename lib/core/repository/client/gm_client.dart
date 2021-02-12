@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:queue/queue.dart';
 
 import 'client.dart';
 
@@ -9,6 +10,8 @@ class GMClient {
   String password;
   String serverName;
   String sessionId;
+
+  final queue = Queue();
 
   void init({
     String username,
@@ -27,7 +30,7 @@ class GMClient {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    final _client = getDefaultClientProvider(serverName, sessionId);
+    final _client = getDefaultClient(serverName, sessionId);
     return await _client.get(
       path,
       queryParameters: queryParameters,
@@ -41,12 +44,33 @@ class GMClient {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    final _client = getDefaultClientProvider(serverName, sessionId);
+    final _client = getDefaultClient(serverName, sessionId);
     return await _client.post(
       path,
       data: data,
       queryParameters: queryParameters,
       options: options,
     );
+  }
+
+  Future<void> postQueued(
+    String path, {
+    dynamic data,
+    Map<String, dynamic> queryParameters,
+    Options options,
+  }) async {
+    final _client = getQueueClient(serverName, sessionId);
+    try {
+      queue.add(
+        () => _client.post(
+          path,
+          data: data,
+          queryParameters: queryParameters,
+          options: options,
+        ),
+      );
+    } on Exception {
+      print('Exceptionnnn!!!!!!!!!!!!!!');
+    }
   }
 }

@@ -25,20 +25,20 @@ class MapCubit extends Cubit<MapState> {
 
   void init() {
     routeStateSubscription = _routeCubit.listen((state) {
-      if (state is DriverPositionUpdated) {
-        emit(UpdateDriverPosition(state.position));
-      } else if (state is ArrivedStopSuccess) {
-        emit(ShowedStopOnMap(null));
-      } else if (state is RouteUpdatedDueStopChange) {
+      if (state is RouteDriverPositionUpdate) {
+        emit(MapUpdateDriverPosition(state.position));
+      } else if (state is RouteArriveStopSuccess) {
+        emit(MapShowStop(null));
+      } else if (state is RouteUpdateDueStopChange) {
         emit(RouteUpdated());
-      } else if (state is RouteUpdatedDueNotification) {
+      } else if (state is RouteUpdateDueNotificationSuccess) {
         emit(RouteUpdatedDueOptimization());
       }
     });
   }
 
   void showStopOnMap(StopModel stop) {
-    emit(ShowedStopOnMap(stop));
+    emit(MapShowStop(stop));
   }
 
   @override

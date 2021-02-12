@@ -54,16 +54,16 @@ class I18nCubit extends Cubit<I18nState> {
   void changeLocale(String localeKey) {
     this.localeKey = localeKey;
     _resources = localResources[localeKey];
-    emit(LocaleChanged(localeKey));
+    emit(I18nLocaleChange(localeKey));
   }
 
   Future<void> fetchResources() async {
     try {
       final _resourcesList = await _repository.fetchResources(localeKey);
       _resources.addAll(_getResourcesMap(_resourcesList));
-      emit(ResourcesFetchSuccess());
+      emit(I18nResourcesFetchSuccess());
     } on Exception {
-      emit(ResourcesFetchFailed());
+      emit(I18nResourcesFetchFailure());
     }
   }
 

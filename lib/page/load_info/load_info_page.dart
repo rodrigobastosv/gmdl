@@ -21,7 +21,7 @@ class LoadInfoPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, LoadInfoState state) {
-    if (state is AllInfoLoadedSuccess) {
+    if (state is LoadInfoAllInfoLoadSuccess) {
       Navigator.of(context).pushReplacementNamed(CHOOSE_EQUIPMENT_PAGE);
     }
   }
@@ -34,7 +34,7 @@ class LoadInfoPage extends StatelessWidget {
           child: GMLoading(),
         ),
         const SizedBox(height: 12),
-        if (state is InfoLoading)
+        if (state is LoadInfoInfoLoading)
           Text(
             state.step,
             style: const TextStyle(

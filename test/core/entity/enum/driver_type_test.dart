@@ -7,7 +7,6 @@ void main() {
     test('driverTypeToJson', () {
       expect(driverTypeToJson(DriverType.DEFAULT), 'DEFAULT');
       expect(driverTypeToJson(DriverType.HELPER), 'HELPER');
-      expect(driverTypeToJson(null), 'DEFAULT');
     });
 
     test('driverTypeFromJson', () {

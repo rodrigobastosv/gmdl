@@ -9,23 +9,12 @@ abstract class StopState extends Equatable {
 
 class StopInitial extends StopState {}
 
-class ArrivingOnStop extends StopState {}
+class StopArriveLoad extends StopState {}
 
-class ArrivedStopSuccessOnStop extends StopState {}
+class StopArriveSuccess extends StopState {}
 
-class ServiceTimeUpdated extends StopState {
-  ServiceTimeUpdated(this.serviceTime);
-
-  final int serviceTime;
-
-  @override
-  List<Object> get props => [
-        serviceTime,
-      ];
-}
-
-class ArriveStopFailed extends StopState {
-  ArriveStopFailed(this.errorMessage);
+class StopArriveFailure extends StopState {
+  StopArriveFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -35,10 +24,10 @@ class ArriveStopFailed extends StopState {
       ];
 }
 
-class DepartingStop extends StopState {}
+class StopDepartLoad extends StopState {}
 
-class DepartedStopSuccess extends StopState {
-  DepartedStopSuccess(this.stop);
+class StopDepartSuccess extends StopState {
+  StopDepartSuccess(this.stop);
 
   final StopModel stop;
 
@@ -48,8 +37,8 @@ class DepartedStopSuccess extends StopState {
       ];
 }
 
-class DepartStopFailed extends StopState {
-  DepartStopFailed(this.errorMessage);
+class StopDepartFailure extends StopState {
+  StopDepartFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -59,10 +48,10 @@ class DepartStopFailed extends StopState {
       ];
 }
 
-class CloningStop extends StopState {}
+class StopCloneLoad extends StopState {}
 
-class ClonedStopSuccess extends StopState {
-  ClonedStopSuccess(this.stop);
+class StopCloneSuccess extends StopState {
+  StopCloneSuccess(this.stop);
 
   final StopModel stop;
 
@@ -72,8 +61,8 @@ class ClonedStopSuccess extends StopState {
       ];
 }
 
-class CloneStopFailed extends StopState {
-  CloneStopFailed(this.errorMessage);
+class StopCloneFailure extends StopState {
+  StopCloneFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -83,10 +72,10 @@ class CloneStopFailed extends StopState {
       ];
 }
 
-class CancellingStop extends StopState {}
+class StopCancelLoad extends StopState {}
 
-class CanceledStopSuccess extends StopState {
-  CanceledStopSuccess(this.stop);
+class StopCancelSuccess extends StopState {
+  StopCancelSuccess(this.stop);
 
   final StopModel stop;
 
@@ -96,8 +85,8 @@ class CanceledStopSuccess extends StopState {
       ];
 }
 
-class CanceledStopFailed extends StopState {
-  CanceledStopFailed(this.errorMessage);
+class StopCancelFailure extends StopState {
+  StopCancelFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -107,10 +96,10 @@ class CanceledStopFailed extends StopState {
       ];
 }
 
-class UndeliveringStop extends StopState {}
+class StopUndeliverLoad extends StopState {}
 
-class UndeliveredStopSuccess extends StopState {
-  UndeliveredStopSuccess(this.stop);
+class StopUndeliverSuccess extends StopState {
+  StopUndeliverSuccess(this.stop);
 
   final StopModel stop;
 
@@ -120,8 +109,8 @@ class UndeliveredStopSuccess extends StopState {
       ];
 }
 
-class UndeliveredStopFailed extends StopState {
-  UndeliveredStopFailed(this.errorMessage);
+class StopUndeliverFailure extends StopState {
+  StopUndeliverFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -131,10 +120,10 @@ class UndeliveredStopFailed extends StopState {
       ];
 }
 
-class RedeliveringStop extends StopState {}
+class StopRedeliverLoad extends StopState {}
 
-class RedeliveredStopSuccess extends StopState {
-  RedeliveredStopSuccess(this.newStop);
+class StopRedeliverSuccess extends StopState {
+  StopRedeliverSuccess(this.newStop);
 
   final StopModel newStop;
 
@@ -144,13 +133,24 @@ class RedeliveredStopSuccess extends StopState {
       ];
 }
 
-class RedeliveredStopFailed extends StopState {
-  RedeliveredStopFailed(this.errorMessage);
+class StopRedeliverFailure extends StopState {
+  StopRedeliverFailure(this.errorMessage);
 
   final String errorMessage;
 
   @override
   List<Object> get props => [
         errorMessage,
+      ];
+}
+
+class StopServiceTimeUpdate extends StopState {
+  StopServiceTimeUpdate(this.serviceTime);
+
+  final int serviceTime;
+
+  @override
+  List<Object> get props => [
+        serviceTime,
       ];
 }

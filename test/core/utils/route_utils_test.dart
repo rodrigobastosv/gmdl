@@ -266,5 +266,21 @@ void main() {
         );
       },
     );
+
+    test(
+      '''WHEN isStopNextSuggestion is called
+         SHOULD return true if the stop that is next suggestion and false otherwise
+      ''',
+      () {
+        final route = RouteModel(
+          stops: [
+            StopModel(id: 1),
+            StopModel(id: 2),
+          ],
+        );
+        expect(isStopNextSuggestion(route, StopModel(id: 1)), true);
+        expect(isStopNextSuggestion(route, StopModel(id: 2)), false);
+      },
+    );
   });
 }

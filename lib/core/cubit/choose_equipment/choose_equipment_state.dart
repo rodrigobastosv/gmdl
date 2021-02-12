@@ -9,21 +9,10 @@ abstract class ChooseEquipmentState extends Equatable {
 
 class ChooseEquipmentInitial extends ChooseEquipmentState {}
 
-class EquipmentFound extends ChooseEquipmentState {}
+class ChooseEquipmentFound extends ChooseEquipmentState {}
 
-class EquipmentNotFound extends ChooseEquipmentState {
-  EquipmentNotFound(this.errorMessage);
-
-  final String errorMessage;
-
-  @override
-  List<Object> get props => [
-        errorMessage,
-      ];
-}
-
-class EquipmentFailed extends ChooseEquipmentState {
-  EquipmentFailed(this.errorMessage);
+class ChooseEquipmentNotFound extends ChooseEquipmentState {
+  ChooseEquipmentNotFound(this.errorMessage);
 
   final String errorMessage;
 
@@ -33,4 +22,15 @@ class EquipmentFailed extends ChooseEquipmentState {
       ];
 }
 
-class LoadingEquipment extends ChooseEquipmentState {}
+class ChooseEquipmentFailure extends ChooseEquipmentState {
+  ChooseEquipmentFailure(this.errorMessage);
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [
+        errorMessage,
+      ];
+}
+
+class ChooseEquipmentLoad extends ChooseEquipmentState {}

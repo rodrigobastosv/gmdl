@@ -52,7 +52,7 @@ class StopListTileBottom extends StatelessWidget {
               ),
               if (stop.hasNotBeenArrived)
                 BlocBuilder<RouteCubit, RouteState>(
-                  builder: (_, state) => (state is ArrivingStop &&
+                  builder: (_, state) => (state is RouteArriveStopLoad &&
                           state.stop == stop)
                       ? const GMButtonLoading()
                       : TextButton.icon(

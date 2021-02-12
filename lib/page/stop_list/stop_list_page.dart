@@ -99,7 +99,7 @@ class StopListPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, RouteState state) {
-    if (state is ArrivedStopSuccess) {
+    if (state is RouteArriveStopSuccess) {
       Navigator.of(context).pushNamed(
         STOP_PAGE,
         arguments: StopPageArguments(
@@ -112,7 +112,7 @@ class StopListPage extends StatelessWidget {
         FINISHED_STOPS_PAGE,
         arguments: context.read<RouteCubit>(),
       );
-    } else if (state is ArrivedWarehouseSuccess) {
+    } else if (state is RouteArriveWarehouseSuccess) {
       Navigator.of(context).pushNamed(
         ROUTE_SUMMARY_PAGE,
         arguments: context.read<RouteCubit>(),

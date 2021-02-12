@@ -7,12 +7,12 @@ abstract class LoadInfoState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadingInitial extends LoadInfoState {}
+class LoadInfoInitial extends LoadInfoState {}
 
-class BasicDriverInfoSuccess extends LoadInfoState {}
+class LoadInfoBasicDriverInfo extends LoadInfoState {}
 
-class RegisterDeviceSuccess extends LoadInfoState {
-  RegisterDeviceSuccess(this.deviceId);
+class LoadInfoRegisterDevice extends LoadInfoState {
+  LoadInfoRegisterDevice(this.deviceId);
 
   final int deviceId;
 
@@ -22,22 +22,22 @@ class RegisterDeviceSuccess extends LoadInfoState {
       ];
 }
 
-class AllInfoLoadedSuccess extends LoadInfoState {}
+class LoadInfoAllInfoLoadSuccess extends LoadInfoState {}
 
-class FetchGlobalConfigSuccess extends LoadInfoState {}
+class LoadInfoFetchGlobalConfig extends LoadInfoState {}
 
-class FetchResourcesSuccess extends LoadInfoState {}
+class LoadInfoFetchResources extends LoadInfoState {}
 
-class FetchUserConfigSuccess extends LoadInfoState {}
+class LoadInfoFetchUserConfig extends LoadInfoState {}
 
-class FetchCancelCodesSuccess extends LoadInfoState {}
+class LoadInfoFetchCancelCodes extends LoadInfoState {}
 
-class FetchUndeliverableCodesSuccess extends LoadInfoState {}
+class LoadInfoFetchUndeliverableCodes extends LoadInfoState {}
 
-class DriverInfoFailed extends LoadInfoState {}
+class LoadInfoInfoLoadingFailure extends LoadInfoState {}
 
-class InfoLoading extends LoadInfoState {
-  InfoLoading(this.step);
+class LoadInfoInfoLoading extends LoadInfoState {
+  LoadInfoInfoLoading(this.step);
 
   final String step;
 

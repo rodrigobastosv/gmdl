@@ -14,11 +14,11 @@ class ChooseCancelCodeCubit extends Cubit<ChooseCancelCodeState> {
 
   void pickCancelCode(CancelCodeModel cancelCode) {
     pickedCancelCode = cancelCode;
-    emit(CancelCodePicked(cancelCode));
+    emit(ChooseCancelCodePickCode(cancelCode));
   }
 
   void unpickCancelCode(CancelCodeModel cancelCode) {
     pickedCancelCode = null;
-    emit(CancelCodePicked(null));
+    emit(ChooseCancelCodePickCode(null));
   }
 }

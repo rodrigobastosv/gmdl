@@ -184,4 +184,20 @@ void main() {
       expect(getLocationInfo(stopWithLocation), '1 - description');
     },
   );
+
+  test(
+    '''WHEN padLeftWithZeros is called
+       SHOULD return number with 0 padded left
+    ''',
+    () {
+      expect(
+        padLeftWithZeros(value: 1, n: 2),
+        '01',
+      );
+      expect(
+        padLeftWithZeros(value: 11, n: 2),
+        '11',
+      );
+    },
+  );
 }

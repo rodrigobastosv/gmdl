@@ -7,10 +7,10 @@ abstract class LoadRouteState extends Equatable {
   List<Object> get props => [];
 }
 
-class RouteAtGlanceInitial extends LoadRouteState {}
+class LoadRouteInitial extends LoadRouteState {}
 
-class RouteLoadedSuccess extends LoadRouteState {
-  RouteLoadedSuccess(this.route);
+class LoadRouteSuccess extends LoadRouteState {
+  LoadRouteSuccess(this.route);
 
   final RouteModel route;
 
@@ -18,8 +18,8 @@ class RouteLoadedSuccess extends LoadRouteState {
   List<Object> get props => [route];
 }
 
-class RouteLoadFailed extends LoadRouteState {
-  RouteLoadFailed(this.errorMessage);
+class LoadRouteFailure extends LoadRouteState {
+  LoadRouteFailure(this.errorMessage);
 
   final String errorMessage;
 
@@ -29,8 +29,8 @@ class RouteLoadFailed extends LoadRouteState {
       ];
 }
 
-class LoadingInfo extends LoadRouteState {
-  const LoadingInfo(this.info);
+class LoadRouteLoad extends LoadRouteState {
+  const LoadRouteLoad(this.info);
 
   final String info;
 

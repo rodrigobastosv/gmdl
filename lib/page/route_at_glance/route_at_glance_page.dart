@@ -29,7 +29,7 @@ class RouteAtGlancePage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, RouteState state) {
-    if (state is DepartOriginSuccess) {
+    if (state is RouteDepartOriginSuccess) {
       Navigator.of(context).pushNamed(
         STOP_LIST_PAGE,
         arguments: context.read<RouteCubit>(),
@@ -71,7 +71,7 @@ class RouteAtGlancePage extends StatelessWidget {
   Future<void> _onPressedButton(RouteCubit cubit, BuildContext context) async {
     final state = cubit.state;
     final route = cubit.route;
-    if (state is StartingRoute) {
+    if (state is RouteStartLoad) {
       return null;
     } else if (route.status == RouteStatus.STARTED) {
       await cubit.departOrigin();
@@ -88,9 +88,9 @@ class RouteAtGlancePage extends StatelessWidget {
   Widget _getMainButtonIcon(RouteCubit cubit) {
     final state = cubit.state;
     final route = cubit.route;
-    if (state is StartingRoute ||
-        state is DepartingOrigin ||
-        state is DepartOriginSuccess) {
+    if (state is RouteStartLoad ||
+        state is RouteDepartOriginLoad ||
+        state is RouteDepartOriginSuccess) {
       return const GMButtonLoading();
     } else if (route.status == RouteStatus.STARTED) {
       return SvgPicture.asset('assets/icons/driving.svg');
