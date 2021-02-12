@@ -147,28 +147,6 @@ void main() {
           expect(cubit.stop.actualArrival, actualArrivalStop);
         },
       );
-
-      blocTest(
-        '''WHEN arriveStop throws ArriveStopException
-           SHOULD emit StopArriveLoad and StopArriveFailure
-        ''',
-        build: () {
-          when(mockRouteCubit.route).thenReturn(routeWithOneStop);
-          when(
-            mockStopRepository.arriveStop(
-              routeId: routeWithOneStop.id,
-              stop: stop,
-              actualArrival: actualArrivalStop,
-            ),
-          ).thenThrow(ArriveStopException('error'));
-          return cubit;
-        },
-        act: (cubit) => cubit.arriveStop(actualArrivalStop),
-        expect: [
-          StopArriveLoad(),
-          StopArriveFailure('error'),
-        ],
-      );
     });
 
     group('departStop', () {
@@ -226,28 +204,6 @@ void main() {
           await cubit.departStop(actualDepartureStop);
           expect(cubit.stop.actualDeparture, actualDepartureStop);
         },
-      );
-
-      blocTest(
-        '''WHEN departStop throws DepartStopException
-           SHOULD emit StopDepartLoad and StopDepartFailure
-        ''',
-        build: () {
-          when(mockRouteCubit.route).thenReturn(routeWithOneStop);
-          when(
-            mockStopRepository.departStop(
-              routeId: routeWithOneStop.id,
-              stop: stop,
-              actualDeparture: actualDepartureStop,
-            ),
-          ).thenThrow(DepartStopException('error'));
-          return cubit;
-        },
-        act: (cubit) async => await cubit.departStop(actualArrivalStop),
-        expect: [
-          StopDepartLoad(),
-          StopDepartFailure('error'),
-        ],
       );
     });
 

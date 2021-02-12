@@ -52,8 +52,7 @@ class StopCubit extends Cubit<StopState> {
 
   Future<void> arriveStop(String actualArrival) async {
     final route = _routeCubit.route;
-    try {
-      emit(StopArriveLoad());
+    emit(StopArriveLoad());
       _repository.arriveStop(
         routeId: route.id,
         stop: stop,
@@ -68,9 +67,6 @@ class StopCubit extends Cubit<StopState> {
       startServiceTime();
       _routeCubit.updateRouteDueStopChange(stop);
       emit(StopArriveSuccess());
-    } on ArriveStopException catch (e) {
-      emit(StopArriveFailure(e.errorMessage));
-    }
   }
 
   void startServiceTime() {
@@ -90,24 +86,20 @@ class StopCubit extends Cubit<StopState> {
 
   Future<void> departStop(String actualDeparture) async {
     final route = _routeCubit.route;
-    try {
-      emit(StopDepartLoad());
-      _repository.departStop(
-        routeId: route.id,
-        stop: stop,
-        actualDeparture: actualDeparture,
-      );
-      _gpsCubit.sendStopGpsInfo(
-        StopEvent.DEPART_STOP,
-        routeId: route.id,
-        stopKey: stop.key,
-      );
-      stop = stop.copyWith(actualDeparture: actualDeparture);
-      _routeCubit.updateRouteDueStopChange(stop);
-      emit(StopDepartSuccess(stop));
-    } on DepartStopException catch (e) {
-      emit(StopDepartFailure(e.errorMessage));
-    }
+    emit(StopDepartLoad());
+    _repository.departStop(
+      routeId: route.id,
+      stop: stop,
+      actualDeparture: actualDeparture,
+    );
+    _gpsCubit.sendStopGpsInfo(
+      StopEvent.DEPART_STOP,
+      routeId: route.id,
+      stopKey: stop.key,
+    );
+    stop = stop.copyWith(actualDeparture: actualDeparture);
+    _routeCubit.updateRouteDueStopChange(stop);
+    emit(StopDepartSuccess(stop));
   }
 
   Future<void> cloneStop(String cloneDate) async {
