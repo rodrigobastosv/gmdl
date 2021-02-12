@@ -43,7 +43,7 @@ class GpsCubit extends Cubit<GpsState> {
   }) async {
     final currentPosition = await _gpsService.getCurrentPosition();
     if (stopEvent == StopEvent.ARRIVE_STOP) {
-      await _repository.sendStopArrivalGpsInfo(
+      _repository.sendStopArrivalGpsInfo(
         routeId: routeId,
         stopKey: stopKey,
         accuracyMeters: currentPosition.accuracy,
@@ -51,7 +51,7 @@ class GpsCubit extends Cubit<GpsState> {
         longitude: currentPosition.longitude,
       );
     } else if (stopEvent == StopEvent.DEPART_STOP) {
-      await _repository.sendStopDepartureGpsInfo(
+      _repository.sendStopDepartureGpsInfo(
         routeId: routeId,
         stopKey: stopKey,
         accuracyMeters: currentPosition.accuracy,
@@ -59,7 +59,7 @@ class GpsCubit extends Cubit<GpsState> {
         longitude: currentPosition.longitude,
       );
     } else if (stopEvent == StopEvent.CANCEL_STOP) {
-      await _repository.sendStopCancelGpsInfo(
+      _repository.sendStopCancelGpsInfo(
         routeId: routeId,
         stopKey: stopKey,
         accuracyMeters: currentPosition.accuracy,
@@ -71,7 +71,7 @@ class GpsCubit extends Cubit<GpsState> {
 
   @override
   Future<void> close() {
-    _positionsSubscription.cancel();
+    _positionsSubscription?.cancel();
     return super.close();
   }
 }

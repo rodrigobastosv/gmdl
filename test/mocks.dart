@@ -68,6 +68,10 @@ class MockSignInRepository extends Mock implements SignInRepository {}
 
 class MockStopRepository extends Mock implements StopRepository {}
 
+class MockGpsRepository extends Mock implements GpsRepository {}
+
+class MockHosRepository extends Mock implements HosRepository {}
+
 // Services
 class MockDeviceInfoService extends Mock implements DeviceInfoService {}
 

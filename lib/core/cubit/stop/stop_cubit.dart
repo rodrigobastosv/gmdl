@@ -53,20 +53,20 @@ class StopCubit extends Cubit<StopState> {
   Future<void> arriveStop(String actualArrival) async {
     final route = _routeCubit.route;
     emit(StopArriveLoad());
-      _repository.arriveStop(
-        routeId: route.id,
-        stop: stop,
-        actualArrival: actualArrival,
-      );
-      _gpsCubit.sendStopGpsInfo(
-        StopEvent.ARRIVE_STOP,
-        routeId: route.id,
-        stopKey: stop.key,
-      );
-      stop = stop.copyWith(actualArrival: actualArrival);
-      startServiceTime();
-      _routeCubit.updateRouteDueStopChange(stop);
-      emit(StopArriveSuccess());
+    _repository.arriveStop(
+      routeId: route.id,
+      stop: stop,
+      actualArrival: actualArrival,
+    );
+    _gpsCubit.sendStopGpsInfo(
+      StopEvent.ARRIVE_STOP,
+      routeId: route.id,
+      stopKey: stop.key,
+    );
+    stop = stop.copyWith(actualArrival: actualArrival);
+    startServiceTime();
+    _routeCubit.updateRouteDueStopChange(stop);
+    emit(StopArriveSuccess());
   }
 
   void startServiceTime() {

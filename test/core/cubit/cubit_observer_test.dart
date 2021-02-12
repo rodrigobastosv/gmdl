@@ -15,5 +15,6 @@ void main() {
         nextState: ChooseCancelCodePickCode(null),
       ),
     );
+    cubit.close();
   });
 }

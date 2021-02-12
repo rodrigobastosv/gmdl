@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_retry/dio_retry.dart';
 import 'package:hive/hive.dart';

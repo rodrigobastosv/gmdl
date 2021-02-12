@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:dio/dio.dart';
 import 'package:dio_retry/dio_retry.dart';
-import 'package:flutter/foundation.dart';
 
 import '../gm_connectivity_retrier.dart';
 

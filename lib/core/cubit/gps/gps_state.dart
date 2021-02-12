@@ -15,4 +15,10 @@ class GpsNewPosition extends GpsState {
   GpsNewPosition(this.position);
 
   final Position position;
+
+  @override
+  List<Object> get props => [
+        position.latitude,
+        position.longitude,
+      ];
 }

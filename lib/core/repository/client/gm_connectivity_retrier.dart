@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class GMConnectivityRetrier {
   final Dio dio;
