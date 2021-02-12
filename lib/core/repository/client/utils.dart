@@ -29,11 +29,25 @@ Dio getBasicClient() {
       },
     ),
   );
-  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  dio.interceptors.addAll(_getInterceptors(dio));
   return dio;
 }
 
-Dio getDefaultClientProvider(String serverName, String sessionId) {
+Dio getBasicTestClient() {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+      },
+      queryParameters: {
+        CONSUMER: consumer,
+      },
+    ),
+  );
+  return dio;
+}
+
+Dio getDefaultClient(String serverName, String sessionId) {
   final dio = Dio(
     BaseOptions(
       headers: {
@@ -46,11 +60,44 @@ Dio getDefaultClientProvider(String serverName, String sessionId) {
       },
     ),
   );
-  dio.interceptors.addAll(_getBasicInterceptors(dio));
+  dio.interceptors.addAll(_getInterceptors(dio));
   return dio;
 }
 
-List<Interceptor> _getBasicInterceptors(Dio dio) {
+Dio getDefaultTestClient(String serverName, String sessionId) {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+        COOKIE: '$SESSION=$sessionId',
+      },
+      baseUrl: 'https://$serverName.greenmile.com',
+      queryParameters: {
+        CONSUMER: 'LIVE',
+      },
+    ),
+  );
+  return dio;
+}
+
+Dio getQueueClient(String serverName, String sessionId) {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+        COOKIE: '$SESSION=$sessionId',
+      },
+      baseUrl: 'https://$serverName.greenmile.com',
+      queryParameters: {
+        CONSUMER: consumer,
+      },
+    ),
+  );
+  dio.interceptors.addAll(_getInterceptors(dio));
+  return dio;
+}
+
+List<Interceptor> _getInterceptors(Dio dio) {
   return [
     if (kDebugMode) ...[
       alice.getDioInterceptor(),
