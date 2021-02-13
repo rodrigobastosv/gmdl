@@ -2,7 +2,9 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<Map<String, dynamic>> createSkuType() async {
+Future<Map<String, dynamic>> createSkuType({
+  Map<String, dynamic> skuType,
+}) async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/SkuType',
@@ -27,16 +29,21 @@ Future<void> deleteSkuType() async {
   );
 }
 
-Future<Map<String, dynamic>> createSku() async {
+Future<Map<String, dynamic>> createSku({
+  Map<String, dynamic> organization,
+  Map<String, dynamic> sku,
+}) async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/Sku',
     data: {
-      'key': '1',
-      'description': '1',
+      'key': sku['key'],
+      'description': sku['description'],
+      'enabled': true,
       'organization': {
-        'id': organization['id'],
+        'key': organization['key'],
       },
+      ...sku
     },
   );
   return response.data;

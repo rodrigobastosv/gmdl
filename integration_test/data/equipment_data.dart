@@ -2,7 +2,9 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<Map<String, dynamic>> createEquipmentType() async {
+Future<Map<String, dynamic>> createEquipmentType({
+  Map<String, dynamic> equipmentType,
+}) async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/EquipmentType',

@@ -12,7 +12,8 @@ import 'data/organization_data.dart';
 import 'data/size_alias_data.dart';
 import 'data/sku_data.dart';
 
-const SERVER = 'textfile';
+const SERVER = 'validator21-test';
+
 String token;
 Map<String, dynamic> organization;
 Map<String, dynamic> equipmentType;
@@ -34,9 +35,9 @@ void main() {
     equipmentType = await createEquipmentType();
     equipment = await createEquipment();
     driver = await createDriver();
-    sizeAlias1 = await createSizeAlias('1');
-    sizeAlias2 = await createSizeAlias('2');
-    sizeAlias3 = await createSizeAlias('3');
+    sizeAlias1 = await createSizeAlias();
+    sizeAlias2 = await createSizeAlias();
+    sizeAlias3 = await createSizeAlias();
     skuType = await createSkuType();
     hosType = await createHosType();
     sku = await createSku();
