@@ -2,7 +2,7 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<int> createOrganization() async {
+Future<Map<String, dynamic>> createOrganization() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/Organization',
@@ -19,7 +19,7 @@ Future<int> createOrganization() async {
       'listenerOrganizations': [],
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteOrganization() async {
@@ -27,7 +27,7 @@ Future<void> deleteOrganization() async {
   await client.post(
     '/Organization/BatchDelete',
     data: [
-      organizationId,
+      organization['id'],
     ],
   );
 }

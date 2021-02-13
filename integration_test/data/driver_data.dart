@@ -2,7 +2,7 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<int> createDriver() async {
+Future<Map<String, dynamic>> createDriver() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/Driver/Save',
@@ -11,7 +11,7 @@ Future<int> createDriver() async {
       'name': 'qqq',
       'login': 'qqq',
       'organization': {
-        'id': organizationId,
+        'id': organization['id'],
       },
       'driverType': 'DEFAULT',
       'enabled': true,
@@ -24,7 +24,7 @@ Future<int> createDriver() async {
       'organizations': []
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteDriver() async {
@@ -32,7 +32,7 @@ Future<void> deleteDriver() async {
   await client.post(
     '/Driver/BatchDelete',
     data: [
-      driverId,
+      driver['id'],
     ],
   );
 }

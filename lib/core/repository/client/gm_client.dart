@@ -27,7 +27,7 @@ class GMClient {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    final _client = getDefaultClientProvider(serverName, sessionId);
+    final _client = getDefaultClient(serverName, sessionId);
     return await _client.get(
       path,
       queryParameters: queryParameters,
@@ -41,7 +41,7 @@ class GMClient {
     Map<String, dynamic> queryParameters,
     Options options,
   }) async {
-    final _client = getDefaultClientProvider(serverName, sessionId);
+    final _client = getDefaultClient(serverName, sessionId);
     return await _client.post(
       path,
       data: data,

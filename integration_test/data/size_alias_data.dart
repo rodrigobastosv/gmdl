@@ -2,7 +2,7 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<int> createSizeAlias(String i) async {
+Future<Map<String, dynamic>> createSizeAlias(String i) async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/SizeAlias',
@@ -13,15 +13,15 @@ Future<int> createSizeAlias(String i) async {
       'icon': 'gmfont-sizes-icon-size$i',
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
-Future<void> deleteSizeAlias(int sizeAliasId) async {
+Future<void> deleteSizeAlias(Map<String, dynamic> sizeAlias) async {
   final client = getDefaultTestClient(SERVER, token);
   await client.post(
     '/SizeAlias/BatchDelete',
     data: [
-      sizeAliasId,
+      sizeAlias['id'],
     ],
   );
 }

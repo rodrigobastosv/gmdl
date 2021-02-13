@@ -2,7 +2,7 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<int> createSkuType() async {
+Future<Map<String, dynamic>> createSkuType() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/SkuType',
@@ -10,11 +10,11 @@ Future<int> createSkuType() async {
       'key': '1',
       'description': '1',
       'organization': {
-        'id': organizationId,
+        'id': organization['id'],
       },
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteSkuType() async {
@@ -22,12 +22,12 @@ Future<void> deleteSkuType() async {
   await client.post(
     '/SkuType/BatchDelete',
     data: [
-      skuTypeId,
+      skuType['id'],
     ],
   );
 }
 
-Future<int> createSku() async {
+Future<Map<String, dynamic>> createSku() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/Sku',
@@ -35,11 +35,11 @@ Future<int> createSku() async {
       'key': '1',
       'description': '1',
       'organization': {
-        'id': organizationId,
+        'id': organization['id'],
       },
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteSku() async {
@@ -47,7 +47,7 @@ Future<void> deleteSku() async {
   await client.post(
     '/Sku/BatchDelete',
     data: [
-      skuId,
+      sku['id'],
     ],
   );
 }

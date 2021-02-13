@@ -2,7 +2,7 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<int> createEquipmentType() async {
+Future<Map<String, dynamic>> createEquipmentType() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/EquipmentType',
@@ -11,7 +11,7 @@ Future<int> createEquipmentType() async {
       'description': '1',
       'vehicleType': 'TRUCK',
       'organization': {
-        'id': organizationId,
+        'id': organization['id'],
       },
       'enabled': true,
       'height': '0',
@@ -30,7 +30,7 @@ Future<int> createEquipmentType() async {
       'averageFuelConsumption': '0',
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteEquipmentType() async {
@@ -38,29 +38,29 @@ Future<void> deleteEquipmentType() async {
   await client.post(
     '/EquipmentType/BatchDelete',
     data: [
-      equipmentTypeId,
+      equipmentType['id'],
     ],
   );
 }
 
-Future<int> createEquipment() async {
+Future<Map<String, dynamic>> createEquipment() async {
   final client = getDefaultTestClient(SERVER, token);
   final response = await client.post(
     '/Equipment',
     data: {
       'key': '1',
       'organization': {
-        'id': organizationId,
+        'id': organization['id'],
       },
       'description': '1',
       'enabled': true,
       'equipmentType': {
-        'id': equipmentTypeId,
+        'id': equipmentType['id'],
       },
       'tags': [],
     },
   );
-  return response.data['id'];
+  return response.data;
 }
 
 Future<void> deleteEquipment() async {
@@ -68,7 +68,7 @@ Future<void> deleteEquipment() async {
   await client.post(
     '/Equipment/BatchDelete',
     data: [
-      equipmentId,
+      equipment['id'],
     ],
   );
 }

@@ -14,32 +14,32 @@ import 'data/sku_data.dart';
 
 const SERVER = 'textfile';
 String token;
-int organizationId;
-int equipmentTypeId;
-int equipmentId;
-int driverId;
-int sizeAlias1Id;
-int sizeAlias2Id;
-int sizeAlias3Id;
-int skuTypeId;
-int hosTypeId;
-int skuId;
+Map<String, dynamic> organization;
+Map<String, dynamic> equipmentType;
+Map<String, dynamic> equipment;
+Map<String, dynamic> driver;
+Map<String, dynamic> sizeAlias1;
+Map<String, dynamic> sizeAlias2;
+Map<String, dynamic> sizeAlias3;
+Map<String, dynamic> skuType;
+Map<String, dynamic> hosType;
+Map<String, dynamic> sku;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() async {
     token = await authAdmin();
-    organizationId = await createOrganization();
-    equipmentTypeId = await createEquipmentType();
-    equipmentId = await createEquipment();
-    driverId = await createDriver();
-    sizeAlias1Id = await createSizeAlias('1');
-    sizeAlias2Id = await createSizeAlias('2');
-    sizeAlias3Id = await createSizeAlias('3');
-    skuTypeId = await createSkuType();
-    hosTypeId = await createHosType();
-    skuId = await createSku();
+    organization = await createOrganization();
+    equipmentType = await createEquipmentType();
+    equipment = await createEquipment();
+    driver = await createDriver();
+    sizeAlias1 = await createSizeAlias('1');
+    sizeAlias2 = await createSizeAlias('2');
+    sizeAlias3 = await createSizeAlias('3');
+    skuType = await createSkuType();
+    hosType = await createHosType();
+    sku = await createSku();
   });
 
   tearDownAll(() async {
@@ -47,9 +47,9 @@ void main() {
     await deleteEquipmentType();
     await deleteEquipment();
     await deleteDriver();
-    await deleteSizeAlias(sizeAlias1Id);
-    await deleteSizeAlias(sizeAlias2Id);
-    await deleteSizeAlias(sizeAlias3Id);
+    await deleteSizeAlias(sizeAlias1);
+    await deleteSizeAlias(sizeAlias2);
+    await deleteSizeAlias(sizeAlias3);
     await deleteSkuType();
     await deleteHosType();
     await deleteSku();
