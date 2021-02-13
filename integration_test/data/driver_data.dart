@@ -2,37 +2,35 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<Map<String, dynamic>> createDriver() async {
-  final client = getDefaultTestClient(SERVER, token);
+Future<Map<String, dynamic>> createDriver({
+  Map<String, dynamic> driver,
+  Map<String, dynamic> organization,
+}) async {
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/Driver/Save',
     data: {
-      'key': 'qqq',
-      'name': 'qqq',
-      'login': 'qqq',
-      'organization': {
-        'id': organization['id'],
-      },
-      'driverType': 'DEFAULT',
       'enabled': true,
+      'driverType': 'DEFAULT',
       'password': '123',
-      'preferedLocale': {
-        'id': 10001,
-      },
+      'preferedLocale': {'id': 10000},
       'unitSystem': 'METRIC',
       'smartTrack': false,
-      'organizations': []
+      'organizations': [],
+      'name': driver['key'],
+      'login': driver['key'],
+      ...driver,
+      'organization': driver['organization'] ?? organization
     },
   );
   return response.data;
 }
 
 Future<void> deleteDriver() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/Driver/BatchDelete',
     data: [
-      driver['id'],
     ],
   );
 }

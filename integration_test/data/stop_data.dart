@@ -2,29 +2,30 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<Map<String, dynamic>> createCancelCode({
-  Map<String, dynamic> cancelCode,
+Future<Map<String, dynamic>> createStopType({
+  Map<String, dynamic> stopType,
   Map<String, dynamic> organization,
 }) async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
-    '/CancelCode',
+    '/StopType',
     data: {
+      'key': 'faker',
+      'description': 'key',
       'organization': {
-        'key': organization['key'],
+        'id': organization['id'],
       },
-      'enabled': true,
-      ...cancelCode
+      'type': 'STOP',
+      'locationRequired': false
     },
   );
   return response.data;
 }
 
-Future<void> deleteCancelCode() async {
+Future<void> deleteStopType(int stopTypeId) async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
-    '/CancelCode/BatchDelete',
-    data: [
-    ],
+    '/StopType/BatchDelete',
+    data: [],
   );
 }

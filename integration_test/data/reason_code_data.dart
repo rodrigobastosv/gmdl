@@ -6,7 +6,7 @@ Future<Map<String, dynamic>> createReasonCode({
   Map<String, dynamic> reasonCode,
   Map<String, dynamic> organization,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/ReasonCode',
     data: {
@@ -21,11 +21,10 @@ Future<Map<String, dynamic>> createReasonCode({
 }
 
 Future<void> deleteReasonCode(int reasonCodeId) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/ReasonCode/BatchDelete',
     data: [
-      reasonCodeId,
     ],
   );
 }

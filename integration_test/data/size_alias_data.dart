@@ -5,7 +5,7 @@ import '../main_test.dart';
 Future<Map<String, dynamic>> createSizeAlias({
   Map<String, dynamic> sizeAlias,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/SizeAlias',
     data: sizeAlias,
@@ -14,11 +14,10 @@ Future<Map<String, dynamic>> createSizeAlias({
 }
 
 Future<void> deleteSizeAlias(Map<String, dynamic> sizeAlias) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/SizeAlias/BatchDelete',
     data: [
-      sizeAlias['id'],
     ],
   );
 }

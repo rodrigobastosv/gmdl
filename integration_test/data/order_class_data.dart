@@ -6,7 +6,7 @@ Future<Map<String, dynamic>> createOrderClass({
   Map<String, dynamic> orderClass,
   Map<String, dynamic> organization,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/OrderClass',
     data: {
@@ -20,11 +20,10 @@ Future<Map<String, dynamic>> createOrderClass({
 }
 
 Future<void> deleteOrderClass() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/OrderClass/BatchDelete',
     data: [
-      equipmentType['id'],
     ],
   );
 }

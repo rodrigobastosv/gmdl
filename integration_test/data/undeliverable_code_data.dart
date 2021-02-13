@@ -6,7 +6,7 @@ Future<Map<String, dynamic>> createUndeliverableCode({
   Map<String, dynamic> undeliverableCode,
   Map<String, dynamic> organization,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/UndeliverableCode',
     data: {
@@ -21,11 +21,10 @@ Future<Map<String, dynamic>> createUndeliverableCode({
 }
 
 Future<void> deleteUndeliverableCode(int undeliverableCodeId) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/UndeliverableCode/BatchDelete',
     data: [
-      undeliverableCodeId,
     ],
   );
 }

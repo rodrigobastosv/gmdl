@@ -16,7 +16,7 @@ Future<Map<String, dynamic>> importRoute({
       ),
     )
   };
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/Integration/RouteDetailAndDependencies?returnIdOnly=false&geocodeLocations=false',
     data: body,

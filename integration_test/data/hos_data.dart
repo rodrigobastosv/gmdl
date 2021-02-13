@@ -2,14 +2,14 @@ import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
 import '../main_test.dart';
 
-Future<Map<String, dynamic>> createHosType() async {
-  final client = getDefaultTestClient(SERVER, token);
+Future<Map<String, dynamic>> createHosType({
+  Map<String, dynamic> organization,
+}) async {
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/HoursOfServiceType',
     data: {
-      'organization': {
-        'id': organization['id']
-      },
+      'organization': {'id': organization['id']},
       'description': '1',
       'allowBreakAppointment': false,
       'allowWaitAppointment': false,
@@ -27,11 +27,9 @@ Future<Map<String, dynamic>> createHosType() async {
 }
 
 Future<void> deleteHosType() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/HoursOfServiceType/BatchDelete',
-    data: [
-      hosType['id'],
-    ],
+    data: [],
   );
 }

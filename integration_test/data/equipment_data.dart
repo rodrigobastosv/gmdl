@@ -4,8 +4,9 @@ import '../main_test.dart';
 
 Future<Map<String, dynamic>> createEquipmentType({
   Map<String, dynamic> equipmentType,
+  Map<String, dynamic> organization,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/EquipmentType',
     data: {
@@ -36,41 +37,34 @@ Future<Map<String, dynamic>> createEquipmentType({
 }
 
 Future<void> deleteEquipmentType() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/EquipmentType/BatchDelete',
-    data: [
-      equipmentType['id'],
-    ],
+    data: [],
   );
 }
 
-Future<Map<String, dynamic>> createEquipment() async {
-  final client = getDefaultTestClient(SERVER, token);
+Future<Map<String, dynamic>> createEquipment({
+  Map<String, dynamic> equipment,
+  Map<String, dynamic> organization,
+}) async {
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/Equipment',
     data: {
-      'key': '1',
-      'organization': {
-        'id': organization['id'],
-      },
-      'description': '1',
       'enabled': true,
-      'equipmentType': {
-        'id': equipmentType['id'],
-      },
       'tags': [],
+      ...equipment,
+      'organization': equipment['organization'] ?? organization,
     },
   );
   return response.data;
 }
 
 Future<void> deleteEquipment() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/Equipment/BatchDelete',
-    data: [
-      equipment['id'],
-    ],
+    data: [],
   );
 }

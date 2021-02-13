@@ -4,8 +4,9 @@ import '../main_test.dart';
 
 Future<Map<String, dynamic>> createSkuType({
   Map<String, dynamic> skuType,
+  Map<String, dynamic> organization,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/SkuType',
     data: {
@@ -20,12 +21,10 @@ Future<Map<String, dynamic>> createSkuType({
 }
 
 Future<void> deleteSkuType() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/SkuType/BatchDelete',
-    data: [
-      skuType['id'],
-    ],
+    data: [],
   );
 }
 
@@ -33,7 +32,7 @@ Future<Map<String, dynamic>> createSku({
   Map<String, dynamic> organization,
   Map<String, dynamic> sku,
 }) async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   final response = await client.post(
     '/Sku',
     data: {
@@ -50,11 +49,9 @@ Future<Map<String, dynamic>> createSku({
 }
 
 Future<void> deleteSku() async {
-  final client = getDefaultTestClient(SERVER, token);
+  final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/Sku/BatchDelete',
-    data: [
-      sku['id'],
-    ],
+    data: [],
   );
 }

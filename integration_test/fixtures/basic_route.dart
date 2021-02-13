@@ -1,3 +1,5 @@
+import 'package:gm_driver_lite/core/extension/extensions.dart';
+
 final basicRoute = {
   'route': {
     'key': 'route-GMD_849-cy',
@@ -63,6 +65,8 @@ final basicRoute = {
     'stops': [
       {
         'key': 's1-GMD_849-cy',
+        'plannedArrival': DateTime.now().toUtcAsString,
+        'plannedDeparture': DateTime.now().toUtcAsString,
         'stopType': {
           'key': 'StopTypeGMD_849',
           'description': 'GMD_849 StopType',
