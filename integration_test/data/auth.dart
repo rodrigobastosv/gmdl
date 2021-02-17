@@ -1,6 +1,6 @@
 import 'package:gm_driver_lite/core/repository/client/client.dart';
 
-import '../main_test.dart';
+import '../test/basic_test.dart';
 
 Future<String> authAdmin() async {
   final client = getBasicTestClient();

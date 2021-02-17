@@ -1,6 +1,6 @@
 import 'package:gm_driver_lite/core/repository/client/utils.dart';
 
-import '../main_test.dart';
+import '../test/basic_test.dart';
 
 Future<Map<String, dynamic>> createUndeliverableCode({
   Map<String, dynamic> undeliverableCode,

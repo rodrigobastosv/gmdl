@@ -42,8 +42,10 @@ Future<int> loadFixtureData() async {
   //final otherRoutes = basicRoute['otherRoutes'] ?? [];
   //final taskTypes = basicRoute['taskTypes'] ?? [];
 
+  print('Creating Organization!');
   final organization = await createOrganization(organization: org);
 
+  print('Creating Equipments!');
   for (var equipmentType in equipmentTypes) {
     await createEquipmentType(
       equipmentType: equipmentType,
@@ -51,12 +53,14 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating Size Aliases!');
   for (var sizeAlias in sizeAliases) {
     await createSizeAlias(
       sizeAlias: sizeAlias,
     );
   }
 
+  print('Creating SkuTypes!');
   for (var skuType in skuTypes) {
     await createSkuType(
       skuType: skuType,
@@ -64,6 +68,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating Skus!');
   for (var sku in skus) {
     await createSku(
       sku: sku,
@@ -71,11 +76,13 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Importing route!');
   await importRoute(
     route: route,
     organization: organization,
   );
 
+  print('Creating OrderClasses!');
   for (var orderClass in orderClasses) {
     await createOrderClass(
       orderClass: orderClass,
@@ -83,6 +90,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating CancelCodes!');
   for (var cancelCode in cancelCodes) {
     await createCancelCode(
       cancelCode: cancelCode,
@@ -90,6 +98,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating ReasonCodes!');
   for (var reasonCode in reasonCodes) {
     await createReasonCode(
       reasonCode: reasonCode,
@@ -97,6 +106,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating UndeliverableCodes!');
   for (var undeliverableCode in undeliverableCodes) {
     await createUndeliverableCode(
       undeliverableCode: undeliverableCode,
@@ -104,6 +114,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating Locations!');
   for (var location in locations) {
     await createLocation(
       location: location,
@@ -111,6 +122,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating StopTypes!');
   for (var stopType in stopTypes) {
     await createStopType(
       stopType: stopType,
@@ -118,6 +130,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating Equipments!');
   for (var equipment in equipments) {
     await createEquipment(
       equipment: equipment,
@@ -125,6 +138,7 @@ Future<int> loadFixtureData() async {
     );
   }
 
+  print('Creating Drivers!');
   for (var driver in drivers) {
     await createDriver(
       driver: driver,

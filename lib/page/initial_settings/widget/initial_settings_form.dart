@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../core/keys.dart';
 import 'package:hive/hive.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -42,6 +43,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     vertical: 10,
                   ),
                   child: TextFormField(
+                    key: initialSettingsServerKey,
                     autocorrect: false,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
@@ -105,6 +107,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          key: initialSettingsFabKey,
           backgroundColor: const Color(0xFF3AA348),
           onPressed: () {
             final _form = _formKey.currentState;
