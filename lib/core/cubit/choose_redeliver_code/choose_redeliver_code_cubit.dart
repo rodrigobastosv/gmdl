@@ -14,11 +14,11 @@ class ChooseRedeliverCodeCubit extends Cubit<ChooseRedeliverCodeState> {
 
   void pickRedeliverCode(UndeliverableCodeModel redeliverableCode) {
     pickedRedeliverableCode = redeliverableCode;
-    emit(RedeliverCodePicked(redeliverableCode));
+    emit(ChooseRedeliverCodePickCode(redeliverableCode));
   }
 
   void unpickRedeliverCode(UndeliverableCodeModel redeliverableCode) {
     pickedRedeliverableCode = null;
-    emit(RedeliverCodePicked(null));
+    emit(ChooseRedeliverCodePickCode(null));
   }
 }

@@ -178,4 +178,58 @@ void main() {
       expect(getLocationInfo(stopWithLocation), '1 - description');
     },
   );
+
+  test(
+    '''WHEN getStopPlannedServiceTimeInSeconds is called
+       SHOULD return the planned service time in seconds
+    ''',
+    () {
+      final plannedServiceTime = getStopPlannedServiceTimeInSeconds(
+        StopModel(
+          plannedArrival: DateTime.now().toUtcAsString,
+          plannedDeparture: DateTime.now().add(ONE_MINUTE).toUtcAsString,
+        ),
+      );
+      expect(plannedServiceTime, 60);
+    },
+  );
+
+  test(
+    '''WHEN getStopServiceTimeInSeconds is called
+       SHOULD return the service time in seconds
+    ''',
+    () {
+      final serviceTime = getStopServiceTimeInSeconds(
+        StopModel(
+          actualArrival: DateTime.now().toUtcAsString,
+          actualDeparture: DateTime.now().add(ONE_MINUTE).toUtcAsString,
+        ),
+      );
+      expect(serviceTime, 60);
+    },
+  );
+
+  test(
+    '''WHEN filterStopsByTerm is called
+       SHOULD filter the stops by the term
+    ''',
+    () {
+      final stops = [
+        StopModel(
+          location: LocationModel(description: 'aaa'),
+        ),
+        StopModel(
+          location: LocationModel(description: 'bbb'),
+        ),
+        StopModel(
+          location: LocationModel(description: 'ccc'),
+        ),
+      ];
+      expect(filterStopsByTerm(stops, '').length, 3);
+      expect(filterStopsByTerm(stops, 'a').length, 1);
+      expect(filterStopsByTerm(stops, 'aaaa').length, 0);
+      expect(filterStopsByTerm(stops, 'b').length, 1);
+      expect(filterStopsByTerm(stops, 'b').length, 1);
+    },
+  );
 }

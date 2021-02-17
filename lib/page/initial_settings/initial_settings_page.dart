@@ -28,9 +28,9 @@ class InitialSettingsPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, InitialSettingsState state) {
-    if (state is ServerValidationSuccess) {
+    if (state is InitialSettingsValidateServerSuccess) {
       Navigator.of(context).pushNamed(SIGN_IN_PAGE);
-    } else if (state is ServerValidationFailed) {
+    } else if (state is InitialSettingsValidateServerFailure) {
       showErrorNotification(context, context.getText(state.errorMessage));
     }
   }

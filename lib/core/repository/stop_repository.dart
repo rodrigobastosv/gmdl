@@ -34,19 +34,18 @@ class StopRepository {
     }
   }
 
-  Future<bool> departStop({
+  Future<void> departStop({
     int routeId,
     StopModel stop,
     String actualDeparture,
   }) async {
     try {
-      final response = await _client.post(
+      await _client.postQueued(
         '/$ROUTE/$routeId/$STOP/${stop.key}/$DEPART',
         data: {
           'actualDeparture': actualDeparture,
         },
       );
-      return response.isOk;
     } on DioError catch (e) {
       throw DepartStopException(getErrorMessage(e));
     } on GMServerException catch (e) {

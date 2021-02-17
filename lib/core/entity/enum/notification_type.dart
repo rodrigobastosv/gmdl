@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 enum NotificationType {
   ROUTE,
   STOP,
@@ -14,37 +16,7 @@ enum NotificationType {
   CARGO_RECONCILIATION
 }
 
-String notificationTypeToJson(NotificationType type) {
-  switch (type) {
-    case NotificationType.ROUTE:
-      return 'ROUTE';
-    case NotificationType.STOP:
-      return 'STOP';
-    case NotificationType.ORDER:
-      return 'ORDER';
-    case NotificationType.LINEITEM:
-      return 'LINEITEM';
-    case NotificationType.START_CHAT:
-      return 'START_CHAT';
-    case NotificationType.ETA:
-      return 'ETA';
-    case NotificationType.SUGGESTED_CUSTOMER:
-      return 'SUGGESTED_CUSTOMER';
-    case NotificationType.DRIVER:
-      return 'DRIVER';
-    case NotificationType.CHAT:
-      return 'CHAT';
-    case NotificationType.APPROVAL_REQUEST:
-      return 'APPROVAL_REQUEST';
-    case NotificationType.UNKNOWN_TYPE:
-      return 'UNKNOWN_TYPE';
-    case NotificationType.EVENT:
-      return 'EVENT';
-    case NotificationType.CARGO_RECONCILIATION:
-      return 'CARGO_RECONCILIATION';
-  }
-  return null;
-}
+String notificationTypeToJson(NotificationType type) => describeEnum(type);
 
 NotificationType notificationTypeFromJson(String type) {
   switch (type) {

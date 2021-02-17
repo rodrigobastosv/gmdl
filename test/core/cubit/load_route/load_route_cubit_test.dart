@@ -53,13 +53,13 @@ void main() {
           throwsAssertionError);
     });
 
-    test('initial state is RouteAtGlanceInitial', () {
-      expect(cubit.state is RouteAtGlanceInitial, true);
+    test('initial state is LoadRouteInitial', () {
+      expect(cubit.state is LoadRouteInitial, true);
     });
 
     blocTest(
       '''WHEN fetchRouteInformation is called
-         SHOULD emit Loading state and RouteLoadedSuccess at the end
+         SHOULD emit Loading state and LoadRouteSuccess at the end
       ''',
       build: () {
         when(mockGlobalInfo.driverInfo).thenReturn(
@@ -84,8 +84,8 @@ void main() {
       },
       act: (cubit) => cubit.fetchRouteInformation(),
       expect: [
-        const LoadingInfo('loading.downloading.route'),
-        RouteLoadedSuccess(
+        const LoadRouteLoad('loading.downloading.route'),
+        LoadRouteSuccess(
           RouteModel.fromJson({
             'id': 1,
           }),
@@ -99,7 +99,7 @@ void main() {
 
     blocTest(
       '''WHEN fetchRouteInformation throws NoneRouteFoundException 
-         SHOULD emit Loading state and RouteLoadFailed at the end
+         SHOULD emit Loading state and LoadRouteFailure at the end
       ''',
       build: () {
         when(mockGlobalInfo.driverInfo).thenReturn(
@@ -113,8 +113,8 @@ void main() {
       },
       act: (cubit) => cubit.fetchRouteInformation(),
       expect: [
-        const LoadingInfo('loading.downloading.route'),
-        RouteLoadFailed('loader.routes.not.found'),
+        const LoadRouteLoad('loading.downloading.route'),
+        LoadRouteFailure('loader.routes.not.found'),
       ],
       verify: (cubit) {
         verify(mockRouteRepository.fetchRouteView('driver')).called(1);
@@ -123,7 +123,7 @@ void main() {
 
     blocTest(
       '''WHEN fetchRouteInformation throws FetchRouteException 
-         SHOULD emit Loading state and RouteLoadFailed at the end
+         SHOULD emit Loading state and LoadRouteFailure at the end
       ''',
       build: () {
         when(mockGlobalInfo.driverInfo).thenReturn(
@@ -142,8 +142,8 @@ void main() {
       },
       act: (cubit) => cubit.fetchRouteInformation(),
       expect: [
-        const LoadingInfo('loading.downloading.route'),
-        RouteLoadFailed('error'),
+        const LoadRouteLoad('loading.downloading.route'),
+        LoadRouteFailure('error'),
       ],
       verify: (cubit) {
         verify(mockRouteRepository.fetchRouteView('driver')).called(1);

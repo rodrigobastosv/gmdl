@@ -35,23 +35,23 @@ void main() {
 
     blocTest(
       '''WHEN pickRedeliverCode is called
-         SHOULD emit RedeliverCodePicked with the same redeliver code picked
+         SHOULD emit ChooseRedeliverCodePickCode with the same redeliver code picked
       ''',
       build: () => cubit,
       act: (cubit) => cubit.pickRedeliverCode(redeliverCode),
       expect: [
-        RedeliverCodePicked(redeliverCode),
+        ChooseRedeliverCodePickCode(redeliverCode),
       ],
     );
 
     blocTest(
       '''WHEN unpickRedeliverCode is called
-         SHOULD emit CancelCodePicked with null
+         SHOULD emit ChooseRedeliverCodePickCode with null
       ''',
       build: () => cubit,
       act: (cubit) => cubit.unpickRedeliverCode(redeliverCode),
       expect: [
-        RedeliverCodePicked(null),
+        ChooseRedeliverCodePickCode(null),
       ],
     );
   });

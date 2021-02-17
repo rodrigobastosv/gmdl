@@ -7,7 +7,6 @@ void main() {
     test('unitSystemToJson', () {
       expect(unitSystemToJson(UnitSystem.METRIC), 'METRIC');
       expect(unitSystemToJson(UnitSystem.NON_METRIC), 'NON_METRIC');
-      expect(unitSystemToJson(null), 'METRIC');
     });
 
     test('unitSystemFromJson', () {

@@ -49,18 +49,18 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _listener(BuildContext context, SignInState state) {
-    if (state is UserSignedSuccess) {
+    if (state is SignInSuccess) {
       Navigator.of(context).pushNamed(
         LOAD_INFO_PAGE,
         arguments: state.loginResult.username,
       );
-    } else if (state is UserSigningFailed) {
+    } else if (state is SignInFailure) {
       showErrorNotification(context, context.getText(state.errorMessage));
     }
   }
 
   Widget _builder(BuildContext context, SignInState state) {
-    if (state is UserSigningLoading || state is UserSignedSuccess) {
+    if (state is SignInLoad || state is SignInSuccess) {
       return const Center(
         child: GMLoading(),
       );

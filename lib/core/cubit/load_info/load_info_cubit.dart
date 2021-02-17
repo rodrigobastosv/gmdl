@@ -28,7 +28,7 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
         _i18nCubit = i18nCubit,
         _deviceInfoService = deviceInfoService,
         _packageInfoService = packageInfoService,
-        super(LoadingInitial());
+        super(LoadInfoInitial());
 
   final LoadingInfoRepository _repository;
   final GlobalInfo globalInfo;
@@ -38,11 +38,12 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
 
   Future<void> getDriverInfo(String username) async {
     try {
-      emit(InfoLoading(_i18nCubit.getFormattedText('driver.loading.data')));
+      emit(LoadInfoInfoLoading(
+          _i18nCubit.getFormattedText('driver.loading.data')));
       final driverInfo = await _repository.getDriverInfo(username: username);
-      emit(BasicDriverInfoSuccess());
+      emit(LoadInfoBasicDriverInfo());
 
-      emit(InfoLoading(
+      emit(LoadInfoInfoLoading(
           _i18nCubit.getFormattedText('push.registerDeviceOnServer')));
       final mobileDevice = await _repository.registerDevice(
         deviceModel: _deviceInfoService.getModel(),
@@ -50,42 +51,42 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
         platformVersion: _packageInfoService.getVersion(),
         uniqueDeviceId: _deviceInfoService.getId(),
       );
-      emit(RegisterDeviceSuccess(mobileDevice.id));
+      emit(LoadInfoRegisterDevice(mobileDevice.id));
 
-      emit(InfoLoading(_i18nCubit.getFormattedText('push.bindModule')));
+      emit(LoadInfoInfoLoading(_i18nCubit.getFormattedText('push.bindModule')));
       await _repository.bindModule(
         deviceId: mobileDevice.id,
         appVersion: _packageInfoService.getVersion(),
         moduleKey: moduleKey,
       );
 
-      emit(InfoLoading(
+      emit(LoadInfoInfoLoading(
           _i18nCubit.getFormattedText('push.registerDeviceOnServer')));
       _repository.logDevice(
         userId: driverInfo.id,
         deviceId: mobileDevice.id,
       );
-      emit(RegisterDeviceSuccess(mobileDevice.id));
+      emit(LoadInfoRegisterDevice(mobileDevice.id));
 
-      emit(InfoLoading(_i18nCubit.getFormattedText('Locale.list')));
+      emit(LoadInfoInfoLoading(_i18nCubit.getFormattedText('Locale.list')));
       await _i18nCubit.fetchResources();
-      emit(FetchResourcesSuccess());
+      emit(LoadInfoFetchResources());
 
-      emit(InfoLoading(
+      emit(LoadInfoInfoLoading(
           _i18nCubit.getFormattedText('loading.downloading.configurations')));
       final globalConfigurations = await _repository.getGlobalConfigurations();
-      emit(FetchGlobalConfigSuccess());
+      emit(LoadInfoFetchGlobalConfig());
 
       final userConfigurations = await _repository.getUserConfigurations();
-      emit(FetchUserConfigSuccess());
+      emit(LoadInfoFetchUserConfig());
 
-      emit(InfoLoading(
+      emit(LoadInfoInfoLoading(
           _i18nCubit.getFormattedText('loading.downloading.reasonCodes')));
       final cancelCodes = await _repository.fetchCancelCodes();
-      emit(FetchCancelCodesSuccess());
+      emit(LoadInfoFetchCancelCodes());
 
       final undeliverableCodes = await _repository.fetchUndeliverableCodes();
-      emit(FetchUndeliverableCodesSuccess());
+      emit(LoadInfoFetchUndeliverableCodes());
 
       globalInfo.storeGeneralInfo(
         driverInfo: driverInfo,
@@ -96,9 +97,9 @@ class LoadInfoCubit extends Cubit<LoadInfoState> {
         undeliverableCodes: undeliverableCodes,
       );
 
-      emit(AllInfoLoadedSuccess());
+      emit(LoadInfoAllInfoLoadSuccess());
     } on Exception {
-      emit(DriverInfoFailed());
+      emit(LoadInfoInfoLoadingFailure());
     }
   }
 }

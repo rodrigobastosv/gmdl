@@ -24,7 +24,7 @@ class RouteSummaryPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, RouteState state) {
-    if (state is RouteCompletedSuccess) {
+    if (state is RouteCompleteSuccess) {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(INITIAL_SETTINGS_PAGE, (_) => false);
     }
@@ -81,7 +81,7 @@ class RouteSummaryPage extends StatelessWidget {
 
   Widget _getMainButtonIcon(RouteCubit cubit) {
     final state = cubit.state;
-    if (state is CompletingRoute || state is RouteCompletedSuccess) {
+    if (state is RouteCompleteLoad || state is RouteCompleteSuccess) {
       return const GMButtonLoading();
     } else {
       return SvgPicture.asset('assets/icons/end-route.svg');

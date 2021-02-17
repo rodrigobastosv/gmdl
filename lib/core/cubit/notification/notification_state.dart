@@ -20,10 +20,10 @@ class NotificationSetupSuccess extends NotificationState {
       ];
 }
 
-class NotificationSetupFailed extends NotificationState {}
+class NotificationSetupFailure extends NotificationState {}
 
-class NotificationReceived extends NotificationState {
-  NotificationReceived(this.notification);
+class NotificationReceive extends NotificationState {
+  NotificationReceive(this.notification);
 
   final NotificationDto notification;
 
@@ -33,8 +33,8 @@ class NotificationReceived extends NotificationState {
       ];
 }
 
-class NotificationTokenRefreshed extends NotificationState {
-  NotificationTokenRefreshed(this.token);
+class NotificationTokenRefresh extends NotificationState {
+  NotificationTokenRefresh(this.token);
 
   final String token;
 

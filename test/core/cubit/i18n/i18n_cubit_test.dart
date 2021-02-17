@@ -85,8 +85,8 @@ void main() {
         cubit.changeLocale('en');
       },
       expect: [
-        const LocaleChanged('pt'),
-        const LocaleChanged('en'),
+        const I18nLocaleChange('pt'),
+        const I18nLocaleChange('en'),
       ],
     );
 
@@ -105,7 +105,7 @@ void main() {
         cubit.fetchResources();
       },
       expect: [
-        ResourcesFetchSuccess(),
+        I18nResourcesFetchSuccess(),
       ],
       verify: (cubit) {
         verify(mockI18nRepository.fetchResources('en')).called(1);
@@ -126,7 +126,7 @@ void main() {
         cubit.fetchResources();
       },
       expect: [
-        ResourcesFetchFailed(),
+        I18nResourcesFetchFailure(),
       ],
       verify: (cubit) {
         verify(mockI18nRepository.fetchResources('en')).called(1);

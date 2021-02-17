@@ -35,19 +35,19 @@ class StopPage extends StatelessWidget {
   }
 
   void _listener(BuildContext context, StopState state) {
-    if (state is DepartedStopSuccess) {
+    if (state is StopDepartSuccess) {
       Navigator.of(context).pop();
     }
-    if (state is ArriveStopFailed) {
+    if (state is StopArriveFailure) {
       showErrorNotification(context, state.errorMessage);
     }
-    if (state is DepartStopFailed) {
+    if (state is StopDepartFailure) {
       showErrorNotification(context, state.errorMessage);
     }
-    if (state is CloneStopFailed) {
+    if (state is StopCloneFailure) {
       showErrorNotification(context, state.errorMessage);
     }
-    if (state is ClonedStopSuccess) {
+    if (state is StopCloneSuccess) {
       Navigator.of(context).pushReplacementNamed(
         STOP_PAGE,
         arguments: StopPageArguments(
@@ -56,9 +56,9 @@ class StopPage extends StatelessWidget {
         ),
       );
     }
-    if (state is CanceledStopSuccess ||
-        state is UndeliveredStopSuccess ||
-        state is RedeliveredStopSuccess) {
+    if (state is StopCancelSuccess ||
+        state is StopUndeliverSuccess ||
+        state is StopRedeliverSuccess) {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
     }
@@ -94,9 +94,9 @@ class StopPage extends StatelessWidget {
   Widget _getMainButtonIcon(StopCubit cubit) {
     final stop = cubit.stop;
     final state = cubit.state;
-    if (state is ArrivingOnStop ||
-        state is DepartingStop ||
-        state is CloningStop) {
+    if (state is StopArriveLoad ||
+        state is StopDepartLoad ||
+        state is StopCloneLoad) {
       return const GMButtonLoading();
     } else if (stop.canClone) {
       return SvgPicture.asset('assets/icons/clone-stop.svg');

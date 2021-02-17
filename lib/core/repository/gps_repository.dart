@@ -15,7 +15,7 @@ class GpsRepository {
     double longitude,
   }) async {
     try {
-      await _client.post(
+      await _client.postQueued(
         '/$ROUTE/$routeId/$STOP/$stopKey/$GEOLOCATION',
         data: {
           'arrivalAccuracyMeters': accuracyMeters,

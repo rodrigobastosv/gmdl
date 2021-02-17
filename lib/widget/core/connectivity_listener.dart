@@ -19,7 +19,7 @@ class ConnectivityListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ConnectivityCubit, ConnectivityState>(
       listener: (_, state) {
-        if (state is HasConnection) {
+        if (state is ConnectivityHasConnection) {
           if (state.hasConnection) {
             showSuccessNotification(
               context,

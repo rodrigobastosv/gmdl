@@ -46,13 +46,13 @@ void main() {
           throwsAssertionError);
     });
 
-    test('initial state is ServerValidationInitial', () {
-      expect(cubit.state is ServerValidationInitial, true);
+    test('initial state is InitialSettingsInitial', () {
+      expect(cubit.state is InitialSettingsInitial, true);
     });
 
     blocTest(
       '''WHEN validateServerName is called
-         SHOULD emit ServerValidationSuccess when success
+         SHOULD emit InitialSettingsValidateServerLoad and InitialSettingsValidateServerSuccess when success
          AND should add info to GlobalBox
       ''',
       build: () {
@@ -68,8 +68,8 @@ void main() {
       },
       act: (cubit) => cubit.validateServerName('serverName'),
       expect: [
-        ValidatingServer(),
-        ServerValidationSuccess(),
+        InitialSettingsValidateServerLoad(),
+        InitialSettingsValidateServerSuccess(),
       ],
       verify: (cubit) {
         verify(mockInitialSettingsRepository.fetchAllLocales('serverName'))
@@ -83,7 +83,7 @@ void main() {
 
     blocTest(
       '''WHEN validateServerName is called
-         SHOULD emit ServerValidationSuccess when GMServerException
+         SHOULD emit InitialSettingsValidateServerLoad and InitialSettingsValidateServerFailure when GMServerException
       ''',
       build: () {
         when(mockInitialSettingsRepository.fetchAllLocales('serverName'))
@@ -92,8 +92,8 @@ void main() {
       },
       act: (cubit) => cubit.validateServerName('serverName'),
       expect: [
-        ValidatingServer(),
-        ServerValidationFailed('error'),
+        InitialSettingsValidateServerLoad(),
+        InitialSettingsValidateServerFailure('error'),
       ],
       verify: (cubit) {
         verify(mockInitialSettingsRepository.fetchAllLocales('serverName'))

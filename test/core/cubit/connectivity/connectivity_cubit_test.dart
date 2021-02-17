@@ -24,8 +24,8 @@ void main() {
       expect(() => ConnectivityCubit(connectivity: null), throwsAssertionError);
     });
 
-    test('initial state is HasConnection', () {
-      expect(cubit.state is HasConnection, true);
+    test('initial state is ConnectivityHasConnection', () {
+      expect(cubit.state is ConnectivityHasConnection, true);
     });
 
     blocTest(
@@ -47,7 +47,7 @@ void main() {
       },
       act: (cubit) => cubit.intiConnectionListener(),
       expect: [
-        HasConnection(false),
+        ConnectivityHasConnection(false),
       ],
     );
   });

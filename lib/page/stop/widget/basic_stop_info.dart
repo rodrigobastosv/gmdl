@@ -30,7 +30,7 @@ class BasicStopInfo extends StatelessWidget {
                 (stop.isPending && stop.hasBeenArrived)
                     ? BlocBuilder<StopCubit, StopState>(
                         buildWhen: (prevState, state) =>
-                            state is ServiceTimeUpdated,
+                            state is StopServiceTimeUpdate,
                         builder: (_, state) => GMTimer(
                           expirationTime: Duration(
                             minutes: getStopPlannedServiceTimeInSeconds(stop),
@@ -50,7 +50,8 @@ class BasicStopInfo extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   getHourAndMinuteFromSeconds(
-                      getStopPlannedServiceTimeInSeconds(stop)),
+                    getStopPlannedServiceTimeInSeconds(stop),
+                  ),
                   style: const TextStyle(
                     color: Colors.white,
                   ),

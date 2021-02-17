@@ -83,13 +83,13 @@ void main() {
           throwsAssertionError);
     });
 
-    test('initial state is LoadingInitial', () {
-      expect(cubit.state is LoadingInitial, true);
+    test('initial state is LoadInfoInitial', () {
+      expect(cubit.state is LoadInfoInitial, true);
     });
 
     blocTest(
       '''WHEN getDriverInfo is called
-         SHOULD emit Loading states and AllInfoLoadedSuccess at the end
+         SHOULD emit Loading states and LoadInfoAllInfoLoadSuccess at the end
          AND should store all the information on GlobalInfo
       ''',
       build: () {
@@ -155,22 +155,22 @@ void main() {
       },
       act: (cubit) => cubit.getDriverInfo('driver'),
       expect: [
-        InfoLoading('driver.loading.data'),
-        BasicDriverInfoSuccess(),
-        InfoLoading('push.registerDeviceOnServer'),
-        RegisterDeviceSuccess(1),
-        InfoLoading('push.bindModule'),
-        InfoLoading('push.registerDeviceOnServer'),
-        RegisterDeviceSuccess(1),
-        InfoLoading('Locale.list'),
-        FetchResourcesSuccess(),
-        InfoLoading('loading.downloading.configurations'),
-        FetchGlobalConfigSuccess(),
-        FetchUserConfigSuccess(),
-        InfoLoading('loading.downloading.reasonCodes'),
-        FetchCancelCodesSuccess(),
-        FetchUndeliverableCodesSuccess(),
-        AllInfoLoadedSuccess(),
+        LoadInfoInfoLoading('driver.loading.data'),
+        LoadInfoBasicDriverInfo(),
+        LoadInfoInfoLoading('push.registerDeviceOnServer'),
+        LoadInfoRegisterDevice(1),
+        LoadInfoInfoLoading('push.bindModule'),
+        LoadInfoInfoLoading('push.registerDeviceOnServer'),
+        LoadInfoRegisterDevice(1),
+        LoadInfoInfoLoading('Locale.list'),
+        LoadInfoFetchResources(),
+        LoadInfoInfoLoading('loading.downloading.configurations'),
+        LoadInfoFetchGlobalConfig(),
+        LoadInfoFetchUserConfig(),
+        LoadInfoInfoLoading('loading.downloading.reasonCodes'),
+        LoadInfoFetchCancelCodes(),
+        LoadInfoFetchUndeliverableCodes(),
+        LoadInfoAllInfoLoadSuccess(),
       ],
       verify: (cubit) {
         verify(
@@ -196,7 +196,7 @@ void main() {
 
     blocTest(
       '''WHEN getDriverInfo is called
-         SHOULD emit DriverInfoFailed state when theres an exception
+         SHOULD emit LoadInfoInfoLoading and LoadInfoInfoLoadingFailure state when theres an exception
       ''',
       build: () {
         when(mockI18nCubit.getFormattedText('driver.loading.data'))
@@ -207,8 +207,8 @@ void main() {
       },
       act: (cubit) => cubit.getDriverInfo('driver'),
       expect: [
-        InfoLoading('driver.loading.data'),
-        DriverInfoFailed(),
+        LoadInfoInfoLoading('driver.loading.data'),
+        LoadInfoInfoLoadingFailure(),
       ],
     );
   });

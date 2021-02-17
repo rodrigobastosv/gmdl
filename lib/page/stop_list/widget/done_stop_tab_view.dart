@@ -18,9 +18,9 @@ class DoneStopsTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RouteCubit, RouteState>(
       buildWhen: (previousState, state) =>
-          state is RouteUpdatedDueStopChange ||
-          state is RouteUpdatedDueStopClone ||
-          state is RouteUpdatedDueStopRedeliver,
+          state is RouteUpdateDueStopChange ||
+          state is RouteUpdateDueStopClone ||
+          state is RouteUpdateDueStopRedeliver,
       builder: (_, state) => ListView.builder(
         itemBuilder: (_, i) => StopListTile(
           stop: stops[i],

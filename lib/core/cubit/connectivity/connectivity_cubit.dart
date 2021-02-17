@@ -14,7 +14,7 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
     @required Connectivity connectivity,
   })  : assert(connectivity != null),
         _connectivity = connectivity,
-        super(HasConnection(true));
+        super(ConnectivityHasConnection(true));
 
   final Connectivity _connectivity;
   StreamSubscription<ConnectivityResult> _subscription;
@@ -30,9 +30,9 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
         _connectivity.onConnectivityChanged.skip(1).listen((result) async {
       if (result != ConnectivityResult.none) {
         final hasConnection = await DataConnectionChecker().hasConnection;
-        emit(HasConnection(hasConnection));
+        emit(ConnectivityHasConnection(hasConnection));
       } else {
-        emit(HasConnection(false));
+        emit(ConnectivityHasConnection(false));
       }
     });
   }

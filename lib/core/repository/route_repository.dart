@@ -150,19 +150,18 @@ class RouteRepository {
     }
   }
 
-  Future<bool> arriveStop({
+  Future<void> arriveStop({
     int routeId,
     StopModel stop,
     String actualArrival,
   }) async {
     try {
-      final response = await _client.post(
+      await _client.postQueued(
         '/$ROUTE/$routeId/$STOP/${stop.key}/$ARRIVE',
         data: {
           'actualArrival': actualArrival,
         },
       );
-      return response.isOk;
     } on DioError catch (e) {
       throw ArriveStopException(getErrorMessage(e));
     } on GMServerException catch (e) {

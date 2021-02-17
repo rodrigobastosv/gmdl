@@ -12,8 +12,9 @@ void main() {
     cubit.onChange(
       Change<ChooseCancelCodeState>(
         currentState: ChooseCancelCodeInitial(),
-        nextState: CancelCodePicked(null),
+        nextState: ChooseCancelCodePickCode(null),
       ),
     );
+    cubit.close();
   });
 }

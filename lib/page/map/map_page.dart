@@ -74,7 +74,7 @@ class _MapPageState extends State<MapPage> {
                     ),
                   ],
                 ),
-                if (state is ShowedStopOnMap && state.stop != null)
+                if (state is MapShowStop && state.stop != null)
                   MapStopListTile(
                     stop: state.stop,
                     isNextStopSuggested: isStopNextSuggestion(

@@ -14,11 +14,11 @@ class ChooseUndeliverableCodeCubit extends Cubit<ChooseUndeliverableCodeState> {
 
   void pickUndeliverableCode(UndeliverableCodeModel undeliverableCodeModel) {
     pickedUndeliverableCode = undeliverableCodeModel;
-    emit(UndeliverableCodePicked(undeliverableCodeModel));
+    emit(ChooseUndeliverableCodePickCode(undeliverableCodeModel));
   }
 
   void unpickUndeliverableCode(UndeliverableCodeModel undeliverableCodeModel) {
     pickedUndeliverableCode = null;
-    emit(UndeliverableCodePicked(null));
+    emit(ChooseUndeliverableCodePickCode(null));
   }
 }
