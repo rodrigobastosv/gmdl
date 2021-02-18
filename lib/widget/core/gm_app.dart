@@ -4,6 +4,7 @@ import 'package:package_info/package_info.dart';
 
 import '../../core/route/route.dart';
 import '../../main.dart';
+import '../../theme/theme.dart';
 import 'dependencies_widget_provider.dart';
 import 'global_cubits_listeners.dart';
 import 'global_cubits_widget_provider.dart';
@@ -33,10 +34,7 @@ class GMApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               navigatorKey: navigatorKey,
               title: 'Flutter Demo',
-              theme: ThemeData(
-                primaryColor: const Color(0xFF3AA348),
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-              ),
+              theme: theme,
               builder: (context, child) => GlobalCubitsListeners(
                 child: child,
               ),

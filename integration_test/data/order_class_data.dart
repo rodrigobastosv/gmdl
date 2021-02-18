@@ -23,7 +23,6 @@ Future<void> deleteOrderClass() async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/OrderClass/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }

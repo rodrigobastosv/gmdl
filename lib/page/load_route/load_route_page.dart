@@ -15,7 +15,7 @@ class LoadRoutePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GMScaffold(
-      backgroundColor: const Color(0xFF24242A),
+      backgroundColor: Theme.of(context).backgroundColor,
       withAppBar: false,
       withNavigationBar: false,
       body: BlocConsumer<LoadRouteCubit, LoadRouteState>(
@@ -49,9 +49,9 @@ class LoadRoutePage extends StatelessWidget {
           if (state is LoadRouteLoad)
             Text(
               state.info,
-              style: const TextStyle(
-                color: Colors.white,
-              ),
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: Colors.white,
+                  ),
             ),
         ],
       ),

@@ -13,6 +13,7 @@ final routeCubit = RouteCubit(
   route: RouteModel(),
   globalInfo: GlobalInfo(),
   notificationCubit: notificationCubit,
+  hosCubit: hosCubit,
   gpsCubit: gpsCubit,
   launchService: LaunchService(),
 );

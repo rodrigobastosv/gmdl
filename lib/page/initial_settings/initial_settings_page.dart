@@ -14,7 +14,7 @@ class InitialSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<I18nCubit, I18nState>(
       builder: (_, state) => GMScaffold(
-        backgroundColor: const Color(0xFF24242A),
+        backgroundColor: Theme.of(context).backgroundColor,
         title: context.getTextUppercase('loader.settings'),
         withDrawer: false,
         withBackButton: false,

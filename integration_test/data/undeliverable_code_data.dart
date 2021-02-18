@@ -24,7 +24,6 @@ Future<void> deleteUndeliverableCode(int undeliverableCodeId) async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/UndeliverableCode/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }

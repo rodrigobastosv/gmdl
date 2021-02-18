@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cubit/cubits.dart';
+import '../../core/entity/model/models.dart';
 import '../../core/extension/extensions.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
@@ -13,15 +14,18 @@ import '../../widget/general/gm_scaffold.dart';
 import '../../widget/menu_items/menu_items.dart';
 import 'stop_page_arguments.dart';
 import 'widget/basic_stop_info.dart';
-import 'widget/times_card.dart';
+import 'widget/times/times_card.dart';
 
 class StopPage extends StatelessWidget {
-  const StopPage({Key key}) : super(key: key);
+  const StopPage({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<StopCubit>();
     return GMScaffold(
+      title: _getTitle(context, cubit.stop),
       backgroundColor: const Color(0xFFE3E3E3),
       body: BlocConsumer<StopCubit, StopState>(
         listener: _listener,
@@ -77,6 +81,13 @@ class StopPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getTitle(BuildContext context, StopModel stop) {
+    if (stop.hasBeenArrived) {
+      return context.getTextUppercase('details.label.departure');
+    }
+    return context.getTextUppercase('driver.StopDetail.Time.Arrival');
   }
 
   Future<void> _onPressedButton(StopCubit cubit) async {
@@ -144,7 +155,7 @@ class StopPage extends StatelessWidget {
           ),
         ),
       ],
-      const HosMenuItem(),
+      const HosLunchMenuItem(),
     ];
   }
 }

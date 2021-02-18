@@ -17,9 +17,9 @@ class NoStopFound extends StatelessWidget {
         children: [
           Text(
             context.getText('list.noResults'),
-            style: const TextStyle(
-              color: Color(0xFF95989A),
-            ),
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: const Color(0xFF95989A),
+                ),
           ),
           const SizedBox(height: 8),
           SvgPicture.asset('assets/icons/no-resuts.svg'),

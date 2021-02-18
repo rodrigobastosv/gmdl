@@ -25,10 +25,10 @@ class StopIcon extends StatelessWidget {
                 backgroundColor: iconColor,
                 child: Text(
                   stop.plannedSequenceNum?.toString() ?? '',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
                 ),
               ),
               if (stop.stopHadActionPerformed)

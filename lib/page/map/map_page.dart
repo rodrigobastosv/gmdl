@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../core/cubit/cubits.dart';
@@ -10,8 +9,8 @@ import '../../core/extension/extensions.dart';
 import '../../core/utils/map_utils.dart';
 import '../../core/utils/utils.dart';
 import '../../widget/general/gm_scaffold.dart';
+import 'widget/map_locate_button.dart';
 import 'widget/map_stop_list_tile.dart';
-import 'widget/map_stop_marker.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({
@@ -69,7 +68,7 @@ class _MapPageState extends State<MapPage> {
                     MarkerLayerOptions(
                       markers: [
                         getMarkerOnPosition(lastPosition),
-                        ..._getStopMarkers(mapCubit),
+                        ...getMapStopMarkers(mapCubit),
                       ],
                     ),
                   ],
@@ -85,17 +84,9 @@ class _MapPageState extends State<MapPage> {
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            heroTag: 'locate-vehicle',
-            backgroundColor: Colors.white,
-            child: SvgPicture.asset('assets/icons/map-locate-vehicle.svg'),
-            onPressed: () => _mapController.move(
-              LatLng(
-                lastPosition.latitude,
-                lastPosition.longitude,
-              ),
-              DEFAULT_MAP_ZOOM,
-            ),
+          floatingActionButton: MapLocateButton(
+            mapController: _mapController,
+            lastPosition: lastPosition,
           ),
         ),
         mainButtonLabel:
@@ -104,30 +95,5 @@ class _MapPageState extends State<MapPage> {
         mainButtonAction: () => Navigator.of(context).pop(),
       ),
     );
-  }
-
-  List<Marker> _getStopMarkers(MapCubit mapCubit) {
-    final route = mapCubit.routeCubit.route;
-    final stops = route.stops;
-    return stops
-        .map(
-          (stop) => Marker(
-            width: 30,
-            height: 30,
-            point: LatLng(
-              stop.latitude,
-              stop.longitude,
-            ),
-            builder: (_) => GestureDetector(
-              onTap: () => mapCubit.showStopOnMap(stop),
-              child: MapStopMarker(
-                stop: stop,
-                isInProgress: stop.isInProgress,
-                isNextSuggestion: isStopNextSuggestion(route, stop),
-              ),
-            ),
-          ),
-        )
-        .toList();
   }
 }

@@ -59,10 +59,7 @@ class ChooseEquipmentPage extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: context.getText('equipment.login'),
-                      fillColor: Colors.white,
-                      filled: true,
                       prefixIcon: const Icon(MdiIcons.truckCheck),
                     ),
                     onSaved: (equipmentKey) => context

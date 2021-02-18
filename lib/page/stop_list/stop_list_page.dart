@@ -55,9 +55,9 @@ class StopListPage extends StatelessWidget {
                     child: TabBar(
                       key: UniqueKey(),
                       indicatorWeight: 3,
-                      labelColor: const Color(0xFFB0D25A),
+                      labelColor: Theme.of(context).primaryColor,
                       unselectedLabelColor: const Color(0xFFE0E0E0),
-                      indicatorColor: const Color(0xFFB0D25A),
+                      indicatorColor: Theme.of(context).primaryColor,
                       tabs: [
                         PendingStopsTab(stops: pendingStopsFiltered),
                         if (doneStops.isNotEmpty)
@@ -89,10 +89,12 @@ class StopListPage extends StatelessWidget {
         ),
         mainButtonLabel: context.getTextUppercase('driver.seeMap'),
         mainButtonIcon: const Icon(Icons.map),
-        mainButtonAction: () => Navigator.of(context).pushNamed(
-          MAP_PAGE,
-          arguments: cubit,
-        ),
+        mainButtonAction: cubit.route.isUsingPro
+            ? () => Navigator.of(context).pushNamed(
+                  MAP_PAGE,
+                  arguments: cubit,
+                )
+            : null,
         menuOptions: _getMenuOptions(context),
       ),
     );
@@ -122,7 +124,7 @@ class StopListPage extends StatelessWidget {
 
   List<Widget> _getMenuOptions(BuildContext context) {
     return [
-      const HosMenuItem(),
+      const HosLunchMenuItem(),
     ];
   }
 }

@@ -68,10 +68,11 @@ class StopListTile extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             getBasicDateHourMinute(stop.plannedArrival),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: _getStopTimeTextColor(),
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: _getStopTimeTextColor(),
+                                    ),
                           ),
                         ],
                       ),

@@ -17,7 +17,6 @@ Future<void> deleteSizeAlias(Map<String, dynamic> sizeAlias) async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/SizeAlias/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }

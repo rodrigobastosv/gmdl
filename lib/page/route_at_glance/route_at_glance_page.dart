@@ -114,7 +114,7 @@ class RouteAtGlancePage extends StatelessWidget {
 
   List<Widget> _getMenuOptions(BuildContext context) {
     return [
-      const HosMenuItem(),
+      const HosLunchMenuItem(),
     ];
   }
 }

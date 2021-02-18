@@ -3,6 +3,8 @@ export 'base_unit_model.dart';
 export 'entity_model.dart';
 export 'feature_state_model.dart';
 export 'holder_material_model.dart';
+export 'hos_event_model.dart';
+export 'hos_type_model.dart';
 export 'line_item_model.dart';
 export 'location_model.dart';
 export 'location_payment_method_model.dart';

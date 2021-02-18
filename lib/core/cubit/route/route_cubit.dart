@@ -25,17 +25,20 @@ class RouteCubit extends Cubit<RouteState> {
     @required RouteRepository repository,
     @required GlobalInfo globalInfo,
     @required NotificationCubit notificationCubit,
+    @required HosCubit hosCubit,
     @required GpsCubit gpsCubit,
     @required LaunchService launchService,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
+        assert(hosCubit != null),
         assert(gpsCubit != null),
         assert(launchService != null),
         _repository = repository,
         _globalInfo = globalInfo,
         _notificationCubit = notificationCubit,
+        _hosCubit = hosCubit,
         _gpsCubit = gpsCubit,
         _launchService = launchService,
         super(RouteInitial());
@@ -43,6 +46,7 @@ class RouteCubit extends Cubit<RouteState> {
   final RouteRepository _repository;
   final GlobalInfo _globalInfo;
   final NotificationCubit _notificationCubit;
+  final HosCubit _hosCubit;
   final GpsCubit _gpsCubit;
   final LaunchService _launchService;
 
@@ -59,6 +63,10 @@ class RouteCubit extends Cubit<RouteState> {
     lastPosition = _gpsCubit.lastPosition ?? DEFAULT_LAT_LNG_IF_NONE_GIVEN;
     _notificationSubscription = _notificationCubit.listen(_handleNotifications);
     _positionSubscription = _gpsCubit.listen(_handlePositionUpdate);
+  }
+
+  Future<void> fetchHosInfo() async {
+    await _hosCubit.fetchHosInfo(driverId: _globalInfo.driverInfo.id);
   }
 
   Future<void> _handleNotifications(NotificationState state) async {

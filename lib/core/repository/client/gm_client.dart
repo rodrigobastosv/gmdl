@@ -70,7 +70,7 @@ class GMClient {
         ),
       );
     } on Exception {
-      print('Exceptionnnn!!!!!!!!!!!!!!');
+      rethrow;
     }
   }
 }

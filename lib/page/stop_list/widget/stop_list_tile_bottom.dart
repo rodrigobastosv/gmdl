@@ -36,9 +36,7 @@ class StopListTileBottom extends StatelessWidget {
                 ),
                 style: TextButton.styleFrom(
                   primary: textColor,
-                  textStyle: const TextStyle(
-                    fontSize: 14,
-                  ),
+                  textStyle: Theme.of(context).textTheme.bodyText1,
                 ),
                 icon: SvgPicture.asset(
                   'assets/icons/directions.svg',
@@ -61,9 +59,7 @@ class StopListTileBottom extends StatelessWidget {
                           ),
                           style: TextButton.styleFrom(
                             primary: textColor,
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                            ),
+                            textStyle: Theme.of(context).textTheme.bodyText1,
                           ),
                           icon: SvgPicture.asset(
                             'assets/icons/arrival.svg',

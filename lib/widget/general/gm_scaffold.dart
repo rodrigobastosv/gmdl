@@ -53,7 +53,8 @@ class _GMScaffoldState extends State<GMScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.backgroundColor ?? const Color(0xFFEEEEEE),
+      backgroundColor:
+          widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
       appBar: _getAppBar(),
       endDrawer: widget.withDrawer ? const GMMenuDrawer() : null,
       body: widget.body,
@@ -67,10 +68,15 @@ class _GMScaffoldState extends State<GMScaffold> {
   Widget _getMainButton() {
     return widget.mainButtonAction != null
         ? FloatingActionButton.extended(
-            backgroundColor: const Color(0xFF3AA348),
+            backgroundColor: Theme.of(context).buttonColor,
             elevation: 4.0,
             icon: widget.mainButtonIcon,
-            label: Text(widget.mainButtonLabel),
+            label: Text(
+              widget.mainButtonLabel,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: Colors.white,
+                  ),
+            ),
             onPressed: widget.mainButtonAction,
           )
         : null;
@@ -121,13 +127,13 @@ class _GMScaffoldState extends State<GMScaffold> {
                 children: [
                   SvgPicture.asset(
                     'assets/icons/more.svg',
-                    color: Colors.white,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   Text(
                     context.getText('menu.less'),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: Theme.of(context).iconTheme.color,
+                        ),
                   ),
                 ],
               ),
@@ -141,7 +147,7 @@ class _GMScaffoldState extends State<GMScaffold> {
   Widget _getMainNavigationBar() {
     return widget.withNavigationBar
         ? BottomAppBar(
-            color: const Color(0xFF181818),
+            color: Theme.of(context).bottomAppBarColor,
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,13 +166,14 @@ class _GMScaffoldState extends State<GMScaffold> {
                         children: [
                           SvgPicture.asset(
                             'assets/icons/more.svg',
-                            color: Colors.white,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                           Text(
                             context.getText('menu.more'),
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1.copyWith(
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
                           ),
                         ],
                       ),

@@ -27,10 +27,6 @@ class GMAuthInterceptor extends Interceptor {
 
   @override
   onError(DioError error) async {
-    print(error);
-    print(error.request);
-    print(error.response);
-    print(error.type);
     final request = error.request;
     final statusCode = error.response?.statusCode;
 

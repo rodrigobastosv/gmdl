@@ -24,7 +24,6 @@ Future<void> deleteCancelCode() async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/CancelCode/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }

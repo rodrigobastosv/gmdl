@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../core/keys.dart';
 import 'package:hive/hive.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -12,6 +11,7 @@ import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/locale_option.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/global/hive.dart';
+import '../../../core/keys.dart';
 import '../../../core/utils/utils.dart';
 
 class InitialSettingsForm extends StatefulWidget {
@@ -29,7 +29,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<I18nCubit, I18nState>(
       builder: (_, state) => Scaffold(
-        backgroundColor: const Color(0xFF24242A),
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -46,10 +46,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     key: initialSettingsServerKey,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: context.getText('general.server'),
-                      fillColor: Colors.white,
-                      filled: true,
                       prefixIcon: const Icon(MdiIcons.server),
                     ),
                     onSaved: (serverAddress) =>
@@ -94,10 +91,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: context.getText('loader.phone'),
-                      fillColor: Colors.white,
-                      filled: true,
                       prefixIcon: const Icon(MdiIcons.phone),
                     ),
                   ),

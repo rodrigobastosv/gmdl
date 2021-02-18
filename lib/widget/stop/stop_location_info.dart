@@ -20,23 +20,19 @@ class StopLocationInfo extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width - 100,
-          child: Text(
-            getLocationInfo(stop),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: textColor,
-            ),
-          ),
+          child: Text(getLocationInfo(stop),
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  )),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width - 100,
-          child: Text(
-            stop.location?.addressLine1 ?? '',
-            maxLines: 2,
-            style: TextStyle(
-              color: textColor,
-            ),
-          ),
+          child: Text(stop.location?.addressLine1 ?? '',
+              maxLines: 2,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: textColor,
+                  )),
         ),
       ],
     );

@@ -45,3 +45,5 @@ class HosLunchTimeMinutePass extends HosState {
         minutesPassed,
       ];
 }
+
+class HosRestartLunchTimer extends HosState {}

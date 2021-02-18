@@ -6,8 +6,8 @@ import '../../core/cubit/cubits.dart';
 import '../../core/extension/extensions.dart';
 import '../general/gm_menu_option.dart';
 
-class HosMenuItem extends StatelessWidget {
-  const HosMenuItem({Key key}) : super(key: key);
+class HosLunchMenuItem extends StatelessWidget {
+  const HosLunchMenuItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

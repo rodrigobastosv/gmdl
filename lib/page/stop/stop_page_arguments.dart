@@ -7,7 +7,8 @@ class StopPageArguments {
   StopPageArguments({
     @required this.stop,
     @required this.routeCubit,
-  });
+  })  : assert(stop != null),
+        assert(routeCubit != null);
 
   final StopModel stop;
   final RouteCubit routeCubit;

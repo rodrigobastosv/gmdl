@@ -24,7 +24,6 @@ Future<void> deleteReasonCode(int reasonCodeId) async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/ReasonCode/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }

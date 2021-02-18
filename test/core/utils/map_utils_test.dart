@@ -1,11 +1,10 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:gm_driver_lite/core/entity/model/models.dart';
-
-import 'package:gm_driver_lite/core/utils/utils.dart';
-
 import 'package:latlong/latlong.dart';
+
+import 'package:gm_driver_lite/core/entity/model/models.dart';
+import 'package:gm_driver_lite/core/utils/utils.dart';
 
 void main() {
   group('Map Utils', () {

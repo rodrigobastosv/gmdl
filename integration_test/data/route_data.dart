@@ -24,10 +24,7 @@ Future<Map<String, dynamic>> importRoute({
       data: body,
     );
     return response.data;
-  } on DioError catch (e) {
-    print(e.error);
-    print(e.message);
-    print(e.response);
+  } on DioError {
     rethrow;
   }
 }

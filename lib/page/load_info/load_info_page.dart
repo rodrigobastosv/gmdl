@@ -12,7 +12,7 @@ class LoadInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF24242A),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: BlocConsumer<LoadInfoCubit, LoadInfoState>(
         listener: _listener,
         builder: _builder,
@@ -37,9 +37,9 @@ class LoadInfoPage extends StatelessWidget {
         if (state is LoadInfoInfoLoading)
           Text(
             state.step,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  color: Colors.white,
+                ),
           ),
       ],
     );

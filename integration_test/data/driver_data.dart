@@ -30,7 +30,6 @@ Future<void> deleteDriver() async {
   final client = getDefaultTestClient(TEST_SERVER, token);
   await client.post(
     '/Driver/BatchDelete',
-    data: [
-    ],
+    data: [],
   );
 }
