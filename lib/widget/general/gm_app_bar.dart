@@ -33,11 +33,12 @@ class GMAppBar extends StatelessWidget implements PreferredSizeWidget {
       return leading;
     }
     return withBackButton
-        ? GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(
+        ? IconButton(
+            icon: const Icon(
               Icons.arrow_back_ios,
+              color: Colors.white,
             ),
+            onPressed: () => Navigator.of(context).pop(),
           )
         : null;
   }
