@@ -72,13 +72,15 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> _handleNotifications(NotificationState state) async {
     if (state is NotificationReceive) {
       final notification = state.notification;
-      if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
-        await _handleRoutePlannedUpdateNotification(notification);
+      if (notification.action == NotificationAction.ROUTE_PROJECTED_UPDATE ||
+          (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE &&
+              !route.isUsingPro)) {
+        await _handleRouteSyncByNotification(notification);
       }
     }
   }
 
-  Future<void> _handleRoutePlannedUpdateNotification(
+  Future<void> _handleRouteSyncByNotification(
       NotificationDto notification) async {
     try {
       final syncRoute = await _repository.syncRouteByNotification(route.id);
@@ -86,14 +88,14 @@ class RouteCubit extends Cubit<RouteState> {
       emit(
         RouteUpdateDueNotificationSuccess(
           notificationId: notification.id,
-          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+          notificationAction: notification.action,
         ),
       );
     } on Exception {
       emit(
         RouteUpdateDueNotificationFailure(
           notificationId: notification.id,
-          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+          notificationAction: notification.action,
         ),
       );
     }
@@ -180,7 +182,7 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> arriveWarehouse() async {
     try {
       emit(RouteArriveWarehouseLoad());
-      _repository.arriveWarehouse(route.id);
+      await _repository.arriveWarehouse(route.id);
       emit(RouteArriveWarehouseSuccess());
     } on Exception {
       emit(RouteArriveWarehouseFailure());
