@@ -169,15 +169,14 @@ class RouteRepository {
     }
   }
 
-  Future<bool> arriveWarehouse(int routeId) async {
+  Future<void> arriveWarehouse(int routeId) async {
     try {
-      final response = await _client.post(
+      await _client.postQueued(
         '/$ROUTE/$routeId/$ARRIVE_DESTINATION',
         data: {
           'actualArrival': DateTime.now().toUtcAsString,
         },
       );
-      return response.isOk;
     } on DioError catch (e) {
       throw ArriveWarehouseException(getErrorMessage(e));
     } on GMServerException catch (e) {

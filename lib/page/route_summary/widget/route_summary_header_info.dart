@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/utils/utils.dart';
 
 import '../../../core/entity/model/models.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
@@ -27,7 +28,7 @@ class RouteSummaryHeaderInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${route.key} - ${route.description}',
+              getRouteHeaderText(route),
               style: const TextStyle(
                 color: Colors.white,
               ),

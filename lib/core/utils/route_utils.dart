@@ -78,14 +78,21 @@ bool isStopNextSuggestion(RouteModel route, StopModel stop) {
   return stop == pendingStops[0];
 }
 
+String getRouteHeaderText(RouteModel route) {
+  if (route.description != null) {
+    return '${route.key} - ${route.description}';
+  }
+  return '${route.key}';
+}
+
 RouteModel mergeRoutes(RouteModel originalRoute, RouteModel nextRoute) {
   return originalRoute.copyWith(
-    organization: nextRoute.organization,
-    date: nextRoute.date,
-    description: nextRoute.description,
-    origin: nextRoute.origin,
-    destination: nextRoute.destination,
-    stops: nextRoute.stops,
+    organization: nextRoute.organization ?? originalRoute.organization,
+    date: nextRoute.date ?? originalRoute.date,
+    description: nextRoute.description ?? originalRoute.description,
+    origin: nextRoute.origin ?? originalRoute.origin,
+    destination: nextRoute.destination ?? originalRoute.destination,
+    stops: nextRoute.stops ?? originalRoute.stops,
     plannedArrival: nextRoute.plannedArrival,
     plannedDeparture: nextRoute.plannedArrival,
     plannedDistance: nextRoute.plannedDistance,
