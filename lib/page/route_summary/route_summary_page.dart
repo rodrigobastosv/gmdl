@@ -42,7 +42,7 @@ class RouteSummaryPage extends StatelessWidget {
         children: [
           Container(
             height: 100,
-            color: const Color(0xFF181818),
+            color: Theme.of(context).bottomAppBarColor,
             child: Padding(
               padding: const EdgeInsets.all(4),
               child: Column(

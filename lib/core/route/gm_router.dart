@@ -73,9 +73,12 @@ class GMRouter {
                 repository: context.read<RouteRepository>(),
                 globalInfo: context.read<GlobalInfo>(),
                 notificationCubit: context.read<NotificationCubit>(),
+                hosCubit: context.read<HosCubit>(),
                 gpsCubit: context.read<GpsCubit>(),
                 launchService: context.read<LaunchService>(),
-              )..init(),
+              )
+                ..init()
+                ..fetchHosInfo(),
             ),
           ],
           child: const RouteAtGlancePage(),

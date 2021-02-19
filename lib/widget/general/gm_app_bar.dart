@@ -15,19 +15,16 @@ class GMAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFB0D25A),
-      iconTheme: const IconThemeData(color: Colors.white),
       automaticallyImplyLeading: false,
       leading: _getLeadingWidget(context),
       title: title != null
-          ? Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-            )
+          ? Text(title,
+              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    color: Colors.white,
+                  ))
           : null,
       centerTitle: true,
+      iconTheme: Theme.of(context).iconTheme,
     );
   }
 
@@ -36,11 +33,12 @@ class GMAppBar extends StatelessWidget implements PreferredSizeWidget {
       return leading;
     }
     return withBackButton
-        ? GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(
+        ? IconButton(
+            icon: const Icon(
               Icons.arrow_back_ios,
+              color: Colors.white,
             ),
+            onPressed: () => Navigator.of(context).pop(),
           )
         : null;
   }

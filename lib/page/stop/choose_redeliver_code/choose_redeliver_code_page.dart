@@ -19,7 +19,7 @@ class ChooseRedeliverCodePage extends StatelessWidget {
     final allRedeliverCodes =
         getRedeliveryReasons(stopCubit.allUndeliveableCodes);
     return GMScaffold(
-      title: 'REDELIVERY CODES',
+      title: context.getTextUppercase('general.reasonCode'),
       body: BlocBuilder<StopCubit, StopState>(
         builder: (_, state) => ListView.builder(
           itemBuilder: (_, i) => ListTile(
@@ -63,7 +63,7 @@ class ChooseRedeliverCodePage extends StatelessWidget {
         height: 22,
         width: 22,
       ),
-      mainButtonLabel: 'SELECT',
+      mainButtonLabel: context.getTextUppercase('loader.select'),
     );
   }
 }

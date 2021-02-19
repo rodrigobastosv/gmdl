@@ -27,14 +27,11 @@ class GMAuthInterceptor extends Interceptor {
 
   @override
   onError(DioError error) async {
-    print(error);
-    print(error.request);
-    print(error.response);
-    print(error.type);
     final request = error.request;
+    final path = request.path;
     final statusCode = error.response?.statusCode;
 
-    if (statusCode == HTTP_FORBIDDEN) {
+    if (statusCode == HTTP_FORBIDDEN && !path.contains(SIGN_IN)) {
       final username = globalBox.get(USERNAME);
       final password = decodeString(globalBox.get(PASSWORD));
       try {

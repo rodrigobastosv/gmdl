@@ -19,7 +19,7 @@ class BasicStopInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF24242A),
+      color: Theme.of(context).backgroundColor,
       height: 76,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -43,18 +43,18 @@ class BasicStopInfo extends StatelessWidget {
                         getHourAndMinuteFromSeconds(
                           getStopServiceTimeInSeconds(stop),
                         ),
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: Colors.white,
+                            ),
                       ),
                 const SizedBox(height: 6),
                 Text(
                   getHourAndMinuteFromSeconds(
                     getStopPlannedServiceTimeInSeconds(stop),
                   ),
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.white,
+                      ),
                 ),
               ],
             ),
@@ -66,10 +66,10 @@ class BasicStopInfo extends StatelessWidget {
                   width: MediaQuery.of(context).size.width - 100,
                   child: Text(
                     getLocationInfo(stop),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -78,10 +78,10 @@ class BasicStopInfo extends StatelessWidget {
                   child: Text(
                     stop.location?.addressLine1 ?? '',
                     maxLines: 2,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFFCCCCCC),
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 12,
+                          color: const Color(0xFFCCCCCC),
+                        ),
                   ),
                 ),
               ],

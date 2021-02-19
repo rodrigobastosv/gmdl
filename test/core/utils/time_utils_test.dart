@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:gm_driver_lite/core/utils/utils.dart';
@@ -20,8 +21,8 @@ void main() {
          SHOULD return date on the hh:mm format
       ''',
       () {
-        final date = DateTime(2021, 12, 09, 10, 30).toIso8601String();
-        expect(getHourAndMinuteFromDateString(date), '10:30');
+        final date = DateTime(2021, 12, 09, 10, 30);
+        expect(getHourAndMinuteFromDate(date), '10:30');
       },
     );
 

@@ -11,6 +11,7 @@ import '../../../core/cubit/cubits.dart';
 import '../../../core/entity/locale_option.dart';
 import '../../../core/extension/i18n_cubit_extension.dart';
 import '../../../core/global/hive.dart';
+import '../../../core/keys.dart';
 import '../../../core/utils/utils.dart';
 
 class InitialSettingsForm extends StatefulWidget {
@@ -28,7 +29,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<I18nCubit, I18nState>(
       builder: (_, state) => Scaffold(
-        backgroundColor: const Color(0xFF24242A),
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -42,12 +43,10 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                     vertical: 10,
                   ),
                   child: TextFormField(
+                    key: initialSettingsServerKey,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: context.getText('general.server'),
-                      fillColor: Colors.white,
-                      filled: true,
                       prefixIcon: const Icon(MdiIcons.server),
                     ),
                     onSaved: (serverAddress) =>
@@ -92,10 +91,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
                   ),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: context.getText('loader.phone'),
-                      fillColor: Colors.white,
-                      filled: true,
                       prefixIcon: const Icon(MdiIcons.phone),
                     ),
                   ),
@@ -105,6 +101,7 @@ class _InitialSettingsFormState extends State<InitialSettingsForm> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          key: initialSettingsFabKey,
           backgroundColor: const Color(0xFF3AA348),
           onPressed: () {
             final _form = _formKey.currentState;

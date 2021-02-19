@@ -15,7 +15,7 @@ class BasicRouteInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      color: const Color(0xFF24242A),
+      color: Theme.of(context).backgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: Column(
@@ -25,27 +25,26 @@ class BasicRouteInfo extends StatelessWidget {
               children: <Widget>[
                 Text(
                   context.getText('driver.routeAtGlance'),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 12,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 12,
+                      ),
                 ),
                 Column(
                   children: <Widget>[
                     const SizedBox(height: 8),
                     Text(
                       route.key,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            color: Colors.white,
+                          ),
                     ),
                     Text(
                       '${route.date}',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                     ),
                   ],
                 ),
@@ -64,10 +63,10 @@ class BasicRouteInfo extends StatelessWidget {
                       ),
                       Text(
                         '''${route.stops.length} ${context.getText('stopList.title')}''',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
                       ),
                     ],
                   ),
@@ -81,10 +80,10 @@ class BasicRouteInfo extends StatelessWidget {
                       ),
                       Text(
                         '''${getPlannedDistanceInKm(route).toStringAsFixed(1)} km''',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
                       ),
                     ],
                   ),
@@ -98,10 +97,10 @@ class BasicRouteInfo extends StatelessWidget {
                       ),
                       Text(
                         '${getPlannedServiceInHoursAndMinutes(route)}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
                       ),
                     ],
                   )

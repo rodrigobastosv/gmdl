@@ -25,17 +25,20 @@ class RouteCubit extends Cubit<RouteState> {
     @required RouteRepository repository,
     @required GlobalInfo globalInfo,
     @required NotificationCubit notificationCubit,
+    @required HosCubit hosCubit,
     @required GpsCubit gpsCubit,
     @required LaunchService launchService,
   })  : assert(route != null),
         assert(repository != null),
         assert(globalInfo != null),
         assert(notificationCubit != null),
+        assert(hosCubit != null),
         assert(gpsCubit != null),
         assert(launchService != null),
         _repository = repository,
         _globalInfo = globalInfo,
         _notificationCubit = notificationCubit,
+        _hosCubit = hosCubit,
         _gpsCubit = gpsCubit,
         _launchService = launchService,
         super(RouteInitial());
@@ -43,6 +46,7 @@ class RouteCubit extends Cubit<RouteState> {
   final RouteRepository _repository;
   final GlobalInfo _globalInfo;
   final NotificationCubit _notificationCubit;
+  final HosCubit _hosCubit;
   final GpsCubit _gpsCubit;
   final LaunchService _launchService;
 
@@ -61,16 +65,22 @@ class RouteCubit extends Cubit<RouteState> {
     _positionSubscription = _gpsCubit.listen(_handlePositionUpdate);
   }
 
+  Future<void> fetchHosInfo() async {
+    await _hosCubit.fetchHosInfo(driverId: _globalInfo.driverInfo.id);
+  }
+
   Future<void> _handleNotifications(NotificationState state) async {
     if (state is NotificationReceive) {
       final notification = state.notification;
-      if (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE) {
-        await _handleRoutePlannedUpdateNotification(notification);
+      if (notification.action == NotificationAction.ROUTE_PROJECTED_UPDATE ||
+          (notification.action == NotificationAction.ROUTE_PLANNED_UPDATE &&
+              !route.isUsingPro)) {
+        await _handleRouteSyncByNotification(notification);
       }
     }
   }
 
-  Future<void> _handleRoutePlannedUpdateNotification(
+  Future<void> _handleRouteSyncByNotification(
       NotificationDto notification) async {
     try {
       final syncRoute = await _repository.syncRouteByNotification(route.id);
@@ -78,14 +88,14 @@ class RouteCubit extends Cubit<RouteState> {
       emit(
         RouteUpdateDueNotificationSuccess(
           notificationId: notification.id,
-          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+          notificationAction: notification.action,
         ),
       );
     } on Exception {
       emit(
         RouteUpdateDueNotificationFailure(
           notificationId: notification.id,
-          notificationAction: NotificationAction.ROUTE_PLANNED_UPDATE,
+          notificationAction: notification.action,
         ),
       );
     }
@@ -172,7 +182,7 @@ class RouteCubit extends Cubit<RouteState> {
   Future<void> arriveWarehouse() async {
     try {
       emit(RouteArriveWarehouseLoad());
-      _repository.arriveWarehouse(route.id);
+      await _repository.arriveWarehouse(route.id);
       emit(RouteArriveWarehouseSuccess());
     } on Exception {
       emit(RouteArriveWarehouseFailure());

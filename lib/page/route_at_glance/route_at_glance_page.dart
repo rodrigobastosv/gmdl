@@ -88,9 +88,7 @@ class RouteAtGlancePage extends StatelessWidget {
   Widget _getMainButtonIcon(RouteCubit cubit) {
     final state = cubit.state;
     final route = cubit.route;
-    if (state is RouteStartLoad ||
-        state is RouteDepartOriginLoad ||
-        state is RouteDepartOriginSuccess) {
+    if (state is RouteStartLoad || state is RouteDepartOriginLoad) {
       return const GMButtonLoading();
     } else if (route.status == RouteStatus.STARTED) {
       return SvgPicture.asset('assets/icons/driving.svg');
@@ -114,7 +112,7 @@ class RouteAtGlancePage extends StatelessWidget {
 
   List<Widget> _getMenuOptions(BuildContext context) {
     return [
-      const HosMenuItem(),
+      const HosLunchMenuItem(),
     ];
   }
 }

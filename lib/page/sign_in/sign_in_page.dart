@@ -21,9 +21,8 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF24242A),
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFB0D25A),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -34,9 +33,9 @@ class _SignInPageState extends State<SignInPage> {
           automaticallyImplyLeading: false,
           title: Text(
             context.getTextUppercase('driver.hint.login'),
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  color: Colors.white,
+                ),
           ),
           centerTitle: true,
         ),

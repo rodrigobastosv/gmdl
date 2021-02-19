@@ -19,18 +19,12 @@ import 'http_constants.dart';
 import 'interceptor/gm_retry_interceptor.dart';
 import 'interceptor/interceptors.dart';
 
-const DEFAULT_RETRIES_COUNT = 3;
-const DEFAULT_RETRY_INTERVAL_SECONDS = 5;
+const DEFAULT_RETRIES_COUNT = 2;
+const DEFAULT_RETRY_INTERVAL_SECONDS = 1;
 const DEFAULT_RETRY_OPTIONS = RetryOptions(
   retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
   retries: DEFAULT_RETRIES_COUNT,
   retryEvaluator: getDefaultRetryPolicy,
-);
-
-const CONNECTIVITY_RETRY_OPTIONS = RetryOptions(
-  retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
-  retries: DEFAULT_RETRIES_COUNT,
-  retryEvaluator: getConnectivityRetryPolicy,
 );
 
 const QUEUE_RETRIES_COUNT = 5;
@@ -39,6 +33,12 @@ const QUEUE_RETRY_OPTIONS = RetryOptions(
   retryInterval: Duration(seconds: QUEUE_RETRY_INTERVAL_SECONDS),
   retries: QUEUE_RETRIES_COUNT,
   retryEvaluator: getQueueRetryPolicy,
+);
+
+const CONNECTIVITY_RETRY_OPTIONS = RetryOptions(
+  retryInterval: Duration(seconds: DEFAULT_RETRY_INTERVAL_SECONDS),
+  retries: DEFAULT_RETRIES_COUNT,
+  retryEvaluator: getConnectivityRetryPolicy,
 );
 
 FutureOr<bool> getDefaultRetryPolicy(DioError error) {
@@ -84,6 +84,20 @@ Dio getBasicClient() {
   return dio;
 }
 
+Dio getBasicTestClient() {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+      },
+      queryParameters: {
+        CONSUMER: consumer,
+      },
+    ),
+  );
+  return dio;
+}
+
 Dio getDefaultClient(String serverName, String sessionId) {
   final dio = Dio(
     BaseOptions(
@@ -101,6 +115,22 @@ Dio getDefaultClient(String serverName, String sessionId) {
   return dio;
 }
 
+Dio getDefaultTestClient(String serverName, String sessionId) {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ACCEPT: APPLICATION_JSON,
+        COOKIE: '$SESSION=$sessionId',
+      },
+      baseUrl: 'https://$serverName.greenmile.com',
+      queryParameters: {
+        CONSUMER: 'LIVE',
+      },
+    ),
+  );
+  return dio;
+}
+
 Dio getQueueClient(String serverName, String sessionId) {
   final dio = Dio(
     BaseOptions(
@@ -114,7 +144,7 @@ Dio getQueueClient(String serverName, String sessionId) {
       },
     ),
   );
-  dio.interceptors.addAll(_getInterceptors(dio));
+  dio.interceptors.addAll(_getQueueInterceptors(dio));
   return dio;
 }
 
@@ -126,6 +156,29 @@ List<Interceptor> _getInterceptors(Dio dio) {
     GMRetryInterceptor(
       dio: dio,
       retryOptions: DEFAULT_RETRY_OPTIONS,
+    ),
+    RetryOnConnectionChangeInterceptor(
+      requestRetrier: GMConnectivityRetrier(
+        dio: dio,
+        connectivity: Connectivity(),
+      ),
+      retryOptions: CONNECTIVITY_RETRY_OPTIONS,
+    ),
+    GMAuthInterceptor(
+      dio: dio,
+      globalBox: Hive.box(GLOBAL_BOX),
+    ),
+  ];
+}
+
+List<Interceptor> _getQueueInterceptors(Dio dio) {
+  return [
+    if (kDebugMode) ...[
+      alice.getDioInterceptor(),
+    ],
+    GMRetryInterceptor(
+      dio: dio,
+      retryOptions: QUEUE_RETRY_OPTIONS,
     ),
     RetryOnConnectionChangeInterceptor(
       requestRetrier: GMConnectivityRetrier(

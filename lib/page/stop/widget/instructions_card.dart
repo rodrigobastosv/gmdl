@@ -6,7 +6,8 @@ class InstructionsCard extends StatelessWidget {
   const InstructionsCard({
     Key key,
     this.stop,
-  }) : super(key: key);
+  })  : assert(stop != null),
+        super(key: key);
 
   final StopModel stop;
 
@@ -25,18 +26,14 @@ class InstructionsCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'INSTRUCTIONS',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const Text(
                 'INSTRUCTIONS HERE',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
               ),
             ],
           ),

@@ -25,10 +25,10 @@ class StopListTileHeader extends StatelessWidget {
         child: Text(
           context.getTextUppercase(label),
           textAlign: TextAlign.start,
-          style: TextStyle(
-            fontSize: 12,
-            color: textColor,
-          ),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontSize: 12,
+                color: textColor,
+              ),
         ),
       ),
     );

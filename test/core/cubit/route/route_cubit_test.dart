@@ -17,6 +17,7 @@ void main() {
   MockRouteRepository mockRouteRepository;
   MockGlobalInfo mockGlobalInfo;
   MockNotificationCubit mockNotificationCubit;
+  MockHosCubit mockHosCubit;
   MockGpsCubit mockGpsCubit;
   MockLaunchService mockLaunchService;
 
@@ -31,6 +32,7 @@ void main() {
       mockRouteRepository = MockRouteRepository();
       mockGlobalInfo = MockGlobalInfo();
       mockNotificationCubit = MockNotificationCubit();
+      mockHosCubit = MockHosCubit();
       mockGpsCubit = MockGpsCubit();
       mockLaunchService = MockLaunchService();
     });
@@ -50,6 +52,7 @@ void main() {
         repository: mockRouteRepository,
         globalInfo: mockGlobalInfo,
         notificationCubit: mockNotificationCubit,
+        hosCubit: mockHosCubit,
         gpsCubit: mockGpsCubit,
         launchService: mockLaunchService,
       );
@@ -64,6 +67,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                hosCubit: mockHosCubit,
                 gpsCubit: mockGpsCubit,
                 launchService: mockLaunchService,
               ),
@@ -74,6 +78,7 @@ void main() {
                 repository: null,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                hosCubit: mockHosCubit,
                 gpsCubit: mockGpsCubit,
                 launchService: mockLaunchService,
               ),
@@ -84,6 +89,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: null,
                 notificationCubit: mockNotificationCubit,
+                hosCubit: mockHosCubit,
                 gpsCubit: mockGpsCubit,
                 launchService: mockLaunchService,
               ),
@@ -95,6 +101,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: null,
+                hosCubit: mockHosCubit,
                 gpsCubit: mockGpsCubit,
                 launchService: mockLaunchService,
               ),
@@ -106,6 +113,19 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                hosCubit: null,
+                gpsCubit: mockGpsCubit,
+                launchService: mockLaunchService,
+              ),
+          throwsAssertionError);
+
+      expect(
+          () => RouteCubit(
+                route: route,
+                repository: mockRouteRepository,
+                globalInfo: mockGlobalInfo,
+                notificationCubit: mockNotificationCubit,
+                hosCubit: mockHosCubit,
                 gpsCubit: null,
                 launchService: mockLaunchService,
               ),
@@ -117,6 +137,7 @@ void main() {
                 repository: mockRouteRepository,
                 globalInfo: mockGlobalInfo,
                 notificationCubit: mockNotificationCubit,
+                hosCubit: mockHosCubit,
                 gpsCubit: mockGpsCubit,
                 launchService: null,
               ),

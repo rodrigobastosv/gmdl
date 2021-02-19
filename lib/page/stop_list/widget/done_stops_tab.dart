@@ -13,9 +13,10 @@ class DoneStopsTab extends StatelessWidget {
     return Tab(
       child: Text(
         '${context.getTextUppercase('route.tab.done')} (${stops.length})',
-        style: const TextStyle(
-          fontSize: 12,
-        ),
+        style: Theme.of(context).textTheme.bodyText1.copyWith(
+              fontSize: 12,
+              color: Colors.white,
+            ),
       ),
     );
   }

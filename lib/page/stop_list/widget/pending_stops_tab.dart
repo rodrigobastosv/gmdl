@@ -13,9 +13,10 @@ class PendingStopsTab extends StatelessWidget {
     return Tab(
       child: Text(
         '''${context.getTextUppercase('message.status.pending')} (${stops.length})''',
-        style: const TextStyle(
-          fontSize: 12,
-        ),
+        style: Theme.of(context).textTheme.bodyText1.copyWith(
+              fontSize: 12,
+              color: Colors.white,
+            ),
       ),
     );
   }

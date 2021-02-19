@@ -24,8 +24,8 @@ class RouteAtGlanceMap extends StatelessWidget {
       key: UniqueKey(),
       options: MapOptions(
         center: LatLng(
-          lastPosition.latitude,
-          lastPosition.longitude,
+          lastPosition?.latitude ?? DEFAULT_LATITUDE,
+          lastPosition?.longitude ?? DEFAULT_LONGITUDE,
         ),
         zoom: DEFAULT_MAP_ZOOM,
       ),
