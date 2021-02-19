@@ -9,10 +9,9 @@ String padDataField(int dataField) {
   return padLeftWithZeros(value: dataField);
 }
 
-String getHourAndMinuteFromDateString(String dataStr) {
-  final datetime = DateTime.parse(dataStr);
-  final hourPadded = padDataField(datetime.hour);
-  final minutePadded = padDataField(datetime.minute);
+String getHourAndMinuteFromDate(DateTime date) {
+  final hourPadded = padDataField(date.hour);
+  final minutePadded = padDataField(date.minute);
   return '$hourPadded:$minutePadded';
 }
 

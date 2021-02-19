@@ -4,6 +4,7 @@ import 'package:flutter_dash/flutter_dash.dart';
 
 import '../../../../core/entity/model/models.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../../core/extension/extensions.dart';
 
 class StopTimes extends StatelessWidget {
   const StopTimes({
@@ -20,8 +21,11 @@ class StopTimes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          getHourAndMinuteFromDateString(
-              stop.hasBeenArrived ? stop.actualArrival : stop.projectedArrival),
+          getHourAndMinuteFromDate(
+            stop.hasBeenArrived
+                ? stop.actualArrival.local
+                : stop.projectedArrival.local,
+          ),
           style: TextStyle(
             color: stop.hasBeenArrived
                 ? const Color(0xFF75B800)
@@ -30,7 +34,7 @@ class StopTimes extends StatelessWidget {
           ),
         ),
         Text(
-          getHourAndMinuteFromDateString(stop.plannedArrival),
+          getHourAndMinuteFromDate(stop.plannedArrival.local),
           style: const TextStyle(
             color: Color(0xFF9B9B9B),
             fontWeight: FontWeight.bold,
@@ -43,14 +47,14 @@ class StopTimes extends StatelessWidget {
           dashColor: Colors.grey,
         ),
         Text(
-          getHourAndMinuteFromDateString(stop.projectedDeparture),
+          getHourAndMinuteFromDate(stop.projectedDeparture.local),
           style: const TextStyle(
             color: Color(0xFF717373),
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          getHourAndMinuteFromDateString(stop.plannedDeparture),
+          getHourAndMinuteFromDate(stop.plannedDeparture.local),
           style: const TextStyle(
             color: Color(0xFF9B9B9B),
             fontWeight: FontWeight.bold,
