@@ -27,7 +27,7 @@ class FinishedStopsPage extends StatelessWidget {
       ),
       mainButtonAction: () => context.read<RouteCubit>().arriveWarehouse(),
       mainButtonIcon: SvgPicture.asset('assets/icons/sidetruck.svg'),
-      mainButtonLabel: context.getTextUppercase('driver.arrivedc'),
+      mainButtonLabel: context.getText('driver.arrivedc'),
     );
   }
 }

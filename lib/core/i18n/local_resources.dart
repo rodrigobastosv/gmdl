@@ -1,6 +1,7 @@
 final localResources = {
   'en': {
     'general.server': 'Server',
+    'driver.button.save': 'Save',
     'locale.label': 'Language',
     'loader.phone': 'Phone',
     'loader.settings': 'Settings',
@@ -24,6 +25,7 @@ final localResources = {
   },
   'pt': {
     'general.server': 'Servidor',
+    'driver.button.save': 'Salvar',
     'locale.label': 'Idioma',
     'loader.phone': 'Telefone',
     'loader.settings': 'Configurações',
@@ -47,6 +49,7 @@ final localResources = {
   },
   'es': {
     'general.server': 'Servidor',
+    'driver.button.save': 'Guardar',
     'locale.label': 'Idioma',
     'loader.phone': 'Teléfono',
     'loader.settings': 'Configuración',
@@ -70,6 +73,7 @@ final localResources = {
   },
   'ja': {
     'general.server': 'サーバー',
+    'driver.button.save': '保存する',
     'locale.label': '言語',
     'loader.phone': '電話',
     'loader.settings': '設定',
@@ -90,6 +94,7 @@ final localResources = {
   },
   'th': {
     'general.server': 'เซิร์ฟเวอร์',
+    'driver.button.save': 'บันทึก',
     'locale.label': 'ภาษา',
     'loader.phone': 'โทรศัพท์',
     'loader.settings': 'การตั้งค่า',
@@ -113,6 +118,7 @@ final localResources = {
   },
   'de': {
     'general.server': 'Server',
+    'driver.button.save': 'Speichern',
     'locale.label': 'Sprache',
     'loader.phone': 'Telefon',
     'loader.settings': 'Einstellungen',
@@ -137,6 +143,7 @@ final localResources = {
   },
   'it': {
     'general.server': 'Server',
+    'driver.button.save': 'Salvare',
     'locale.label': 'Lingue',
     'loader.phone': 'Telefono',
     'loader.settings': 'Impostazioni',
@@ -161,6 +168,7 @@ final localResources = {
   },
   'fr': {
     'general.server': 'Serveur',
+    'driver.button.save': 'Sauvegarder',
     'locale.label': 'Langue',
     'loader.phone': 'Téléphone',
     'loader.settings': 'Réglages',
@@ -184,6 +192,7 @@ final localResources = {
   },
   'ru': {
     'general.server': 'сервер',
+    'driver.button.save': 'Сохранить',
     'locale.label': 'язык',
     'loader.phone': 'Телефон',
     'loader.settings': 'настройки',

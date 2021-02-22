@@ -102,11 +102,11 @@ class RouteAtGlancePage extends StatelessWidget {
   String _getMainButtonLabel(BuildContext context, RouteCubit cubit) {
     final route = cubit.route;
     if (route.status == RouteStatus.STARTED) {
-      return context.getTextUppercase('driver.leavedc');
+      return context.getText('driver.leavedc');
     } else if (route.status == RouteStatus.NOT_STARTED) {
-      return context.getTextUppercase('equipment.button.start');
+      return context.getText('equipment.button.start');
     } else {
-      return context.getTextUppercase('stop.list');
+      return context.getText('stop.list');
     }
   }
 

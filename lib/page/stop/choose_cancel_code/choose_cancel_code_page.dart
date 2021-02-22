@@ -51,7 +51,7 @@ class ChooseCancelCodePage extends StatelessWidget {
         height: 22,
         width: 22,
       ),
-      mainButtonLabel: context.getTextUppercase('loader.select'),
+      mainButtonLabel: context.getText('loader.select'),
     );
   }
 }

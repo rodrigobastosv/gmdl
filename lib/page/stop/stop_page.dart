@@ -119,11 +119,11 @@ class StopPage extends StatelessWidget {
   String _getMainButtonLabel(BuildContext context, StopCubit cubit) {
     final stop = cubit.stop;
     if (stop.canClone) {
-      return context.getTextUppercase('stop.clone');
+      return context.getText('stop.clone');
     } else if (stop.hasBeenArrived) {
-      return context.getTextUppercase('driver.leave');
+      return context.getText('driver.leave');
     } else {
-      return context.getTextUppercase('stop.detail.arrive');
+      return context.getText('stop.detail.arrive');
     }
   }
 

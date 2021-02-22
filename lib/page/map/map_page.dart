@@ -90,7 +90,7 @@ class _MapPageState extends State<MapPage> {
           ),
         ),
         mainButtonLabel:
-            context.getTextUppercase('driver.forro.map.seestoplist'),
+            context.getText('driver.forro.map.seestoplist'),
         mainButtonIcon: const Icon(Icons.list),
         mainButtonAction: () => Navigator.of(context).pop(),
       ),

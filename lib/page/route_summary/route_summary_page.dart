@@ -37,7 +37,7 @@ class RouteSummaryPage extends StatelessWidget {
       title: context.getTextUppercase('driver.goodjob.beforevocative'),
       mainButtonAction: cubit.completeRoute,
       mainButtonIcon: _getMainButtonIcon(cubit),
-      mainButtonLabel: context.getTextUppercase('status.complete'),
+      mainButtonLabel: context.getText('status.complete'),
       body: Column(
         children: [
           Container(

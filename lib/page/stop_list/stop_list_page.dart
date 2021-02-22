@@ -87,7 +87,7 @@ class StopListPage extends StatelessWidget {
             },
           ),
         ),
-        mainButtonLabel: context.getTextUppercase('driver.seeMap'),
+        mainButtonLabel: context.getText('driver.seeMap'),
         mainButtonIcon: const Icon(Icons.map),
         mainButtonAction: cubit.route.isUsingPro
             ? () => Navigator.of(context).pushNamed(

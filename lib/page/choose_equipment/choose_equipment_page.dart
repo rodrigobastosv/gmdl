@@ -48,7 +48,7 @@ class ChooseEquipmentPage extends StatelessWidget {
         }
       },
       mainButtonIcon: _getMainButtonIcon(state),
-      mainButtonLabel: context.getTextUppercase('menu.load.route'),
+      mainButtonLabel: context.getText('menu.load.route'),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(top: 48, right: 18, left: 18),
