@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
-
-import '../../core/extension/i18n_cubit_extension.dart';
 import 'gm_app_bar.dart';
+import 'gm_bottom_bar.dart';
 import 'gm_menu_drawer.dart';
 
 class GMScaffold extends StatefulWidget {
@@ -60,8 +58,7 @@ class _GMScaffoldState extends State<GMScaffold> {
       body: widget.body,
       floatingActionButton: !isBottomMenuOpened ? _getMainButton() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar:
-          isBottomMenuOpened ? _getMenuOptionsBar() : _getMainNavigationBar(),
+      bottomNavigationBar: _getMainNavigationBar(),
     );
   }
 
@@ -92,97 +89,9 @@ class _GMScaffoldState extends State<GMScaffold> {
         : null;
   }
 
-  Widget _getMenuOptionsBar() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          height:
-              optionsLength <= 3 ? 64 : (menuOptions.length / 3).floor() * 64.0,
-          color: const Color(0xFF181818),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 2,
-              crossAxisSpacing: 0,
-              mainAxisSpacing: 0,
-            ),
-            itemBuilder: (_, i) => menuOptions[i],
-            itemCount: menuOptions.length,
-          ),
-        ),
-        BottomAppBar(
-          color: const Color(0xFF181818),
-          child: GestureDetector(
-            onTap: () => setState(() => isBottomMenuOpened = false),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 8,
-                bottom: 2,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/more.svg',
-                    color: Theme.of(context).iconTheme.color,
-                  ),
-                  Text(
-                    context.getText('menu.less'),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _getMainNavigationBar() {
-    return widget.withNavigationBar
-        ? BottomAppBar(
-            color: Theme.of(context).bottomAppBarColor,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 8,
-                    bottom: 2,
-                  ),
-                  child: GestureDetector(
-                    onTap: () => setState(() => isBottomMenuOpened = true),
-                    child: Opacity(
-                      opacity: hasMenuOptions ? 1 : 0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/more.svg',
-                            color: Theme.of(context).iconTheme.color,
-                          ),
-                          Text(
-                            context.getText('menu.more'),
-                            style:
-                                Theme.of(context).textTheme.bodyText1.copyWith(
-                                      color: Theme.of(context).iconTheme.color,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
+    return hasMenuOptions
+        ? GMBottomBar(menuOptions: menuOptions)
         : null;
   }
 }

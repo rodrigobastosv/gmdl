@@ -19,31 +19,18 @@ class GMMenuOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ListTile(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 0.5,
-            color: const Color(0xFF464646),
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              'assets/icons/$icon.svg',
-              height: 40,
-              width: 40,
-            ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-              ),
-            ),
-          ],
+      leading: SvgPicture.asset(
+        'assets/icons/$icon.svg',
+        height: 22,
+        width: 22,
+      ),
+      title: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 12,
+          color: Colors.white,
         ),
       ),
     );
