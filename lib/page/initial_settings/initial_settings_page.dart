@@ -34,7 +34,6 @@ class _InitialSettingsPageState extends State<InitialSettingsPage> {
         title: context.getTextUppercase('loader.settings'),
         withDrawer: false,
         withBackButton: false,
-        withNavigationBar: true,
         mainButtonLabel: context.getText('driver.button.save'),
         mainButtonIcon: SvgPicture.asset(
           'assets/icons/checkmark.svg',

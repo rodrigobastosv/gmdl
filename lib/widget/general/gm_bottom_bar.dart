@@ -41,20 +41,23 @@ class GMBottomBar extends StatelessWidget {
                   },
                 ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/more.svg',
-                    color: Theme.of(context).iconTheme.color,
-                  ),
-                  Text(
-                    context.getText('menu.more'),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                  ),
-                ],
+              child: Opacity(
+                opacity: menuOptions != null && menuOptions.isNotEmpty ? 1 : 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/more.svg',
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    Text(
+                      context.getText('menu.more'),
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )

@@ -17,7 +17,6 @@ class LoadRoutePage extends StatelessWidget {
     return GMScaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       withAppBar: false,
-      withNavigationBar: false,
       body: BlocConsumer<LoadRouteCubit, LoadRouteState>(
         listener: _listener,
         builder: _builder,

@@ -38,7 +38,6 @@ class ChooseEquipmentPage extends StatelessWidget {
   Widget _builder(BuildContext context, ChooseEquipmentState state) {
     return GMScaffold(
       backgroundColor: const Color(0xFF24242A),
-      withNavigationBar: true,
       withBackButton: false,
       title: context.getTextUppercase('menu.load.route'),
       mainButtonAction: () {

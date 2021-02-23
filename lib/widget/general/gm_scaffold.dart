@@ -18,7 +18,6 @@ class GMScaffold extends StatefulWidget {
     this.withAppBar = true,
     this.withBackButton = true,
     this.withDrawer = true,
-    this.withNavigationBar = true,
     this.menuOptions,
   })  : assert(body != null),
         super(key: key);
@@ -34,7 +33,6 @@ class GMScaffold extends StatefulWidget {
   final bool withAppBar;
   final bool withBackButton;
   final bool withDrawer;
-  final bool withNavigationBar;
   final List<Widget> menuOptions;
 
   @override
@@ -58,7 +56,7 @@ class _GMScaffoldState extends State<GMScaffold> {
       body: widget.body,
       floatingActionButton: !isBottomMenuOpened ? _getMainButton() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: _getMainNavigationBar(),
+      bottomNavigationBar: GMBottomBar(menuOptions: menuOptions),
     );
   }
 
@@ -86,12 +84,6 @@ class _GMScaffoldState extends State<GMScaffold> {
             leading: widget.leading,
             withBackButton: widget.withBackButton,
           )
-        : null;
-  }
-
-  Widget _getMainNavigationBar() {
-    return hasMenuOptions
-        ? GMBottomBar(menuOptions: menuOptions)
         : null;
   }
 }
