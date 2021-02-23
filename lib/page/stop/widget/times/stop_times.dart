@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import '../../../../core/entity/model/models.dart';
-import '../../../../core/utils/utils.dart';
 import '../../../../core/extension/extensions.dart';
+import '../../../../core/utils/utils.dart';
 
 class StopTimes extends StatelessWidget {
   const StopTimes({

@@ -1,5 +1,7 @@
 import '../entity/model/models.dart';
 
+const INTERVAL_FOR_ROUTE_SYNCS = Duration(minutes: 5);
+
 List<StopModel> getPendingStops(RouteModel route) {
   final routeStops = route.stops;
   return routeStops.where((stop) => stop.isPending).toList();

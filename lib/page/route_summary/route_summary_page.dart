@@ -27,6 +27,10 @@ class RouteSummaryPage extends StatelessWidget {
     if (state is RouteCompleteSuccess) {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(INITIAL_SETTINGS_PAGE, (_) => false);
+    } else if (state is RouteQueueNotEmpty) {
+
+    } else if (state is RouteQueueNotEmpty) {
+      
     }
   }
 

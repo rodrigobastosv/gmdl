@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../widget/general/gm_scaffold.dart';
 
 import '../../core/cubit/sign_in/sign_in_cubit.dart';
 import '../../core/extension/i18n_cubit_extension.dart';
 import '../../core/route/route.dart';
 import '../../widget/alert/notification.dart';
 import '../../widget/general/gm_loading.dart';
+import '../../widget/general/gm_scaffold.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key key}) : super(key: key);

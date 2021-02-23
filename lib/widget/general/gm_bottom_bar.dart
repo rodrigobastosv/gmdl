@@ -1,5 +1,6 @@
-import 'package:backdrop_modal_route/backdrop_modal_route.dart';
 import 'package:flutter/material.dart';
+
+import 'package:backdrop_modal_route/backdrop_modal_route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/extension/extensions.dart';

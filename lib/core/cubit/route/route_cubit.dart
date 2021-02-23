@@ -52,17 +52,22 @@ class RouteCubit extends Cubit<RouteState> {
 
   RouteModel route;
   Position lastPosition;
+  DateTime _lastSyncDate;
+
   StreamSubscription<NotificationState> _notificationSubscription;
   StreamSubscription<GpsState> _positionSubscription;
 
   String get driverName => _globalInfo.driverInfo.name;
-
   String get token => _notificationCubit.fcmToken;
+  bool get needResync =>
+      _lastSyncDate.isBefore(DateTime.now().subtract(INTERVAL_FOR_ROUTE_SYNCS));
 
   void init() {
     lastPosition = _gpsCubit.lastPosition ?? DEFAULT_LAT_LNG_IF_NONE_GIVEN;
+    _lastSyncDate = DateTime.now();
     _notificationSubscription = _notificationCubit.listen(_handleNotifications);
     _positionSubscription = _gpsCubit.listen(_handlePositionUpdate);
+    Stream.periodic(INTERVAL_FOR_ROUTE_SYNCS).listen(_trySyncRoute);
   }
 
   Future<void> fetchHosInfo() async {
@@ -85,6 +90,7 @@ class RouteCubit extends Cubit<RouteState> {
     try {
       final syncRoute = await _repository.syncRouteByNotification(route.id);
       route = mergeRoutes(route, syncRoute);
+      _updateLastSyncDate();
       emit(
         RouteUpdateDueNotificationSuccess(
           notificationId: notification.id,
@@ -105,6 +111,24 @@ class RouteCubit extends Cubit<RouteState> {
     if (state is GpsNewPosition) {
       lastPosition = state.position;
       emit(RouteDriverPositionUpdate(lastPosition));
+    }
+  }
+
+  void _updateLastSyncDate() {
+    _lastSyncDate = DateTime.now();
+  }
+
+  Future<void> _trySyncRoute(dynamic _) async {
+    if (needResync) {
+      final syncRoute = await _repository.syncRouteByNotification(route.id);
+      route = mergeRoutes(route, syncRoute);
+      _updateLastSyncDate();
+      emit(
+        RouteResyncSuccess(
+          route: route,
+          syncDate: _lastSyncDate,
+        ),
+      );
     }
   }
 

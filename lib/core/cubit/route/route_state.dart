@@ -98,6 +98,22 @@ class RouteUpdateDueStopRedeliver extends RouteState {
       ];
 }
 
+class RouteResyncSuccess extends RouteState {
+  RouteResyncSuccess({
+    this.route,
+    this.syncDate,
+  });
+
+  final RouteModel route;
+  final DateTime syncDate;
+
+  @override
+  List<Object> get props => [
+        route.id,
+        syncDate.toString(),
+      ];
+}
+
 class RouteHasNoPendingStops extends RouteState {}
 
 class RouteArriveWarehouseLoad extends RouteState {}
@@ -177,3 +193,7 @@ class RouteDriverPositionUpdate extends RouteState {
         position.longitude,
       ];
 }
+
+class RouteQueueEmpty extends RouteState {}
+
+class RouteQueueNotEmpty extends RouteState {}
